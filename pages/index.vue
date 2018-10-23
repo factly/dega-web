@@ -1,29 +1,22 @@
 <template>
-  <section class="section">
-    <div class="columns is-mobile">
-      <div
-        v-for="(feature, i) of features"
-        :key="i"
-        class="column">
-        <div class="card">
-          <header class="card-header">
-            <p class="card-header-title has-text-grey">
-              {{ feature.title }}
-            </p>
-          </header>
-          <div class="card-content">
-            <div class="content has-text-centered">
-              <b-icon
-                :icon="feature.icon"
-                size="is-large"
-                type="is-primary"/>
-            </div>
+  <section class="section is-hero">
+    <div class="container">
+      <div class="columns is-vcentered">
+        <div class="column is-6 is-5-fullhd is-offset-1-fullhd">
+          <div class="section-header">
+            <h1 class="title is-spaced is-2"> The bedtime story<span class="is-hidden-touch"><br></span> app for families </h1>
+            <h2 class="subtitle is-5"> Awaken the inner storyteller with diverse and empowering stories for young &amp; old. Storytelling has never been easier. </h2>
+            <a class="has-tint has-text-weight-semibold" href="/" target="_blank">
+              <i class="icon icon-award"></i><span>Parents' Choice Approved App</span>
+            </a>
+            <hr class="spacer is-1-5">
           </div>
-          <footer class="card-footer">
-            <div
-              class="card-footer-item"
-              v-html="feature.content"/>
-          </footer>
+        </div>
+        <div class="column is-6">
+          <div class="section-media">
+            <img role="presentation" src="https://getbedtimestories.com/assets/images/hero/Hero-Karlotta@2x-cc57e26e.jpg?1540201404" srcset="https://getbedtimestories.com/assets/images/hero/Hero-Karlotta@2x-cc57e26e.jpg?1540201404 1x, https://getbedtimestories.com/assets/images/hero/Hero-Karlotta@2x-cc57e26e.jpg?1540201404 2x">
+            <p> <small><a href="/library/karlotta-the-knight"><u>Karlotta the Knight</u></a> with her squire and steed.</small> </p>
+          </div>
         </div>
       </div>
     </div>
@@ -31,10 +24,9 @@
 </template>
 
 <script>
-import BLogo from '@/components/Logo'
 
 export default {
-  name: 'HomePage',
+/*  name: 'HomePage',
   components: {BLogo},
   data() {
       return {
@@ -45,6 +37,6 @@ export default {
               { icon: 'arrange-bring-to-front', title: 'Lightweight', content: `<span>No other internal dependency</span>` }
           ]
       }
-  }
+  }*/
 }
 </script>
