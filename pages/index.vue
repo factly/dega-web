@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- featured post section-->
-    <section class="section is-hero">
+    <section class="section is-hero" @click="LoadPost">
       <div class="container">
         <div class="columns is-vcentered">
           <div class="column is-6 is-5-fullhd is-offset-1-fullhd">
@@ -22,9 +22,9 @@
         </div>
       </div>
     </section>
-    <hr class="spacer is-1-5">
+    <hr class="spacer is-1-5 is-hidden-mobile">
     <!-- Latest Stories Section -->
-    <section class="section">
+    <section class="section" @click="LoadPost">
       <div class="container columns">
         <div class="column is-4 has-background-light">
           <h3>LATEST FACTCHECKS</h3>
@@ -193,10 +193,10 @@
 
         </div>
     </section>
-    <hr class="spacer is-1-5">
+    <hr class="spacer is-1-5 is-hidden-mobile">
 
     <!-- MORE STORIES Section -->
-    <section class="section">
+    <section class="section" @click="LoadPost">
       <h3>MORE STORIES</h3>
       <br>
       <!-- FIRST POST -->
@@ -222,7 +222,7 @@
          </div>
          <!-- post-blockquote-column -->
          <div class="column is-4">
-           <div class="content">
+           <div class="content is-hidden-mobile">
               <p>Following the judgment of the SC in September, the ECI has now issued directions to candidates & political parties on the format to be followed for publication of pending criminal cases in newspapers & TV channels. Here is a look at all the changes.
               </p>
            </div>
@@ -243,7 +243,7 @@
         </div>
         <!-- post-title-column -->
         <div class="column is-4">
-          <div class="content">
+          <div class="content is-hidden-mobile">
             <p class="title is-4"> Details of pending criminal cases against candidates contesting Lok Sabha & Assembly elections will now be on Newspapers & TV</p>
             <br>
             <p class="subtitle is-6">BY RAKESH DUBBUDU </p>
@@ -252,7 +252,7 @@
         </div>
         <!-- post-blockquote-column -->
         <div class="column is-4">
-          <div class="content">
+          <div class="content is-hidden-mobile">
             <p>Following the judgment of the SC in September, the ECI has now issued directions to candidates & political parties on the format to be followed for publication of pending criminal cases in newspapers & TV channels. Here is a look at all the changes.
             </p>
           </div>
@@ -298,6 +298,11 @@
 <script>
 
 export default {
+  methods: {
+      LoadPost () {
+        this.$router.push('/Post')
+      }
+    }
 /*  name: 'HomePage',
   components: {BLogo},
   data() {
