@@ -282,7 +282,7 @@
         </div>
         <!-- post-blockquote-column -->
         <div class="column is-4">
-          <div class="content">
+          <div class="content is-hidden-mobile">
             <p>Following the judgment of the SC in September, the ECI has now issued directions to candidates & political parties on the format to be followed for publication of pending criminal cases in newspapers & TV channels. Here is a look at all the changes.
             </p>
           </div>
