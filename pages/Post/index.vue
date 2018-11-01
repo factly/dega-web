@@ -5,18 +5,18 @@
 			    <div class="container" >
 			    	<h1 class=" title is-2 has-text-weight-bold">Government claims on
                     the "Welfare of the Girl Child"</h1>
-                    <h2 class="subtitle is-6">BY AILA BANDAGI KANDLAKUNTA ON OCTOBER 10, 2018</h2>
+                    <h2 class="subtitle is-6"@click="LoadAuthor">BY AILA BANDAGI KANDLAKUNTA ON OCTOBER 10, 2018</h2>
                     
                 </div>
 	        </div>
 	    </section>
 <!-- image-section -->
-		<section class="section has-text-centered">
-			<div class="container">
+		<section class="section">
+			<!-- <div class="container"> -->
 				<figure class="image is-2by1">
 					<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
 				</figure>
-			</div>
+			<!-- </div> -->
 		</section>
 			
 
@@ -77,6 +77,16 @@
 	</div>
 </template>
 
+<script>
+	export default {
+		methods: {
+     		 LoadAuthor () {
+        		this.$router.push('/Author')
+      }
+    }
+}
+	
+</script>
 
 <style>
 	.post {

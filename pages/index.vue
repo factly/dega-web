@@ -81,118 +81,17 @@
           </h3>
           </div>
         </div>
+
         <div class="column is-8">
           <h3>LATEST STORIES</h3>
           <br>
-          <div class="columns">
-            <div class="column is-6">
-              <div class="card">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                  </figure>
-                </div>
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-content">
-                      <p class="title is-4">John Smith</p>
-                      <p class="subtitle is-6">@johnsmith</p>
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                    <a href="#">#css</a> <a href="#">#responsive</a>
-                    <br>
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="column is-6">
-              <div class="card">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                  </figure>
-                </div>
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-content">
-                      <p class="title is-4">John Smith</p>
-                      <p class="subtitle is-6">@johnsmith</p>
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                    <a href="#">#css</a> <a href="#">#responsive</a>
-                    <br>
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                  </div>
-                </div>
-              </div>
-            </div>
-            </div>
-          <div class="columns ">
-            <div class="column is-6">
-              <div class="card">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                  </figure>
-                </div>
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-content">
-                      <p class="title is-4">John Smith</p>
-                      <p class="subtitle is-6">@johnsmith</p>
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                    <a href="#">#css</a> <a href="#">#responsive</a>
-                    <br>
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="column is-6">
-              <div class="card">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                  </figure>
-                </div>
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-content">
-                      <p class="title is-4">John Smith</p>
-                      <p class="subtitle is-6">@johnsmith</p>
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                    <a href="#">#css</a> <a href="#">#responsive</a>
-                    <br>
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-
-
+          <!-- Latest stories section -->
+          <LatestStories />
+          <LatestStories />
         </div>
+      </div>
     </section>
+
     <hr class="spacer is-1-5 is-hidden-mobile">
 
     <!-- MORE STORIES Section -->
@@ -200,95 +99,16 @@
       <h3>MORE STORIES</h3>
       <br>
       <!-- FIRST POST -->
-      <div class="container columns">
-        <!-- post-image  column-->
-        <div class= "column is-4">
-        <div class="card">
-           <div class="card-image">
-             <figure class ="image is-5by3">
-               <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-             </figure>
-           </div>
-        </div>
-      </div>
-         <!-- post-title-column -->
-         <div class="column is-4">
-            <div class="content">
-                <p class="title is-4"> Details of pending criminal cases against candidates contesting Lok Sabha & Assembly elections will now be on Newspapers & TV</p>
-                  <br>
-                <p class="subtitle is-6">BY RAKESH DUBBUDU </p>
-                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-            </div>
-         </div>
-         <!-- post-blockquote-column -->
-         <div class="column is-4">
-           <div class="content is-hidden-mobile">
-              <p>Following the judgment of the SC in September, the ECI has now issued directions to candidates & political parties on the format to be followed for publication of pending criminal cases in newspapers & TV channels. Here is a look at all the changes.
-              </p>
-           </div>
-         </div>
-      </div>
+      <MoreStories />
       <br>
       <!-- SECOND POST -->
-      <div class="container columns">
-        <!-- post-image  column-->
-        <div class= "column is-4">
-          <div class="card">
-            <div class="card-image">
-              <figure class ="image is-5by3">
-                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-              </figure>
-            </div>
-          </div>
-        </div>
-        <!-- post-title-column -->
-        <div class="column is-4">
-          <div class="content is-hidden-mobile">
-            <p class="title is-4"> Details of pending criminal cases against candidates contesting Lok Sabha & Assembly elections will now be on Newspapers & TV</p>
-            <br>
-            <p class="subtitle is-6">BY RAKESH DUBBUDU </p>
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-          </div>
-        </div>
-        <!-- post-blockquote-column -->
-        <div class="column is-4">
-          <div class="content is-hidden-mobile">
-            <p>Following the judgment of the SC in September, the ECI has now issued directions to candidates & political parties on the format to be followed for publication of pending criminal cases in newspapers & TV channels. Here is a look at all the changes.
-            </p>
-          </div>
-        </div>
-      </div>
+      <MoreStories />
       <br>
       <!-- THIRD POST -->
-      <div class="container columns">
-        <!-- post-image  column-->
-        <div class= "column is-4">
-          <div class="card">
-            <div class="card-image">
-              <figure class ="image is-5by3">
-                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-              </figure>
-            </div>
-          </div>
-        </div>
-        <!-- post-title-column -->
-        <div class="column is-4">
-          <div class="content">
-            <p class="title is-4"> Details of pending criminal cases against candidates contesting Lok Sabha & Assembly elections will now be on Newspapers & TV</p>
-            <br>
-            <p class="subtitle is-6">BY RAKESH DUBBUDU </p>
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-          </div>
-        </div>
-        <!-- post-blockquote-column -->
-        <div class="column is-4">
-          <div class="content is-hidden-mobile">
-            <p>Following the judgment of the SC in September, the ECI has now issued directions to candidates & political parties on the format to be followed for publication of pending criminal cases in newspapers & TV channels. Here is a look at all the changes.
-            </p>
-          </div>
-        </div>
-      </div>
+      <MoreStories />
       <br>
+      <!-- FOURTH POST -->
+      <MoreStories />
 
     </section>
 
@@ -296,8 +116,14 @@
 </template>
 
 <script>
+  import LatestStories from '@/components/LatestStories'
+  import MoreStories   from '@/components/MoreStories'
 
 export default {
+  components: {
+    LatestStories : LatestStories,
+    MoreStories   : MoreStories
+  },
   methods: {
       LoadPost () {
         this.$router.push('/Post')
