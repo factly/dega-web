@@ -9,7 +9,7 @@
 			<div class="card-content">
 					<div class="media">
 							<div class="media-content">
-	             				 <p class="title is-4 has-text-weight-bold" style="color:#3273dc;">Government claims on the "Welfare of the Girl Child"</p>
+	             				 <p class="title is-4 has-text-weight-semibold">Government claims on the "Welfare of the Girl Child"</p>
 
 	             			     <p class="subtitle is-6">An infographic published by the government claims that financial future has been secured for crores of girls in India.
 							                              This claim is part of a series on ‘speed and scale of transformation’ in India. Here is a fact check of the claim.</p>

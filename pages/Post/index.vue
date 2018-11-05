@@ -3,29 +3,31 @@
 		<section class="hero-title has-text-centered ">
 			<div class="hero-body">
 			    <div class="container" >
-			    	<h1 class=" title is-2 has-text-weight-bold">Government claims on
+			    	<h1 class=" title is-spaced is-2 has-text-weight-semibold">Government claims on
                     the "Welfare of the Girl Child"</h1>
-                    <h2 class="subtitle is-6"@click="LoadAuthor">BY AILA BANDAGI KANDLAKUNTA ON OCTOBER 10, 2018</h2>
-                    
+                    <h2 class="subtitle is-5"@click="LoadAuthor" style="color: #555;">An infographic published by the government claims that financial future has been secured for crores of girls in India.
+                    </h2> 
+                    <a class="has-tint has-text-weight-semibold" href="http://localhost:3000/Author/" target="_blank"@click="LoadAuthor">
+                <i class="icon icon-award"></i><span >BY AILA BANDAGI KANDLAKUNTA ON OCTOBER 10, 2018</span>
+              </a>
                 </div>
 	        </div>
 	    </section>
 <!-- image-section -->
+
 		<section class="section">
 			<!-- <div class="container"> -->
 				<figure class="image is-2by1">
-					<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+					<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image" style="border-radius: 5px 5px 5px 5px;">
 				</figure>
 			<!-- </div> -->
 		</section>
-			
-
+		
 	<!-- POST-Text-section -->
 
 		<section class="section">
-			<div class="container  ">
+			<div class="container">
 				<div class="column">
-					
 					<article class="post">
 				
 				          <p>An infographic published by the government claims that financial future has been secured for crores of girls in India. This claim is part of a series on ‘speed and scale of transformation’ in India. Here is a fact check of the claim.
@@ -69,10 +71,9 @@
 				          <p>This story is part of a larger series on the 4-years of the Modi government. This series has been made possible with the flash grant of the International Fact Checking Network (IFCN). Read the rest of the stories in this series here.
 
 				         </p>
-								
-					</article>
-				</div>
+				</article>
 			</div>
+		</div>
 		</section>
 	</div>
 </template>

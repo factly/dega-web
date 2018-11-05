@@ -5,7 +5,7 @@
 				<article class="media">
 					<figure class="media-left">
 						<p class="image is-64*64"> 
-							<img class="is-rounded"src="https://secure.gravatar.com/avatar/1967fa4790de5665198e36e746b0d148?s=200&d=mm&r=g" >
+							<img class="is-rounded gatsby-imagewrapper"src="https://secure.gravatar.com/avatar/1967fa4790de5665198e36e746b0d148?s=200&d=mm&r=g" >
 						</p>
 					</figure>
                 	<div class="media-content">
@@ -34,7 +34,7 @@
 		<!-- another two posts -->
 			<div class="container">
             	<div class="columns is-centered">
-            		<ListSmall/>
+            		<ListSmall />
             		<ListSmall />
 				</div>
 			</div>

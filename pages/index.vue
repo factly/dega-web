@@ -6,16 +6,16 @@
         <div class="columns is-vcentered">
           <div class="column is-6 is-5-fullhd is-offset-1-fullhd">
             <div class="section-header">
-              <h1 class="title is-spaced is-2" > Government claims on<span class="is-hidden-touch"><br></span> the "Welfare of the Girl Child "</h1>
+              <h1 class="title is-spaced is-2 has-text-weight-semibold" > Government claims on<span class="is-hidden-touch"><br></span> the "Welfare of the Girl Child"</h1>
               <h2 class="subtitle is-5">  An infographic published by the government claims that financial future has been secured for crores of girls in India. </h2>
-              <a class="has-tint has-text-weight-semibold" href="/" target="_blank">
+              <a class="has-tint has-text-weight-semibold" @click="LoadAuthor" href="http://localhost:3000/Author/" target="_blank">
                 <i class="icon icon-award"></i><span>BY AILA BANDAGI KANDLAKUNTA ON OCTOBER 10, 2018</span>
               </a>
             </div>
           </div>
           <div class="column is-6">
             <div class="section-media">
-              <img role="presentation" src="https://2nafqn3o0l6kwfofi3ydj9li-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/Welfare-of-the-Girl-Child_factly.png"width="500">
+              <img role="presentation" src="https://2nafqn3o0l6kwfofi3ydj9li-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/Welfare-of-the-Girl-Child_factly.png"width="500" style="border-radius: 5px 5px 5px 5px;">
               <p> <small><a href="/library/karlotta-the-knight"><u>Karlotta the Knight</u></a> with her squire and steed.</small> </p>
             </div>
           </div>
@@ -100,13 +100,13 @@
       <br>
       <!-- FIRST POST -->
       <MoreStories />
-      <br>
+      
       <!-- SECOND POST -->
       <MoreStories />
-      <br>
+
       <!-- THIRD POST -->
       <MoreStories />
-      <br>
+     
       <!-- FOURTH POST -->
       <MoreStories />
 
@@ -127,6 +127,9 @@ export default {
   methods: {
       LoadPost () {
         this.$router.push('/Post')
+      },
+      LoadAuthor () {
+            this.$router.push('/Author')
       }
     }
 /*  name: 'HomePage',
@@ -144,6 +147,3 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
