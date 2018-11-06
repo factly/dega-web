@@ -1,30 +1,30 @@
 <template>
   <div>
     <!-- featured post section-->
-    <section class="section is-hero">
+    <section class="section is-hero" @click="LoadPost">
       <div class="container">
         <div class="columns is-vcentered">
           <div class="column is-6 is-5-fullhd is-offset-1-fullhd">
             <div class="section-header">
-              <h1 class="title is-spaced is-2" > Government claims on<span class="is-hidden-touch"><br></span> the "Welfare of the Girl Child "</h1>
+              <h1 class="title is-spaced is-2 has-text-weight-semibold" > Government claims on<span class="is-hidden-touch"><br></span> the "Welfare of the Girl Child"</h1>
               <h2 class="subtitle is-5">  An infographic published by the government claims that financial future has been secured for crores of girls in India. </h2>
-              <a class="has-tint has-text-weight-semibold" href="/" target="_blank">
+              <a class="has-tint has-text-weight-semibold" @click="LoadAuthor" href="http://localhost:3000/Author/" target="_blank">
                 <i class="icon icon-award"></i><span>BY AILA BANDAGI KANDLAKUNTA ON OCTOBER 10, 2018</span>
               </a>
             </div>
           </div>
           <div class="column is-6">
             <div class="section-media">
-              <img role="presentation" src="https://2nafqn3o0l6kwfofi3ydj9li-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/Welfare-of-the-Girl-Child_factly.png"width="500">
+              <img role="presentation" src="https://2nafqn3o0l6kwfofi3ydj9li-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/Welfare-of-the-Girl-Child_factly.png"width="500" style="border-radius: 5px 5px 5px 5px;">
               <p> <small><a href="/library/karlotta-the-knight"><u>Karlotta the Knight</u></a> with her squire and steed.</small> </p>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <hr class="spacer is-1-5">
+    <hr class="spacer is-1-5 is-hidden-mobile">
     <!-- Latest Stories Section -->
-    <section class="section">
+    <section class="section" @click="LoadPost">
       <div class="container columns">
         <div class="column is-4 has-background-light">
           <h3>LATEST FACTCHECKS</h3>
@@ -81,131 +81,57 @@
           </h3>
           </div>
         </div>
+
         <div class="column is-8">
           <h3>LATEST STORIES</h3>
           <br>
-          <div class="columns">
-            <div class="column is-6">
-              <div class="card">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                  </figure>
-                </div>
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-content">
-                      <p class="title is-4">John Smith</p>
-                      <p class="subtitle is-6">@johnsmith</p>
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                    <a href="#">#css</a> <a href="#">#responsive</a>
-                    <br>
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="column is-6">
-              <div class="card">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                  </figure>
-                </div>
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-content">
-                      <p class="title is-4">John Smith</p>
-                      <p class="subtitle is-6">@johnsmith</p>
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                    <a href="#">#css</a> <a href="#">#responsive</a>
-                    <br>
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                  </div>
-                </div>
-              </div>
-            </div>
-            </div>
-          <div class="columns">
-            <div class="column is-6">
-              <div class="card">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                  </figure>
-                </div>
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-content">
-                      <p class="title is-4">John Smith</p>
-                      <p class="subtitle is-6">@johnsmith</p>
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                    <a href="#">#css</a> <a href="#">#responsive</a>
-                    <br>
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="column is-6">
-              <div class="card">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                  </figure>
-                </div>
-                <div class="card-content">
-                  <div class="media">
-                    <div class="media-content">
-                      <p class="title is-4">John Smith</p>
-                      <p class="subtitle is-6">@johnsmith</p>
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                    <a href="#">#css</a> <a href="#">#responsive</a>
-                    <br>
-                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          </div>
-
-
+          <!-- Latest stories section -->
+          <LatestStories />
+          <LatestStories />
         </div>
+      </div>
     </section>
+
+    <hr class="spacer is-1-5 is-hidden-mobile">
+
+    <!-- MORE STORIES Section -->
+    <section class="section" @click="LoadPost">
+      <h3>MORE STORIES</h3>
+      <br>
+      <!-- FIRST POST -->
+      <MoreStories />
+      
+      <!-- SECOND POST -->
+      <MoreStories />
+
+      <!-- THIRD POST -->
+      <MoreStories />
+     
+      <!-- FOURTH POST -->
+      <MoreStories />
+
+    </section>
+
   </div>
-
-
-
-
-
-        
-
 </template>
 
 <script>
+  import LatestStories from '@/components/LatestStories'
+  import MoreStories   from '@/components/MoreStories'
 
 export default {
+  components: {
+    LatestStories : LatestStories,
+    MoreStories   : MoreStories
+  },
+  methods: {
+      LoadPost () {
+        this.$router.push('/Post')
+      },
+      LoadAuthor () {
+            this.$router.push('/Author')
+      }
+    }
 /*  name: 'HomePage',
   components: {BLogo},
   data() {
@@ -221,6 +147,3 @@ export default {
 }
 </script>
 
-<style>
-
-</style>

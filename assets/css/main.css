@@ -6,3 +6,10 @@ a.navbar-item>.icon:not(:last-child) {
   margin-left: -.25em;
   margin-right: .25em;
 }
+
+.card {
+    border-radius: 5px;
+  }
+  img {
+    border-radius: 5px 5px 0px 0px;
+  }
