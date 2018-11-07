@@ -126,10 +126,10 @@ export default {
   },
   methods: {
       LoadPost () {
-        this.$router.push('/Post')
+        this.$router.push('/story')
       },
       LoadAuthor () {
-            this.$router.push('/Author')
+            this.$router.push('/author')
       }
     }
 /*  name: 'HomePage',

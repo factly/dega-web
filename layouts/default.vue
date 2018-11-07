@@ -35,12 +35,12 @@
           </a>
 
 
-          <a class="navbar-item bd-navbar-item-Lists " href="http://localhost:3000/Lists/">
+          <a class="navbar-item bd-navbar-item-Lists " href="http://localhost:3000/category/">
           <span class="icon has-text-success">
             <svg class="svg-inline--fa fa-play-circle fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="play-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm115.7 272l-176 101c-15.8 8.8-35.7-2.5-35.7-21V152c0-18.4 19.8-29.8 35.7-21l176 107c16.4 9.2 16.4 32.9 0 42z"></path></svg><!-- <i class="fas fa-play-circle"></i> -->
           </span>
 
-            <span>Lists</span>
+            <span>Category</span>
           </a>
 
           <a class="navbar-item bd-navbar-item-blog " href="/">
@@ -51,7 +51,7 @@
             <span>Blog</span>
           </a>
 
-          <a class="navbar-item bd-navbar-item-expo " href="http://localhost:3000/Author/">
+          <a class="navbar-item bd-navbar-item-expo " href="http://localhost:3000/author/">
           <span class="icon has-text-star">
             <svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg><!-- <i class="fas fa-star"></i> -->
           </span>
