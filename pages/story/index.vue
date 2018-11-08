@@ -5,9 +5,9 @@
 			    <div class="container" >
 			    	<h1 class=" title is-spaced is-2 has-text-weight-semibold">Government claims on
                     the "Welfare of the Girl Child"</h1>
-                    <h2 class="subtitle is-5"@click="LoadAuthor" style="color: #555;">An infographic published by the government claims that financial future has been secured for crores of girls in India.
+                    <h2 class="subtitle is-5" @click="LoadAuthor" style="color: #555;">An infographic published by the government claims that financial future has been secured for crores of girls in India.
                     </h2> 
-                    <a class="has-tint has-text-weight-semibold" href="http://localhost:3000/Author/" target="_blank"@click="LoadAuthor">
+                    <a class="has-tint has-text-weight-semibold" href="http://127.0.0.1:3000/author/" target="_blank" @click="LoadAuthor">
                 <i class="icon icon-award"></i><span >BY AILA BANDAGI KANDLAKUNTA ON OCTOBER 10, 2018</span>
               </a>
                 </div>

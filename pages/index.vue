@@ -8,7 +8,7 @@
             <div class="section-header">
               <h1 class="title is-spaced is-2 has-text-weight-semibold" > Government claims on<span class="is-hidden-touch"><br></span> the "Welfare of the Girl Child"</h1>
               <h2 class="subtitle is-5">  An infographic published by the government claims that financial future has been secured for crores of girls in India. </h2>
-              <a class="has-tint has-text-weight-semibold" @click="LoadAuthor" href="http://localhost:3000/Author/" target="_blank">
+              <a class="has-tint has-text-weight-semibold" @click="LoadAuthor" href="http://127.0.0.1:3000/author/" target="_blank">
                 <i class="icon icon-award"></i><span>BY AILA BANDAGI KANDLAKUNTA ON OCTOBER 10, 2018</span>
               </a>
             </div>
