@@ -82,7 +82,7 @@
 	export default {
 		methods: {
      		 LoadAuthor () {
-        		this.$router.push('/Author')
+        		this.$router.push('/author')
       }
     }
 }
