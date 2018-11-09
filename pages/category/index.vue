@@ -49,7 +49,7 @@
 
     	methods: {
      		 LoadPost () {
-        		this.$router.push('/Post')
+        		this.$router.push('/story')
       }
     }
 

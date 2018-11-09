@@ -2,13 +2,13 @@
   <div>
     <!-- featured post section-->
     <section class="section is-hero" @click="LoadPost">
-      <div class="container">
+      <!--<div class="container">
         <div class="columns is-vcentered">
           <div class="column is-6 is-5-fullhd is-offset-1-fullhd">
             <div class="section-header">
               <h1 class="title is-spaced is-2 has-text-weight-semibold" > Government claims on<span class="is-hidden-touch"><br></span> the "Welfare of the Girl Child"</h1>
               <h2 class="subtitle is-5">  An infographic published by the government claims that financial future has been secured for crores of girls in India. </h2>
-              <a class="has-tint has-text-weight-semibold" @click="LoadAuthor" href="http://localhost:3000/Author/" target="_blank">
+              <a class="has-tint has-text-weight-semibold" @click="LoadAuthor" href="http://127.0.0.1:3000/author/" target="_blank">
                 <i class="icon icon-award"></i><span>BY AILA BANDAGI KANDLAKUNTA ON OCTOBER 10, 2018</span>
               </a>
             </div>
@@ -18,6 +18,22 @@
               <img role="presentation" src="https://2nafqn3o0l6kwfofi3ydj9li-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/Welfare-of-the-Girl-Child_factly.png"width="500" style="border-radius: 5px 5px 5px 5px;">
               <p> <small><a href="/library/karlotta-the-knight"><u>Karlotta the Knight</u></a> with her squire and steed.</small> </p>
             </div>
+          </div>
+        </div>
+      </div>-->
+      <div class="container">
+        <figure class ="image is-5by3">
+          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+        </figure>
+        <div class="content column">
+          <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop"> Details of pending criminal cases against candidates contesting Lok Sabha & Assembly elections will now be on Newspapers & TV</p>
+          <!--<div class="has-text-centered">
+            <span class="subtitle is-6">BY RAKESH DUBBUDU, </span>
+            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          </div>-->
+          <div class="content subtitle is-hidden-mobile has-text-centered">
+            <p>Following the judgment of the SC in September, the ECI has now issued directions to candidates & political parties on the format to be followed for publication of pending criminal cases in newspapers & TV channels. Here is a look at all the changes.
+            </p>
           </div>
         </div>
       </div>
