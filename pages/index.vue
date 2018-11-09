@@ -15,7 +15,7 @@
           </div>
           <div class="column is-6">
             <div class="section-media">
-              <img role="presentation" src="https://2nafqn3o0l6kwfofi3ydj9li-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/Welfare-of-the-Girl-Child_factly.png"width="500" style="border-radius: 5px 5px 5px 5px;">
+              <img role="presentation" src="https://2nafqn3o0l6kwfofi3ydj9li-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/Welfare-of-the-Girl-Child_factly.png"width="500" style="border-radius: 5px 5px 5px 5px; ">
               <p> <small><a href="/library/karlotta-the-knight"><u>Karlotta the Knight</u></a> with her squire and steed.</small> </p>
             </div>
           </div>
