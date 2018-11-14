@@ -2,25 +2,6 @@
   <div>
     <!-- featured post section-->
     <section class="section is-hero" @click="LoadPost">
-      <!--<div class="container">
-        <div class="columns is-vcentered">
-          <div class="column is-6 is-5-fullhd is-offset-1-fullhd">
-            <div class="section-header">
-              <h1 class="title is-spaced is-2 has-text-weight-semibold" > Government claims on<span class="is-hidden-touch"><br></span> the "Welfare of the Girl Child"</h1>
-              <h2 class="subtitle is-5">  An infographic published by the government claims that financial future has been secured for crores of girls in India. </h2>
-              <a class="has-tint has-text-weight-semibold" @click="LoadAuthor" href="http://127.0.0.1:3000/author/" target="_blank">
-                <i class="icon icon-award"></i><span>BY AILA BANDAGI KANDLAKUNTA ON OCTOBER 10, 2018</span>
-              </a>
-            </div>
-          </div>
-          <div class="column is-6">
-            <div class="section-media">
-              <img role="presentation" src="https://2nafqn3o0l6kwfofi3ydj9li-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/Welfare-of-the-Girl-Child_factly.png"width="500" style="border-radius: 5px 5px 5px 5px; ">
-              <p> <small><a href="/library/karlotta-the-knight"><u>Karlotta the Knight</u></a> with her squire and steed.</small> </p>
-            </div>
-          </div>
-        </div>
-      </div>-->
       <div class="container">
         <figure class ="image is-5by3">
           <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
@@ -132,34 +113,22 @@
 </template>
 
 <script>
-  import LatestStories from '@/components/LatestStories'
+import LatestStories from '@/components/LatestStories'
   import MoreStories   from '@/components/MoreStories'
 
 export default {
   components: {
-    LatestStories : LatestStories,
-    MoreStories   : MoreStories
+    LatestStories,
+    MoreStories
   },
   methods: {
-      LoadPost () {
-        this.$router.push('/story')
-      },
-      LoadAuthor () {
-            this.$router.push('/author')
-      }
+    LoadPost() {
+      this.$router.push('/story')
+    },
+    LoadAuthor() {
+      this.$router.push('/author')
     }
-/*  name: 'HomePage',
-  components: {BLogo},
-  data() {
-      return {
-          features: [
-              { icon: 'github-circle', title: 'Free', content: `<span>Open source on <a href="https://github.com/buefy/buefy"> GitHub</a></span>` },
-              { icon: 'cellphone-link', title: 'Responsive', content: `<span><b class="has-text-grey">Every</b> component is responsive</span>` },
-              { icon: 'alert-decagram', title: 'Modern', content: `<span>Built with <a href="https://vuejs.org/">Vue.js</a> and <a href="http://bulma.io/">Bulma</a></span>` },
-              { icon: 'arrange-bring-to-front', title: 'Lightweight', content: `<span>No other internal dependency</span>` }
-          ]
-      }
-  }*/
+  }
 }
 </script>
 
