@@ -10,9 +10,9 @@
     <div class="card-content">
       <div class="media">
         <div class="media-content">
-          <p class="title is-4 has-text-weight-semibold">{{ article.title }}</p>
+          <p class="title is-4 has-text-weight-semibold">{{ post.title }}</p>
           <p class="subtitle is-6">An infographic published by the government claims that financial future has been secured for crores of girls in India.
-            This claim is part of a series on ‘speed and scale of transformation’ in India. Here is a fact check of the claim.</p>
+          This claim is part of a series on ‘speed and scale of transformation’ in India. Here is a fact check of the claim.</p>
           <time style="color: #b3b2b2">By Aila Bandagi Kandlakunta On October 10, 2018</time>
         </div>
       </div>
@@ -21,14 +21,13 @@
 </template>
 
 <script>
-export default{
+export default {
   props: {
-    article: {
+    post: {
       type: Object,
       required: true,
       default: null
     }
   }
 }
-
 </script>
