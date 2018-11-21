@@ -1,111 +1,41 @@
 <template>
   <div>
     <!-- featured post section-->
-    <section class="section is-hero" @click="LoadPost">
+    <section class="section is-hero">
       <div class="container">
         <figure class ="image is-5by3">
           <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
         </figure>
-        <div class="content column">
-          <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop"> Details of pending criminal cases against candidates contesting Lok Sabha & Assembly elections will now be on Newspapers & TV</p>
-          <!--<div class="has-text-centered">
-            <span class="subtitle is-6">BY RAKESH DUBBUDU, </span>
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-          </div>-->
-          <div class="content subtitle is-hidden-mobile has-text-centered">
-            <p>Following the judgment of the SC in September, the ECI has now issued directions to candidates & political parties on the format to be followed for publication of pending criminal cases in newspapers & TV channels. Here is a look at all the changes.
-            </p>
+        <a v-bind:href="'/post/'+ posts[posts.length-1].id">
+          <div class="content column">
+            <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop"> {{posts[posts.length-1].title}}</p>
+            <!--<div class="has-text-centered">
+              <span class="subtitle is-6">BY RAKESH DUBBUDU, </span>
+              <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+            </div>-->
+            <div class="content subtitle is-hidden-mobile has-text-centered">
+              <p>{{posts[posts.length-1].subTitle}}</p>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     </section>
     <hr class="spacer is-1-5 is-hidden-mobile">
     <!-- Latest Stories Section -->
-    <section class="section" @click="LoadPost">
-      <div class="container columns">
-        <div class="column is-4 has-background-light">
-          <h3>LATEST FACTCHECKS</h3>
-          <br>
-          <div>
-            <h3><strong>Podcast: Regimes weaponizing social media</strong> <br>9 mins ago / Business</h3>
-          </div>
-          <br>
-          <div>
-            <h3><strong>Democrats launch campaign to reach 1 million California voters before Election Day  </strong><br>
-            32 mins ago / Politics </h3>
-          </div>
-          <br>
-          <div>
-          <h3><strong>Facebook Messenger simplifies design for its 1.3 billion users </strong> <br>
-            1 hour ago / Technology </h3>
-          </div>
-          <br>
-          <div>
-          <h3><strong>Megyn Kelly: When I was a kid, Halloween blackface "was OK"  </strong><br>
-            1 hour ago / U.S. News </h3>
-          </div>
-          <br>
-          <div>
-          <h3><strong>125 Android apps caught up in million dollar ad fraud scheme  </strong><br>
-            1 hour ago / Technology  </h3>
-          </div>
-          <br>
-          <div>
-          <h3><strong>Georgia governor candidate burned state’s Confederate-inspired flag </strong><br>
-            2 hours ago / Politics  </h3>
-          </div>
-          <br>
-          <div>
-          <h3><strong>Facebook debuts political ad archive data report </strong> <br>
-            2 hours ago / Politics </h3>
-          </div>
-          <br>
-          <div>
-          <h3><strong>Trump to meet Putin in Paris in November</strong> <br>
-            2 hours ago / World </h3>
-          </div>
-          <br>
-          <div>
-          <h3>
-            <strong>Tim Cook: Tech must embrace privacy to hold public trust </strong> <br>
-            2 hours ago / Technology  </h3>
-          </div>
-          <br>
-          <div>
-          <h3>
-            <strong>Report: Russia supported industrial controls cyberattack in 2017 </strong> <br>
-            2 hours ago / Technology
-          </h3>
-          </div>
-        </div>
 
-        <div class="column is-8">
-          <h3>LATEST STORIES</h3>
-          <br>
-          <!-- Latest stories section -->
-          <LatestStories />
-          <LatestStories />
-        </div>
-      </div>
-    </section>
-
-    <hr class="spacer is-1-5 is-hidden-mobile">
 
     <!-- MORE STORIES Section -->
-    <section class="section" @click="LoadPost">
+    <section class="section">
       <h3>MORE STORIES</h3>
       <br>
-      <!-- FIRST POST -->
-      <MoreStories />
-      
-      <!-- SECOND POST -->
-      <MoreStories />
-
-      <!-- THIRD POST -->
-      <MoreStories />
-     
-      <!-- FOURTH POST -->
-      <MoreStories />
+      <div
+        v-for="(p, index) in posts"
+        :key="index"
+        class="container columns">
+        <a v-bind:href="'/post/'+ p.id">
+          <MoreStories :post="p"/>
+        </a>
+      </div>
 
     </section>
 
@@ -113,22 +43,34 @@
 </template>
 
 <script>
-import LatestStories from '@/components/LatestStories'
-  import MoreStories   from '@/components/MoreStories'
+import PostCard from '~/components/PostCard'
+import axios from 'axios'
+import MoreStories from "../components/MoreStories";
 
 export default {
   components: {
-    LatestStories,
-    MoreStories
+    MoreStories,
+    PostCard
   },
-  methods: {
-    LoadPost() {
-      this.$router.push('/story')
-    },
-    LoadAuthor() {
-      this.$router.push('/author')
+  methods: {},
+  async asyncData() {
+    const config = {
+      url: 'http://127.0.0.1:8080/core/api/posts',
+      method: 'get',
+      headers: {
+        Authorization:
+          'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwUXo5YUVJVndiNmZrNUFDaVRhMTFaTU1JcC13QXRRak5ZYlU2OEtJVmlzIn0.eyJqdGkiOiI1ZjcxYmY2Ny02ZGVhLTQ2MmQtYTU4ZS0zMmViYzI0NTE4M2IiLCJleHAiOjE1NDI4MjM4NjcsIm5iZiI6MCwiaWF0IjoxNTQyODIzNTY3LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwODAvYXV0aC9yZWFsbXMvamhpcHN0ZXIiLCJhdWQiOiJmYWN0bHkiLCJzdWIiOiI3ZDg0Nzc4YS1jMGJhLTQ0NTEtYjBlZS04MDkyMzM5M2Y4YTAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJmYWN0bHkiLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiIwNzFjYmIzOC01Y2Y5LTQwOTItYWNmYy0yNjIwM2Y0MDMwNjEiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJjbGllbnRIb3N0IjoiMTcyLjI0LjAuMSIsImNsaWVudElkIjoiZmFjdGx5IiwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LWZhY3RseSIsImNsaWVudEFkZHJlc3MiOiIxNzIuMjQuMC4xIiwiZW1haWwiOiJzZXJ2aWNlLWFjY291bnQtZmFjdGx5QHBsYWNlaG9sZGVyLm9yZyJ9.oj635dBWUs6aA28iOKW9XDJtZg-vT_3KueonJOxv4eKm_m_-mKwLxFenLG5F6xqpREPmMY89-Yl6Yo7683ALO9FSdjf6KSGdMaRVMLMxSTYRjKrpDHz7F0F0mn2fIl54AAdnl5CEiJ9Ol2dOdJBQFngRFQs8-Ww8Wkm0ZEmfIND4B_hLFgA5QeO0dzG6ZzCJiV3vY1yNZ1vvZPct5s_5v4D1bdNFLnrRURtzqITmQ9Ug-JMAQZ6nCdna6X-lJVkrNUD8sFm1dMGB2ixc73EYuhtsstk-j_5sa_3dsLnXgLLcTXcJ-EPTzyByznSN44xKceeOs-OX9Qydy3rKt6xzgQ'
+      }
     }
+    return axios
+      .get(`http://127.0.0.1:8080/core/api/posts?access_token=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwUXo5YUVJVndiNmZrNUFDaVRhMTFaTU1JcC13QXRRak5ZYlU2OEtJVmlzIn0.eyJqdGkiOiIzNWNmYTBjZS1hY2FmLTQyNjAtYmRjMC1iNWQ4ZjNjNjM2NDgiLCJleHAiOjE1NDI4NTk4NDksIm5iZiI6MCwiaWF0IjoxNTQyODIzODQ5LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwODAvYXV0aC9yZWFsbXMvamhpcHN0ZXIiLCJhdWQiOiJmYWN0bHkiLCJzdWIiOiI3ZDg0Nzc4YS1jMGJhLTQ0NTEtYjBlZS04MDkyMzM5M2Y4YTAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJmYWN0bHkiLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiJiZWQyY2RjMy1kYjE1LTQ1ZWQtODI4My03MDZiNDAyMDdjY2YiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJjbGllbnRIb3N0IjoiMTcyLjI0LjAuMSIsImNsaWVudElkIjoiZmFjdGx5IiwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LWZhY3RseSIsImNsaWVudEFkZHJlc3MiOiIxNzIuMjQuMC4xIiwiZW1haWwiOiJzZXJ2aWNlLWFjY291bnQtZmFjdGx5QHBsYWNlaG9sZGVyLm9yZyJ9.XRmqklBLNllMzcqWeAIJ13GFPGktlUkCDCy-DISKubvA1GFyd3j3Tbk1-9iswwcFORGuwDXZUD9cH1542qjzBNpgwhOVfWDzuMaOaJe2mLqEy_PM2mUAWvsr9N47wOvuETI6eN2BwxifWgG2ra2xqz4Gfr6lCxbKATLpcogJ3A0P-stSERxy23mJBH2QkHEyFdrX7HuFd6xpiwM0BU9iGuw9VmoW2Eu7Xvetq0Z56W8a4K9tzd5hvYkut-Ee5HcMpkxNH3KpsLCOye4Hxr6dU_I0h-hkFjuyCuFwzgf-w8TaIpOFp4YUEabW6PC5J21UYw7PiScbzzmoTBCyrtNFxQ`)
+      .then(response => {
+        const data = {
+          posts: response.data
+        }
+        return data
+      })
+      .catch(error => console.log(error))
   }
 }
 </script>
-
