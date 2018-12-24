@@ -19,4 +19,18 @@ $ npm start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+## Using Docker to run the production build of Dega Web
+
+Run the following command from the root folder to build for production and start Dega Web in a docker container.
+
+```
+docker-compose build && docker-compose up -d
+```
+
+You should be able to access the website on: http://localhost:8000
+
+Run the following command from the root folder to stop and remove the container:
+
+```
+docker-compose down
+```
