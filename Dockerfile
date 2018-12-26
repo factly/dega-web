@@ -1,6 +1,12 @@
+## To do:
+# Add Dockerfile.dev
+# User Dockefile.dev in docker-compose
+# Bookmark node_modules directory in docker-compose
+# Change Dockerfile based on the project directory complex. Include nginx
+
 # build stage
 FROM node:10.14.2-alpine
-ENV APP_ROOT /src
+ENV APP_ROOT /app
 
 RUN mkdir ${APP_ROOT}
 WORKDIR ${APP_ROOT}
