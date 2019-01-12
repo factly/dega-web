@@ -1,6 +1,6 @@
 {
   "name": "dega-web",
-  "version": "1.1.2",
+  "version": "0.1.0",
   "description": "Website template for Dega",
   "author": "Factly Media &amp; Research LLC",
   "private": true,
@@ -21,13 +21,13 @@
     "nuxt-buefy": "^0.2.1"
   },
   "devDependencies": {
-    "nodemon": "^1.18.9",
     "babel-eslint": "^8.2.1",
-    "eslint": "^5.0.1",
-    "eslint-loader": "^2.0.0",
-    "eslint-plugin-vue": "^4.0.0",
+    "eslint": "^5.11.0",
     "eslint-config-prettier": "^3.1.0",
+    "eslint-loader": "^2.0.0",
     "eslint-plugin-prettier": "2.6.2",
+    "eslint-plugin-vue": "^4.0.0",
+    "nodemon": "^1.18.9",
     "prettier": "1.14.3"
   }
 }
