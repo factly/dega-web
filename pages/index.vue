@@ -6,18 +6,18 @@
         <figure class ="image is-5by3">
           <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
         </figure>
-        <a v-bind:href="'/post/'+ posts[posts.length-1].id">
+        <nuxt-link :to="'/post/'+ posts[posts.length-1].slug">
           <div class="content column">
             <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop"> {{posts[posts.length-1].title}}</p>
-            <!--<div class="has-text-centered">
+            <div class="has-text-centered">
               <span class="subtitle is-6">BY RAKESH DUBBUDU, </span>
               <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-            </div>-->
+            </div>
             <div class="content subtitle is-hidden-mobile has-text-centered">
               <p>{{posts[posts.length-1].subTitle}}</p>
             </div>
           </div>
-        </a>
+        </nuxt-link>
       </div>
     </section>
     <hr class="spacer is-1-5 is-hidden-mobile">
@@ -32,9 +32,9 @@
         v-for="(p, index) in posts"
         :key="index"
         class="container columns">
-        <a v-bind:href="'/post/'+ p.id">
+        <nuxt-link :to="'/post/'+ p.slug">
           <MoreStories :post="p"/>
-        </a>
+        </nuxt-link>
       </div>
 
     </section>
