@@ -8,7 +8,7 @@
           <i class="icon icon-award"></i>
           <span class="is-uppercase">
             BY
-            <nuxt-link class="has-tint has-text-weight-semibold" :to="'/author/'+post[0].authors[0].slug">{{post[0].authors[0].display_name}}</nuxt-link>
+            <nuxt-link class="has-tint has-text-weight-semibold" :to="'/author/'+ post[0].authors[0].slug">{{post[0].authors[0].display_name}}</nuxt-link>
             ON NOVEMBER 15, 2018
           </span>
 
@@ -29,8 +29,8 @@
 
     <section class="section">
       <div class="container">
-        <article class="post" v-html="post.content">
-          {{ post.content }}
+        <article class="post" v-html="post[0].content">
+          {{ post[0].content }}
         </article>
       </div>
     </section>
