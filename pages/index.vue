@@ -6,15 +6,15 @@
         <figure class ="image is-5by3">
           <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
         </figure>
-        <nuxt-link :to="'/post/'+ posts[posts.length-1].slug">
+        <nuxt-link :to="'/post/'+ posts[0].slug">
           <div class="content column">
-            <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop"> {{posts[posts.length-1].title}}</p>
+            <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop"> {{posts[0].title}}</p>
             <div class="has-text-centered">
-              <span class="subtitle is-6">BY RAKESH DUBBUDU, </span>
-              <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+              <span class="subtitle is-6 is-uppercase">BY {{posts[0].authors[0].display_name}}, </span>
+              <time datetime="2016-1-1">{{posts[0].last_updated_date}}</time>
             </div>
             <div class="content subtitle is-hidden-mobile has-text-centered">
-              <p>{{posts[posts.length-1].subTitle}}</p>
+              <p>{{posts[0].subTitle}}</p>
             </div>
           </div>
         </nuxt-link>
@@ -63,7 +63,7 @@ export default {
       }
     }
     return axios
-      .get(`http://127.0.0.1:8000/api/v1/posts`)
+      .get(`http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false`)
       .then(response => {
         const data = {
           posts: response.data

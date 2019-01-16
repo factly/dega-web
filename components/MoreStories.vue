@@ -15,8 +15,8 @@
       <div class="content">
         <p class="title is-4">{{ post.title }}</p>
         <br>
-        <p class="subtitle is-6">BY RAKESH DUBBUDU </p>
-        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+        <p class="subtitle is-6 is-uppercase">BY {{ post.authors[0].display_name }}</p>
+        <time datetime="2016-1-1">{{ post.last_updated_date }}</time>
       </div>
    </div>
    <!-- post-blockquote-column -->
