@@ -16,6 +16,10 @@
         <p class="title is-4">{{ post.title }}</p>
         <br>
         <p class="subtitle is-6 is-uppercase">BY {{ post.authors[0].display_name }}</p>
+        <div v-for="(author, index) in post.authors.splice(1)"
+                :key="index" class="has-text-centered">
+              <span class="subtitle is-6 is-uppercase"> ,{{author.display_name}}</span>
+        </div>
         <time datetime="2016-1-1">{{getDate(post.last_updated_date)}}</time>
       </div>
    </div>
