@@ -57,7 +57,6 @@
       return params.slug
     },
     async asyncData(params) {
-      console.log(params.params.slug)
       const config = {
         url: 'http://127.0.0.1:8000/core/api/posts',
         method: 'get',
@@ -67,8 +66,7 @@
         }
       }
       return axios
-        //.get(`http://127.0.0.1:8000/api/v1/posts/?category=${params.params.slug}`)
-        .get(`http://127.0.0.1:8000/api/v1/posts/?category=Business`)
+        .get(`http://127.0.0.1:8000/api/v1/posts/?category=${params.params.slug}`)
         .then(response => {
           const data = {
             posts: response.data
