@@ -1,20 +1,18 @@
 <template>
-	<div>
-	<!-- Image Section -->
-		<section class="section">
-			<div class="container columns has-text-centered">
-				<div class="column is-three-quarters">
-						<div class="box">
-							<h1 class="subtitle is-5 has-text-weight-bold" style="color:lightgrey;">INDIA</h1>
-							<h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">Have deposits by Indians in Swiss Bank has been decreased?
-							</h1>
+<div>
+	<section class="section">
+		<div class="container columns has-text-centered">
+			<div class="column is-three-quarters">
+				<div class="box">
+                    <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{factchecks[0].title}}
+					</h1>
 							<a class="has-tint has-text-weight-semibold " href="http://127.0.0.1:3000/author/shashi-deshetti" target="_blank" style="text-align: center">
 							<i class="icon icon-award"></i><span >BY SHASHI DESHETTI  ON OCTOBER 10, 2018</span> </a>
 							<figure class="image is-2by1">
 							<img src="https://2nafqn3o0l6kwfofi3ydj9li-wpengine.netdna-ssl.com/wp-content/uploads/2018/08/deposits-by-Indians-in-Swiss-Banks_featured-image.jpg" style="border-radius: 0px 0px 0px 0px;">
 							</figure>
 							<br>
-							<h2 class="subtitle is-size-6 is-size-6-tablet is-size-5-desktop has-text-weight-semibold">The government claimed that Swiss Bank deposits by Indians decreased during the current government while they increased during the UPA regime. </h2>
+							<h2 class="subtitle is-size-6 is-size-6-tablet is-size-5-desktop has-text-weight-semibold">{{factchecks[0]}}</h2>
 						</div>
 				</div>
 
@@ -27,11 +25,7 @@
 						<br><br>
 						<h1 class="subtitle has-text-weight-bold" style="color:#034f84;">#1. Swiss Bank deposits have gone down</h1>
 						<p style="color:grey">The government claimed that Swiss Bank deposits by Indians decreased during the current government while they increased during the UPA regime.</p>
-						<br>
-						<br>
-						<hr>
-						<br>
-						<br>
+						<br><br> <hr><br><br>
 						<h1 class="subtitle has-text-weight-bold" style="color:#034f84;">#2. More deposits in UPA regime</h1>
 						<p style="color:grey">The government claimed that Swiss Bank deposits by Indians decreased during the current government while they increased during the UPA regime.</p>
 						<br><br><br>
@@ -141,3 +135,31 @@
 		</section>
 	</div>
 </template>
+<script>
+import axios from 'axios'
+
+export default {
+  components: {
+  },
+  methods: {},
+  async asyncData() {
+    const config = {
+      url: 'http://127.0.0.1:8000/core/api/posts',
+      method: 'get',
+      headers: {
+        Authorization:
+          'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwUXo5YUVJVndiNmZrNUFDaVRhMTFaTU1JcC13QXRRak5ZYlU2OEtJVmlzIn0.eyJqdGkiOiI1ZjcxYmY2Ny02ZGVhLTQ2MmQtYTU4ZS0zMmViYzI0NTE4M2IiLCJleHAiOjE1NDI4MjM4NjcsIm5iZiI6MCwiaWF0IjoxNTQyODIzNTY3LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwODAvYXV0aC9yZWFsbXMvamhpcHN0ZXIiLCJhdWQiOiJmYWN0bHkiLCJzdWIiOiI3ZDg0Nzc4YS1jMGJhLTQ0NTEtYjBlZS04MDkyMzM5M2Y4YTAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJmYWN0bHkiLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiIwNzFjYmIzOC01Y2Y5LTQwOTItYWNmYy0yNjIwM2Y0MDMwNjEiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJjbGllbnRIb3N0IjoiMTcyLjI0LjAuMSIsImNsaWVudElkIjoiZmFjdGx5IiwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LWZhY3RseSIsImNsaWVudEFkZHJlc3MiOiIxNzIuMjQuMC4xIiwiZW1haWwiOiJzZXJ2aWNlLWFjY291bnQtZmFjdGx5QHBsYWNlaG9sZGVyLm9yZyJ9.oj635dBWUs6aA28iOKW9XDJtZg-vT_3KueonJOxv4eKm_m_-mKwLxFenLG5F6xqpREPmMY89-Yl6Yo7683ALO9FSdjf6KSGdMaRVMLMxSTYRjKrpDHz7F0F0mn2fIl54AAdnl5CEiJ9Ol2dOdJBQFngRFQs8-Ww8Wkm0ZEmfIND4B_hLFgA5QeO0dzG6ZzCJiV3vY1yNZ1vvZPct5s_5v4D1bdNFLnrRURtzqITmQ9Ug-JMAQZ6nCdna6X-lJVkrNUD8sFm1dMGB2ixc73EYuhtsstk-j_5sa_3dsLnXgLLcTXcJ-EPTzyByznSN44xKceeOs-OX9Qydy3rKt6xzgQ'
+      }
+    }
+    return axios
+      .get(`http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false`)
+      .then(response => {
+        const data = {
+          factchecks: response.data
+        }
+        return data
+      })
+      .catch(error => console.log(error))
+  }
+}
+</script>
