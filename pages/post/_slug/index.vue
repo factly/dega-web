@@ -1,5 +1,6 @@
 <template>
   <div>
+    <br><br><br><br>
     <section class="hero-title has-text-centered ">
       <div class="hero-body">
         <div class="container" >
@@ -9,7 +10,7 @@
           <span class="is-uppercase">
             BY
             <nuxt-link class="has-tint has-text-weight-semibold" :to="'/author/'+ post[0].authors[0].slug">{{post[0].authors[0].display_name}}</nuxt-link>
-            ON NOVEMBER 15, 2018
+            <div class="has-text-centered">{{getDate(post[0].last_updated_date)}}</div>
           </span>
 
         </div>
@@ -64,7 +65,13 @@ import axios from 'axios'
 
 export default {
 
-  methods: {},
+  methods: {
+    getDate(datetime) {
+      let date = new Date(datetime);
+      var ms = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return date.getDate() + ' ' + ms[date.getMonth()] + ' ' + date.getFullYear();
+    } 
+  },
   validate({ params }){
     return params.slug
   },
