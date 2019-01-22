@@ -1,6 +1,6 @@
 <template>
   <div>
-    <br><br><br><br><br>
+    <br><br><br>
     <nuxt-link :to="'/post/'+ posts[0].slug">
     <div class="columns" style="margin-bottom: 25px;">
         <div class= "column is-6">
