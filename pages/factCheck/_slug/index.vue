@@ -3,39 +3,34 @@
 	<section class="section">
 		<div class="container columns has-text-centered">
 			<div class="column is-three-quarters">
-				<div class="box">
-                    <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{factchecks[0].title}}
-					</h1>
-							<a class="has-tint has-text-weight-semibold " href="http://127.0.0.1:3000/author/shashi-deshetti" target="_blank" style="text-align: center">
-							<i class="icon icon-award"></i><span >BY SHASHI DESHETTI  ON OCTOBER 10, 2018</span> </a>
-							<figure class="image is-2by1">
-							<img src="https://2nafqn3o0l6kwfofi3ydj9li-wpengine.netdna-ssl.com/wp-content/uploads/2018/08/deposits-by-Indians-in-Swiss-Banks_featured-image.jpg" style="border-radius: 0px 0px 0px 0px;">
-							</figure>
-							<br>
-							<h2 class="subtitle is-size-6 is-size-6-tablet is-size-5-desktop has-text-weight-semibold">{{factchecks[0]}}</h2>
-						</div>
-				</div>
-
-
-					<!-- FACT CHECK BOX -->
-
-				<div class="column is-one-fourth is-hidden-mobile">
-					<div class="box has-text-weight-semibold" style="color: #1976d2;text-align:left;">
-					Fact Check For The Claims
-						<br><br>
-						<h1 class="subtitle has-text-weight-bold" style="color:#034f84;">#1. Swiss Bank deposits have gone down</h1>
-						<p style="color:grey">The government claimed that Swiss Bank deposits by Indians decreased during the current government while they increased during the UPA regime.</p>
-						<br><br> <hr><br><br>
-						<h1 class="subtitle has-text-weight-bold" style="color:#034f84;">#2. More deposits in UPA regime</h1>
-						<p style="color:grey">The government claimed that Swiss Bank deposits by Indians decreased during the current government while they increased during the UPA regime.</p>
-						<br><br><br>
-					</div>
+				<div class="box"><br><br><br>
+                    <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{factcheck}}</h1>
+					<span class="is-uppercase">
+						BY
+						<!-- <nuxt-link class="has-tint has-text-weight-semibold" :to="'/author/'+ factchecks[0].authors[0].slug">{{factchecks[0].authors[0].display_name}}</nuxt-link> -->
+						<div class="has-text-centered">{{getDate(factchecks[0].last_updated_date)}}</div>
+					</span>
+					<figure class="image is-2by1">
+						<img src="https://2nafqn3o0l6kwfofi3ydj9li-wpengine.netdna-ssl.com/wp-content/uploads/2018/08/deposits-by-Indians-in-Swiss-Banks_featured-image.jpg" style="border-radius: 0px 0px 0px 0px;">
+					</figure>
+					<br>
+					<h2 class="subtitle is-size-6 is-size-6-tablet is-size-5-desktop has-text-weight-semibold">{{factchecks[0].excerpt}}</h2>
 				</div>
 			</div>
-
-		<!-- CLAIM BOX -->
-
-			<div class="container columns">
+			<div class="column is-one-fourth is-hidden-mobile">
+				<div class="box has-text-weight-semibold" style="color: #1976d2;text-align:left;">
+					Fact Check For The Claims
+					<br><br>
+					<h1 class="subtitle has-text-weight-bold" style="color:#034f84;">#1. Swiss Bank deposits have gone down</h1>
+					<p style="color:grey">The government claimed that Swiss Bank deposits by Indians decreased during the current government while they increased during the UPA regime.</p>
+					<br><br> <hr><br><br>
+					<h1 class="subtitle has-text-weight-bold" style="color:#034f84;">#2. More deposits in UPA regime</h1>
+					<p style="color:grey">The government claimed that Swiss Bank deposits by Indians decreased during the current government while they increased during the UPA regime.</p>
+					<br><br><br>
+				</div>
+			</div>
+		</div>
+	<div class="container columns">
 				<div class="column is-three-quarters">
 					<div class="box">
 						<div class="columns is-mobile has-text-centered">
@@ -152,7 +147,7 @@ export default {
       }
     }
     return axios
-      .get(`http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false`)
+      .get(`http://127.0.0.1:8000/api/v1/factchecks/?slug=${params.params.slug}`)
       .then(response => {
         const data = {
           factchecks: response.data

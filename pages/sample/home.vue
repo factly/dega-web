@@ -1,49 +1,52 @@
 <template>
   <div>
-    <br><br><br>
-    <nuxt-link :to="'/post/'+ posts[0].slug">
-    <div class="columns" style="margin-bottom: 25px;">
-        <div class= "column is-6">
-            <div class="card">
-                <div class="card-image">
-                    <figure class ="image is-5by3">
-                        <img src="https://www.publicdomainpictures.net/pictures/200000/nahled/plain-blue-background.jpg" alt="Placeholder image">
-                    </figure>
-                </div>
-            </div>
-        </div>
-        <div class= "column is-6">
-            <br><br><br><br>
-            <div class="content subtitle is-hidden-mobile has-text-centered">
-                <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ posts[0].title }}</p>
-            </div>
-            <div class="has-text-centered" v-if="posts[0].authors.length >= 1">
-              <span class="subtitle is-6 is-uppercase">BY {{posts[0].authors[0].display_name}}</span>
-            </div>
-            <div v-for="(author, index) in posts[0].authors.splice(1)"
-                :key="index" class="has-text-centered">
-              <span class="subtitle is-6 is-uppercase"> ,{{author.display_name}}</span>
-            </div>
-            <div class="has-text-centered">{{getDate(posts[0].last_updated_date)}}</div>
-        </div>
-    </div>
-    </nuxt-link>
-    <hr class="spacer is-1-5 is-hidden-mobile">
-
-    <section class="section">
-      <h3>MORE STORIES</h3>
-      <br>
-      <div
-        v-for="(p, index) in posts.slice(1)"
-        :key="index"
-        class="container columns">
-        <nuxt-link :to="'/post/'+ p.slug">
-          <MoreStories :story="p"/>
-        </nuxt-link>
+    <br><br><br><br>
+    <div v-if="posts" >
+      <nuxt-link :to="'/post/'+ posts[0].slug">
+      <div class="columns" style="margin-bottom: 25px;">
+          <div class= "column is-6">
+              <div class="card">
+                  <div class="card-image">
+                      <figure class ="image is-5by3">
+                          <img src="https://www.publicdomainpictures.net/pictures/200000/nahled/plain-blue-background.jpg" alt="Placeholder image">
+                      </figure>
+                  </div>
+              </div>
+          </div>
+          <div class= "column is-6">
+              <br><br><br><br>
+              <div class="content subtitle is-hidden-mobile has-text-centered">
+                  <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ posts[0].title }}</p>
+              </div>
+              <div class="has-text-centered" v-if="posts[0].authors.length >= 1">
+                <span class="subtitle is-6 is-uppercase">BY {{posts[0].authors[0].display_name}}</span>
+              </div>
+              <div v-for="(author, index) in posts[0].authors.splice(1)"
+                  :key="index" class="has-text-centered">
+                <span class="subtitle is-6 is-uppercase"> ,{{author.display_name}}</span>
+              </div>
+              <div class="has-text-centered">{{getDate(posts[0].last_updated_date)}}</div>
+          </div>
       </div>
+      </nuxt-link>
+      <hr class="spacer is-1-5 is-hidden-mobile">
 
+      <section class="section">
+        <h3>MORE STORIES</h3>
+        <br>
+        <div
+          v-for="(p, index) in posts.slice(1)"
+          :key="index"
+          class="container columns">
+          <nuxt-link :to="'/post/'+ p.slug">
+            <MoreStories :story="p"/>
+          </nuxt-link>
+        </div>
+    
+    
     </section>
-
+    </div>
+    <div v-else> Loading</div>
   </div>
 </template>
 

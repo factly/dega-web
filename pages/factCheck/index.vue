@@ -137,9 +137,9 @@
 <template>
   <div>
     <br><br><br>
-    <nuxt-link :to="'/post/'+ factchecks[0].slug">
+    <nuxt-link :to="'/factCheck/'+ factchecks[0].slug">
     <div class="columns" style="margin-bottom: 25px;">
-        <div class= "column is-6">
+        <div class= "column is-6"><br><br>
             <div class="card">
                 <div class="card-image">
                     <figure class ="image is-5by3">
