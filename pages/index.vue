@@ -50,7 +50,7 @@
 <script>
 
 import axios from 'axios'
-import MoreStories from "../components/MoreStories";
+import MoreStories from "~/components/MoreStories";
 
 export default {
   components: {
