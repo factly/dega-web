@@ -1,91 +1,95 @@
 <template>
 <div>
 	<section class="section"><br><br><br>
-		<div class="container columns has-text-centered">
-			<div class="column is-three-quarters">
-				<div class="box">
-					<h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{factchecks[0].title}}</h1>
-					<span class="is-uppercase">
-						<!-- BY -->
-						<a class="has-tint has-text-weight-semibold " href="http://127.0.0.1:3000/author/shashi-deshetti" target="_blank" style="text-align: center">
-							<i class="icon icon-award"></i><span >BY SHASHI DESHETTI</span> </a>
-						<!-- <nuxt-link class="has-tint has-text-weight-semibold" :to="'/author/'+ factchecks[0].authors[0].slug">{{factchecks[0].authors[0].display_name}}</nuxt-link> -->
-						<div class="has-text-centered">{{getDate(factchecks[0].last_updated_date)}}</div>
-					</span>
-					<figure class="image is-2by1">
-						<img src="https://2nafqn3o0l6kwfofi3ydj9li-wpengine.netdna-ssl.com/wp-content/uploads/2018/08/deposits-by-Indians-in-Swiss-Banks_featured-image.jpg" style="border-radius: 0px 0px 0px 0px;">
-					</figure>
-					<br>
-					<h2 class="subtitle is-size-6 is-size-6-tablet is-size-5-desktop has-text-weight-semibold">{{factchecks[0].excerpt}}</h2>
-				</div>
-			</div><br><br><br>
-			<div class="column is-one-fourth is-hidden-mobile">
-				<div class="box has-text-weight-semibold" style="color: #1976d2;text-align:left;">
-					Fact Check For The Claims
-					<div v-for="(claim, index) in factchecks[0].claims" :key="index">
-						<h1 class="has-text-weight-semibold" style="color:#034f84;" >#{{index+1}}. {{claim.claim}}</h1>
-						<!-- <p style="color:grey" v-html="claim.description">{{claim.description}}</p> -->
-						<hr>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container columns">
-			<div class="column is-three-quarters">
-				<!-- CLAIM COLUMN -->
-				<div class="box" v-for="(claim, index) in factchecks[0].claims" :key="index">
-					<div class="columns is-mobile has-text-left">
-						<div class="column is-one-fifth" style="float:left;">
-							<img :src="claim.claim_source" alt="Claim Source">
+	<div class="columns">
+		<div class="column is-three-quarters is-full-mobile" style="float:left;">
+				<div class="column is-full has-text-centered">
+						<div class="box">
+							<h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{factchecks[0].title}}</h1>
+							<span class="is-uppercase">
+								<!-- BY -->
+								<a class="has-tint has-text-weight-semibold " href="http://127.0.0.1:3000/author/shashi-deshetti" target="_blank" style="text-align: center">
+									<i class="icon icon-award"></i><span >BY SHASHI DESHETTI</span> </a>
+								<!-- <nuxt-link class="has-tint has-text-weight-semibold" :to="'/author/'+ factchecks[0].authors[0].slug">{{factchecks[0].authors[0].display_name}}</nuxt-link> -->
+								<div class="has-text-centered">{{getDate(factchecks[0].last_updated_date)}}</div>
+							</span>
+							<figure class="image is-2by1">
+								<img src="https://2nafqn3o0l6kwfofi3ydj9li-wpengine.netdna-ssl.com/wp-content/uploads/2018/08/deposits-by-Indians-in-Swiss-Banks_featured-image.jpg" style="border-radius: 0px 0px 0px 0px;">
+							</figure>
+							<br>
+							<h2 class="subtitle is-size-6 is-size-6-tablet is-size-5-desktop has-text-weight-semibold">{{factchecks[0].excerpt}}</h2>
 						</div>
-						<div class="column is-three-fifth">
-							<p style="color: #1976d2;">Claimed by {{claim.claimant.name}}</p>
-							<p class="subtitle is-size-3 is-size-4-tablet is-size-5-desktop is-spaced is-2">{{claim.claim}}</p>
-							<!-- <p class="subtitle is-size-6 is-size-6-tablet is-size-5-desktop" v-html="claim.review">{{claim.review}}</p> -->
-						</div>
-						<div class="column is-one-fifth">
-							<img :src="claim.rating.numeric_value.png">
-							<!-- Rating: {{claim.rating.numeric_value}} -->
-							<!-- <img :src="~assets/images/ratings/claim.rating.numeric_value" alt="Rating"> -->
-							<!-- <img style="{ backgroundImage: 'url(' + require(@/assets/imgages/ratings/${claim.rating.numeric_value}) + ')' }"> -->
+				</div>
+				<div class="column is-full">
+					<!-- CLAIM COLUMN -->
+					<div class="box" v-for="(claim, index) in factchecks[0].claims" :key="index">
+						<div class="columns is-full-mobile has-text-left">
+							<div class="column is-one-fifth is-hidden-mobile" style="float:left;">
+								<img :src="claim.claim_source" alt="Claim Source">
+							</div>
+							<div class="column is-three-fifth is-mobile ">
+								<p style="color: #1976d2;">Claimed by {{claim.claimant.name}}</p>
+								<p class="subtitle is-size-3 is-size-4-tablet is-size-5-desktop is-size-5-mobile is-spaced is-2">{{claim.claim}}</p>
+								<!-- <p class="subtitle is-size-6 is-size-6-tablet is-size-5-desktop" v-html="claim.review">{{claim.review}}</p> -->
+							</div>
+							<div class="column is-one-fifth is-hidden-mobile">
+								<img :src="claim.rating.numeric_value.png">
+								<!-- Rating: {{claim.rating.numeric_value}} -->
+								<!-- <img :src="~assets/images/ratings/claim.rating.numeric_value" alt="Rating"> -->
+								<!-- <img style="{ backgroundImage: 'url(' + require(@/assets/imgages/ratings/${claim.rating.numeric_value}) + ')' }"> -->
+							</div>
 						</div>
 					</div>
 				</div>
-				<!-- ARTCILE CONTENT -->
-				<div class="box">
-					<article class="post" style="text-align: justify;">
-						<p v-html="factchecks[0].introduction">{{factchecks[0].introduction}}</p>
-					</article>
-					<div v-for="(claim,index) in factchecks[0].claims" :key="index">
-						<br>
+				<div class="column is-full">
+					<!-- ARTCILE CONTENT -->
+					<div class="box">
 						<article class="post" style="text-align: justify;">
-							<p v-html="claim.description">{{claim.description}}</p>
+							<p v-html="factchecks[0].introduction">{{factchecks[0].introduction}}</p>
 						</article>
-						<br>
+						<div v-for="(claim,index) in factchecks[0].claims" :key="index">
+							<br>
+							<article class="post" style="text-align: justify;">
+								<p v-html="claim.description">{{claim.description}}</p>
+							</article>
+							<br>
+						</div>
+						<article class="post" style="text-align: justify;">
+							<p>{{factchecks[0].summary}}</p>
+						</article>
 					</div>
-					<article class="post" style="text-align: justify;">
-						<p>{{factchecks[0].summary}}</p>
-					</article>
 				</div>
-			</div>
-			<!--RELATED ARTICLES BOX  -->
-			<div class="column is-one-fourth is-hidden-mobile">
-				<div class="box has-text-weight-semibold" style="color: #1976d2;">
-					Related Articles  <br><br>
-					<h2 class="subtitle is-6 has-text-weight-bold" style="color:lightgrey">INDIA</h2>
-					<p class="subtitle has-text-weight-bold">Are More people travelling in Airplanes than in AC trains?</p>
-					<br>
-					<h2 class="subtitle is-6 has-text-weight-bold" style="color:lightgrey">ELECTIONS 2019</h2>
-					<p class="subtitle has-text-weight-bold">Are More people travelling in Airplanes than in AC trains?</p>
-					<br>
-					<h2 class="subtitle is-6 has-text-weight-bold" style="color:lightgrey">WORLD</h2>
-					<p class="subtitle has-text-weight-bold">Are More people travelling in Airplanes than in AC trains?</p>
-					<br>
-					<h2 class="subtitle is-6 has-text-weight-bold" style="color:lightgrey">BUSSINESS</h2>
-					<p class="subtitle has-text-weight-bold">Are More people travelling in Airplanes than in AC trains?</p>
-				</div>
-			</div>
 		</div>
+		<div class="column is-one-fourth is-hidden-mobile"> 
+					<div class="column is-full">
+						<div class="box has-text-weight-semibold" style="color: #1976d2;text-align:left;">
+							Fact Check For The Claims
+							<div v-for="(claim, index) in factchecks[0].claims" :key="index">
+								<h1 class="has-text-weight-semibold" style="color:#034f84;" >#{{index+1}}. {{claim.claim}}</h1>
+								<!-- <p style="color:grey" v-html="claim.description">{{claim.description}}</p> -->
+								<hr>
+							</div>
+						</div>
+					</div>
+					<!--RELATED ARTICLES BOX  -->
+					<div class="column is-full">
+						<div class="box has-text-weight-semibold" style="color: #1976d2;">
+							Related Articles  <br><br>
+							<h2 class="subtitle is-6 has-text-weight-bold" style="color:lightgrey">INDIA</h2>
+							<p class="subtitle has-text-weight-bold">Are More people travelling in Airplanes than in AC trains?</p>
+							<br>
+							<h2 class="subtitle is-6 has-text-weight-bold" style="color:lightgrey">ELECTIONS 2019</h2>
+							<p class="subtitle has-text-weight-bold">Are More people travelling in Airplanes than in AC trains?</p>
+							<br>
+							<h2 class="subtitle is-6 has-text-weight-bold" style="color:lightgrey">WORLD</h2>
+							<p class="subtitle has-text-weight-bold">Are More people travelling in Airplanes than in AC trains?</p>
+							<br>
+							<h2 class="subtitle is-6 has-text-weight-bold" style="color:lightgrey">BUSSINESS</h2>
+							<p class="subtitle has-text-weight-bold">Are More people travelling in Airplanes than in AC trains?</p>
+						</div>
+					</div>
+		</div>
+	</div>
 	</section>
 </div>
 </template>
