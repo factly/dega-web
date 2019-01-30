@@ -54,8 +54,7 @@ import MoreStories from "../components/MoreStories";
 
 export default {
   components: {
-    MoreStories,
-    PostCard
+    MoreStories
   },
   methods: {
     getDate(datetime) {

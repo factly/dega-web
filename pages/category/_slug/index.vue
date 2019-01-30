@@ -46,8 +46,7 @@
 
   export default {
     components: {
-      MoreStories,
-      PostCard
+      MoreStories
     },
     methods: {},
     validate({ params }){
