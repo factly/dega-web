@@ -7,6 +7,11 @@ a.navbar-item>.icon:not(:last-child) {
   margin-right: .25em;
 }
 
+/* CSS for Fixed Div */
+.is-dockedTop {
+  position: fixed;
+}
+
 .card {
     border-radius: 5px;
   }
