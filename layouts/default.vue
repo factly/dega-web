@@ -5,14 +5,22 @@
       role="navigation"
       aria-label="main navigation">
       <div class="navbar-brand">
-        <a
+        <!--<a
           class="navbar-item"
           href="/">
           <img
             src="~assets/images/logo.png"
             alt="Dega"
             height="110">
-        </a>
+        </a>-->
+        <nuxt-link
+          class="navbar-item"
+          to="/">
+          <img
+            src="~assets/images/logo.png"
+            alt="Dega"
+            height="110">
+        </nuxt-link>
 
         <div class="navbar-burger">
           <span/>
@@ -22,57 +30,26 @@
       </div>
       <div id="navMenuDocumentation" class="navbar-menu">
         <div class="navbar-start is-uppercase">
-          <a class="navbar-item" href="/">
-            <span>Home</span>
-          </a>
-          <a class="navbar-item" href="/">
-            <span>Stories</span>
-          </a>
-          <a class="navbar-item" href="/">
-            <span class="is-hidden-touch is-hidden-widescreen">
-              Factchecks
-            </span>
-            <span class="is-hidden-desktop-only">
-              Factchecks
-            </span>
-          </a>
-          <a class="navbar-item" href="/">
-            <span>Fake News</span>
-          </a>
+          <nuxt-link to="/" class="navbar-item">Home</nuxt-link>
+          <nuxt-link to="/post" class="navbar-item">Stories</nuxt-link>
+          <nuxt-link to="/factcheck" class="navbar-item">Fact Check</nuxt-link>
+          <nuxt-link to="/category/fake-news" class="navbar-item">Fake News</nuxt-link>
+
+
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link" href="/">
-              About Us
-            </a>
+            <nuxt-link to="/page/about-us" class="navbar-link">About Us</nuxt-link>
             <div id="aboutUsDropdown" class="navbar-dropdown">
-              <a class="navbar-item " href="/">
-                <span>
-                  Our Story
-                </span>
-              </a>
+              <nuxt-link to="/page/corrections-policy" class="navbar-item">Corrections Policy</nuxt-link>
               <hr class="navbar-divider">
-              <a class="navbar-item " href="/">
-                <span>
-                  Team
-                </span>
-              </a>
+              <nuxt-link to="/page/team" class="navbar-item">Team</nuxt-link>
               <hr class="navbar-divider">
-              <a class="navbar-item " href="/">
-                <span>
-                  Factcheck Methodology
-                </span>
-              </a>
+              <nuxt-link to="/page/fact-check-methodology" class="navbar-item">Fact Check Methodology</nuxt-link>
               <hr class="navbar-divider">
-              <a class="navbar-item " href="/">
-                <span>
-                  FAQs
-                </span>
-              </a>
+              <nuxt-link to="/page/submit-a-claim" class="navbar-item">Submit a Claim</nuxt-link>
               <hr class="navbar-divider">
-              <a class="navbar-item " href="/">
-                <span>
-                  Contact Us
-                </span>
-              </a>
+              <nuxt-link to="/page/funding-details" class="navbar-item">Funding Details</nuxt-link>
+              <hr class="navbar-divider">
+              <nuxt-link to="/page/contact-us" class="navbar-item">Contact Us</nuxt-link>
             </div>
           </div>
         </div>
