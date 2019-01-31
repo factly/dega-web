@@ -79,12 +79,17 @@
         </div>
       </div>
     </nav>
-
-    <section class="main-content columns">
-      <div class="container">
-        <nuxt />
-      </div>
-    </section>
+    <!-- <br><br><br><br> -->
+    <!-- <div class="columns"> -->
+      <!-- Nuxt Pages -->
+      <!-- <div class="column is-10" style="margin-left: 5%; margin-right: 5%;">
+        <div class="main-content">
+          <div class="container"> -->
+            <nuxt />
+          <!-- </div>
+        </div>
+      </div> -->
+  <!-- </div> -->
   </div>
 </template>
 

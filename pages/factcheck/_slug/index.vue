@@ -1,6 +1,6 @@
 <template>
 <div>
-	<section class="section"><br><br><br>
+	<section style="margin: 5%;">
 	<div class="columns">
 		<div class="column is-four-fifths is-full-mobile" style="float:left;">
 				<div class="column is-full has-text-centered">
@@ -60,7 +60,7 @@
 		</div>
 		<div class="column is-one-fifth is-hidden-mobile">
         <div class="column is-one-fifth is-dockedTop">
-          <div class="box has-text-weight-semibold" style="color: #1976d2;text-align:left;">
+          <div class="box has-text-weight-semibold" style="color: #1976d2; text-align:left;">
             Fact Check For The Claims
             <div v-for="(claim, index) in factchecks[0].claims" :key="index">
               <hr>

@@ -1,9 +1,8 @@
 <template>
-  <div>
-    <br><br><br><br>
-    <section class="hero-title has-text-centered ">
-      <div class="hero-body">
-        <div class="container" >
+  <div style="margin: 5%;">
+    <section class="hero-title has-text-centered">
+      <!-- <div class="hero-body"> -->
+        <div class="container post-article">
           <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-semibold">{{post[0].title}}</h1>
           <h2 class="subtitle is-size-6 is-size-6-tablet is-size-5-desktop" style="color: #555;">{{post[0].subTitle}}</h2>
           <i class="icon icon-award"></i>
@@ -12,11 +11,9 @@
             <nuxt-link class="has-tint has-text-weight-semibold" :to="'/author/'+ post[0].authors[0].slug">{{post[0].authors[0].display_name}}</nuxt-link>
             <div class="has-text-centered">{{getDate(post[0].last_updated_date)}}</div>
           </span>
-
         </div>
-      </div>
+      <!-- </div> -->
     </section>
-
     <!-- featured image-section -->
     <section class="section is-paddingless">
       <div class="container">
@@ -25,19 +22,16 @@
         </figure>
       </div>
     </section>
-
     <!-- post content -->
-
     <section class="section">
       <div class="container">
-        <article class="post" v-html="post[0].content">
+        <article class="post has-text-justified" v-html="post[0].content">
           {{ post[0].content }}
         </article>
       </div>
     </section>
   </div>
 </template>
-
 <style>
 /*.post {
   max-width: 800px;
@@ -50,6 +44,10 @@
   margin-top:-80px;
 }*/
 
+.post-article{
+  margin-top: 7%; 
+  margin-bottom: 1%;
+}
 p {
   display: block;
   margin-block-start: 1em;
