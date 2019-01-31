@@ -2,7 +2,7 @@
 <div>
 	<section class="section"><br><br><br>
 	<div class="columns">
-		<div class="column is-three-quarters is-full-mobile" style="float:left;">
+		<div class="column is-four-fifths is-full-mobile" style="float:left;">
 				<div class="column is-full has-text-centered">
 						<div class="box">
 							<h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{factchecks[0].title}}</h1>
@@ -17,7 +17,8 @@
 								<img src="https://2nafqn3o0l6kwfofi3ydj9li-wpengine.netdna-ssl.com/wp-content/uploads/2018/08/deposits-by-Indians-in-Swiss-Banks_featured-image.jpg" style="border-radius: 0px 0px 0px 0px;">
 							</figure>
 							<br>
-							<h2 class="subtitle is-size-6 is-size-6-tablet is-size-5-desktop has-text-weight-semibold">{{factchecks[0].excerpt}}</h2>
+							<p class="subtitle is-size-6 is-size-6-tablet is-size-6-desktop has-text-weight-semibold has-text-left has-text-weight-semibold">{{factchecks[0].excerpt}}</p>
+
 						</div>
 				</div>
 				<div class="column is-full">
@@ -57,34 +58,17 @@
 					</div>
 				</div>
 		</div>
-		<div class="column is-one-fourth is-hidden-mobile"> 
-					<div class="column is-full">
-						<div class="box has-text-weight-semibold" style="color: #1976d2;text-align:left;">
-							Fact Check For The Claims
-							<div v-for="(claim, index) in factchecks[0].claims" :key="index">
-								<h1 class="has-text-weight-semibold" style="color:#034f84;" >#{{index+1}}. {{claim.claim}}</h1>
-								<!-- <p style="color:grey" v-html="claim.description">{{claim.description}}</p> -->
-								<hr>
-							</div>
-						</div>
-					</div>
-					<!--RELATED ARTICLES BOX  -->
-					<div class="column is-full">
-						<div class="box has-text-weight-semibold" style="color: #1976d2;">
-							Related Articles  <br><br>
-							<h2 class="subtitle is-6 has-text-weight-bold" style="color:lightgrey">INDIA</h2>
-							<p class="subtitle has-text-weight-bold">Are More people travelling in Airplanes than in AC trains?</p>
-							<br>
-							<h2 class="subtitle is-6 has-text-weight-bold" style="color:lightgrey">ELECTIONS 2019</h2>
-							<p class="subtitle has-text-weight-bold">Are More people travelling in Airplanes than in AC trains?</p>
-							<br>
-							<h2 class="subtitle is-6 has-text-weight-bold" style="color:lightgrey">WORLD</h2>
-							<p class="subtitle has-text-weight-bold">Are More people travelling in Airplanes than in AC trains?</p>
-							<br>
-							<h2 class="subtitle is-6 has-text-weight-bold" style="color:lightgrey">BUSSINESS</h2>
-							<p class="subtitle has-text-weight-bold">Are More people travelling in Airplanes than in AC trains?</p>
-						</div>
-					</div>
+		<div class="column is-one-fifth is-hidden-mobile">
+        <div class="column is-one-fifth is-dockedTop">
+          <div class="box has-text-weight-semibold" style="color: #1976d2;text-align:left;">
+            Fact Check For The Claims
+            <div v-for="(claim, index) in factchecks[0].claims" :key="index">
+              <hr>
+              <h2 class="has-text-weight-semibold" style="color:#034f84;" >#{{index+1}}. {{claim.claim}}</h2>
+              <!-- <p style="color:grey" v-html="claim.description">{{claim.description}}</p> -->
+            </div>
+          </div>
+      </div>
 		</div>
 	</div>
 	</section>
