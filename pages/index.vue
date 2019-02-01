@@ -1,6 +1,6 @@
 <template>
-  <div class="columns" style="margin: 5%;">
-    <div class="column is-three-fourth">
+  <div class="columns" style="margin-top: 100px;">
+    <div class="column is-three-fourth" style="margin-left: 1rem;">
       <div class="main-content">
         <div class="container">
           <nuxt-link :to="'/post/'+ posts[0].slug">

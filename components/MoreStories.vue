@@ -1,5 +1,5 @@
 <template>
-  <div class="columns" style="margin-bottom: 25px;"> <!--<div class="container columns">-->
+  <div class="columns" style="margin-bottom: 1rem; margin-left: 0.5rem"> <!--<div class="container columns">-->
     <!-- story-image  column-->
     <div class= "column is-4">
       <div class="card">
