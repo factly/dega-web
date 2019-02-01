@@ -12,6 +12,11 @@ a.navbar-item>.icon:not(:last-child) {
   position: fixed;
 }
 
+.post-article{
+  margin-top: 7%; 
+  margin-bottom: 1%;
+}
+
 .card {
     border-radius: 5px;
   }

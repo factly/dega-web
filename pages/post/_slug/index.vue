@@ -44,10 +44,6 @@
   margin-top:-80px;
 }*/
 
-.post-article{
-  margin-top: 7%; 
-  margin-bottom: 1%;
-}
 p {
   display: block;
   margin-block-start: 1em;
