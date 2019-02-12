@@ -1,11 +1,11 @@
 <template>
-  <div class="columns" style="margin-top: 100px;">
-    <div class="column is-three-fourth" style="margin-left: 1rem;">
+  <div class="columns home-page">
+    <div class="column is-three-fourth">
       <div class="main-content">
-        <div class="container">
+        <div v-if="posts" class="container">
           <nuxt-link :to="'/post/'+ posts[0].slug">
-            <div class="columns" style="margin-bottom: 25px;">
-                <div class= "column is-6">
+            <div class="columns">
+                <div class= "column is-6 is-full-mobile">
                     <div class="card">
                         <div class="card-image">
                             <figure class ="image is-5by3">
@@ -14,17 +14,23 @@
                         </div>
                     </div>
                 </div>
-                <div class= "column is-6">
+                <div class= "column is-6 is-full-mobile" >
                     <div class="content subtitle has-text-centered">
                         <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ posts[0].title }}</p>
                     </div>
-                    <center>
+                    <!-- <div class="has-text-centered">
                       <span v-if="posts[0].authors.length >= 1" class="subtitle is-6 is-uppercase has-text-centered">BY {{posts[0].authors[0].display_name}}</span>
                       <span v-for="(author, index) in posts[0].authors.splice(1)"
                         :key="index">
-                      <span class="subtitle is-6 is-uppercase has-text-centered">, {{author.display_name}}</span>
+                        <span class="subtitle is-6 is-uppercase has-text-centered">, {{author.display_name}}</span>
                       </span>
-                    </center>
+                    </div> -->
+                    <div class="subtitle is-6 is-uppercase has-text-centered">
+                      BY
+                      <span  v-for="(author, index) in posts[0].authors" :key="index" >{{author.display_name}} 
+                        <span v-if="index != posts[0].authors.length -1">, </span>
+                      </span>
+                    </div>
                     <div class="has-text-centered">{{getDate(posts[0].last_updated_date)}}</div><br>
                     <div class="has-text-justified">
                       {{posts[0].excerpt}}
@@ -52,11 +58,19 @@
             </div>
           </div>
         </div>
+        <div>
+          Server Not Responding
+        </div>
       </div>
     </div>
-    <PopularArticles></PopularArticles>
+    <!-- <PopularArticles></PopularArticles> -->
   </div>
 </template>
+<style>
+.home-page{
+  margin: 1%
+}
+</style>
 
 <script>
 

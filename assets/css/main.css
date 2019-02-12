@@ -12,10 +12,13 @@ a.navbar-item>.icon:not(:last-child) {
   position: fixed;
 }
 
-.post-article{
-  margin-top: 7%; 
-  margin-bottom: 1%;
+.navbar.is-fixed-top{
+  position: relative;
 }
+/* .post-article{
+  margin-top: 1%; 
+  margin-bottom: 1%;
+} */
 
 .card {
     border-radius: 5px;
@@ -32,20 +35,20 @@ a.navbar-item>.icon:not(:last-child) {
     transform: scale(0);
   } */
 
-  .page-enter-active{
-    animation: bounce-in .8s;
-  }
+.page-enter-active{
+  animation: bounce-in .8s;
+}
 
-  .page-leave-active{
-    animation: bounce-out .5s;
-  }
+.page-leave-active{
+  animation: bounce-out .5s;
+}
 
-  @keyframes bounce-in{
-    0% { transform: scale(.9); opacity: 0;}
-    100% {transform: scale(1); opacity: 1;}
-  }
+@keyframes bounce-in{
+  0% { transform: scale(.9); opacity: 0;}
+  100% {transform: scale(1); opacity: 1;}
+}
 
-  @keyframes bounce-out{
-    0% {transform: scale(1); opacity: 1;}
-    100% { transform: scale(.9); opacity: 0;}
-  }
+@keyframes bounce-out{
+  0% {transform: scale(1); opacity: 1;}
+  100% { transform: scale(.9); opacity: 0;}
+}

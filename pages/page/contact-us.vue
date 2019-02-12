@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <div class="column is-12">
-      <div class="main-content post-article">
+      <div class="main-content contact-us-page">
         <section class="hero-title has-text-centered container">
           <!-- <div>
             <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">
@@ -186,3 +186,10 @@
     </div>
   </div>
 </template>
+
+
+<style>
+.contact-us-page{
+  margin-block-start: 1%
+}
+</style>

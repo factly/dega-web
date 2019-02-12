@@ -1,10 +1,10 @@
 <template>
-  <div class="columns" style="margin-top: 100px;">
-    <div class="column is-three-fourth" style="margin-left: 1rem;">
+  <div class="columns factcheck-list">
+    <div class="column is-three-fourth">
       <div class="main-content">
         <div class="container">
 					<nuxt-link :to="'/factcheck/'+ factchecks[0].slug">
-						<div class="columns" style="margin-bottom: 25px;">
+						<div class="columns">
 								<div class= "column is-6">
 										<div class="card">
 												<div class="card-image">
@@ -44,9 +44,14 @@
 				</div>
 			</div>
 		</div>
-	<PopularArticles></PopularArticles>
+	<!-- <PopularArticles></PopularArticles> -->
 	</div>
 </template>
+<style>
+.factcheck-list{
+  margin: 1%
+}
+</style>
 
 <script>
 import axios from 'axios'
