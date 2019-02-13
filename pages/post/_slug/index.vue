@@ -1,11 +1,11 @@
 <template>
-  <div style="margin: 5%;">
+  <div class="post-page">
     <section class="hero-title has-text-centered">
       <!-- <div class="hero-body"> -->
         <div class="container post-article">
           <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-semibold">{{post[0].title}}</h1>
-          <h2 class="subtitle is-size-6 is-size-6-tablet is-size-5-desktop" style="color: #555;">{{post[0].subTitle}}</h2>
-          <i class="icon icon-award"></i>
+          <!-- <h2 class="subtitle is-size-6 is-size-6-tablet is-size-5-desktop" style="color: #555;">{{post[0].subTitle}}</h2> -->
+          <!-- <i class="icon icon-award"></i> -->
           <span class="is-uppercase">
             BY
             <nuxt-link class="has-tint has-text-weight-semibold" :to="'/author/'+ post[0].authors[0].slug">{{post[0].authors[0].display_name}}</nuxt-link>
@@ -32,26 +32,12 @@
     </section>
   </div>
 </template>
+
+
 <style>
-/*.post {
-  max-width: 800px;
-  margin: auto;
-  text-align: left;
-  margin-bottom: 1rem;
-  line-height: 1.85;
-  font-size: 1.25rem;
-  color: rgba(0,0,0,.8);
-  margin-top:-80px;
-}*/
-
-p {
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+.post-page{
+  margin: 1%
 }
-
 </style>
 
 <script>

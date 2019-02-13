@@ -1,5 +1,5 @@
 <template>
-  <div class="columns" style="margin-bottom: 1rem; margin-left: 0.5rem"> <!--<div class="container columns">-->
+  <div class="columns" style="margin-bottom: 1rem; margin: 0.5rem"> <!--<div class="container columns">-->
     <!-- story-image  column-->
     <div class= "column is-4">
       <div class="card">
@@ -14,14 +14,20 @@
    <div class="column is-4">
       <div class="content">
         <p class="title is-4">{{ story.title }}</p>
-        <div v-if="story.authors">
+        <div v-if="story.authors" class="subtitle is-6 is-uppercase">
+          BY
+          <span  v-for="(author, index) in story.authors" :key="index" >{{author.display_name}} 
+            <span v-if="index != story.authors.length -1"> & </span>
+          </span>
+        </div>
+        <!-- <div v-if="story.authors">
               <span v-if="story.authors" class="subtitle is-6 is-uppercase">BY {{story.authors[0].display_name}}</span>
               <span v-for="(author, index) in story.authors.splice(1)"
                 :key="index"  class="subtitle is-6 is-uppercase">, {{author.display_name}}
-                <!-- <span class="subtitle is-6 is-uppercase">, {{author.display_name}}</span> -->
+                <span class="subtitle is-6 is-uppercase">, {{author.display_name}}</span>
               </span>
-        </div>
-              <br>
+        </div> -->
+              <!-- <br> -->
         <!-- <div v-if="story.authors">
           <p class="subtitle is-6 is-uppercase">BY {{ story.authors[0].display_name }}</p>
           <div v-for="(author, index) in story.authors.splice(1)"
