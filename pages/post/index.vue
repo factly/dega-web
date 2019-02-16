@@ -50,7 +50,7 @@
                   :key="index"
                   class="container columns">
                   <nuxt-link :to="'/post/'+ p.slug">
-                    <MoreStories :story="p"/>
+                    <MoreStories :story="p" :categories="true"/>
                   </nuxt-link>
                 </div>
 
@@ -58,8 +58,8 @@
             </div>
           </div>
         </div>
-        <div>
-          Server Not Responding
+        <div v-else class="subtitle is-6 is-uppercase has-text-centered">
+          Dega API is not responding.<br> Please contact the administrator.
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@
   <div class="columns factcheck-list">
     <div class="column is-three-fourth">
       <div class="main-content">
-        <div class="container">
+        <div v-if="factchecks" class="container">
 					<nuxt-link :to="'/factcheck/'+ factchecks[0].slug">
 						<div class="columns">
 								<div class= "column is-6">
@@ -35,13 +35,16 @@
 								<br>
 								<div v-for="(p, index) in factchecks.slice(1)" :key="index" class="container columns">
 									<nuxt-link :to="'/factCheck/'+ p.slug">
-										<MoreStories :story="p"/>
+										<MoreStories :story="p" :categories="false"/>
 									</nuxt-link>
 								</div>
 							</section>
 						</div>
 					</div>
 				</div>
+				<div v-else class="subtitle is-6 is-uppercase has-text-centered">
+          Dega API is not responding.<br> Please contact the administrator.
+        </div>
 			</div>
 		</div>
 	<!-- <PopularArticles></PopularArticles> -->

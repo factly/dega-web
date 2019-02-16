@@ -2,38 +2,43 @@
   <div class="columns home-page">
     <div class="column is-three-fourth">
       <div class="main-content">
-        <div v-if="posts" class="container">
-          <nuxt-link :to="'/post/'+ posts[0].slug">
+        <div v-if="story" class="container">
+          <nuxt-link :to="'/post/'+ story[0].slug">
             <div class="columns">
-                <div class= "column is-6 is-full-mobile">
+                <div class= "column is- 6 is-full-mobile">
                     <div class="card">
                         <div class="card-image">
                             <figure class ="image is-5by3">
                                 <img src="https://www.publicdomainpictures.net/pictures/200000/nahled/plain-blue-background.jpg" alt="Placeholder image">
+                                <div class="story-art">
+                                  <div v-if="story[0]._class == 'com.factly.dega.domain.Factcheck'" class="fact-strip">
+                                    <h1>FACTCHECK</h1>
+                                  </div>
+                                </div>
                             </figure>
                         </div>
                     </div>
                 </div>
                 <div class= "column is-6 is-full-mobile" >
                     <div class="content subtitle has-text-centered">
-                        <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ posts[0].title }}</p>
+                        <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ story[0].title }}</p>
                     </div>
                     <!-- <div class="has-text-centered">
-                      <span v-if="posts[0].authors.length >= 1" class="subtitle is-6 is-uppercase has-text-centered">BY {{posts[0].authors[0].display_name}}</span>
-                      <span v-for="(author, index) in posts[0].authors.splice(1)"
+                      <span v-if="story[0].authors.length >= 1" class="subtitle is-6 is-uppercase has-text-centered">BY {{story[0].authors[0].display_name}}</span>
+                      <span v-for="(author, index) in story[0].authors.splice(1)"
                         :key="index">
                         <span class="subtitle is-6 is-uppercase has-text-centered">, {{author.display_name}}</span>
                       </span>
                     </div> -->
                     <div class="subtitle is-6 is-uppercase has-text-centered">
                       BY
-                      <span  v-for="(author, index) in posts[0].authors" :key="index" >{{author.display_name}} 
-                        <span v-if="index != posts[0].authors.length -1">, </span>
+                      <span  v-for="(author, index) in story[0].authors" :key="index" >{{author.display_name}} 
+                        <span v-if="index != story[0].authors.length -1">, </span>
                       </span>
                     </div>
-                    <div class="has-text-centered">{{getDate(posts[0].last_updated_date)}}</div><br>
+                    <div class="has-text-centered">{{getDate(story[0].last_updated_date)}}</div><br>
                     <div class="has-text-justified">
-                      {{posts[0].excerpt}}
+                      {{story[0].excerpt}}
                     </div>
                 </div>
             </div>
@@ -46,11 +51,11 @@
                 <h3>MORE STORIES</h3>
                 <br>
                 <div
-                  v-for="(p, index) in posts.slice(1)"
+                  v-for="(p, index) in story.slice(1)"
                   :key="index"
                   class="container columns">
                   <nuxt-link :to="'/post/'+ p.slug">
-                    <MoreStories :story="p"/>
+                    <MoreStories :story="p" :categories= "true"/>
                   </nuxt-link>
                 </div>
 
@@ -58,8 +63,8 @@
             </div>
           </div>
         </div>
-        <div>
-          Server Not Responding
+        <div v-else class="subtitle is-6 is-uppercase has-text-centered">
+          Dega API is not responding.<br> Please contact the administrator.
         </div>
       </div>
     </div>
@@ -70,17 +75,43 @@
 .home-page{
   margin: 1%
 }
+
+.story-art {
+  position: relative; 
+  max-width: 800px; /* Maximum width */
+  margin: 0 auto; /* Center it */
+}
+
+.story-art .fact-strip {
+  position: absolute; /* Position the background text */
+  bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1; /* Grey text */
+  width: 100%; /* Full width */
+  padding: 20px; /* Some padding */
+}
+
 </style>
 
 <script>
 
 import axios from 'axios'
-import MoreStories from "~/components/MoreStories";
+import MoreStories from "~/components/MoreStories"
 import PopularArticles from "~/components/PopularArticles"
+import * as _ from "lodash"
 export default {
   components: {
     MoreStories,
     PopularArticles
+  },
+  data()
+  {
+    return {
+      posts:null,
+      factchecks:null,
+      story:null
+    };
   },
   methods: {
     getDate(datetime) {
@@ -90,15 +121,21 @@ export default {
     }
   },
   async asyncData() {
-    return axios
-      .get(`http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false`)
-      .then(response => {
-        const data = {
-          posts: response.data
-        }
-        return data
-      })
-      .catch(error => console.log(error))
+    // return axios
+    //   .get(`http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false`)
+    //   .then(response => {
+    //     const data = {
+    //       posts: response.data
+    //     }
+    //     return data
+    //   })
+    //   .catch(error => console.log(error))
+    let post = await axios.get('http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false')
+    let factcheck = await axios.get('http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false')
+    let stories =  _.shuffle(post.data.concat(factcheck.data));
+    return {
+    story : stories
+    }
   }
 }
 </script>

@@ -3,21 +3,26 @@
     <!-- story-image  column-->
     <div class= "column is-4">
       <div class="card">
-       <div class="card-image">
-         <figure class ="image is-5by3">
-           <img src="https://www.solidbackgrounds.com/images/2880x1800/2880x1800-spanish-sky-blue-solid-color-background.jpg" alt="Placeholder image">
-         </figure>
-       </div>
+        <div class="card-image">
+          <figure class ="image is-5by3">
+            <img src="https://www.solidbackgrounds.com/images/2880x1800/2880x1800-spanish-sky-blue-solid-color-background.jpg" alt="Placeholder image">
+            <div v-if="categories" class="story-art">
+              <div v-if="story._class == 'com.factly.dega.domain.Factcheck'" class="fact-strip">
+                <h1>FACTCHECK</h1>
+              </div>
+            </div>
+          </figure>
+        </div>
       </div>
     </div>
-   <!-- story-title-column -->
-   <div class="column is-4">
+    <!-- story-title-column -->
+    <div class="column is-4">
       <div class="content">
         <p class="title is-4">{{ story.title }}</p>
         <div v-if="story.authors" class="subtitle is-6 is-uppercase">
           BY
           <span  v-for="(author, index) in story.authors" :key="index" >{{author.display_name}} 
-            <span v-if="index != story.authors.length -1"> & </span>
+            <span v-if="index != story.authors.length -1"> , </span>
           </span>
         </div>
         <!-- <div v-if="story.authors">
@@ -55,7 +60,12 @@ export default {
       type: Object,
       required: true,
       default: null
-    }
+    },
+    categories: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
   },
   methods: {
     getDate(datetime) {
