@@ -3,7 +3,7 @@
     <div class="column is-three-fourth">
       <div class="main-content">
         <div v-if="story" class="container">
-          <nuxt-link :to="'/post/'+ story[0].slug">
+          <nuxt-link :to="'/'+ story[0]._class.split('.').pop().toLowerCase()+ '/' + story[0].slug">
             <div class="columns">
                 <div class= "column is- 6 is-full-mobile">
                     <div class="card">
@@ -54,11 +54,10 @@
                   v-for="(p, index) in story.slice(1)"
                   :key="index"
                   class="container columns">
-                  <nuxt-link :to="'/post/'+ p.slug">
+                  <nuxt-link :to="'/'+ p._class.split('.').pop().toLowerCase()+ '/' +p.slug">
                     <MoreStories :story="p" :categories= "true"/>
                   </nuxt-link>
                 </div>
-
               </section>
             </div>
           </div>
@@ -130,8 +129,8 @@ export default {
     //     return data
     //   })
     //   .catch(error => console.log(error))
-    let post = await axios.get('http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false')
-    let factcheck = await axios.get('http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false')
+    let post = await axios.get('http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false').catch(error => console.log(error))
+    let factcheck = await axios.get('http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false').catch(error => console.log(error))
     let stories =  _.shuffle(post.data.concat(factcheck.data));
     return {
     story : stories
