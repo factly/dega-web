@@ -60,21 +60,7 @@
           </div>
         </div>
       </nav>
-    <!-- <br><br><br><br> -->
-    <!-- <div class="columns"> -->
-      <!-- Nuxt Pages -->
-      <!-- <div class="column is-10" style="margin-left: 5%; margin-right: 5%;">
-        <div class="main-content"> -->
-          <!-- <div class="container"> -->
-            <!-- <section class="main-content">  -->
-              <nuxt />
-              <!-- </section> -->
-          <!-- </div> -->
-        <!--</div>
-      </div> -->
-  <!-- </div> -->
-  <!-- </div> -->
-
+      <nuxt />
       <footer class="footer">
       <div class="content has-text-centered">
         <p>
@@ -93,7 +79,6 @@
 export default {
   data(){
     return {toggle:false}
-    // return toggle
   },
   methods:{
     toggleMenu(){
@@ -101,14 +86,4 @@ export default {
     }
   }
 }
-// /*  data() {
-//     return {
-//       items: [
-//         { title: 'Home', icon: 'home', to: { name: 'index' } },
-//         { title: 'Inspire', icon: 'lightbulb', to: { name: 'inspire' } }
-//       ]
-//     }
-//   }*/
-// }
-
 </script>

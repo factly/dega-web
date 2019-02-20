@@ -4,8 +4,6 @@
       <!-- <div class="hero-body"> -->
         <div class="container post-article">
           <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-semibold">{{post[0].title}}</h1>
-          <!-- <h2 class="subtitle is-size-6 is-size-6-tablet is-size-5-desktop" style="color: #555;">{{post[0].subTitle}}</h2> -->
-          <!-- <i class="icon icon-award"></i> -->
           <span class="is-uppercase">
             BY
             <nuxt-link class="has-tint has-text-weight-semibold" :to="'/author/'+ post[0].authors[0].slug">{{post[0].authors[0].display_name}}</nuxt-link>

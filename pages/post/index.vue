@@ -18,13 +18,6 @@
                     <div class="content subtitle has-text-centered">
                         <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ posts[0].title }}</p>
                     </div>
-                    <!-- <div class="has-text-centered">
-                      <span v-if="posts[0].authors.length >= 1" class="subtitle is-6 is-uppercase has-text-centered">BY {{posts[0].authors[0].display_name}}</span>
-                      <span v-for="(author, index) in posts[0].authors.splice(1)"
-                        :key="index">
-                        <span class="subtitle is-6 is-uppercase has-text-centered">, {{author.display_name}}</span>
-                      </span>
-                    </div> -->
                     <div class="subtitle is-6 is-uppercase has-text-centered">
                       BY
                       <span  v-for="(author, index) in posts[0].authors" :key="index" >{{author.display_name}} 

@@ -8,9 +8,6 @@
               <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{factchecks[0].title}}</h1>
               <span class="is-uppercase">
 								<!-- BY -->
-								<!-- <a class="has-tint has-text-weight-semibold " href="http://127.0.0.1:3000/author/shashi-deshetti" target="_blank" style="text-align: center"> -->
-									<!-- <i class="icon icon-award"></i><span >BY SHASHI DESHETTI</span> </a> -->
-                <!-- <nuxt-link class="has-tint has-text-weight-semibold" :to="'/author/'+ factchecks[0].authors[0].slug">{{factchecks[0].authors[0].display_name}}</nuxt-link> -->
 								<div class="has-text-centered">{{getDate(factchecks[0].last_updated_date)}}</div>
 							</span>
               <figure class="image is-2by1">
@@ -31,7 +28,6 @@
                 <div class="column is-three-fifth is-mobile ">
                   <p style="color: #1976d2;">Claimed by {{claim.claimant.name}}</p>
                   <p class="subtitle is-size-3 is-size-4-tablet is-size-5-desktop is-size-5-mobile is-spaced is-2">{{claim.claim}}</p>
-                  <!--<p class="subtitle is-size-6 is-size-6-tablet is-size-5-desktop" v-html="claim.review">{{claim.review}}</p>-->
                 </div>
                 <div class="column is-one-fifth is-hidden-mobile">
                   <img :src="require('~/assets/images/ratings/'+claim.rating.numeric_value+'.png')">
@@ -65,7 +61,6 @@
               <div v-for="(claim, index) in factchecks[0].claims" :key="index">
                 <hr>
                 <a :href="'#claim'+(index+1)"> <h2 class="has-text-weight-semibold" style="color:#034f84;" >#{{index+1}}. {{claim.claim}}</h2> </a>
-                <!-- <p style="color:grey" v-html="claim.description">{{claim.description}}</p> -->
               </div>
             </div>
           </div>
