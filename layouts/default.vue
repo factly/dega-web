@@ -1,48 +1,37 @@
 <template>
     <div>
-      <nav
-        class="navbar header has-shadow is-spaced is-fixed-top"
-        role="navigation"
-        aria-label="main navigation">
+      <nav class="navbar header has-shadow is-spaced is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <nuxt-link
-            class="navbar-item"
-            to="/">
-            <img
-              src="~assets/images/logo.png"
-              alt="Dega"
-              height="110">
+          <nuxt-link class="navbar-item" to="/">
+            <img src="~assets/images/logo.png" alt="Dega" height="110">
           </nuxt-link>
-
-          <div class="navbar-burger">
-            <span/>
-            <span/>
-            <span/>
+          <div class="navbar-burger burger" v-on:click="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
           </div>
         </div>
-        <div id="navMenuDocumentation" class="navbar-menu">
+        <div v-bind:class="{ 'is-active': toggle }" class="navbar-menu">
           <div class="navbar-start is-uppercase">
             <nuxt-link to="/" class="navbar-item">Home</nuxt-link>
             <nuxt-link to="/post" class="navbar-item">Stories</nuxt-link>
             <nuxt-link to="/factcheck" class="navbar-item">Fact Check</nuxt-link>
             <nuxt-link to="/category/fake-news" class="navbar-item">Fake News</nuxt-link>
-
-
             <div class="navbar-item has-dropdown is-hoverable">
-              <nuxt-link to="/page/about-us" class="navbar-link">About Us</nuxt-link>
-              <div id="aboutUsDropdown" class="navbar-dropdown">
-                <nuxt-link to="/page/corrections-policy" class="navbar-item">Corrections Policy</nuxt-link>
-                <hr class="navbar-divider">
-                <nuxt-link to="/page/team" class="navbar-item">Team</nuxt-link>
-                <hr class="navbar-divider">
-                <nuxt-link to="/page/fact-check-methodology" class="navbar-item">Fact Check Methodology</nuxt-link>
-                <hr class="navbar-divider">
-                <nuxt-link to="/page/submit-a-claim" class="navbar-item">Submit a Claim</nuxt-link>
-                <hr class="navbar-divider">
-                <nuxt-link to="/page/funding-details" class="navbar-item">Funding Details</nuxt-link>
-                <hr class="navbar-divider">
-                <nuxt-link to="/page/contact-us" class="navbar-item">Contact Us</nuxt-link>
-              </div>
+                <nuxt-link to="/page/about-us" class="navbar-link">About Us</nuxt-link>
+                <div id="aboutUsDropdown" class="navbar-dropdown">
+                  <nuxt-link to="/page/corrections-policy" class="navbar-item">Corrections Policy</nuxt-link>
+                  <hr class="navbar-divider">
+                  <nuxt-link to="/page/team" class="navbar-item">Team</nuxt-link>
+                  <hr class="navbar-divider">
+                  <nuxt-link to="/page/fact-check-methodology" class="navbar-item">Fact Check Methodology</nuxt-link>
+                  <hr class="navbar-divider">
+                  <nuxt-link to="/page/submit-a-claim" class="navbar-item">Submit a Claim</nuxt-link>
+                  <hr class="navbar-divider">
+                  <nuxt-link to="/page/funding-details" class="navbar-item">Funding Details</nuxt-link>
+                  <hr class="navbar-divider">
+                  <nuxt-link to="/page/contact-us" class="navbar-item">Contact Us</nuxt-link>
+                </div>
             </div>
           </div>
           <div class="navbar-end">
@@ -71,32 +60,30 @@
           </div>
         </div>
       </nav>
-    <!-- <br><br><br><br> -->
-    <!-- <div class="columns"> -->
-      <!-- Nuxt Pages -->
-      <!-- <div class="column is-10" style="margin-left: 5%; margin-right: 5%;">
-        <div class="main-content"> -->
-          <!-- <div class="container"> -->
-            <!-- <section class="main-content">  -->
-              <nuxt />
-              <!-- </section> -->
-           <!-- </div> -->
-        <!--</div>
-      </div> -->
-  <!-- </div> -->
-  <!-- </div> -->
+      <nuxt />
+      <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>DEGA</strong> by
+          <a href="https://factly.in/">FACTLY</a>. The source code is licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+        </p>
+      </div>
+    </footer>
+
+    
   </div>
 </template>
 
 <script>
 export default {
-/*  data() {
-    return {
-      items: [
-        { title: 'Home', icon: 'home', to: { name: 'index' } },
-        { title: 'Inspire', icon: 'lightbulb', to: { name: 'inspire' } }
-      ]
+  data(){
+    return {toggle:false}
+  },
+  methods:{
+    toggleMenu(){
+      this.toggle = !this.toggle;
     }
-  }*/
+  }
 }
 </script>

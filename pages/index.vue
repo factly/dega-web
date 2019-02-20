@@ -3,7 +3,7 @@
     <div class="column is-three-fourth">
       <div class="main-content">
         <div v-if="story" class="container">
-          <nuxt-link :to="'/post/'+ story[0].slug">
+          <nuxt-link :to="'/'+ story[0]._class.split('.').pop().toLowerCase()+ '/' + story[0].slug">
             <div class="columns">
                 <div class= "column is- 6 is-full-mobile">
                     <div class="card">
@@ -23,13 +23,6 @@
                     <div class="content subtitle has-text-centered">
                         <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ story[0].title }}</p>
                     </div>
-                    <!-- <div class="has-text-centered">
-                      <span v-if="story[0].authors.length >= 1" class="subtitle is-6 is-uppercase has-text-centered">BY {{story[0].authors[0].display_name}}</span>
-                      <span v-for="(author, index) in story[0].authors.splice(1)"
-                        :key="index">
-                        <span class="subtitle is-6 is-uppercase has-text-centered">, {{author.display_name}}</span>
-                      </span>
-                    </div> -->
                     <div class="subtitle is-6 is-uppercase has-text-centered">
                       BY
                       <span  v-for="(author, index) in story[0].authors" :key="index" >{{author.display_name}} 
@@ -54,11 +47,10 @@
                   v-for="(p, index) in story.slice(1)"
                   :key="index"
                   class="container columns">
-                  <nuxt-link :to="'/post/'+ p.slug">
+                  <nuxt-link :to="'/'+ p._class.split('.').pop().toLowerCase()+ '/' +p.slug">
                     <MoreStories :story="p" :categories= "true"/>
                   </nuxt-link>
                 </div>
-
               </section>
             </div>
           </div>
@@ -121,18 +113,23 @@ export default {
     }
   },
   async asyncData() {
-    // return axios
-    //   .get(`http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false`)
-    //   .then(response => {
-    //     const data = {
-    //       posts: response.data
-    //     }
-    //     return data
-    //   })
-    //   .catch(error => console.log(error))
-    let post = await axios.get('http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false')
-    let factcheck = await axios.get('http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false')
-    let stories =  _.shuffle(post.data.concat(factcheck.data));
+    let posts = await axios
+      .get(`http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false`)
+      .then(response => {
+        return response.data
+      })
+      .catch(error => console.log(error))
+    let factchecks = await axios
+      .get(`http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false`)
+      .then(response => {
+        return response.data
+      })
+      .catch(error => console.log(error))
+    let stories = null;
+    if(posts && factchecks)
+    {
+      stories =  _.shuffle(posts.concat(factchecks));
+    }
     return {
     story : stories
     }
