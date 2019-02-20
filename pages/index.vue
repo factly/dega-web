@@ -155,7 +155,7 @@ export default {
     // let post = await axios.get('http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false').catch(error => console.log(error))
     // let factcheck = await axios.get('http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false').catch(error => console.log(error))
     let stories = null;
-    if(posts)
+    if(posts && factchecks)
     {
       stories =  _.shuffle(posts.concat(factchecks));
 			// console.log('TCL: asyncData -> stories', stories)
