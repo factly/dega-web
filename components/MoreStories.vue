@@ -25,21 +25,6 @@
             <span v-if="index != story.authors.length -1"> , </span>
           </span>
         </div>
-        <!-- <div v-if="story.authors">
-              <span v-if="story.authors" class="subtitle is-6 is-uppercase">BY {{story.authors[0].display_name}}</span>
-              <span v-for="(author, index) in story.authors.splice(1)"
-                :key="index"  class="subtitle is-6 is-uppercase">, {{author.display_name}}
-                <span class="subtitle is-6 is-uppercase">, {{author.display_name}}</span>
-              </span>
-        </div> -->
-              <!-- <br> -->
-        <!-- <div v-if="story.authors">
-          <p class="subtitle is-6 is-uppercase">BY {{ story.authors[0].display_name }}</p>
-          <div v-for="(author, index) in story.authors.splice(1)"
-                  :key="index" class="has-text-centered">
-                <span class="subtitle is-6 is-uppercase"> ,{{author.display_name}}</span>
-          </div>
-        </div> -->
         <time datetime="2016-1-1">{{getDate(story.last_updated_date)}}</time>
       </div>
    </div>
