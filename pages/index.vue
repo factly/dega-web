@@ -116,22 +116,50 @@ export default {
     getDate(datetime) {
       let date = new Date(datetime);
       var ms = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+			// console.log('TCL: getDate -> ms', ms)
       return date.getDate() + ' ' + ms[date.getMonth()] + ' ' + date.getFullYear();
     }
   },
   async asyncData() {
-    // return axios
-    //   .get(`http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false`)
-    //   .then(response => {
-    //     const data = {
-    //       posts: response.data
-    //     }
-    //     return data
-    //   })
-    //   .catch(error => console.log(error))
-    let post = await axios.get('http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false').catch(error => console.log(error))
-    let factcheck = await axios.get('http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false').catch(error => console.log(error))
-    let stories =  _.shuffle(post.data.concat(factcheck.data));
+    let posts = await axios
+      .get(`http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false`)
+      .then(response => {
+        // const data = {
+        //   posts: response.data
+        // }
+        return response.data
+      })
+      .catch(error => console.log(error))
+		// // console.log('TCL: asyncData -> posts', posts)
+		// // console.log('TCL: asyncData -> hello1')
+    let factchecks = await axios
+      .get(`http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false`)
+      .then(response => {
+        // console.log(response.data);
+        // const data = {
+          
+        //   factchecks: response.data
+        // }
+        // let stories =  _.shuffle(posts.posts.concat(data.factcheck));
+        // console.log("hello1");
+
+				// // // console.log('TCL: asyncData -> response.data', response.data)
+        // console.log(data);
+        // console.log(stories);
+        // console.log("hello2");
+        return response.data
+      })
+      .catch(error => console.log(error))
+		// // console.log('TCL: asyncData -> factchecks', factchecks)
+    console.log("hello2");
+    // let post = await axios.get('http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false').catch(error => console.log(error))
+    // let factcheck = await axios.get('http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false').catch(error => console.log(error))
+    let stories = null;
+    if(posts)
+    {
+      stories =  _.shuffle(posts.concat(factchecks));
+			// console.log('TCL: asyncData -> stories', stories)
+    }
     return {
     story : stories
     }
