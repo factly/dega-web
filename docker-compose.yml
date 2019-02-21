@@ -5,7 +5,7 @@ version: "3"
 
 services:
   nuxt:
-    build: .
+    build: ./
     container_name: dega-web
     restart: always
     ports:
