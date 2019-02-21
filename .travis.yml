@@ -27,7 +27,7 @@ script:
   - npm run build
   - docker build -t $IMAGE .
 after_success:
-  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+  - if [[ $TRAVIS_BRANCH == "deshetti" ]]; then
     docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
     docker push $(IMAGE)
     fi
