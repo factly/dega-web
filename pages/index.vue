@@ -1,76 +1,138 @@
 <template>
-  <div>
-    <!-- featured post section-->
-    <section class="section is-hero">
-      <div class="container">
-        <figure class ="image is-5by3">
-          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-        </figure>
-        <a v-bind:href="'/post/'+ posts[posts.length-1].id">
-          <div class="content column">
-            <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop"> {{posts[posts.length-1].title}}</p>
-            <!--<div class="has-text-centered">
-              <span class="subtitle is-6">BY RAKESH DUBBUDU, </span>
-              <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-            </div>-->
-            <div class="content subtitle is-hidden-mobile has-text-centered">
-              <p>{{posts[posts.length-1].subTitle}}</p>
+  <div class="columns home-page">
+    <div class="column is-three-fourth">
+      <div class="main-content">
+        <div v-if="story" class="container">
+          <nuxt-link :to="'/'+ story[0]._class.split('.').pop().toLowerCase()+ '/' + story[0].slug">
+            <div class="columns">
+                <div class= "column is- 6 is-full-mobile">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class ="image is-5by3">
+                                <img src="https://www.publicdomainpictures.net/pictures/200000/nahled/plain-blue-background.jpg" alt="Placeholder image">
+                                <div class="story-art">
+                                  <div v-if="story[0]._class == 'com.factly.dega.domain.Factcheck'" class="fact-strip">
+                                    <h1>FACTCHECK</h1>
+                                  </div>
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <div class= "column is-6 is-full-mobile" >
+                    <div class="content subtitle has-text-centered">
+                        <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ story[0].title }}</p>
+                    </div>
+                    <div class="subtitle is-6 is-uppercase has-text-centered">
+                      BY
+                      <span  v-for="(author, index) in story[0].authors" :key="index" >{{author.display_name}} 
+                        <span v-if="index != story[0].authors.length -1">, </span>
+                      </span>
+                    </div>
+                    <div class="has-text-centered">{{getDate(story[0].last_updated_date)}}</div><br>
+                    <div class="has-text-justified">
+                      {{story[0].excerpt}}
+                    </div>
+                </div>
+            </div>
+          </nuxt-link>
+          <hr class="spacer is-1-5 is-hidden-mobile">
+          <div class="columns">
+            <!-- MoreStories Section -->
+            <div class="column is-12">
+              <section>
+                <h3>MORE STORIES</h3>
+                <br>
+                <div
+                  v-for="(p, index) in story.slice(1)"
+                  :key="index"
+                  class="container columns">
+                  <nuxt-link :to="'/'+ p._class.split('.').pop().toLowerCase()+ '/' +p.slug">
+                    <MoreStories :story="p" :categories= "true"/>
+                  </nuxt-link>
+                </div>
+              </section>
             </div>
           </div>
-        </a>
+        </div>
+        <div v-else class="subtitle is-6 is-uppercase has-text-centered">
+          Dega API is not responding.<br> Please contact the administrator.
+        </div>
       </div>
-    </section>
-    <hr class="spacer is-1-5 is-hidden-mobile">
-    <!-- Latest Stories Section -->
-
-
-    <!-- MORE STORIES Section -->
-    <section class="section">
-      <h3>MORE STORIES</h3>
-      <br>
-      <div
-        v-for="(p, index) in posts"
-        :key="index"
-        class="container columns">
-        <a v-bind:href="'/post/'+ p.id">
-          <MoreStories :post="p"/>
-        </a>
-      </div>
-
-    </section>
-
+    </div>
+    <!-- <PopularArticles></PopularArticles> -->
   </div>
 </template>
+<style>
+.home-page{
+  margin: 1%
+}
+
+.story-art {
+  position: relative; 
+  max-width: 800px; /* Maximum width */
+  margin: 0 auto; /* Center it */
+}
+
+.story-art .fact-strip {
+  position: absolute; /* Position the background text */
+  bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1; /* Grey text */
+  width: 100%; /* Full width */
+  padding: 20px; /* Some padding */
+}
+
+</style>
 
 <script>
-import PostCard from '~/components/PostCard'
-import axios from 'axios'
-import MoreStories from "../components/MoreStories";
 
+import axios from 'axios'
+import MoreStories from "~/components/MoreStories"
+import PopularArticles from "~/components/PopularArticles"
+import * as _ from "lodash"
 export default {
   components: {
     MoreStories,
-    PostCard
+    PopularArticles
   },
-  methods: {},
-  async asyncData() {
-    const config = {
-      url: 'http://127.0.0.1:8080/core/api/posts',
-      method: 'get',
-      headers: {
-        Authorization:
-          'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwUXo5YUVJVndiNmZrNUFDaVRhMTFaTU1JcC13QXRRak5ZYlU2OEtJVmlzIn0.eyJqdGkiOiI1ZjcxYmY2Ny02ZGVhLTQ2MmQtYTU4ZS0zMmViYzI0NTE4M2IiLCJleHAiOjE1NDI4MjM4NjcsIm5iZiI6MCwiaWF0IjoxNTQyODIzNTY3LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwODAvYXV0aC9yZWFsbXMvamhpcHN0ZXIiLCJhdWQiOiJmYWN0bHkiLCJzdWIiOiI3ZDg0Nzc4YS1jMGJhLTQ0NTEtYjBlZS04MDkyMzM5M2Y4YTAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJmYWN0bHkiLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiIwNzFjYmIzOC01Y2Y5LTQwOTItYWNmYy0yNjIwM2Y0MDMwNjEiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJjbGllbnRIb3N0IjoiMTcyLjI0LjAuMSIsImNsaWVudElkIjoiZmFjdGx5IiwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LWZhY3RseSIsImNsaWVudEFkZHJlc3MiOiIxNzIuMjQuMC4xIiwiZW1haWwiOiJzZXJ2aWNlLWFjY291bnQtZmFjdGx5QHBsYWNlaG9sZGVyLm9yZyJ9.oj635dBWUs6aA28iOKW9XDJtZg-vT_3KueonJOxv4eKm_m_-mKwLxFenLG5F6xqpREPmMY89-Yl6Yo7683ALO9FSdjf6KSGdMaRVMLMxSTYRjKrpDHz7F0F0mn2fIl54AAdnl5CEiJ9Ol2dOdJBQFngRFQs8-Ww8Wkm0ZEmfIND4B_hLFgA5QeO0dzG6ZzCJiV3vY1yNZ1vvZPct5s_5v4D1bdNFLnrRURtzqITmQ9Ug-JMAQZ6nCdna6X-lJVkrNUD8sFm1dMGB2ixc73EYuhtsstk-j_5sa_3dsLnXgLLcTXcJ-EPTzyByznSN44xKceeOs-OX9Qydy3rKt6xzgQ'
-      }
+  data()
+  {
+    return {
+      posts:null,
+      factchecks:null,
+      story:null
+    };
+  },
+  methods: {
+    getDate(datetime) {
+      let date = new Date(datetime);
+      var ms = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return date.getDate() + ' ' + ms[date.getMonth()] + ' ' + date.getFullYear();
     }
-    return axios
-      .get(`http://127.0.0.1:8080/core/api/posts?access_token=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwUXo5YUVJVndiNmZrNUFDaVRhMTFaTU1JcC13QXRRak5ZYlU2OEtJVmlzIn0.eyJqdGkiOiI1NjNjNTUwNC1iM2NkLTRmYjQtOTA1OC0wOWI3OGRhZGFjY2YiLCJleHAiOjE1NDMxMjkwNzEsIm5iZiI6MCwiaWF0IjoxNTQzMDkzMDcxLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwODAvYXV0aC9yZWFsbXMvamhpcHN0ZXIiLCJhdWQiOiJmYWN0bHkiLCJzdWIiOiI3ZDg0Nzc4YS1jMGJhLTQ0NTEtYjBlZS04MDkyMzM5M2Y4YTAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJmYWN0bHkiLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiJjMDZlNWMzZC01OTYyLTRjMzktYTM4MS0zOGY0OWI2MWIyYjMiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJjbGllbnRIb3N0IjoiMTcyLjI0LjAuMSIsImNsaWVudElkIjoiZmFjdGx5IiwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LWZhY3RseSIsImNsaWVudEFkZHJlc3MiOiIxNzIuMjQuMC4xIiwiZW1haWwiOiJzZXJ2aWNlLWFjY291bnQtZmFjdGx5QHBsYWNlaG9sZGVyLm9yZyJ9.c1-Id8NTzOZIwZSpJW_ksVOJ0oppkOkY_w1WTPBgosjcKa0yGb9CCzrm8IQa8Q2Q45-l7E5qfCVBudpXKH6jOdcISegBnH5ZxxeIgt6YcgN4BZ607RA319xzfRwKf91Gyre2YhtZYJqlLRzG6PVRNwQ8KarlGtMIue8csewv2S5q_DPsJCOarYuQG1IUdxiveysoktBRp9G66dxkZfv2xtHeOHw7p2ea4UxAEqc36TGnPXbx5kISWB9kMgd5QHqr_u0zpJUa1j90zberBWYk2Ox8nFTeeMLhjhxRmBGDd8AhFIqWds-n2EUsCM9guxMOsXUHOAZHKtHMgjAorm9gQA`)
+  },
+  async asyncData() {
+    let posts = await axios
+      .get(`http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false`)
       .then(response => {
-        const data = {
-          posts: response.data
-        }
-        return data
+        return response.data
       })
       .catch(error => console.log(error))
+    let factchecks = await axios
+      .get(`http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false`)
+      .then(response => {
+        return response.data
+      })
+      .catch(error => console.log(error))
+    let stories = null;
+    if(posts && factchecks)
+    {
+      stories =  _.shuffle(posts.concat(factchecks));
+    }
+    return {
+    story : stories
+    }
   }
 }
 </script>

@@ -1,13 +1,11 @@
 <template>
-	<div>
-	<!-- Image Section -->
-		<section class="section">
-			<div class="container columns has-text-centered">
-				<div class="column is-three-quarters">
-						<div class="box">
-							<h1 class="subtitle is-5 has-text-weight-bold" style="color:lightgrey;">INDIA</h1>
-							<h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">Have deposits by Indians in Swiss Bank has been decreased?
-							</h1>
+<div>
+	<section class="section">
+		<div class="container columns has-text-centered">
+			<div class="column is-three-quarters">
+				<div class="box">
+                    <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{factchecks[0].title}}
+					</h1>
 							<a class="has-tint has-text-weight-semibold " href="http://127.0.0.1:3000/author/shashi-deshetti" target="_blank" style="text-align: center">
 							<i class="icon icon-award"></i><span >BY SHASHI DESHETTI  ON OCTOBER 10, 2018</span> </a>
 							<figure class="image is-2by1">
@@ -22,16 +20,12 @@
 					<!-- FACT CHECK BOX -->
 
 				<div class="column is-one-fourth is-hidden-mobile">
-					<div class="box has-text-weight-semibold"style="color: #1976d2;text-align:left;">
+					<div class="box has-text-weight-semibold" style="color: #1976d2;text-align:left;">
 					Fact Check For The Claims
 						<br><br>
 						<h1 class="subtitle has-text-weight-bold" style="color:#034f84;">#1. Swiss Bank deposits have gone down</h1>
 						<p style="color:grey">The government claimed that Swiss Bank deposits by Indians decreased during the current government while they increased during the UPA regime.</p>
-						<br>
-						<br>
-						<hr>
-						<br>
-						<br>
+						<br><br> <hr><br><br>
 						<h1 class="subtitle has-text-weight-bold" style="color:#034f84;">#2. More deposits in UPA regime</h1>
 						<p style="color:grey">The government claimed that Swiss Bank deposits by Indians decreased during the current government while they increased during the UPA regime.</p>
 						<br><br><br>
@@ -55,24 +49,24 @@
 								</div>
 								<!-- VALIDATION COLUMN -->
 								<div  class="column is-one-quarter">
-								<p class= "title is-size-5 is-size-4-tablet is-size-4-desktop is-spaced is-2 "style="color: #1976d2"><strong>VALIDATION</strong></p>
+								<p class= "title is-size-5 is-size-4-tablet is-size-4-desktop is-spaced is-2 " style="color: #1976d2"><strong>VALIDATION</strong></p>
 								<h1 class="subtitle is-size-6 is-size-6-tablet is-size-1-desktop" style="color:LimeGreen">4.0</h1>
 								<span class="icon has-text-star has-text-centered" style="color:LimeGreen">
 								<svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
 								<i class="fas fa-star"></i>
 								</span>
 
-								<span class="icon has-text-star has-text-centered"style="color:LimeGreen">
+								<span class="icon has-text-star has-text-centered" style="color:LimeGreen">
 								<svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
 								<i class="fas fa-star"></i>
 								</span>
 
-								<span class="icon has-text-star has-text-centered"style="color:LimeGreen">
+								<span class="icon has-text-star has-text-centered" style="color:LimeGreen">
 								<svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
 								<i class="fas fa-star"></i>
 								</span>
 
-								<span class="icon has-text-star has-text-centered"style="color:LimeGreen">
+								<span class="icon has-text-star has-text-centered" style="color:LimeGreen">
 								<svg class="svg-inline--fa fa-star fa-w-18" aria-hidden="true" data-prefix="fas" data-icon="star" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"></path></svg>
 								<i class="fas fa-star"></i>
 								</span>
@@ -119,7 +113,7 @@
 				</div>
 		<!--RELATED ARTICLES BOX  -->
 				<div class="column is-one-fourth is-hidden-mobile">
-					<div class="box has-text-weight-semibold"style="color: #1976d2;">
+					<div class="box has-text-weight-semibold" style="color: #1976d2;">
 						Related Articles  <br><br>
 						<h2 class="subtitle is-6 has-text-weight-bold" style="color:lightgrey">INDIA</h2>
 						<p class="subtitle has-text-weight-bold">Are More people travelling in Airplanes than in AC trains?</p>
@@ -141,3 +135,31 @@
 		</section>
 	</div>
 </template>
+<script>
+import axios from 'axios'
+
+export default {
+  components: {
+  },
+  methods: {},
+  async asyncData() {
+    const config = {
+      url: 'http://127.0.0.1:8000/core/api/posts',
+      method: 'get',
+      headers: {
+        Authorization:
+          'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwUXo5YUVJVndiNmZrNUFDaVRhMTFaTU1JcC13QXRRak5ZYlU2OEtJVmlzIn0.eyJqdGkiOiI1ZjcxYmY2Ny02ZGVhLTQ2MmQtYTU4ZS0zMmViYzI0NTE4M2IiLCJleHAiOjE1NDI4MjM4NjcsIm5iZiI6MCwiaWF0IjoxNTQyODIzNTY3LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwODAvYXV0aC9yZWFsbXMvamhpcHN0ZXIiLCJhdWQiOiJmYWN0bHkiLCJzdWIiOiI3ZDg0Nzc4YS1jMGJhLTQ0NTEtYjBlZS04MDkyMzM5M2Y4YTAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJmYWN0bHkiLCJhdXRoX3RpbWUiOjAsInNlc3Npb25fc3RhdGUiOiIwNzFjYmIzOC01Y2Y5LTQwOTItYWNmYy0yNjIwM2Y0MDMwNjEiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJjbGllbnRIb3N0IjoiMTcyLjI0LjAuMSIsImNsaWVudElkIjoiZmFjdGx5IiwicHJlZmVycmVkX3VzZXJuYW1lIjoic2VydmljZS1hY2NvdW50LWZhY3RseSIsImNsaWVudEFkZHJlc3MiOiIxNzIuMjQuMC4xIiwiZW1haWwiOiJzZXJ2aWNlLWFjY291bnQtZmFjdGx5QHBsYWNlaG9sZGVyLm9yZyJ9.oj635dBWUs6aA28iOKW9XDJtZg-vT_3KueonJOxv4eKm_m_-mKwLxFenLG5F6xqpREPmMY89-Yl6Yo7683ALO9FSdjf6KSGdMaRVMLMxSTYRjKrpDHz7F0F0mn2fIl54AAdnl5CEiJ9Ol2dOdJBQFngRFQs8-Ww8Wkm0ZEmfIND4B_hLFgA5QeO0dzG6ZzCJiV3vY1yNZ1vvZPct5s_5v4D1bdNFLnrRURtzqITmQ9Ug-JMAQZ6nCdna6X-lJVkrNUD8sFm1dMGB2ixc73EYuhtsstk-j_5sa_3dsLnXgLLcTXcJ-EPTzyByznSN44xKceeOs-OX9Qydy3rKt6xzgQ'
+      }
+    }
+    return axios
+      .get(`http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false`)
+      .then(response => {
+        const data = {
+          factchecks: response.data
+        }
+        return data
+      })
+      .catch(error => console.log(error))
+  }
+}
+</script>

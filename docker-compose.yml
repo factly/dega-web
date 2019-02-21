@@ -1,0 +1,25 @@
+# To Do:
+# Add working directory
+
+version: "3"
+
+services:
+  nuxt:
+    build: ./
+    container_name: dega-web
+    restart: always
+    ports:
+    - "3000:3000"
+    command:
+      "npm run start"
+
+  nginx:
+    image: nginx:1.15.7-alpine
+    container_name: nginx
+    restart: always
+    ports:
+    - "8081:80"
+    volumes:
+    - ./nginx:/etc/nginx/conf.d
+    depends_on:
+    - nuxt
