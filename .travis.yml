@@ -27,10 +27,7 @@ script:
   - npm run build
   - docker build -t $IMAGE .
 after_success:
-  - if [[ $TRAVIS_BRANCH == "deshetti" ]]; then
-    docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
-    docker push $(IMAGE)
-    fi
+  - 'if[[ $TRAVIS_PULL_REQUEST == “false” ]] && [[ $TRAVIS_BRANCH == "deshetti" ]]; then docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ; docker push $(IMAGE); fi'
 notifications:
   webhooks:
     on_success: change  # options: [always|never|change] default: always
