@@ -30,7 +30,7 @@ deploy:
   provider: script
   script:
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-    - docker push $(IMAGE)
+    - docker push $IMAGE
   on:
     branch: deshetti
 after_success:
