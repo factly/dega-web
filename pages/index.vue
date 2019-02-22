@@ -36,7 +36,7 @@
                 </div>
             </div>
           </nuxt-link>
-          <hr class="spacer is-1-5 is-hidden-mobile">
+          <hr class="spacer is-1-5">
           <div class="columns">
             <!-- MoreStories Section -->
             <div class="column is-12">
@@ -50,6 +50,7 @@
                   <nuxt-link :to="'/'+ p._class.split('.').pop().toLowerCase()+ '/' +p.slug">
                     <MoreStories :story="p" :categories= "true"/>
                   </nuxt-link>
+                  <hr class="spacer is-1-5 is-hidden-desktop">
                 </div>
               </section>
             </div>
