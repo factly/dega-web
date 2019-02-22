@@ -1,8 +1,8 @@
 ## To do:
 # Add Dockerfile.dev
-# User Dockefile.dev in docker-compose
+# Use Dockefile.dev in docker-compose
 # Bookmark node_modules directory in docker-compose
-# Change Dockerfile based on the project directory complex. Include nginx
+# Change Dockerfile based on the project directory. Include nginx
 
 # build stage
 FROM node:10.14.2-alpine
