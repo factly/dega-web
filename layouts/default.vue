@@ -5,32 +5,35 @@
           <nuxt-link class="navbar-item" to="/">
             <img src="~assets/images/logo.png" alt="Dega" height="110">
           </nuxt-link>
-          <div class="navbar-burger burger" v-on:click="toggleMenu()">
+          <div class="navbar-burger burger" v-on:click="toggleNavBar = !toggleNavBar">
             <span></span>
             <span></span>
             <span></span>
           </div>
         </div>
-        <div v-bind:class="{ 'is-active': toggle }" class="navbar-menu">
+        <div v-bind:class="{ 'is-active': toggleNavBar }" class="navbar-menu">
           <div class="navbar-start is-uppercase">
             <nuxt-link to="/" class="navbar-item">Home</nuxt-link>
             <nuxt-link to="/post" class="navbar-item">Stories</nuxt-link>
             <nuxt-link to="/factcheck" class="navbar-item">Fact Check</nuxt-link>
             <nuxt-link to="/category/fake-news" class="navbar-item">Fake News</nuxt-link>
             <div class="navbar-item has-dropdown is-hoverable">
-                <nuxt-link to="/page/about-us" class="navbar-link">About Us</nuxt-link>
-                <div id="aboutUsDropdown" class="navbar-dropdown">
-                  <nuxt-link to="/page/corrections-policy" class="navbar-item">Corrections Policy</nuxt-link>
-                  <hr class="navbar-divider">
-                  <nuxt-link to="/page/team" class="navbar-item">Team</nuxt-link>
-                  <hr class="navbar-divider">
-                  <nuxt-link to="/page/fact-check-methodology" class="navbar-item">Fact Check Methodology</nuxt-link>
-                  <hr class="navbar-divider">
-                  <nuxt-link to="/page/submit-a-claim" class="navbar-item">Submit a Claim</nuxt-link>
-                  <hr class="navbar-divider">
-                  <nuxt-link to="/page/funding-details" class="navbar-item">Funding Details</nuxt-link>
-                  <hr class="navbar-divider">
-                  <nuxt-link to="/page/contact-us" class="navbar-item">Contact Us</nuxt-link>
+                <div class="navbar-link has-dropdown" v-on:click="toggleMore = !toggleMore">More
+                  <div id="aboutUsDropdown" class="navbar-dropdown" v-bind:class="{ 'is-hidden-mobile': toggleMore }">
+                    <nuxt-link to="/page/about-us" class="navbar-item">About us</nuxt-link>
+                    <hr class="navbar-divider">
+                    <nuxt-link to="/page/corrections-policy" class="navbar-item">Corrections Policy</nuxt-link>
+                    <hr class="navbar-divider">
+                    <nuxt-link to="/page/team" class="navbar-item">Team</nuxt-link>
+                    <hr class="navbar-divider">
+                    <nuxt-link to="/page/fact-check-methodology" class="navbar-item">Fact Check Methodology</nuxt-link>
+                    <hr class="navbar-divider">
+                    <nuxt-link to="/page/submit-a-claim" class="navbar-item">Submit a Claim</nuxt-link>
+                    <hr class="navbar-divider">
+                    <nuxt-link to="/page/funding-details" class="navbar-item">Funding Details</nuxt-link>
+                    <hr class="navbar-divider">
+                    <nuxt-link to="/page/contact-us" class="navbar-item">Contact Us</nuxt-link>
+                  </div>
                 </div>
             </div>
           </div>
@@ -74,16 +77,23 @@
     
   </div>
 </template>
+<style>
+/* .navbar-item.has-dropdown .navbar-dropdown {
+  display: none;
+}
+.navbar-item.has-dropdown.is-active .navbar-dropdown {
+  display: block;
+} */
+
+</style>
 
 <script>
 export default {
   data(){
-    return {toggle:false}
-  },
-  methods:{
-    toggleMenu(){
-      this.toggle = !this.toggle;
-    }
+    return {
+      toggleNavBar:false,
+      toggleMore:true
+      }
   }
 }
 </script>
