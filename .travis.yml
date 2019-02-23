@@ -27,9 +27,15 @@ script:
   - npm run build
   - docker build -t $IMAGE .
 
+deploy:
+  provider: script
+  script: bash ./cicd/deploy.sh
+  on:
+    branch: deshetti
+
 after_success:
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-  - docker push $IMAGE;
+  #- docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+  #- docker push $IMAGE;
   #- if [[ $TRAVIS_BRANCH == "deshetti" ]] && [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
   #  docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
   #  docker push $IMAGE;
