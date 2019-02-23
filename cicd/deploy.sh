@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Starting Logging into Docker"
-docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 echo "Logged into Docker"
 echo "Logged into Docker"
 docker push $IMAGE
