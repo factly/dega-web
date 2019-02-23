@@ -29,9 +29,9 @@ script:
 
 after_success:
   - if [[ $TRAVIS_BRANCH == "deshetti" ]] && [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin;
-  - docker push $IMAGE;
-  fi
+    echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin;
+    docker push $IMAGE;
+    fi
 #docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
 #docker push $IMAGE;
 notifications:
