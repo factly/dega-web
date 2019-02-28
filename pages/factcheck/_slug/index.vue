@@ -21,16 +21,16 @@
           <div class="column is-full">
             <!-- CLAIM COLUMN -->
             <div class="box" v-for="(claim, index) in factchecks[0].claims" :key="index">
-              <div :id="'claim'+(index+1)" class="columns is-full-mobile has-text-left anchor">
-                <div class="column is-one-fifth is-hidden-mobile" style="float:left;">
-                  <img :src="claim.claim_source" alt="Claim Source">
+              <div :id="'claim'+(index+1)" class="columns is-full-mobile has-text-left">
+                <div class="column is-one-fifth is-hidden-mobile" style="padding:0px">
+                  <img :src="claim.claim_source" alt="Claim Source" width="90%">
                 </div>
-                <div class="column is-three-fifth is-mobile ">
+                <div class="column is-three-fifth is-mobile " style="padding:0px">
                   <p style="color: #1976d2;">Claimed by {{claim.claimant.name}}</p>
-                  <p class="subtitle is-size-3 is-size-4-tablet is-size-5-desktop is-size-5-mobile is-spaced is-2">{{claim.claim}}</p>
+                  <p class="subtitle is-size-3 is-size-4-tablet is-size-5-desktop is-size-6-mobile is-spaced is-2">{{claim.claim}}</p>
                 </div>
-                <div class="column is-one-fifth is-hidden-mobile">
-                  <img :src="require('~/assets/images/ratings/'+claim.rating.numeric_value+'.png')">
+                <div class="column is-one-fifth is-hidden-mobile" style="padding:0px;">
+                  <img :src="require('~/assets/images/ratings/'+claim.rating.numeric_value+'.png')"  alt="Claim Rating" width="90%">
                 </div>
               </div>
             </div>

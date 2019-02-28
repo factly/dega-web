@@ -18,8 +18,8 @@
     <!-- story-title-column -->
     <div class="column is-4">
       <div class="content">
-        <p class="title is-4">{{ story.title }}</p><br>
-        <div v-if="story.authors" class="subtitle is-6 is-uppercase">
+        <p class="title is-4 is-size-6-mobile">{{ story.title }}</p><br>
+        <div v-if="story.authors" class="subtitle is-6 is-uppercase is-size-6-mobile">
           BY
           <span  v-for="(author, index) in story.authors" :key="index" >{{author.display_name}} 
             <span v-if="index != story.authors.length -1"> , </span>
