@@ -27,7 +27,7 @@
                 </div>
                 <div class="column is-three-fifth is-mobile " style="padding:0px">
                   <p style="color: #1976d2;">Claimed by {{claim.claimant.name}}</p>
-                  <p class="subtitle is-size-3 is-size-4-tablet is-size-5-desktop is-size-5-mobile is-spaced is-2">{{claim.claim}}</p>
+                  <p class="subtitle is-size-3 is-size-4-tablet is-size-5-desktop is-size-6-mobile is-spaced is-2">{{claim.claim}}</p>
                 </div>
                 <div class="column is-one-fifth is-hidden-mobile" style="padding:0px;">
                   <img :src="require('~/assets/images/ratings/'+claim.rating.numeric_value+'.png')"  alt="Claim Rating" width="90%">
