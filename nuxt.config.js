@@ -2,17 +2,7 @@ const pkg = require('./package')
 
 module.exports = {
   env: {
-    postUrl:
-      process.env.POST_URL ||
-      'http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false',
-    postSlugUrl:
-      process.env.POST_URL || 'http://127.0.0.1:8000/api/v1/posts/?slug=',
-    factcheckUrl:
-      process.env.FACTCHECK_URL ||
-      'http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false',
-    factcheckSlugUrl:
-      process.env.FACTCHECK_URL ||
-      'http://127.0.0.1:8000/api/v1/factchecks/?slug='
+    apiUri: process.env.API_URI || 'http://127.0.0.1:8000'
   },
   mode: 'universal',
 
