@@ -16,7 +16,7 @@
     <section class="section is-paddingless">
       <div class="container">
         <figure class="image is-2by1">
-          <img :src="post[0].featured_image" alt="Placeholder image" style="border-radius: 5px 5px 5px 5px;">
+          <img :src="post[0].featured_image" alt="Post" style="border-radius: 5px 5px 5px 5px;">
         </figure>
       </div>
     </section>

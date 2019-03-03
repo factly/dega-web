@@ -9,7 +9,7 @@
 										<div class="card">
 												<div class="card-image">
 														<figure class ="image is-5by3">
-																<img :src="factchecks[0].featured_image" alt="Placeholder image">
+																<img :src="factchecks[0].featured_image" alt="Factchecks">
 														</figure>
 												</div>
 										</div>
