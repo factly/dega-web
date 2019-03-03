@@ -64,7 +64,7 @@ export default {
       }
     }
     return axios
-      .get(`http://127.0.0.1:8000/api/v1/posts/?slug=${params.params.slug}`)
+      .get(process.env.postUrl + `${params.params.slug}`)
       .then(response => {
         const data = {
           post: response.data
