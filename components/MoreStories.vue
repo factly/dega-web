@@ -5,9 +5,9 @@
       <div class="card">
         <div class="card-image">
           <figure class ="image is-5by3">
-            <img src="https://www.solidbackgrounds.com/images/2880x1800/2880x1800-spanish-sky-blue-solid-color-background.jpg" alt="Placeholder image">
+            <img :src="story.featured_image" alt="Placeholder image">
             <div v-if="categories" class="story-art">
-              <div v-if="story._class == 'com.factly.dega.domain.Factcheck'" class="fact-strip">
+              <div v-if="story._class.split('.').pop() == 'Factcheck'" class="fact-strip">
                 <h1>FACTCHECK</h1>
               </div>
             </div>

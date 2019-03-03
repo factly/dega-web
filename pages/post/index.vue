@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-image">
                             <figure class ="image is-5by3">
-                                <img src="https://www.publicdomainpictures.net/pictures/200000/nahled/plain-blue-background.jpg" alt="Placeholder image">
+                                <img :src="posts[0].featured_image" alt="Placeholder image">
                             </figure>
                         </div>
                     </div>
@@ -18,7 +18,7 @@
                     <div class="content subtitle has-text-centered">
                         <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ posts[0].title }}</p>
                     </div>
-                    <div class="subtitle is-6 is-uppercase has-text-centered">
+                    <div v-if="posts[0].authors" class="subtitle is-6 is-uppercase has-text-centered">
                       BY
                       <span  v-for="(author, index) in posts[0].authors" :key="index" >{{author.display_name}} 
                         <span v-if="index != posts[0].authors.length -1">, </span>
