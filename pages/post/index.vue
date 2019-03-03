@@ -84,7 +84,7 @@ export default {
   },
   async asyncData() {
     return axios
-      .get(`http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false`)
+      .get(process.env.postUrl)
       .then(response => {
         const data = {
           posts: response.data

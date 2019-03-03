@@ -94,7 +94,7 @@
     },
     async asyncData(params) {
       return axios
-        .get(`http://127.0.0.1:8000/api/v1/factchecks/?slug=${params.params.slug}`)
+        .get(process.env.factcheckSlugUrl + `${params.params.slug}`)
         .then(response => {
           const data = {
             factchecks: response.data

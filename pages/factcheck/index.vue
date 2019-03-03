@@ -75,7 +75,7 @@ export default {
   },
   async asyncData() {
     return axios
-      .get(`http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false`)
+      .get(process.env.factcheckUrl)
       .then(response => {
         const data = {
           factchecks: response.data

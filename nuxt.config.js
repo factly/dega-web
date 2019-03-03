@@ -1,6 +1,19 @@
 const pkg = require('./package')
 
 module.exports = {
+  env: {
+    postUrl:
+      process.env.POST_URL ||
+      'http://127.0.0.1:8000/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false',
+    postSlugUrl:
+      process.env.POST_URL || 'http://127.0.0.1:8000/api/v1/posts/?slug=',
+    factcheckUrl:
+      process.env.FACTCHECK_URL ||
+      'http://127.0.0.1:8000/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false',
+    factcheckSlugUrl:
+      process.env.FACTCHECK_URL ||
+      'http://127.0.0.1:8000/api/v1/factchecks/?slug='
+  },
   mode: 'universal',
 
   /*
@@ -14,13 +27,9 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-      
 
-/*,
-      { rel:"stylesheet",href:"https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"}*/
-
+      /*,{ rel:"stylesheet",href:"https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"}*/
     ]
   },
 
@@ -32,15 +41,12 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [
-    '@/assets/css/main.css'
-  ],
+  css: ['@/assets/css/main.css'],
 
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
+  plugins: [],
 
   /*
   ** Nuxt.js modules
