@@ -23,7 +23,7 @@
                     <div class="content subtitle has-text-centered">
                         <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ story[0].title }}</p>
                     </div>
-                    <div class="subtitle is-6 is-uppercase has-text-centered">
+                    <div v-if="story[0].authors" class="subtitle is-6 is-uppercase has-text-centered">
                       BY
                       <span  v-for="(author, index) in story[0].authors" :key="index" >{{author.display_name}} 
                         <span v-if="index != story[0].authors.length -1">, </span>
@@ -36,7 +36,7 @@
                 </div>
             </div>
           </nuxt-link>
-          <hr class="spacer is-1-5 is-hidden-mobile">
+          <hr class="spacer is-1-5">
           <div class="columns">
             <!-- MoreStories Section -->
             <div class="column is-12">
@@ -50,6 +50,7 @@
                   <nuxt-link :to="'/'+ p._class.split('.').pop().toLowerCase()+ '/' +p.slug">
                     <MoreStories :story="p" :categories= "true"/>
                   </nuxt-link>
+                  <hr class="spacer is-1-5 is-hidden-desktop">
                 </div>
               </section>
             </div>
