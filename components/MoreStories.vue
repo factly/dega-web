@@ -5,7 +5,7 @@
       <div class="card">
         <div class="card-image">
           <figure class ="image is-5by3">
-            <img :src="story.featured_image" :alt="story._class.split('.').pop()">
+            <img :src="story.featured_media" :alt="story._class.split('.').pop()">
             <div v-if="categories" class="story-art">
               <div v-if="story._class.split('.').pop() == 'Factcheck'" class="fact-strip">
                 <h1>FACTCHECK</h1>
