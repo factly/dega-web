@@ -5,7 +5,7 @@
         <div class="column is-four-fifths is-full-mobile" style="float:left;">
           <div class="column is-full has-text-centered">
             <div class="">
-              <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{factchecks[0].title}}</h1>
+              <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{factchecks[0].subtitle}}</h1>
               <span class="is-uppercase">
 								<!-- BY -->
 								<div class="has-text-centered">{{getDate(factchecks[0].last_updated_date)}}</div>

@@ -16,7 +16,7 @@
           <div class= "column is-6">
               <br><br><br><br>
               <div class="content subtitle is-hidden-mobile has-text-centered">
-                  <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ posts[0].title }}</p>
+                  <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ posts[0].subtitle }}</p>
               </div>
               <div class="has-text-centered" v-if="posts[0].authors.length >= 1">
                 <span class="subtitle is-6 is-uppercase">BY {{posts[0].authors[0].display_name}}</span>
