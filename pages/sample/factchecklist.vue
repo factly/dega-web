@@ -15,7 +15,7 @@
         <div class= "column is-6">
             <br><br><br><br>
             <div class="content subtitle is-hidden-mobile has-text-centered">
-                <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ factchecks[0].title }}</p>
+                <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ factchecks[0].subtitle }}</p>
             </div>
             <div class="has-text-centered">{{getDate(factchecks[0].last_updated_date)}}</div>
         </div>

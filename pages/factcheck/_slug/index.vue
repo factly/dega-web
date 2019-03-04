@@ -5,7 +5,7 @@
         <div class="column is-four-fifths is-full-mobile" style="float:left;">
           <div class="column is-full has-text-centered">
             <div class="">
-              <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{factchecks[0].title}}</h1>
+              <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{factchecks[0].subtitle}}</h1>
               <span class="is-uppercase">
 								<!-- BY -->
 								<div class="has-text-centered">{{getDate(factchecks[0].last_updated_date)}}</div>
@@ -27,7 +27,8 @@
                 </div>
                 <div class="column is-three-fifth is-mobile " style="padding:0px">
                   <p style="color: #1976d2;">Claimed by {{claim.claimant.name}}</p>
-                  <p class="subtitle is-size-3 is-size-4-tablet is-size-5-desktop is-size-6-mobile is-spaced is-2">{{claim.claim}}</p>
+                  <p class="subtitle is-size-3 is-size-4-tablet is-size-5-desktop is-size-6-mobile is-spaced is-2 ellipsis">Claim: {{claim.claim}}</p><br>
+                  <p class="subtitle is-size-3 is-size-4-tablet is-size-5-desktop is-size-6-mobile is-spaced is-2 ellipsis">Review: {{claim.review}}</p>
                 </div>
                 <div class="column is-one-fifth is-hidden-mobile" style="padding:0px;">
                   <img :src="require('~/assets/images/ratings/'+claim.rating.numeric_value+'.png')"  alt="Claim Rating" width="90%">
@@ -73,6 +74,9 @@
 <style>
 .factcheck-detail{
   margin: 1%
+}
+.ellipsis{
+  text-overflow: ellipsis;
 }
 </style>
 
