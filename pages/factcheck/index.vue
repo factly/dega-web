@@ -9,21 +9,26 @@
 										<div class="card">
 												<div class="card-image">
 														<figure class ="image is-5by3">
-																<img src="https://www.publicdomainpictures.net/pictures/200000/nahled/plain-blue-background.jpg" alt="Placeholder image">
+																<img :src="factchecks[0].featured_image" alt="Factchecks">
 														</figure>
 												</div>
 										</div>
 								</div>
-								<div class= "column is-6">
-										<div class="content subtitle is-hidden-mobile has-text-centered">
-												<p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ factchecks[0].title }}</p>
-										</div>
-										<div class="has-text-centered">{{getDate(factchecks[0].last_updated_date)}}</div><br>
-										<div class="has-text-justified">
-											{{factchecks[0].excerpt}}
-										</div>
-								</div>
-								
+								<div class= "column is-6 is-full-mobile" >
+                    <div class="content subtitle has-text-centered">
+                        <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ factchecks[0].title }}</p>
+                    </div>
+                    <div v-if="factchecks[0].authors" class="subtitle is-6 is-uppercase has-text-centered">
+                      BY
+                      <span  v-for="(author, index) in factchecks[0].authors" :key="index" >{{author.display_name}} 
+                        <span v-if="index != factchecks[0].authors.length -1">, </span>
+                      </span>
+                    </div>
+                    <div class="has-text-centered">{{getDate(factchecks[0].last_updated_date)}}</div><br>
+                    <div class="has-text-justified">
+                      {{factchecks[0].excerpt}}
+                    </div>
+                </div>
 						</div>
 					</nuxt-link>
 					<hr class="spacer is-1-5 is-hidden-mobile">
