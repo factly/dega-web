@@ -2,7 +2,7 @@ const pkg = require('./package')
 
 module.exports = {
   env: {
-    apiUri: process.env.API_URI || 'http://127.0.0.1:8000'
+    apiUri: process.env.API_URI || 'http://35.184.193.18'
   },
   mode: 'universal',
 
