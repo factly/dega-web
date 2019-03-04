@@ -5,7 +5,7 @@
 		<div class="column is-four-fifths is-full-mobile" style="float:left;">
 				<div class="column is-full has-text-centered">
 						<div class="">
-							<h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{factchecks[0].subtitle}}</h1>
+							<h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{factchecks[0].sub_title}}</h1>
 							<span class="is-uppercase">
 								<!-- BY -->
 								<a class="has-tint has-text-weight-semibold " href="http://127.0.0.1:3000/author/shashi-deshetti" target="_blank" style="text-align: center">

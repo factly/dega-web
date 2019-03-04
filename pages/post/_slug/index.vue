@@ -3,7 +3,7 @@
     <section class="hero-title has-text-centered">
       <!-- <div class="hero-body"> -->
         <div class="container post-article">
-          <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-semibold">{{post[0].subtitle}}</h1>
+          <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-semibold">{{post[0].sub_title}}</h1>
           <span class="is-uppercase">
             BY
             <nuxt-link class="has-tint has-text-weight-semibold" :to="'/author/'+ post[0].authors[0].slug">{{post[0].authors[0].display_name}}</nuxt-link>
