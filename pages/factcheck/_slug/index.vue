@@ -11,7 +11,7 @@
 								<div class="has-text-centered">{{getDate(factchecks[0].last_updated_date)}}</div>
 							</span>
               <figure class="image is-2by1">
-                <img src="https://2nafqn3o0l6kwfofi3ydj9li-wpengine.netdna-ssl.com/wp-content/uploads/2018/08/deposits-by-Indians-in-Swiss-Banks_featured-image.jpg" style="border-radius: 0px 0px 0px 0px;">
+                <img :src="factchecks[0].featured_image" alt="Factcheck" style="border-radius: 0px 0px 0px 0px;">
               </figure>
               <br>
               <p class="subtitle is-size-6 is-size-6-tablet is-size-6-desktop has-text-weight-semibold has-text-left has-text-weight-semibold">{{factchecks[0].excerpt}}</p>
