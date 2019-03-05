@@ -115,13 +115,13 @@ export default {
   },
   async asyncData() {
     let posts = await axios
-      .get(process.env.apiUri + `/api/v1/posts/?sortBy=lastUpdatedDate&sortAsc=false`)
+      .get(process.env.apiUri + `/api/v1/posts/?client_id=`+process.env.clientId+`&sortBy=lastUpdatedDate&sortAsc=false`)
       .then(response => {
         return response.data
       })
       .catch(error => console.log(error))
     let factchecks = await axios
-      .get(process.env.apiUri + `/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false`)
+      .get(process.env.apiUri + `/api/v1/factchecks/?client_id=`+process.env.clientId+`&sortBy=lastUpdatedDate&sortAsc=false`)
       .then(response => {
         return response.data
       })

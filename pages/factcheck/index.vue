@@ -80,7 +80,7 @@ export default {
   },
   async asyncData() {
     return axios
-      .get(process.env.apiUri + `/api/v1/factchecks/?sortBy=lastUpdatedDate&sortAsc=false`)
+      .get(process.env.apiUri + `/api/v1/factchecks/?client_id=`+process.env.clientId+`&sortBy=lastUpdatedDate&sortAsc=false`)
       .then(response => {
         const data = {
           factchecks: response.data
