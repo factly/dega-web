@@ -5,7 +5,7 @@
   "author": "Factly Media &amp; Research LLC",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development CLIENT_ID=factly nodemon server/index.js --watch server",
+    "dev": "cross-env NODE_ENV=development API_URI=http://api.factly.in CLIENT_ID=factly-telugu nodemon server/index.js --watch server",
     "build": "nuxt build",
     "start": "cross-env NODE_ENV=production node server/index.js",
     "generate": "nuxt generate",

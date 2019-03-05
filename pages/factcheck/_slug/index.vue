@@ -27,10 +27,10 @@
                 </div>
                 <div class="column is-three-fifth is-mobile " style="padding:.75rem">
                   <p style="color: #1976d2;">Claimed by {{claim.claimant.name}}</p><br>
-                  <span style="color: #1976d2;" class="subtitle is-size-3 is-size-4-tablet is-size-5-desktop is-size-6-mobile is-spaced is-2 ">Claim:</span>
-                  <span class="subtitle is-size-3 is-size-4-tablet is-size-5-desktop is-size-6-mobile is-spaced is-2"> {{claim.claim}}</span><br><br>
-                  <span style="color: #1976d2;" class="subtitle is-size-3 is-size-4-tablet is-size-5-desktop is-size-6-mobile is-spaced is-2 ">Review:</span>
-                  <span class="subtitle is-size-3 is-size-4-tablet is-size-5-desktop is-size-6-mobile is-spaced is-2"> {{claim.review}}</span>
+                  <span style="color: #1976d2;" class="subtitle is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2 ">Claim:</span>
+                  <span class="subtitle is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"> {{claim.claim}}</span><br><br>
+                  <span style="color: #1976d2;" class="subtitle is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2 ">Review:</span>
+                  <span class="subtitle is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"> {{claim.review}}</span>
                 </div>
                 <div class="column is-one-fifth is-hidden-mobile" style="padding:0px;">
                   <img :src="require('~/assets/images/ratings/'+claim.rating.numeric_value+'.png')"  alt="Claim Rating" width="90%">
@@ -52,7 +52,7 @@
                 <br>
               </div>
               <article class="post" style="text-align: justify;">
-                <p>{{factchecks[0].summary}}</p>
+                <p v-html="factchecks[0].summary">{{factchecks[0].summary}}</p>
               </article>
             </div>
           </div>

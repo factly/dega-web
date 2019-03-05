@@ -129,7 +129,8 @@ export default {
     let stories = null;
     if(posts && factchecks)
     {
-      stories =  _.shuffle(posts.concat(factchecks));
+      //stories =  _.shuffle(posts.concat(factchecks));
+      stories = posts.concat(factchecks);
     }
     return {
     story : stories
