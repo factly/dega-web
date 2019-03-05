@@ -10,11 +10,11 @@
             <div class="card">
               <div class="card-image">
                 <figure class="image is-3by2">
-                  <img :src="article.urlToImage" :alt="article.subtitle">
+                  <img :src="article.urlToImage" :alt="article.sub_title">
                 </figure>
               </div>
               <div class="card-content">
-                <div class="content">{{ article.subtitle }}</div>
+                <div class="content">{{ article.sub_title }}</div>
               </div>
             </div>
           </a>

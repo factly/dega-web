@@ -16,7 +16,7 @@
                 </div>
                 <div class= "column is-6 is-full-mobile" >
                     <div class="content subtitle has-text-centered">
-                        <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ posts[0].subtitle }}</p>
+                        <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ posts[0].sub_title }}</p>
                     </div>
                     <div v-if="posts[0].authors" class="subtitle is-6 is-uppercase has-text-centered">
                       BY
