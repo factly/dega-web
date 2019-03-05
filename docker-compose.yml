@@ -1,13 +1,15 @@
 # To Do:
-# Add working directory
 
 version: "3"
 
 services:
   nuxt:
-    build: ./
+    build: .
     container_name: dega-web
     restart: always
+    #volumes:
+    #  - /app/node_modules
+    #  - .:/app
     ports:
     - "3000:3000"
     command:
