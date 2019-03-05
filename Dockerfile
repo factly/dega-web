@@ -7,6 +7,8 @@
 # build stage
 FROM node:10.14.2-alpine
 ENV APP_ROOT /app
+ARG API_URI=http://localhost:8000
+ARG CLIENT_ID=factly
 
 # create and setup working directory
 RUN mkdir ${APP_ROOT}

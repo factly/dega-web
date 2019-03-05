@@ -4,24 +4,25 @@ version: "3"
 
 services:
   nuxt:
-    build: .
+    build:
+      context: .
+      args:
+        - API_URI=http://localhost:8000
+        - CLIENT_ID=factly
     container_name: dega-web
     restart: always
-    #volumes:
-    #  - /app/node_modules
-    #  - .:/app
     ports:
     - "3000:3000"
     command:
       "npm run start"
 
-  nginx:
-    image: nginx:1.15.7-alpine
-    container_name: nginx
-    restart: always
-    ports:
-    - "8081:80"
-    volumes:
-    - ./nginx:/etc/nginx/conf.d
-    depends_on:
-    - nuxt
+#  nginx:
+#    image: nginx:1.15.7-alpine
+#    container_name: nginx
+#    restart: always
+#    ports:
+#    - "8081:80"
+#    volumes:
+#    - ./nginx:/etc/nginx/conf.d
+#    depends_on:
+#    - nuxt
