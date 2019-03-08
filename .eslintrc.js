@@ -8,6 +8,7 @@ module.exports = {
     parser: 'babel-eslint'
   },
   extends: [
+    'airbnb/base',
     'plugin:vue/recommended',
     'plugin:prettier/recommended'
   ],

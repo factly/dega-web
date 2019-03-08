@@ -7,7 +7,7 @@
 # build stage
 FROM node:10.14.2-alpine
 ENV APP_ROOT /app
-ARG API_URI=http://localhost:8000
+ARG API_URI=http://api.factly.in
 ARG CLIENT_ID=factly
 
 # create and setup working directory
@@ -24,3 +24,6 @@ RUN npm run build
 
 # give full external access to the app container
 ENV HOST 0.0.0.0
+
+# Primary command to run when the container starts
+CMD ["npm", "start"]

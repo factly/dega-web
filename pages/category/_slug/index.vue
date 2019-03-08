@@ -20,8 +20,9 @@
           <div class="has-text-centered" v-if="posts[0].authors.length >= 1">
             <span class="subtitle is-6 is-uppercase">BY {{posts[0].authors[0].display_name}}</span>
           </div>
-          <div v-for="(author, index) in posts[0].authors.splice(1)"
-              :key="index" class="has-text-centered">
+          <div
+            v-for="(author, index) in posts[0].authors.splice(1)"
+            :key="index" class="has-text-centered">
             <span class="subtitle is-6 is-uppercase"> ,{{author.display_name}}</span>
           </div>
           <div class="has-text-centered">{{getDate(posts[0].last_updated_date)}}</div>
@@ -48,36 +49,34 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  import MoreStories from "~/components/MoreStories";
+import axios from 'axios'
+import MoreStories from '~/components/MoreStories';
 
-  export default {
-    components: {
-      MoreStories
-    },
-    methods: {
-      getDate(datetime) {
-        let date = new Date(datetime);
-        var ms = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        return date.getDate() + ' ' + ms[date.getMonth()] + ' ' + date.getFullYear();
-      }
-    },
-    validate({ params }){
-      return params.slug
-    },
-    async asyncData(params) {
-      return axios
-        .get(`http://127.0.0.1:8000/api/v1/posts/?category=${params.params.slug}&sortBy=lastUpdatedDate&sortAsc=false`)
-        .then(response => {
-          const data = {
-            posts: response.data
-          }
-          return data
-        })
-        .catch(error => console.log(error))
+export default {
+  components: {
+    MoreStories
+  },
+  methods: {
+    getDate(datetime) {
+      let date = new Date(datetime);
+      var ms = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return date.getDate() + ' ' + ms[date.getMonth()] + ' ' + date.getFullYear();
     }
+  },
+  validate({ params }){
+    return params.slug
+  },
+  async asyncData(params) {
+    return axios
+      .get(`http://127.0.0.1:8000/api/v1/posts/?category=${params.params.slug}&sortBy=lastUpdatedDate&sortAsc=false`)
+      .then(response => {
+        const data = {
+          posts: response.data
+        }
+        return data
+      })
+      .catch(error => console.log(error))
   }
+}
 </script>
-
-
 

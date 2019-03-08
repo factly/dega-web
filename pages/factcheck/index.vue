@@ -20,7 +20,7 @@
                     </div>
                     <div v-if="factchecks[0].authors" class="subtitle is-6 is-uppercase has-text-centered">
                       BY
-                      <span  v-for="(author, index) in factchecks[0].authors" :key="index" >{{author.display_name}} 
+                      <span  v-for="(author, index) in factchecks[0].authors" :key="index" >{{author.display_name}}
                         <span v-if="index != factchecks[0].authors.length -1">, </span>
                       </span>
                     </div>
