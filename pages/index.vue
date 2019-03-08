@@ -92,7 +92,7 @@
 import axios from 'axios'
 import MoreStories from "~/components/MoreStories"
 import PopularArticles from "~/components/PopularArticles"
-import * as _ from "lodash"
+
 export default {
   components: {
     MoreStories,
@@ -108,32 +108,26 @@ export default {
   },
   methods: {
     getDate(datetime) {
-      let date = new Date(datetime);
-      var ms = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const date = new Date(datetime);
+      const ms = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       return date.getDate() + ' ' + ms[date.getMonth()] + ' ' + date.getFullYear();
     }
   },
   async asyncData() {
-    let posts = await axios
-      .get(process.env.apiUri + `/api/v1/posts/?client_id=`+process.env.clientId+`&sortBy=lastUpdatedDate&sortAsc=false`)
+    const posts = await axios
+      .get(`${process.env.apiUri}/api/v1/posts/?client_id=${process.env.clientId}&sortBy=lastUpdatedDate&sortAsc=false`)
+      .then(response => response.data);
+
+    const factchecks = await axios
+      .get(`${process.env.apiUri}api/v1/factchecks/?client_id=${process.env.clientId}&sortBy=lastUpdatedDate&sortAsc=false`)
       .then(response => {
         return response.data
-      })
-      .catch(error => console.log(error))
-    let factchecks = await axios
-      .get(process.env.apiUri + `/api/v1/factchecks/?client_id=`+process.env.clientId+`&sortBy=lastUpdatedDate&sortAsc=false`)
-      .then(response => {
-        return response.data
-      })
-      .catch(error => console.log(error))
-    let stories = null;
-    if(posts && factchecks)
-    {
-      //stories =  _.shuffle(posts.concat(factchecks));
-      stories = posts.concat(factchecks);
-    }
+      });
+
+    const stories = posts && factchecks ? posts.concat(factchecks) : null;
+
     return {
-    story : stories
+      story: stories
     }
   }
 }
