@@ -1,11 +1,12 @@
 <template>
   <div>
+
     <section class="factcheck-detail">
       <div class="columns">
         <div 
-          class="column is-four-fifths is-full-mobile" 
+          class="column is-four-fifths is-full-mobile "
           style="float:left;">
-          <div class="column is-full has-text-centered">
+          <div class="column is-full has-text-centered is-paddingless" style="margin-bottom: 1rem">
             <div class="card">
               <div class="card-content">
                 <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{ factchecks[0].sub_title }}</h1>
@@ -27,12 +28,48 @@
               </div>
             </div>
           </div>
+          <div class="card column is-full" style="background-color: #f5faff;">
+            <div class="columns">
+              <div class="column is-one-fifth">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="https://versions.bulma.io/0.7.0/images/placeholders/1280x960.png" alt="Placeholder image">
+                  </figure>
+                </div>
+              </div>
+              <div class="column is-three-fifths">
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-content">
+                      <p class="title is-5">John Smith</p>
+                      <p class="subtitle is-6">@johnsmith</p>
+                    </div>
+                  </div>
+
+                  <div class="content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+                    <a href="#">#css</a> <a href="#">#responsive</a>
+                    <br>
+                    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                  </div>
+                </div>
+              </div>
+              <div class="column is-one-fifth">
+                <div class="card-image">
+                  <figure class="image is-4by3">
+                    <img src="https://versions.bulma.io/0.7.0/images/placeholders/1280x960.png" alt="Placeholder image">
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="column is-full">
             <!-- CLAIM WIDGET -->
             <div 
               v-for="(claim, index) in factchecks[0].claims" 
               :key="index" 
-              class="box" 
+              class="box"
               style="background-color: #f5faff;">
               <div 
                 :id="'claim'+(index+1)" 
