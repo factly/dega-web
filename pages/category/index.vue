@@ -9,7 +9,9 @@
     </section>
 
     <!-- First-Post -->
-    <section class="section" @click="LoadPost">
+    <section 
+      class="section" 
+      @click="LoadPost">
       <ListBig />
       <br>
       <!-- Second post -->
@@ -45,7 +47,7 @@ export default {
     ListSmall
   },
   methods: {
-    LoadPost(){
+    LoadPost() {
       this.$router.push('/story')
     }
   }

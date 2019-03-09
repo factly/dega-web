@@ -12,9 +12,14 @@
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">Support Us</p>
-              <a href="#" class="card-header-icon" aria-label="more options">
+              <a 
+                href="#" 
+                class="card-header-icon" 
+                aria-label="more options">
                 <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i 
+                    class="fas fa-angle-down" 
+                    aria-hidden="true"/>
                 </span>
               </a>
             </header>
@@ -29,9 +34,14 @@
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">FAQ's</p>
-              <a href="#" class="card-header-icon" aria-label="more options">
+              <a 
+                href="#" 
+                class="card-header-icon" 
+                aria-label="more options">
                 <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i 
+                    class="fas fa-angle-down" 
+                    aria-hidden="true"/>
                 </span>
               </a>
             </header>
@@ -53,13 +63,17 @@
                   <br>&nbsp;Grants for specific projects
                   <br>&nbsp;Subscriptions from readers
                 </p>
-                <p style="text-align: justify;" class="selectionShareable">
+                <p 
+                  style="text-align: justify;" 
+                  class="selectionShareable">
                   <strong>
                     <a>Why does Factly want readers to support?</a>
                     <br>
                   </strong>Your support will enable us invest in more resources (human &amp; technology) to create more content &amp; tools, there by accelerating the reach of facts, information &amp; data that is important &amp; useful to the common man.
                 </p>
-                <p style="text-align: justify;" class="selectionShareable">
+                <p 
+                  style="text-align: justify;" 
+                  class="selectionShareable">
                   <strong>
                     <a>What will the reader get by supporting Factly?</a>
                     <br>
@@ -69,7 +83,9 @@
                   style="text-align: justify;"
                   class="selectionShareable"
                 >However, we have plans to generate content in more engaging formats like Podcasts etc. in the coming days. Our supporters will be the first ones to access them. Supporters will also be entitled to discounts for any paid workshops by Factly.</p>
-                <p style="text-align: justify;" class="selectionShareable">
+                <p 
+                  style="text-align: justify;" 
+                  class="selectionShareable">
                   <strong>
                     <a>Do I get a tax exemption when I contribute to Factly?</a>
                     <br>
@@ -85,7 +101,7 @@
 </template>
 
 <style>
-.funding-details{
-  margin-block-start: 1%
+.funding-details {
+  margin-block-start: 1%;
 }
 </style>

@@ -10,9 +10,14 @@
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">Policy</p>
-              <a href="#" class="card-header-icon" aria-label="more options">
+              <a 
+                href="#" 
+                class="card-header-icon" 
+                aria-label="more options">
                 <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i 
+                    class="fas fa-angle-down" 
+                    aria-hidden="true"/>
                 </span>
               </a>
             </header>
@@ -30,7 +35,7 @@
   </div>
 </template>
 <style>
-.correction-policy{
-  margin-block-start: 1%
+.correction-policy {
+  margin-block-start: 1%;
 }
 </style>
