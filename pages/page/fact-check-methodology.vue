@@ -5,7 +5,7 @@
         <section class="hero-title has-text-centered container">
           <div>
             <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">
-                Fact Check Methodology
+              Fact Check Methodology
             </p>
             <p class="selectionShareable">
               Factly is a
@@ -22,9 +22,14 @@
               <p class="card-header-title">
                 Selection of Claim
               </p>
-              <a href="#" class="card-header-icon" aria-label="more options">
+              <a 
+                href="#" 
+                class="card-header-icon" 
+                aria-label="more options">
                 <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i 
+                    class="fas fa-angle-down" 
+                    aria-hidden="true"/>
                 </span>
               </a>
             </header>
@@ -42,9 +47,14 @@
               <p class="card-header-title">
                 Verification of the Claim
               </p>
-              <a href="#" class="card-header-icon" aria-label="more options">
+              <a 
+                href="#" 
+                class="card-header-icon" 
+                aria-label="more options">
                 <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i 
+                    class="fas fa-angle-down" 
+                    aria-hidden="true"/>
                 </span>
               </a>
             </header>
@@ -62,9 +72,14 @@
               <p class="card-header-title">
                 Research
               </p>
-              <a href="#" class="card-header-icon" aria-label="more options">
+              <a 
+                href="#" 
+                class="card-header-icon" 
+                aria-label="more options">
                 <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i 
+                    class="fas fa-angle-down" 
+                    aria-hidden="true"/>
                 </span>
               </a>
             </header>
@@ -81,9 +96,14 @@
               <p class="card-header-title">
                 Claim Check
               </p>
-              <a href="#" class="card-header-icon" aria-label="more options">
+              <a 
+                href="#" 
+                class="card-header-icon" 
+                aria-label="more options">
                 <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i 
+                    class="fas fa-angle-down" 
+                    aria-hidden="true"/>
                 </span>
               </a>
             </header>
@@ -107,9 +127,14 @@
               <p class="card-header-title">
                 Editorial Check
               </p>
-              <a href="#" class="card-header-icon" aria-label="more options">
+              <a 
+                href="#" 
+                class="card-header-icon" 
+                aria-label="more options">
                 <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i 
+                    class="fas fa-angle-down" 
+                    aria-hidden="true"/>
                 </span>
               </a>
             </header>
@@ -127,9 +152,14 @@
               <p class="card-header-title">
                 Correction Policy
               </p>
-              <a href="#" class="card-header-icon" aria-label="more options">
+              <a 
+                href="#" 
+                class="card-header-icon" 
+                aria-label="more options">
                 <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i 
+                    class="fas fa-angle-down" 
+                    aria-hidden="true"/>
                 </span>
               </a>
             </header>
@@ -137,7 +167,7 @@
               <div class="content">
                 <p>
                   Readers are encouraged to comment below the story or write to us with any corrections through the 
-                <nuxt-link to="'page/contact-us'">Contact Us</nuxt-link>
+                  <nuxt-link to="'page/contact-us'">Contact Us</nuxt-link>
                   page or via the email listed on that page. All such communication is taken very seriously and relevant corrections are made if they are found to be valid within 48 hours of the receipt of a correction email or message.
                 </p>
               </div>
@@ -149,9 +179,14 @@
               <p class="card-header-title">
                 Nonpartisanship Policy
               </p>
-              <a href="#" class="card-header-icon" aria-label="more options">
+              <a 
+                href="#" 
+                class="card-header-icon" 
+                aria-label="more options">
                 <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i 
+                    class="fas fa-angle-down" 
+                    aria-hidden="true"/>
                 </span>
               </a>
             </header>
@@ -169,46 +204,51 @@
               <p class="card-header-title">
                 Fact Check Team
               </p>
-              <a href="#" class="card-header-icon" aria-label="more options">
+              <a 
+                href="#" 
+                class="card-header-icon" 
+                aria-label="more options">
                 <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i 
+                    class="fas fa-angle-down" 
+                    aria-hidden="true"/>
                 </span>
               </a>
             </header>
             <div class="card-content has-text-justified">
               <div class="content">
                 <p>
-                    <strong>Rakesh Dubbudu (Editor &amp; Author)</strong>
-                    <br>Rakesh has been working on issues related to Right to Information (RTI) for a decade. He is a Data/Information enthusiast &amp; passionate about Governance/Policy issues.
-                  </p>
-                  <p>
-                    <strong>Tejeswi Pratima Dodda (Editor &amp; Author)</strong>
-                    <br>Tejeswi is a communications professional. She is passionate about social justice, gender mainstreaming and conflict.
-                  </p>
-                  <p>
-                    <strong>Shashi Deshetti (Technology)</strong>
-                    <br>Shashi is Software Analyst by Profession and is passionate about Films, Politics and Technology.
-                  </p>
-                  <p>
-                    <strong>Bharath Guniganti (Data Analyst &amp; Author)</strong>
-                    <br>Bharat is a Data enthusiast and is keen about fact checking.
-                  </p>
-                  <p>
-                    <strong>Aila Bandagi Kandlakunta (Author)</strong>
-                    <br>Aila Bandagi is a social scientist by training and specializes in Urban Development and Gender Studies. She loves to explore cities and dance.
-                  </p>
-                  <p>
-                    <strong>Sneha Venu (Author)</strong>
-                    <br>Sneha is a student at Azim Premji University pursuing a B.A in Economics. She is passionate about development, social justice, and sustainability.
-                  </p>
-                  <p>
-                    <strong>Uday Erothu (Designer)</strong>
-                    <br>Uday Kumar Erothu is a graphic designer.
-                  </p>
-                  <p>
-                    <strong>Sai Santosh Vangala (Research Assistant)</strong>
-                    <br>Sai Santosh is interested in public policy ,advocates social justice and loves music.
-                  </p>
+                  <strong>Rakesh Dubbudu (Editor &amp; Author)</strong>
+                  <br>Rakesh has been working on issues related to Right to Information (RTI) for a decade. He is a Data/Information enthusiast &amp; passionate about Governance/Policy issues.
+                </p>
+                <p>
+                  <strong>Tejeswi Pratima Dodda (Editor &amp; Author)</strong>
+                  <br>Tejeswi is a communications professional. She is passionate about social justice, gender mainstreaming and conflict.
+                </p>
+                <p>
+                  <strong>Shashi Deshetti (Technology)</strong>
+                  <br>Shashi is Software Analyst by Profession and is passionate about Films, Politics and Technology.
+                </p>
+                <p>
+                  <strong>Bharath Guniganti (Data Analyst &amp; Author)</strong>
+                  <br>Bharat is a Data enthusiast and is keen about fact checking.
+                </p>
+                <p>
+                  <strong>Aila Bandagi Kandlakunta (Author)</strong>
+                  <br>Aila Bandagi is a social scientist by training and specializes in Urban Development and Gender Studies. She loves to explore cities and dance.
+                </p>
+                <p>
+                  <strong>Sneha Venu (Author)</strong>
+                  <br>Sneha is a student at Azim Premji University pursuing a B.A in Economics. She is passionate about development, social justice, and sustainability.
+                </p>
+                <p>
+                  <strong>Uday Erothu (Designer)</strong>
+                  <br>Uday Kumar Erothu is a graphic designer.
+                </p>
+                <p>
+                  <strong>Sai Santosh Vangala (Research Assistant)</strong>
+                  <br>Sai Santosh is interested in public policy ,advocates social justice and loves music.
+                </p>
               </div>
             </div>
           </div>
@@ -220,7 +260,7 @@
   
 
   <style>
-.fact-check-methodology-page{
-  margin-block-start: 1%
+.fact-check-methodology-page {
+  margin-block-start: 1%;
 }
 </style>

@@ -5,16 +5,21 @@
         <section class="hero-title has-text-centered container">
           <div>
             <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">
-                About Us
+              About Us
             </p>
             <br>
           </div>
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">Background</p>
-              <a href="#" class="card-header-icon" aria-label="more options">
+              <a 
+                href="#" 
+                class="card-header-icon" 
+                aria-label="more options">
                 <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i 
+                    class="fas fa-angle-down" 
+                    aria-hidden="true"/>
                 </span>
               </a>
             </header>
@@ -28,9 +33,14 @@
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">Mission</p>
-              <a href="#" class="card-header-icon" aria-label="more options">
+              <a 
+                href="#" 
+                class="card-header-icon" 
+                aria-label="more options">
                 <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i 
+                    class="fas fa-angle-down" 
+                    aria-hidden="true"/>
                 </span>
               </a>
             </header>
@@ -44,9 +54,14 @@
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">Vision</p>
-              <a href="#" class="card-header-icon" aria-label="more options">
+              <a 
+                href="#" 
+                class="card-header-icon" 
+                aria-label="more options">
                 <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i 
+                    class="fas fa-angle-down" 
+                    aria-hidden="true"/>
                 </span>
               </a>
             </header>
@@ -60,9 +75,14 @@
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">What we do</p>
-              <a href="#" class="card-header-icon" aria-label="more options">
+              <a 
+                href="#" 
+                class="card-header-icon" 
+                aria-label="more options">
                 <span class="icon">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  <i 
+                    class="fas fa-angle-down" 
+                    aria-hidden="true"/>
                 </span>
               </a>
             </header>
@@ -76,7 +96,10 @@
                   <li>
                     <b>Information Tools:</b>
                     <span style="font-weight: 400;" >Creating and developing tools that will increase access to public data and information by making it easy, interactive and intuitive.&nbsp;</span>
-                    <a href="https://countingindia.com" target="_blank" rel="noopener">
+                    <a 
+                      href="https://countingindia.com" 
+                      target="_blank" 
+                      rel="noopener">
                       <span style="font-weight: 400;">Counting India</span>
                     </a>
                     <span style="font-weight: 400;" >is Factly’s first tool in its beta version that focuses on accessibility and data visualization of &nbsp;Census-2011 data. Factly is currently working on other tools that are in the development stage.</span>
@@ -96,7 +119,7 @@
   </div>
 </template>
 <style>
-.about-us{
-  margin-block-start: 1%
+.about-us {
+  margin-block-start: 1%;
 }
 </style>
