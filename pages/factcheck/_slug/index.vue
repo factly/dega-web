@@ -2,60 +2,32 @@
   <div>
     <section class="factcheck-detail">
       <div class="columns">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="https://versions.bulma.io/0.7.0/images/placeholders/1280x960.png" alt="Placeholder image">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="media">
-              <div class="media-left">
-                <figure class="image is-48x48">
-                  <img src="https://versions.bulma.io/0.7.0/images/placeholders/96x96.png" alt="Placeholder image">
-                </figure>
-              </div>
-              <div class="media-content">
-                <p class="title is-4">John Smith</p>
-                <p class="subtitle is-6">@johnsmith</p>
-              </div>
-            </div>
-
-            <div class="content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-              <a href="#">#css</a> <a href="#">#responsive</a>
-              <br>
-              <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="columns">
         <div 
           class="column is-four-fifths is-full-mobile" 
           style="float:left;">
           <div class="column is-full has-text-centered">
-            <div class="">
-              <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{ factchecks[0].sub_title }}</h1>
-              <span class="is-uppercase">
-                <!-- BY -->
-                <div class="has-text-centered">{{ getDate(factchecks[0].last_updated_date) }}</div>
-              </span>
-              <figure class="image is-2by1">
-                <img 
-                  :src="factchecks[0].featured_media" 
-                  alt="Factcheck" 
-                  style="border-radius: 0px 0px 0px 0px;">
-              </figure>
-              <br>
-              <div class="box">
+            <div class="card">
+              <div class="card-content">
+                <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-bold">{{ factchecks[0].sub_title }}</h1>
+                <span class="is-uppercase">
+                  <!-- BY -->
+                  <div class="has-text-centered">{{ getDate(factchecks[0].last_updated_date) }}</div>
+                </span>
+              </div>
+              <div class="card-image">
+                <figure class="image is-2by1">
+                  <img
+                    :src="factchecks[0].featured_media"
+                    alt="Factcheck"
+                    style="border-radius: 0px 0px 0px 0px;">
+                </figure>
+              </div>
+              <div class="card-content">
                 <p class="subtitle is-size-6 is-size-6-tablet is-size-6-desktop has-text-weight-semibold has-text-left has-text-weight-semibold">{{ factchecks[0].excerpt }}</p>
               </div>
             </div>
           </div>
-          <div class="column is-full" style="background-color: #000">
+          <div class="column is-full">
             <!-- CLAIM WIDGET -->
             <div 
               v-for="(claim, index) in factchecks[0].claims" 
