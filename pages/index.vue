@@ -6,8 +6,8 @@
           v-if="story" 
           class="container">
           <nuxt-link :to="'/'+ story[0]._class.split('.').pop().toLowerCase()+ '/' + story[0].slug">
-            <div class="columns">
-              <div class= "column is- 6 is-full-mobile">
+            <div class="columns is-vcentered">
+              <div class= "column is-6 is-full-mobile">
                 <div class="card">
                   <div class="card-image">
                     <figure class ="image is-5by3">
