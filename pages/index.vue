@@ -145,14 +145,16 @@ export default {
         }&sortBy=lastUpdatedDate&sortAsc=false`
       )
       .then(response => response.data)
+      .catch(error => console.log(error))
 
     const factchecks = await axios
       .get(
-        `${process.env.apiUri}api/v1/factchecks/?client_id=${
+        `${process.env.apiUri}/api/v1/factchecks/?client_id=${
           process.env.clientId
         }&sortBy=lastUpdatedDate&sortAsc=false`
       )
       .then(response => response.data)
+      .catch(error => console.log(error))
 
     const stories = posts && factchecks ? posts.concat(factchecks) : null
 
