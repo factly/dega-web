@@ -21,9 +21,8 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'import/extensions': ['error', 'always', {
-      js: 'never',
-      vue: 'never',
-    }]
+    'import/no-unresolved': 0,
+    'import/extensions': 0,
+    'import/no-extraneous-dependencies': 0
   }
 };
