@@ -22,8 +22,6 @@
               <div class="box">
                 <p class="subtitle is-size-6 is-size-6-tablet is-size-6-desktop has-text-weight-semibold has-text-left has-text-weight-semibold">{{ factchecks[0].excerpt }}</p>
               </div>
-
-
             </div>
           </div>
           <div class="column is-full">
@@ -206,9 +204,7 @@ export default {
   async asyncData(params) {
     return axios
       .get(
-        `${process.env.apiUri}/api/v1/factchecks/?client_id=${
-          process.env.clientId
-        }&slug=` + `${params.params.slug}`
+        `${process.env.apiUri}/api/v1/factchecks/?client_id=${process.env.clientId}&slug=${params.params.slug}`
       )
       .then(response => {
         const data = {
