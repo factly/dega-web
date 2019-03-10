@@ -3,7 +3,7 @@
     <div class="column is-three-fourth">
       <div class="main-content">
         <div 
-          v-if="posts" 
+          v-if="posts.length" 
           class="container">
           <nuxt-link :to="'/post/'+ posts[0].slug">
             <div class="columns">
