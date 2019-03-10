@@ -86,6 +86,11 @@ export default {
     MoreStories,
     PopularArticles
   },
+  data(){
+    return{
+      factchecks: null
+    }
+  },
   methods: {
     getDate(datetime) {
       const date = new Date(datetime)
@@ -107,7 +112,8 @@ export default {
     }
   },
   async asyncData() {
-    return axios
+    console.log(`${process.env.apiUri}/api/v1/factchecks/?client_id=${process.env.clientId}&sortBy=lastUpdatedDate&sortAsc=false`);
+    const factChecks = await axios
       .get(
         `${process.env.apiUri}/api/v1/factchecks/?client_id=${
           process.env.clientId
@@ -115,6 +121,9 @@ export default {
       )
       .then(response => response.data)
       .catch(error => console.log(error))
+    return{
+      factchecks: factChecks
+    }
   }
 }
 </script>
