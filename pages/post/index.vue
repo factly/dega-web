@@ -1,6 +1,6 @@
 <template>
   <div class="columns home-page">
-    <div class="column is-three-fourth">
+    <div class="column">
       <div class="main-content">
         <div 
           v-if="posts.length" 
@@ -120,7 +120,12 @@ export default {
           process.env.clientId
         }&sortBy=lastUpdatedDate&sortAsc=false`
       )
-      .then(response => response.data)
+      .then(response => {
+        const data = {
+          posts: response.data
+        }
+        return data
+      })
       .catch(error => console.log(error))
     return{
       posts: post

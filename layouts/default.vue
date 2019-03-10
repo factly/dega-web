@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav 
+    <nav
       class="navbar header has-shadow is-spaced is-fixed-top" 
       role="navigation" 
       aria-label="main navigation">
@@ -82,7 +82,7 @@
             <span 
               class="icon" 
               style="color: #55acee;">
-              <!--<svg class="svg-inline&#45;&#45;fa fa-twitter fa-w-16 fa-lg" aria-hidden="true" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">-->
+              <!--<svg class="svg-inline--fa fa-twitter fa-w-16 fa-lg" aria-hidden="true" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">-->
               <svg 
                 style="width:24px;height:24px" 
                 viewBox="0 0 24 24">
@@ -100,7 +100,7 @@
               class="icon" 
               style="color: #55acee;">
               <svg 
-                class="svg-inline--fa fa-twitter fa-w-16 fa-lg" 
+                class="svg-inline--fa fa-twitter fa-w-16 fa-lg"
                 aria-hidden="true" 
                 data-prefix="fab" 
                 data-icon="twitter" 
@@ -122,7 +122,7 @@
               class="icon" 
               style="color: #333;">
               <svg 
-                class="svg-inline--fa fa-github-alt fa-w-15 fa-lg" 
+                class="svg-inline--fa fa-github-alt fa-w-15 fa-lg"
                 aria-hidden="true" 
                 data-prefix="fab" 
                 data-icon="github-alt" 
@@ -151,14 +151,6 @@
     </footer>
   </div>
 </template>
-<style>
-/* .navbar-item.has-dropdown .navbar-dropdown {
-  display: none;
-}
-.navbar-item.has-dropdown.is-active .navbar-dropdown {
-  display: block;
-} */
-</style>
 
 <script>
 export default {

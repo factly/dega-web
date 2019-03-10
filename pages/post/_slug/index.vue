@@ -79,7 +79,12 @@ export default {
           process.env.clientId
         }&slug=${params.params.slug}`
       )
-      .then(response => response.data)
+      .then(response => {
+        const data = {
+          post: response.data
+        }
+        return data
+      })
   }
 }
 </script>

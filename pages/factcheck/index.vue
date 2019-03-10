@@ -1,6 +1,6 @@
 <template>
   <div class="columns factcheck-list">
-    <div class="column is-three-fourth">
+    <div class="column">
       <div class="main-content">
         <div 
           v-if="factchecks.length" 
@@ -78,7 +78,7 @@
 
 <script>
 import axios from 'axios'
-import MoreStories from '../../components/MoreStories'
+import MoreStories from '~/components/MoreStories'
 import PopularArticles from '~/components/PopularArticles'
 
 export default {
@@ -118,7 +118,12 @@ export default {
           process.env.clientId
         }&sortBy=lastUpdatedDate&sortAsc=false`
       )
-      .then(response => response.data)
+      .then(response => {
+        const data = {
+          factchecks: response.data
+        }
+        return data
+      })
       .catch(error => console.log(error))
     return{
       factchecks: factChecks
