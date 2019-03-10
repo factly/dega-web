@@ -118,7 +118,7 @@
       </div>
       <div class="is-divider-vertical is-hidden-mobile"></div>
       <div class="column is-two-fifths is-hidden-mobile">
-        <div class="column is-one-fifth is-dockedTop">
+        <div class="column is-half sticky">
           <div
             class="box has-text-weight-semibold"
             style="color: #1976d2; text-align:left;">
