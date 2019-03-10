@@ -1,6 +1,6 @@
 <template>
   <div class="columns home-page">
-    <div class="column is-three-fourth">
+    <div class="column">
       <div class="main-content">
         <div 
           v-if="story" 

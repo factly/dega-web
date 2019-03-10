@@ -93,7 +93,12 @@ export default {
           params.params.slug
         }&sortBy=lastUpdatedDate&sortAsc=false`
       )
-      .then(response => response.data)
+      .then(response => {
+        const data = {
+          posts: response.data
+        }
+        return data
+      })
       .catch(error => console.log(error))
   }
 }
