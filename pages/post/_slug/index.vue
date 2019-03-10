@@ -72,14 +72,23 @@ export default {
   validate({ params }) {
     return params.slug
   },
+  data() {
+    return {
+      post: null
+    }
+  },
   async asyncData(params) {
-    return axios
+    const posts = await axios
       .get(
         `${process.env.apiUri}/api/v1/posts/?client_id=${
           process.env.clientId
         }&slug=${params.params.slug}`
       )
       .then(response => response.data)
+      .catch(error => console.log(error))
+    return{
+      post: posts
+    }
   }
 }
 </script>
