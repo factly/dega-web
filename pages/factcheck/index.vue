@@ -113,12 +113,7 @@ export default {
           process.env.clientId
         }&sortBy=lastUpdatedDate&sortAsc=false`
       )
-      .then(response => {
-        const data = {
-          factchecks: response.data
-        }
-        return data
-      })
+      .then(response => response.data)
       .catch(error => console.log(error))
   }
 }
