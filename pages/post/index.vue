@@ -3,7 +3,7 @@
     <div class="column is-three-fourth">
       <div class="main-content">
         <div 
-          v-if="posts" 
+          v-if="posts.length" 
           class="container">
           <nuxt-link :to="'/post/'+ posts[0].slug">
             <div class="columns">
@@ -87,7 +87,7 @@ export default {
     MoreStories,
     PopularArticles
   },
-  methods: {
+    methods: {
     getDate(datetime) {
       const date = new Date(datetime)
       const ms = [
@@ -107,8 +107,14 @@ export default {
       return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`
     }
   },
+  data() {
+    return {
+      posts: null
+    }
+  },
+
   async asyncData() {
-    return axios
+    const post = await axios
       .get(
         `${process.env.apiUri}/api/v1/posts/?client_id=${
           process.env.clientId
@@ -116,6 +122,9 @@ export default {
       )
       .then(response => response.data)
       .catch(error => console.log(error))
+    return{
+      posts: post
+    }
   }
 }
 </script>

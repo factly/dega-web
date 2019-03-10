@@ -112,8 +112,6 @@ export default {
   },
   data() {
     return {
-      posts: null,
-      factchecks: null,
       story: null
     }
   },
@@ -157,7 +155,6 @@ export default {
       .catch(error => console.log(error))
 
     const stories = posts && factchecks ? posts.concat(factchecks) : null
-
     return {
       story: stories
     }

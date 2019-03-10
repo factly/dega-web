@@ -3,7 +3,7 @@
     <div class="column is-three-fourth">
       <div class="main-content">
         <div 
-          v-if="factchecks" 
+          v-if="factchecks.length" 
           class="container">
           <nuxt-link :to="'/factcheck/'+ factchecks[0].slug">
             <div class="columns">
@@ -86,6 +86,11 @@ export default {
     MoreStories,
     PopularArticles
   },
+  data(){
+    return{
+      factchecks: null
+    }
+  },
   methods: {
     getDate(datetime) {
       const date = new Date(datetime)
@@ -107,7 +112,7 @@ export default {
     }
   },
   async asyncData() {
-    return axios
+    const factChecks = await axios
       .get(
         `${process.env.apiUri}/api/v1/factchecks/?client_id=${
           process.env.clientId
@@ -115,6 +120,9 @@ export default {
       )
       .then(response => response.data)
       .catch(error => console.log(error))
+    return{
+      factchecks: factChecks
+    }
   }
 }
 </script>
