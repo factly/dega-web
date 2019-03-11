@@ -1,5 +1,5 @@
 <template>
-  <div class="columns home-page">
+  <div class="columns">
     <div class="column">
       <div class="main-content">
         <div 
@@ -79,10 +79,6 @@
   </div>
 </template>
 <style>
-.home-page {
-  margin: 1%;
-}
-
 .story-art {
   position: relative;
   max-width: 800px; /* Maximum width */

@@ -1,5 +1,5 @@
 <template>
-  <div class="post-page">
+  <div>
     <section class="hero-title has-text-centered">
       <!-- <div class="hero-body"> -->
       <div class="container post-article">
@@ -38,13 +38,6 @@
   </div>
 </template>
 
-
-<style>
-.post-page {
-  margin: 1%;
-}
-</style>
-
 <script>
 import axios from 'axios'
 
@@ -72,19 +65,23 @@ export default {
   validate({ params }) {
     return params.slug
   },
+  data() {
+    return {
+      post: null
+    }
+  },
   async asyncData(params) {
-    return axios
+    const posts = await axios
       .get(
         `${process.env.apiUri}/api/v1/posts/?client_id=${
           process.env.clientId
         }&slug=${params.params.slug}`
       )
-      .then(response => {
-        const data = {
-          post: response.data
-        }
-        return data
-      })
+      .then(response => response.data)
+      .catch(error => console.log(error))
+    return{
+      post: posts
+    }
   }
 }
 </script>
