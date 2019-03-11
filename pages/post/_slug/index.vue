@@ -1,5 +1,5 @@
 <template>
-  <div class="post-page">
+  <div>
     <section class="hero-title has-text-centered">
       <!-- <div class="hero-body"> -->
       <div class="container post-article">
@@ -37,13 +37,6 @@
     </section>
   </div>
 </template>
-
-
-<style>
-.post-page {
-  margin: 1%;
-}
-</style>
 
 <script>
 import axios from 'axios'

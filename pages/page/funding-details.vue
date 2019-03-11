@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <div class="column is-12">
-      <div class="main-content funding-details">
+      <div class="main-content">
         <section class="hero-title has-text-centered container">
           <div>
             <p
@@ -99,9 +99,3 @@
     </div>
   </div>
 </template>
-
-<style>
-.funding-details {
-  margin-block-start: 1%;
-}
-</style>

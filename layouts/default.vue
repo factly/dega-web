@@ -139,7 +139,7 @@
         </div>
       </div>
     </nav>
-    <nuxt />
+    <nuxt class="page"></nuxt>
     <footer class="footer">
       <div class="content has-text-centered">
         <p>
@@ -151,6 +151,11 @@
     </footer>
   </div>
 </template>
+<style>
+.page{
+  margin-block-start: 6%;
+}
+</style>
 
 <script>
 export default {

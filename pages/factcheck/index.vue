@@ -1,9 +1,9 @@
 <template>
-  <div class="columns factcheck-list">
+  <div class="columns">
     <div class="column">
       <div class="main-content">
         <div 
-          v-if="factchecks.length" 
+          v-if="factchecks && factchecks.length" 
           class="container">
           <nuxt-link :to="'/factcheck/'+ factchecks[0].slug">
             <div class="columns">
@@ -70,11 +70,6 @@
     <!-- <PopularArticles></PopularArticles> -->
   </div>
 </template>
-<style>
-.factcheck-list {
-  margin: 1%;
-}
-</style>
 
 <script>
 import axios from 'axios'
@@ -118,12 +113,7 @@ export default {
           process.env.clientId
         }&sortBy=lastUpdatedDate&sortAsc=false`
       )
-      .then(response => {
-        const data = {
-          factchecks: response.data
-        }
-        return data
-      })
+      .then(response => response.data)
       .catch(error => console.log(error))
     return{
       factchecks: factChecks

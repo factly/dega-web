@@ -1,9 +1,9 @@
 <template>
-  <div class="columns home-page">
+  <div class="columns">
     <div class="column">
       <div class="main-content">
         <div 
-          v-if="posts.length" 
+          v-if="posts && posts.length" 
           class="container">
           <nuxt-link :to="'/post/'+ posts[0].slug">
             <div class="columns">
@@ -71,12 +71,6 @@
     <!-- <PopularArticles></PopularArticles> -->
   </div>
 </template>
-<style>
-.home-page {
-  margin: 1%;
-}
-</style>
-
 <script>
 import axios from 'axios'
 import MoreStories from '~/components/MoreStories'
@@ -120,12 +114,7 @@ export default {
           process.env.clientId
         }&sortBy=lastUpdatedDate&sortAsc=false`
       )
-      .then(response => {
-        const data = {
-          posts: response.data
-        }
-        return data
-      })
+      .then(response => response.data)
       .catch(error => console.log(error))
     return{
       posts: post

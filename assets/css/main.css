@@ -23,7 +23,7 @@ div.sticky {
 /***************************************************/
 
 .navbar.is-fixed-top{
-  position: relative;
+  position: fixed;
 }
 
 .page-enter-active{

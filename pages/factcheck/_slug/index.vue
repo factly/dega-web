@@ -1,5 +1,5 @@
 <template>
-  <section class="factcheck-detail" style="margin-top: 0">
+  <section>
     <div class="columns is-vcentered is-centered">
       <div class= "column is-6">
         <div class="card">

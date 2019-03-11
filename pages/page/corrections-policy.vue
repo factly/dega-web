@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <div class="column is-12">
-      <div class="main-content correction-policy">
+      <div class="main-content">
         <section class="hero-title has-text-centered container">
           <div>
             <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">Correction Policy</p>
@@ -34,8 +34,3 @@
     </div>
   </div>
 </template>
-<style>
-.correction-policy {
-  margin-block-start: 1%;
-}
-</style>
