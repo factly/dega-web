@@ -1,6 +1,6 @@
 <template>
   <div 
-    class="columns" 
+    class="columns"
     style="margin-bottom: 1rem; margin: 0.5rem"> <!--<div class="container columns">-->
     <!-- story-image  column-->
     <div class= "column is-4">
