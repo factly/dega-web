@@ -150,7 +150,10 @@ export default {
       .then(response => response.data)
       .catch(error => console.log(error))
 
-    const stories = posts && factchecks ? posts.concat(factchecks) : null
+    let stories = posts && factchecks ? posts.concat(factchecks) : null
+    stories = stories.sort(function(storyFirst,storySecond){
+        return storyFirst.last_updated_date > storySecond.last_updated_date ? 1 : -1;
+    });
     return {
       story: stories
     }
