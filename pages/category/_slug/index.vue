@@ -88,7 +88,11 @@ export default {
   },
   async asyncData(params) {
     return axios
-      .get(`http://127.0.0.1:8000/api/v1/posts/?category=${params.params.slug}&sortBy=lastUpdatedDate&sortAsc=false`)
+      .get(
+        `http://127.0.0.1:8000/api/v1/posts/?category=${
+          params.params.slug
+        }&sortBy=lastUpdatedDate&sortAsc=false`
+      )
       .then((response) => {
         const data = {
           posts: response.data

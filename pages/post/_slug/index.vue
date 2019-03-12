@@ -74,7 +74,11 @@ export default {
 
   async asyncData(params) {
     const posts = await axios
-      .get(`${process.env.apiUri}/api/v1/posts/?client_id=${process.env.clientId}&slug=${params.params.slug}`)
+      .get(
+        `${process.env.apiUri}/api/v1/posts/?client_id=${
+          process.env.clientId
+        }&slug=${params.params.slug}`
+      )
       .then(response => response.data);
     return {
       post: posts

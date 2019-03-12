@@ -25,8 +25,8 @@
             </header>
             <div class="card-content has-text-justified">
               <div class="content">
-                <p>We strive to tell you the facts. At Factly, every news story powers you with information that is true, compelling and open to be challenged. We pursue facts without fear or favour. We want to create an ecosystem that allows the common man in India to have access to important public information/data that she/he can engage, understand and strive to make it better.</p>
-                <p>In the past two odd years, we have evolved into a mature & comprehensive digital platform for public information with content created in various formats such as stories, infographics, videos & data/information tools. We believe it is about time to expand our horizons and resources. We are ready to partner with each one of you and be accountable with what we create.</p>
+                <p>{{ $t('supportus.stmt1') }}</p>
+                <p>{{ $t('supportus.stmt2') }}</p>
               </div>
             </div>
           </div>
