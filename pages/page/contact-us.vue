@@ -22,13 +22,13 @@
               <p class="card-header-title">
                 Have feedback for us?
               </p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-p="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -47,13 +47,13 @@
               <p class="card-header-title">
                 Corrections Policy
               </p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -72,13 +72,13 @@
               <p class="card-header-title">
                 Wish to be part of Factly’s work?
               </p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -97,13 +97,13 @@
               <p class="card-header-title">
                 Wish to be submit a claim for Fact Checking?
               </p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -112,7 +112,7 @@
               <div class="content">
                 <p>
                   If you come across a claim you that you think we could Fact Check, please fill in the details below or write to us at hi@factly.in
-                </p>                  
+                </p>
               </div>
             </div>
           </div>
@@ -122,13 +122,13 @@
               <p class="card-header-title">
                 Wish to be a part of team Factly?
               </p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -147,13 +147,13 @@
               <p class="card-header-title">
                 Wish to Spam Us?
               </p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -171,18 +171,18 @@
             <div>
               <p class="card-header-title">Name</p>
               <div class="control">
-                <input 
-                  class="input" 
-                  type="text" 
+                <input
+                  class="input"
+                  type="text"
                   placeholder="Text input">
               </div>
             </div>
             <div class="field">
               <p class="card-header-title">Email</p>
               <div class="control has-icons-left has-icons-right">
-                <input 
-                  class="input is-danger" 
-                  type="email" 
+                <input
+                  class="input is-danger"
+                  type="email"
                   placeholder="Email input">
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope"/>
@@ -196,9 +196,9 @@
             <div class="field">
               <p class="card-header-title">Mobile Number</p>
               <div class="control">
-                <input 
-                  class="input" 
-                  type="text" 
+                <input
+                  class="input"
+                  type="text"
                   placeholder="Text input">
               </div>
             </div>
@@ -206,8 +206,8 @@
             <div class="field">
               <p class="card-header-title">Message</p>
               <div class="control">
-                <textarea 
-                  class="textarea" 
+                <textarea
+                  class="textarea"
                   placeholder="Textarea"/>
               </div>
             </div>

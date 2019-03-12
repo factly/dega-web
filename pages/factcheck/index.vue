@@ -2,8 +2,8 @@
   <div class="columns">
     <div class="column">
       <div class="main-content">
-        <div 
-          v-if="factchecks && factchecks.length" 
+        <div
+          v-if="factchecks && factchecks.length"
           class="container">
           <nuxt-link :to="'/factcheck/'+ factchecks[0].slug">
             <div class="columns">
@@ -11,8 +11,8 @@
                 <div class="card">
                   <div class="card-image">
                     <figure class ="image is-5by3">
-                      <img 
-                        :src="factchecks[0].featured_media" 
+                      <img
+                        :src="factchecks[0].featured_media"
                         alt="Factchecks">
                     </figure>
                   </div>
@@ -22,12 +22,12 @@
                 <div class="content subtitle has-text-centered">
                   <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ factchecks[0].sub_title }}</p>
                 </div>
-                <div 
-                  v-if="factchecks[0].authors" 
+                <div
+                  v-if="factchecks[0].authors"
                   class="subtitle is-6 is-uppercase has-text-centered">
                   BY
-                  <span 
-                    v-for="(author, index) in factchecks[0].authors" 
+                  <span
+                    v-for="(author, index) in factchecks[0].authors"
                     :key="index" >{{ author.display_name }}
                     <span v-if="index != factchecks[0].authors.length -1">, </span>
                   </span>
@@ -46,13 +46,13 @@
               <section>
                 <h3>MORE STORIES</h3>
                 <br>
-                <div 
-                  v-for="(p, index) in factchecks.slice(1)" 
-                  :key="index" 
+                <div
+                  v-for="(p, index) in factchecks.slice(1)"
+                  :key="index"
                   class="container columns">
                   <nuxt-link :to="'/factCheck/'+ p.slug">
-                    <MoreStories 
-                      :story="p" 
+                    <MoreStories
+                      :story="p"
                       :categories="false"/>
                   </nuxt-link>
                 </div>
@@ -60,8 +60,8 @@
             </div>
           </div>
         </div>
-        <div 
-          v-else 
+        <div
+          v-else
           class="subtitle is-6 is-uppercase has-text-centered">
           Dega API is not responding.<br> Please contact the administrator.
         </div>
@@ -72,23 +72,23 @@
 </template>
 
 <script>
-import axios from 'axios'
-import MoreStories from '~/components/MoreStories'
-import PopularArticles from '~/components/PopularArticles'
+import axios from 'axios';
+import MoreStories from '~/components/MoreStories';
+import PopularArticles from '~/components/PopularArticles';
 
 export default {
   components: {
     MoreStories,
     PopularArticles
   },
-  data(){
-    return{
+  data() {
+    return {
       factchecks: null
-    }
+    };
   },
   methods: {
     getDate(datetime) {
-      const date = new Date(datetime)
+      const date = new Date(datetime);
       const ms = [
         'Jan',
         'Feb',
@@ -101,9 +101,9 @@ export default {
         'Sep',
         'Oct',
         'Nov',
-        'Dec'
-      ]
-      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`
+        'Dec',
+      ];
+      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   },
   async asyncData() {
@@ -114,10 +114,10 @@ export default {
         }&sortBy=lastUpdatedDate&sortAsc=false`
       )
       .then(response => response.data)
-      .catch(error => console.log(error))
-    return{
+      .catch(error => console.log(error));
+    return {
       factchecks: factChecks
-    }
+    };
   }
-}
+};
 </script>
