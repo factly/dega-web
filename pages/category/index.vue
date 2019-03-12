@@ -9,8 +9,8 @@
     </section>
 
     <!-- First-Post -->
-    <section 
-      class="section" 
+    <section
+      class="section"
       @click="LoadPost">
       <ListBig />
       <br>
@@ -38,8 +38,8 @@
 </template>
 
 <script>
-import ListBig from '~/components/ListBig'
-import ListSmall from '~/components/ListSmall'
+import ListBig from '~/components/ListBig';
+import ListSmall from '~/components/ListSmall';
 
 export default {
   components: {
@@ -48,8 +48,8 @@ export default {
   },
   methods: {
     LoadPost() {
-      this.$router.push('/story')
+      this.$router.push('/story');
     }
   }
-}
+};
 </script>

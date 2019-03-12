@@ -2,8 +2,8 @@
   <div class="columns">
     <div class="column">
       <div class="main-content">
-        <div 
-          v-if="story" 
+        <div
+          v-if="story"
           class="container">
           <nuxt-link :to="'/'+ story[0]._class.split('.').pop().toLowerCase()+ '/' + story[0].slug">
             <div class="columns is-vcentered">
@@ -11,12 +11,12 @@
                 <div class="card">
                   <div class="card-image">
                     <figure class ="image is-5by3">
-                      <img 
-                        :src="story[0].featured_media" 
+                      <img
+                        :src="story[0].featured_media"
                         :alt="story[0]._class.split('.').pop()">
                       <div class="story-art">
-                        <div 
-                          v-if="story[0]._class.split('.').pop() == 'Factcheck'" 
+                        <div
+                          v-if="story[0]._class.split('.').pop() == 'Factcheck'"
                           class="fact-strip">
                           <h1>FACTCHECK</h1>
                         </div>
@@ -29,13 +29,13 @@
                 <div class="content subtitle has-text-centered">
                   <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ story[0].sub_title }}</p>
                 </div>
-                <div 
-                  v-if="story[0].authors" 
+                <div
+                  v-if="story[0].authors"
                   class="subtitle is-6 is-uppercase has-text-centered">
                   BY
-                  <span 
-                    v-for="(author, index) in story[0].authors" 
-                    :key="index" >{{ author.display_name }} 
+                  <span
+                    v-for="(author, index) in story[0].authors"
+                    :key="index" >{{ author.display_name }}
                     <span v-if="index != story[0].authors.length -1">, </span>
                   </span>
                 </div>
@@ -58,8 +58,8 @@
                   :key="index"
                   class="container columns">
                   <nuxt-link :to="'/'+ p._class.split('.').pop().toLowerCase()+ '/' +p.slug">
-                    <MoreStories 
-                      :story="p" 
+                    <MoreStories
+                      :story="p"
                       :categories= "true"/>
                   </nuxt-link>
                   <hr class="spacer is-1-5 is-hidden-desktop">
@@ -68,8 +68,8 @@
             </div>
           </div>
         </div>
-        <div 
-          v-else 
+        <div
+          v-else
           class="subtitle is-6 is-uppercase has-text-centered">
           Dega API is not responding.<br> Please contact the administrator.
         </div>
@@ -97,9 +97,9 @@
 </style>
 
 <script>
-import axios from 'axios'
-import MoreStories from '~/components/MoreStories'
-import PopularArticles from '~/components/PopularArticles'
+import axios from 'axios';
+import MoreStories from '~/components/MoreStories';
+import PopularArticles from '~/components/PopularArticles';
 
 export default {
   components: {
@@ -109,11 +109,11 @@ export default {
   data() {
     return {
       story: null
-    }
+    };
   },
   methods: {
     getDate(datetime) {
-      const date = new Date(datetime)
+      const date = new Date(datetime);
       const ms = [
         'Jan',
         'Feb',
@@ -126,34 +126,26 @@ export default {
         'Sep',
         'Oct',
         'Nov',
-        'Dec'
-      ]
-      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`
+        'Dec',
+      ];
+      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   },
   async asyncData() {
     const posts = await axios
-      .get(
-        `${process.env.apiUri}/api/v1/posts/?client_id=${
-          process.env.clientId
-        }&sortBy=lastUpdatedDate&sortAsc=false`
-      )
-      .then(response => response.data)
-      .catch(error => console.log(error))
+      .get(`${process.env.apiUri}/api/v1/posts/?client_id=${process.env.clientId}&sortBy=lastUpdatedDate&sortAsc=false`)
+      .then(response => response.data);
 
-    const factchecks = await axios
-      .get(
-        `${process.env.apiUri}/api/v1/factchecks/?client_id=${
-          process.env.clientId
-        }&sortBy=lastUpdatedDate&sortAsc=false`
-      )
-      .then(response => response.data)
-      .catch(error => console.log(error))
+    const factchecks = await axios.get(
+      `${process.env.apiUri}/api/v1/factchecks/?client_id=${process.env.clientId}&sortBy=lastUpdatedDate&sortAsc=false`)
+      .then(response => response.data);
 
-    const stories = posts && factchecks ? posts.concat(factchecks) : null
+    const stories = (posts || []).concat(factchecks || []);
+    const sortedStories = stories.sort((storyFirst, storySecond) =>
+      storyFirst.last_updated_date > storySecond.last_updated_date ? 1 : -1);
     return {
-      story: stories
-    }
+      story: sortedStories
+    };
   }
-}
+};
 </script>

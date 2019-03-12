@@ -12,13 +12,13 @@
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">Background</p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -33,13 +33,13 @@
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">Mission</p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -54,13 +54,13 @@
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">Vision</p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -75,13 +75,13 @@
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">What we do</p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -96,9 +96,9 @@
                   <li>
                     <b>Information Tools:</b>
                     <span style="font-weight: 400;" >Creating and developing tools that will increase access to public data and information by making it easy, interactive and intuitive.&nbsp;</span>
-                    <a 
-                      href="https://countingindia.com" 
-                      target="_blank" 
+                    <a
+                      href="https://countingindia.com"
+                      target="_blank"
                       rel="noopener">
                       <span style="font-weight: 400;">Counting India</span>
                     </a>
