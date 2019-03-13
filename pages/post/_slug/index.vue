@@ -6,8 +6,8 @@
         <h1 class="title is-size-5 is-size-4-tablet is-size-3-desktop is-spaced is-2 has-text-weight-semibold">{{ post[0].sub_title }}</h1>
         <span class="is-uppercase">
           BY
-          <nuxt-link 
-            :to="'/author/'+ post[0].authors[0].slug" 
+          <nuxt-link
+            :to="'/author/'+ post[0].authors[0].slug"
             class="has-tint has-text-weight-semibold">{{ post[0].authors[0].display_name }}</nuxt-link>
           <div class="has-text-centered">{{ getDate(post[0].last_updated_date) }}</div>
         </span>
@@ -39,12 +39,17 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
+  data() {
+    return {
+      post: null
+    };
+  },
   methods: {
     getDate(datetime) {
-      const date = new Date(datetime)
+      const date = new Date(datetime);
       const ms = [
         'Jan',
         'Feb',
@@ -57,31 +62,23 @@ export default {
         'Sep',
         'Oct',
         'Nov',
-        'Dec'
-      ]
-      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`
+        'Dec',
+      ];
+      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   },
+
   validate({ params }) {
-    return params.slug
+    return params.slug;
   },
-  data() {
-    return {
-      post: null
-    }
-  },
+
   async asyncData(params) {
     const posts = await axios
-      .get(
-        `${process.env.apiUri}/api/v1/posts/?client_id=${
-          process.env.clientId
-        }&slug=${params.params.slug}`
-      )
-      .then(response => response.data)
-      .catch(error => console.log(error))
-    return{
+      .get(`${process.env.apiUri}/api/v1/posts/?client_id=${process.env.clientId}&slug=${params.params.slug}`)
+      .then(response => response.data);
+    return {
       post: posts
-    }
+    };
   }
-}
+};
 </script>

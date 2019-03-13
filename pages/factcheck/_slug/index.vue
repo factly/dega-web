@@ -59,7 +59,9 @@
               </article>
 
               <!-- claim widget starts heres -->
-              <div class="card column is-full" style="background-color: #f5faff; margin: 1rem 0 1rem 0;">
+              <div
+                class="card column is-full"
+                style="background-color: #f5faff; margin: 1rem 0 1rem 0;">
                 <div class="columns is-vcentered">
                   <div class="column is-2">
                     <div class="card-image">
@@ -72,17 +74,29 @@
                     </div>
                   </div>
                   <div class="column is-8">
-                    <div class="card-content" style="padding-top: 0px; padding-bottom: 0px;">
-                      <div class="" style="padding-bottom: 0.75rem">
-                        <span class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2" style="color: #1976d2;">Claimed by {{ claim.claimant.name }} on {{ getDate(claim.last_updated_date)}}</span>
+                    <div
+                      class="card-content"
+                      style="padding-top: 0px; padding-bottom: 0px;">
+                      <div
+                        class=""
+                        style="padding-bottom: 0.75rem">
+                        <span
+                          class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
+                          style="color: #1976d2;">Claimed by {{ claim.claimant.name }} on {{ getDate(claim.last_updated_date) }}</span>
                       </div>
-                      <div class="" style="padding-bottom: 0.75rem">
-                        <span class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2" style="color: #1976d2;">Claim:</span>
+                      <div
+                        class=""
+                        style="padding-bottom: 0.75rem">
+                        <span
+                          class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
+                          style="color: #1976d2;">Claim:</span>
                         <span class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"> {{ claim.claim }}</span>
                       </div>
                       <div class="columns">
-                        <p class="column title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile" style="color: #1976d2;">Share: </p>
-                        <!--<div class="column is-4">Review Sources</div>-->
+                        <p
+                          class="column title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile"
+                          style="color: #1976d2;">Share: </p>
+                          <!--<div class="column is-4">Review Sources</div>-->
                       </div>
                     </div>
 
@@ -116,7 +130,7 @@
           </div>
         </div>
       </div>
-      <div class="is-divider-vertical is-hidden-mobile"></div>
+      <div class="is-divider-vertical is-hidden-mobile"/>
       <div class="column is-two-fifths is-hidden-mobile">
         <div class="column is-half sticky">
           <div
@@ -139,17 +153,17 @@
 </template>
 
 <script>
-import axios from 'axios'
-import '~/node_modules/bulma-divider'
+import axios from 'axios';
+import '~/node_modules/bulma-divider';
 
 export default {
   components: {},
   methods: {
     validate({ params }) {
-      return params.slug
+      return params.slug;
     },
     getDate(datetime) {
-      const date = new Date(datetime)
+      const date = new Date(datetime);
       const ms = [
         'Jan',
         'Feb',
@@ -162,23 +176,20 @@ export default {
         'Sep',
         'Oct',
         'Nov',
-        'Dec'
-      ]
-      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`
+        'Dec',
+      ];
+      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   },
   async asyncData(params) {
     return axios
-      .get(
-        `${process.env.apiUri}/api/v1/factchecks/?client_id=${process.env.clientId}&slug=${params.params.slug}`
-      )
-      .then(response => {
+      .get(`${process.env.apiUri}/api/v1/factchecks/?client_id=${process.env.clientId}&slug=${params.params.slug}`)
+      .then((response) => {
         const data = {
           factchecks: response.data
-        }
-        return data
-      })
-      .catch(error => console.log(error))
+        };
+        return data;
+      });
   }
-}
+};
 </script>

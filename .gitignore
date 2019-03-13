@@ -81,3 +81,5 @@ dist
 .idea
 
 .DS_Store
+static/.sw
+yarn.lock

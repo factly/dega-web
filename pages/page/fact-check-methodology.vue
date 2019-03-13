@@ -22,13 +22,13 @@
               <p class="card-header-title">
                 Selection of Claim
               </p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -47,13 +47,13 @@
               <p class="card-header-title">
                 Verification of the Claim
               </p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -72,13 +72,13 @@
               <p class="card-header-title">
                 Research
               </p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -96,20 +96,20 @@
               <p class="card-header-title">
                 Claim Check
               </p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
             </header>
             <div class="card-content has-text-justified">
               <div class="content">
-                <p>Based on the above research, a conclusion is arrived at. The broad ratings we follow are</p>              
+                <p>Based on the above research, a conclusion is arrived at. The broad ratings we follow are</p>
                 <ul>
                   <li>True</li>
                   <li>Partially True or Partly True</li>
@@ -117,7 +117,7 @@
                   <li>Misleading</li>
                   <li>Unverified (for those claims which can’t be fact checked)</li>
                 </ul>
-                <p>Opinion of the team is solicited through internal messaging groups to confirm the rating.</p>                  
+                <p>Opinion of the team is solicited through internal messaging groups to confirm the rating.</p>
               </div>
             </div>
           </div>
@@ -127,13 +127,13 @@
               <p class="card-header-title">
                 Editorial Check
               </p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -152,13 +152,13 @@
               <p class="card-header-title">
                 Correction Policy
               </p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -166,7 +166,7 @@
             <div class="card-content has-text-justified">
               <div class="content">
                 <p>
-                  Readers are encouraged to comment below the story or write to us with any corrections through the 
+                  Readers are encouraged to comment below the story or write to us with any corrections through the
                   <nuxt-link to="'page/contact-us'">Contact Us</nuxt-link>
                   page or via the email listed on that page. All such communication is taken very seriously and relevant corrections are made if they are found to be valid within 48 hours of the receipt of a correction email or message.
                 </p>
@@ -179,13 +179,13 @@
               <p class="card-header-title">
                 Nonpartisanship Policy
               </p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
@@ -204,13 +204,13 @@
               <p class="card-header-title">
                 Fact Check Team
               </p>
-              <a 
-                href="#" 
-                class="card-header-icon" 
+              <a
+                href="#"
+                class="card-header-icon"
                 aria-label="more options">
                 <span class="icon">
-                  <i 
-                    class="fas fa-angle-down" 
+                  <i
+                    class="fas fa-angle-down"
                     aria-hidden="true"/>
                 </span>
               </a>
