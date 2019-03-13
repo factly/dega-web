@@ -105,7 +105,7 @@
                     <div class="card-image">
                       <figure class="image is-square">
                         <img
-                          :src="require('~/assets/images/ratings/'+claim.rating.numeric_value+'.png')"
+                          :src="claim.rating.icon_url"
                           alt="Claim Rating"
                           width="90%">
                       </figure>
