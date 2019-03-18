@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="columns is-vcentered is-centered">
+    <!-- <div class="columns is-vcentered is-centered">
       <div class= "column is-6">
         <div class="card">
           <div class="card-image">
@@ -28,11 +28,12 @@
           </span>
         </div>
         <div class="has-text-centered">{{ getDate(factchecks[0].last_updated_date) }}</div><br>
-        <div class="has-text-justified">
+        <div class="has-text-justified is-hidden-mobile ">
           {{ factchecks[0].excerpt }}
         </div>
       </div>
-    </div>
+    </div> -->
+    <Hero :story="factchecks[0]" :categories= "true"/>
     <div class="column is-divider is-hidden-mobile is-offset-one-quarter is-half"/>
     <div class="columns">
       <div
@@ -155,9 +156,12 @@
 <script>
 import axios from 'axios';
 import '~/node_modules/bulma-divider';
+import Hero from '~/components/Hero';
 
 export default {
-  components: {},
+  components: {
+    Hero
+  },
   methods: {
     validate({ params }) {
       return params.slug;
