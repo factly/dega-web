@@ -19,9 +19,11 @@
             <div class="column is-8">
                 <div class="card-content" style="padding-top: 0px; padding-bottom: 0px;">
                     <div class style="padding-bottom: 0.75rem">
-                        <span class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2" style="color: #1976d2;" >
-                            Claimed by {{ claim.claimant.name }}
-                        </span>
+                        <a :href="claim.claim_source">
+                            <span class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2" style="color: #1976d2;" >
+                                Claimed by {{ claim.claimant.name }}
+                            </span>
+                        </a>
                         <span v-if="claim.claim_date" class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"  style="color: #1976d2;"> on {{ getDate(claim.claim_date) }}</span>
                     </div>
                     <div class style="padding-bottom: 0.75rem">
