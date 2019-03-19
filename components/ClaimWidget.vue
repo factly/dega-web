@@ -40,17 +40,9 @@
             <div class="columns">
               <p class="column title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile" style="color: #1976d2;" >
                 <!-- Share: -->
-                
-                <SocialSharing :url="$nuxt.$route.path"/>
+                <SocialSharing :url="$nuxt.$route.path"/>  <!-- + Add the claims number to the url+'#({{ index }}+1)' -->
               </p>
-              <!--<div class="column is-4">Review Sources</div>-->
             </div>
-            <!-- <div>
-                        <span class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2" style="color: #1976d2;">
-                            Date:
-                        </span>
-                        <span class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2">{{ getDate(claim.claim_date) }}</span>
-            </div>-->
           </div>
         </div>
         <div class="column is-2">

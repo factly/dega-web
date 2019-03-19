@@ -32,7 +32,10 @@
           <div
             class="box has-text-weight-semibold"
             style="color: #1976d2; text-align:left;">
-            <span class="is-uppercase">List of claims in the story</span>
+            <div class="is-uppercase">List of claims in the story</div><br>
+            <div class="has-text-centered">
+              <SocialSharing :url="$nuxt.$route.path"/>
+            </div>
             <div
               v-for="(claim, index) in factchecks[0].claims"
               :key="index">
@@ -53,11 +56,13 @@ import axios from 'axios';
 import '~/node_modules/bulma-divider';
 import Hero from '~/components/Hero';
 import ClaimWidget from '~/components/ClaimWidget';
+import SocialSharing from '~/components/SocialSharing';
 
 export default {
   components: {
     Hero,
-    ClaimWidget
+    ClaimWidget,
+    SocialSharing
   },
   methods: {
     validate({ params }) {
