@@ -9,6 +9,7 @@ services:
       args:
         - API_URI=http://localhost:8000
         - CLIENT_ID=factly
+        - DOMAIN_HOSTNAME=http://factchecks.factly.in
     container_name: dega-web
     restart: always
     ports:
