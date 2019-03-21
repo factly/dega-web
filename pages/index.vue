@@ -3,48 +3,10 @@
     <div class="column">
       <div class="main-content">
         <div
-          v-if="story"
+          v-if="story && story.length"
           class="container">
           <nuxt-link :to="'/'+ story[0]._class.split('.').pop().toLowerCase()+ '/' + story[0].slug">
-            <div class="columns is-vcentered">
-              <div class= "column is-6 is-full-mobile">
-                <div class="card">
-                  <div class="card-image">
-                    <figure class ="image is-5by3">
-                      <img
-                        :src="story[0].featured_media"
-                        :alt="story[0]._class.split('.').pop()">
-                      <div class="story-art">
-                        <div
-                          v-if="story[0]._class.split('.').pop() == 'Factcheck'"
-                          class="fact-strip">
-                          <h1>FACTCHECK</h1>
-                        </div>
-                      </div>
-                    </figure>
-                  </div>
-                </div>
-              </div>
-              <div class= "column is-6 is-full-mobile" >
-                <div class="content subtitle has-text-centered">
-                  <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ story[0].sub_title }}</p>
-                </div>
-                <div
-                  v-if="story[0].authors"
-                  class="subtitle is-6 is-uppercase has-text-centered">
-                  BY
-                  <span
-                    v-for="(author, index) in story[0].authors"
-                    :key="index" >{{ author.display_name }}
-                    <span v-if="index != story[0].authors.length -1">, </span>
-                  </span>
-                </div>
-                <div class="has-text-centered">{{ getDate(story[0].last_updated_date) }}</div><br>
-                <div class="has-text-justified">
-                  {{ story[0].excerpt }}
-                </div>
-              </div>
-            </div>
+            <Hero :story="story[0]" :categories= "true"/>
           </nuxt-link>
           <hr class="spacer is-1-5">
           <div class="columns">
@@ -100,11 +62,13 @@
 import axios from 'axios';
 import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
+import Hero from '~/components/Hero';
 
 export default {
   components: {
     MoreStories,
-    PopularArticles
+    PopularArticles,
+    Hero
   },
   data() {
     return {
