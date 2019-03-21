@@ -133,17 +133,28 @@ export default {
   },
   async asyncData() {
     const posts = await axios
-      .get(`${process.env.apiUri}/api/v1/posts/?client_id=${process.env.clientId}&sortBy=lastUpdatedDate&sortAsc=false`)
+      .get(
+        `${process.env.apiUri}/api/v1/posts/?client_id=${
+          process.env.clientId
+        }&sortBy=lastUpdatedDate&sortAsc=false`
+      )
       .then(response => response.data);
 
-    const factchecks = await axios.get(
-      `${process.env.apiUri}/api/v1/factchecks/?client_id=${process.env.clientId}&sortBy=lastUpdatedDate&sortAsc=false`)
+    const factchecks = await axios
+      .get(
+        `${process.env.apiUri}/api/v1/factchecks/?client_id=${
+          process.env.clientId
+        }&sortBy=lastUpdatedDate&sortAsc=false`
+      )
       .then(response => response.data);
 
     const stories = (posts || []).concat(factchecks || []);
-    const sortedStories = stories.sort((storyFirst, storySecond) =>
-      storyFirst.last_updated_date > storySecond.last_updated_date ? 1 : -1);
-      
+
+    const sortedStories = stories.sort(
+      (storyFirst, storySecond) =>
+        storyFirst.last_updated_date > storySecond.last_updated_date ? 1 : -1
+    );
+
     return {
       story: sortedStories
     };

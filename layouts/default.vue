@@ -152,7 +152,7 @@
   </div>
 </template>
 <style>
-.page{
+.page {
   margin-block-start: 6%;
 }
 </style>
