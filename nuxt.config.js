@@ -36,10 +36,14 @@ module.exports = {
   */
   css: ['@/assets/css/main.css'],
 
+  router: {
+    middleware: 'i18n'
+  },
+
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [],
+  plugins: ['~/plugins/i18n.js'],
 
   /*
   ** Nuxt.js modules

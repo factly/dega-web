@@ -25,7 +25,10 @@
             </header>
             <div class="card-content has-text-justified">
               <div class="content">
-                <p>In 2005, India legislated one of the best ‘Right to Information’ laws in the world which changed the public information landscape and accessibility in the country. It was the first step towards transparency and accountability of governance. In 2012, India came up with the National Data Sharing and Accessibility Policy (NDSAP), popularly known as the ‘Open Data policy’ of the Government of India. In Spite of these systems in place, data and information remain in complex and overwhelming formats in the country. Some of the data that is meant for the public does not even exist in the public domain. Factly was born to create supporting platforms and infrastructure to bridge this gap and strengthen democracy through engagement.</p>
+                <p>
+                  {{ $t('aboutus.background') }}
+                </p>
+                <p></p>
               </div>
             </div>
           </div>
@@ -119,5 +122,4 @@
   </div>
 </template>
 <style>
-
 </style>

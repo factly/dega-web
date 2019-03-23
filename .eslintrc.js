@@ -43,7 +43,7 @@ module.exports = {
 
     // max-len set to 120 based on team poll
     'max-len': ['error', {
-      code: 999,
+      code: 120,
       ignoreUrls: true,
       ignoreComments: false,
       ignoreRegExpLiterals: true,
