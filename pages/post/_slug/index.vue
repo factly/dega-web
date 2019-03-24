@@ -65,6 +65,16 @@ export default {
     return {
       post: posts
     };
+  },
+  head () {
+    return {
+      title: this.post[0].title,
+      meta: [
+        { hid: 'og:title', name: 'og:title', content: this.post[0].title },
+        // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
+        { hid: 'og:image', name: 'og:image', content: this.post[0].featured_media }
+      ]
+    }
   }
 };
 </script>
