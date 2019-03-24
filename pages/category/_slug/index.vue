@@ -1,67 +1,63 @@
 <template>
-  <div>
-    <br><br><br><br><br>
-    <nuxt-link :to="'/post/'+ posts[0].slug">
-      <div
-        class="columns"
-        style="margin-bottom: 25px;">
-        <div class= "column is-6">
-          <div class="card">
-            <div class="card-image">
-              <figure class ="image is-5by3">
-                <img
-                  src="https://www.publicdomainpictures.net/pictures/200000/nahled/plain-blue-background.jpg"
-                  alt="Placeholder image">
-              </figure>
+  <div class="columns">
+    <div class="column">
+      <div class="main-content">
+        <div
+          v-if="story && story.length"
+          class="container">
+          <nuxt-link :to="'/'+ story[0]._class.split('.').pop().toLowerCase()+ '/' + story[0].slug">
+            <Hero :story="story[0]" :categories= "true"/>
+          </nuxt-link>
+          <hr class="spacer is-1-5">
+          <div class="columns">
+            <!-- MoreStories Section -->
+            <div class="column is-12">
+              <section>
+                <h3>MORE STORIES</h3>
+                <br>
+                <div
+                  v-for="(p, index) in story.slice(1)"
+                  :key="index"
+                  class="container columns">
+                  <nuxt-link :to="'/'+ p._class.split('.').pop().toLowerCase()+ '/' +p.slug">
+                    <MoreStories
+                      :story="p"
+                      :categories= "true"/>
+                  </nuxt-link>
+                  <hr class="spacer is-1-5 is-hidden-desktop">
+                </div>
+              </section>
             </div>
           </div>
         </div>
-        <div class= "column is-6">
-          <br><br><br><br>
-          <div class="content subtitle is-hidden-mobile has-text-centered">
-            <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">{{ posts[0].sub_title }}</p>
-          </div>
-          <div
-            v-if="posts[0].authors.length >= 1"
-            class="has-text-centered">
-            <span class="subtitle is-6 is-uppercase">BY {{ posts[0].authors[0].display_name }}</span>
-          </div>
-          <div
-            v-for="(author, index) in posts[0].authors.splice(1)"
-            :key="index"
-            class="has-text-centered">
-            <span class="subtitle is-6 is-uppercase"> ,{{ author.display_name }}</span>
-          </div>
-          <div class="has-text-centered">{{ getDate(posts[0].last_updated_date) }}</div>
+        <div
+          v-else
+          class="subtitle is-6 is-uppercase has-text-centered">
+          Dega API is not responding.<br> Please contact the administrator.
         </div>
       </div>
-    </nuxt-link>
-    <hr class="spacer is-1-5 is-hidden-mobile">
-
-    <section class="section">
-      <h3>MORE STORIES</h3>
-      <br>
-      <div
-        v-for="(p, index) in posts.slice(1)"
-        :key="index"
-        class="container columns">
-        <nuxt-link :to="'/post/'+ p.slug">
-          <MoreStories :story="p"/>
-        </nuxt-link>
-      </div>
-
-    </section>
-
+    </div>
+    <!-- <PopularArticles></PopularArticles> -->
   </div>
 </template>
+
 
 <script>
 import axios from 'axios';
 import MoreStories from '~/components/MoreStories';
+import PopularArticles from '~/components/PopularArticles';
+import Hero from '~/components/Hero';
 
 export default {
   components: {
-    MoreStories
+    MoreStories,
+    PopularArticles,
+    Hero
+  },
+  data() {
+    return {
+      story: null
+    };
   },
   methods: {
     getDate(datetime) {
@@ -83,22 +79,33 @@ export default {
       return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   },
-  validate({ params }) {
-    return params.slug;
-  },
-  async asyncData(params) {
-    return axios
+  async asyncData() {
+    const posts = await axios
       .get(
-        `http://127.0.0.1:8000/api/v1/posts/?category=${
-          params.params.slug
+        `${process.env.apiUri}/api/v1/posts/?client_id=${
+          process.env.clientId
         }&sortBy=lastUpdatedDate&sortAsc=false`
       )
-      .then((response) => {
-        const data = {
-          posts: response.data
-        };
-        return data;
-      });
+      .then(response => response.data);
+
+    const factchecks = await axios
+      .get(
+        `${process.env.apiUri}/api/v1/factchecks/?client_id=${
+          process.env.clientId
+        }&sortBy=lastUpdatedDate&sortAsc=false`
+      )
+      .then(response => response.data);
+
+    const stories = (posts || []).concat(factchecks || []);
+
+    const sortedStories = stories.sort(
+      (storyFirst, storySecond) =>
+        storyFirst.last_updated_date > storySecond.last_updated_date ? 1 : -1
+    );
+
+    return {
+      story: sortedStories
+    };
   }
 };
 </script>
