@@ -50,6 +50,24 @@
   </div>
 </template>
 
+<style>
+.story-art {
+  position: relative;
+  max-width: 800px; 
+  margin: 0 auto;
+}
+
+.story-art .fact-strip {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0); 
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%; 
+  padding: 20px;
+}
+</style>
+
 <script>
 export default {
   props: {
