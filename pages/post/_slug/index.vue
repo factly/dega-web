@@ -13,16 +13,19 @@
         </article>
       </div>
     </section>
+    <SocialSharingVertical :url="$nuxt.$route.path"/>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import Hero from '~/components/Hero';
+import SocialSharingVertical from '~/components/SocialSharingVertical';
 
 export default {
   components: {
-    Hero
+    Hero,
+    SocialSharingVertical
   },
   data() {
     return {

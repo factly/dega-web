@@ -48,6 +48,7 @@
         </div>
       </div>
     </div>
+    <SocialSharingVertical :url="$nuxt.$route.path"/>
   </section>
 </template>
 
@@ -57,12 +58,14 @@ import '~/node_modules/bulma-divider';
 import Hero from '~/components/Hero';
 import ClaimWidget from '~/components/ClaimWidget';
 import SocialSharing from '~/components/SocialSharing';
+import SocialSharingVertical from '~/components/SocialSharingVertical';
 
 export default {
   components: {
     Hero,
     ClaimWidget,
-    SocialSharing
+    SocialSharing,
+    SocialSharingVertical
   },
   data() {
     return {

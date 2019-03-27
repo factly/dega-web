@@ -156,7 +156,7 @@
 </template>
 <style>
 .page {
-  margin-block-start: 6%;
+  margin-block-start: 6em;
 }
 </style>
 
