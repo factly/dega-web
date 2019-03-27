@@ -6,7 +6,7 @@
     </article>
     <div class="card column is-full" style="background-color: #f5faff; margin: 1rem 0 1rem 0;">
       <div class="columns is-vcentered">
-        <div class="column is-2">
+        <div class="column is-2 is-hidden-mobile">
           <div class="card-image">
             <figure class="image is-square">
               <img :src="claim.claimant.image_url" alt="Claim Source" width="100%">
@@ -15,7 +15,7 @@
         </div>
         <div class="column is-8">
           <div class="card-content" style="padding-top: 0px; padding-bottom: 0px;">
-            <div class style="padding-bottom: 0.75rem">
+            <div class="" style="padding-bottom: 0.75rem">
               <a :href="claim.claim_source">
                 <span
                   class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
@@ -53,7 +53,7 @@
           </div>
         </div>
       </div>
-      <div>
+      <div class="is-hidden-mobile">
         <p>
           <span
             style="color: #1976d2;"
