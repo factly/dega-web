@@ -32,6 +32,9 @@
             to="/post"
             class="navbar-item">Stories</nuxt-link>
           <nuxt-link
+            to="/fakenews"
+            class="navbar-item">Facke News</nuxt-link>
+          <nuxt-link
             to="/factcheck"
             class="navbar-item">Fact Check</nuxt-link>
           <!--<nuxt-link to="/category/fake-news" class="navbar-item">Fake News</nuxt-link>-->
@@ -153,7 +156,7 @@
 </template>
 <style>
 .page {
-  margin-block-start: 6%;
+  margin-block-start: 6em;
 }
 </style>
 

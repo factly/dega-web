@@ -37,6 +37,7 @@
         </div>
       </div>
     </div>
+    <SocialSharingVertical :url="$nuxt.$route.path"/>
     <!-- <PopularArticles></PopularArticles> -->
   </div>
 </template>
@@ -45,12 +46,14 @@ import axios from 'axios';
 import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
+import SocialSharingVertical from '~/components/SocialSharingVertical';
 
 export default {
   components: {
     MoreStories,
     PopularArticles,
-    Hero
+    Hero,
+    SocialSharingVertical
   },
   data() {
     return {

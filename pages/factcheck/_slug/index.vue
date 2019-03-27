@@ -48,6 +48,7 @@
         </div>
       </div>
     </div>
+    <SocialSharingVertical :url="$nuxt.$route.path"/>
   </section>
 </template>
 
@@ -57,12 +58,19 @@ import '~/node_modules/bulma-divider';
 import Hero from '~/components/Hero';
 import ClaimWidget from '~/components/ClaimWidget';
 import SocialSharing from '~/components/SocialSharing';
+import SocialSharingVertical from '~/components/SocialSharingVertical';
 
 export default {
   components: {
     Hero,
     ClaimWidget,
-    SocialSharing
+    SocialSharing,
+    SocialSharingVertical
+  },
+  data() {
+    return {
+      factchecks: null
+    };
   },
   methods: {
     validate({ params }) {
@@ -88,18 +96,26 @@ export default {
     }
   },
   async asyncData(params) {
-    return axios
+    const factcheck = await axios
       .get(
         `${process.env.apiUri}/api/v1/factchecks/?client_id=${
           process.env.clientId
         }&slug=${params.params.slug}`
       )
-      .then((response) => {
-        const data = {
-          factchecks: response.data
-        };
-        return data;
-      });
+      .then((response) => response.data);
+        return{
+          factchecks: factcheck
+      };
+  },
+  head () {
+    return {
+      title: this.factchecks[0].title,
+      meta: [
+        { hid: 'og:title', name: 'og:title', content: this.factchecks[0].title },
+        // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
+        { hid: 'og:image', name: 'og:image', content: this.factchecks[0].featured_media }
+      ]
+    }
   }
 };
 </script>

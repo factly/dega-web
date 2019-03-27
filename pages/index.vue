@@ -27,6 +27,7 @@
                   <hr class="spacer is-1-5 is-hidden-desktop">
                 </div>
               </section>
+              
             </div>
           </div>
         </div>
@@ -38,37 +39,22 @@
       </div>
     </div>
     <!-- <PopularArticles></PopularArticles> -->
+    <SocialSharingVertical :url="$nuxt.$route.path"/>
   </div>
 </template>
-<style>
-.story-art {
-  position: relative;
-  max-width: 800px; /* Maximum width */
-  margin: 0 auto; /* Center it */
-}
-
-.story-art .fact-strip {
-  position: absolute; /* Position the background text */
-  bottom: 0; /* At the bottom. Use top:0 to append it to the top */
-  background: rgb(0, 0, 0); /* Fallback color */
-  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
-  color: #f1f1f1; /* Grey text */
-  width: 100%; /* Full width */
-  padding: 20px; /* Some padding */
-}
-</style>
 
 <script>
 import axios from 'axios';
 import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
-
+import SocialSharingVertical from '~/components/SocialSharingVertical';
 export default {
   components: {
     MoreStories,
     PopularArticles,
-    Hero
+    Hero,
+    SocialSharingVertical
   },
   data() {
     return {
