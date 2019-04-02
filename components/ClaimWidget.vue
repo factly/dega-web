@@ -39,8 +39,7 @@
             </div>
             <div class="columns">
               <p class="column title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile" style="color: #1976d2;" >
-                <!-- Share: -->
-                <SocialSharing :url="$nuxt.$route.path"/>  <!-- + Add the claims number to the url+'#({{ index }}+1)' -->
+                <SocialSharing :url="$nuxt.$route.path"/>
               </p>
             </div>
           </div>
