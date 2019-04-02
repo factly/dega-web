@@ -14,9 +14,9 @@
       </div>
       <div class= "column is-5" >
         <div class="content subtitle has-text-centered">
-          <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-centered-desktop">{{ story.sub_title }}</p>
+          <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-centered-desktop">{{ story.title }}</p>
         </div>
-        <div
+        <!-- <div
           v-if="story.authors"
           class="subtitle is-6 is-uppercase has-text-centered">
           BY
@@ -28,7 +28,7 @@
             </nuxt-link>
             <span v-if="index != story.authors.length -1">, </span>
           </span>
-        </div>
+        </div> -->
         <div class="has-text-centered">{{ getDate(story.last_updated_date) }}</div><br>
         <div class="has-text-justified is-hidden-mobile ">
           {{ story.excerpt }}

@@ -84,7 +84,7 @@ export default {
       .get(
         `${process.env.apiUri}/api/v1/posts/?client_id=${
           process.env.clientId
-        }&sortBy=lastUpdatedDate&sortAsc=false`
+        }&category=fake-news`
       )
       .then(response => response.data);
 
@@ -92,7 +92,7 @@ export default {
       .get(
         `${process.env.apiUri}/api/v1/factchecks/?client_id=${
           process.env.clientId
-        }&sortBy=lastUpdatedDate&sortAsc=false`
+        }&category=fake-news`
       )
       .then(response => response.data);
 
