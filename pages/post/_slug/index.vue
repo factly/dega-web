@@ -13,7 +13,7 @@
         </article>
       </div>
     </section>
-    <SocialSharingVertical :url="$nuxt.$route.path"/>
+    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
   </div>
 </template>
 

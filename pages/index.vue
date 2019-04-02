@@ -10,7 +10,6 @@
           </nuxt-link>
           <hr class="spacer is-1-5">
           <div class="columns">
-            <!-- MoreStories Section -->
             <div class="column is-12">
               <section>
                 <h3>MORE STORIES</h3>
@@ -38,8 +37,7 @@
         </div>
       </div>
     </div>
-    <!-- <PopularArticles></PopularArticles> -->
-    <SocialSharingVertical :url="$nuxt.$route.path"/>
+    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
   </div>
 </template>
 
@@ -99,7 +97,6 @@ export default {
       .then(response => response.data);
 
     const stories = (posts || []).concat(factchecks || []);
-
     const sortedStories = stories.sort(
       (storyFirst, storySecond) =>
         storyFirst.last_updated_date > storySecond.last_updated_date ? 1 : -1

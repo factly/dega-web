@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-    <SocialSharingVertical :url="$nuxt.$route.path"/>
+    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
     <!-- <PopularArticles></PopularArticles> -->
   </div>
 </template>
