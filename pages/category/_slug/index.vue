@@ -100,7 +100,7 @@ export default {
 
     const sortedStories = stories.sort(
       (storyFirst, storySecond) =>
-        storyFirst.last_updated_date > storySecond.last_updated_date ? 1 : -1
+        storyFirst.last_updated_date < storySecond.last_updated_date ? 1 : -1
     );
 
     return {
