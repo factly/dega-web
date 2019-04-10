@@ -88,7 +88,8 @@ export default {
           process.env.clientId
         }&sortBy=lastUpdatedDate&sortAsc=false`
       )
-      .then(response => response.data);
+      .then(response => response.data)
+      .catch(err => console.log(err));
     return {
       posts: post
     };

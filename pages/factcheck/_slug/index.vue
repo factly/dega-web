@@ -102,10 +102,8 @@ export default {
           process.env.clientId
         }&slug=${params.params.slug}`
       )
-      .then((response) => response.data);
-        return{
-          factchecks: factcheck
-      };
+      .then((response) => response.data)
+      .catch(err => console.log(err));
   },
   head () {
     return {

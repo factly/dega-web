@@ -86,7 +86,8 @@ export default {
           process.env.clientId
         }&category=fake-news`
       )
-      .then(response => response.data);
+      .then(response => response.data)
+      .catch(err => console.log(err));
 
     const factchecks = await axios
       .get(
@@ -94,13 +95,14 @@ export default {
           process.env.clientId
         }&category=fake-news`
       )
-      .then(response => response.data);
+      .then(response => response.data)
+      .catch(err => console.log(err));
 
     const stories = (posts || []).concat(factchecks || []);
 
     const sortedStories = stories.sort(
       (storyFirst, storySecond) =>
-        storyFirst.last_updated_date > storySecond.last_updated_date ? 1 : -1
+        storyFirst.last_updated_date < storySecond.last_updated_date ? 1 : -1
     );
 
     return {
