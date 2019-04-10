@@ -2,7 +2,7 @@ const pkg = require('./package');
 
 module.exports = {
   env: {
-    apiUri: process.env.API_URI || 'http://localhost:8000',
+    apiUri: process.env.API_URI || 'http://api.factly.in',
     clientId: process.env.CLIENT_ID || 'factly',
     domainHostname: process.env.DOMAIN_HOSTNAME || 'http://factcheck.factly.in'
   // eslint-disable-next-line linebreak-style
