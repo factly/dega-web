@@ -4,7 +4,7 @@ module.exports = {
   env: {
     apiUri: process.env.API_URI || 'http://localhost:8000',
     clientId: process.env.CLIENT_ID || 'factly',
-    domainHostname: process.env.DOMAIN_HOSTNAME || 'www.factchecks.factly.in'
+    domainHostname: process.env.DOMAIN_HOSTNAME || 'http://factcheck.factly.in'
   // eslint-disable-next-line linebreak-style
   },
   mode: 'universal',
