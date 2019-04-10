@@ -35,7 +35,7 @@
             v-for="(author, index) in story.authors"
             :key="index" >
             <nuxt-link :to="'/author/' + author.slug">
-            {{ author.display_name }}
+              {{ author.display_name }}
             </nuxt-link>
             <span v-if="index != story.authors.length -1"> , </span>
           </span>

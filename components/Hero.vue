@@ -1,15 +1,14 @@
 <template>
   <div class="columns is-vcentered is-centered">
-      <div class= "column is-6">
-        <div class="card">
-          <div class="card-image">
-            <figure class ="image is-5by3">
-              <img
-                :src="story.featured_media"
-                alt="Factcheck"
-                style="border-radius: 0px 0px 0px 0px;">
-            </figure>
-          </div>
+    <div class= "column is-6">
+      <div class="card">
+        <div class="card-image">
+          <figure class ="image is-5by3">
+            <img
+              :src="story.featured_media"
+              alt="Factcheck"
+              style="border-radius: 0px 0px 0px 0px;">
+          </figure>
         </div>
       </div>
       <div class= "column is-5" >
@@ -35,6 +34,7 @@
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
