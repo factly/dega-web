@@ -86,7 +86,8 @@ export default {
           process.env.clientId
         }&category=fake-news`
       )
-      .then(response => response.data);
+      .then(response => response.data)
+      .catch(err => console.log(err));
 
     const factchecks = await axios
       .get(
@@ -94,7 +95,8 @@ export default {
           process.env.clientId
         }&category=fake-news`
       )
-      .then(response => response.data);
+      .then(response => response.data)
+      .catch(err => console.log(err));
 
     const stories = (posts || []).concat(factchecks || []);
 

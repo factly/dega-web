@@ -64,7 +64,8 @@ export default {
           process.env.clientId
         }&slug=${params.params.slug}`
       )
-      .then(response => response.data);
+      .then(response => response.data)
+      .catch(err => console.log(err));
     return {
       post: posts
     };

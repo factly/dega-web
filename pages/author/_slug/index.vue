@@ -93,8 +93,9 @@ export default {
         }
         &author=${params.params.slug}&sortBy=lastUpdatedDate&sortAsc=false`
       )
-      .then(response => response.data);
-    // console.log(`${process.env.apiUri}/api/v1/posts/?client_id=${process.env.clientId}&author=${params.params.slug}&sortBy=lastUpdatedDate&sortAsc=false`);
+      .then(response => response.data)
+      .catch(err => console.log(err));
+      
     const factchecks = await axios
       .get(
         `${process.env.apiUri}/api/v1/factchecks/?client_id=${
@@ -102,7 +103,8 @@ export default {
         }
         &author=${params.params.slug}&sortBy=lastUpdatedDate&sortAsc=false`
       )
-      .then(response => response.data);
+      .then(response => response.data)
+      .catch(err => console.log(err));
 
     const stories = (posts || []).concat(factchecks || []);
 
