@@ -60,7 +60,7 @@ export default {
   async asyncData(params) {
     const posts = await axios
       .get(
-        `${process.env.apiUri}/api/v1/posts/?client_id=${
+        `${process.env.apiUri}/api/v1/posts/?client=${
           process.env.clientId
         }&slug=${params.params.slug}`
       )

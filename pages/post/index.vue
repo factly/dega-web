@@ -84,7 +84,7 @@ export default {
   async asyncData() {
     const post = await axios
       .get(
-        `${process.env.apiUri}/api/v1/posts/?client_id=${
+        `${process.env.apiUri}/api/v1/posts/?client=${
           process.env.clientId
         }&sortBy=lastUpdatedDate&sortAsc=false`
       )

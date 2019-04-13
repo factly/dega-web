@@ -98,12 +98,15 @@ export default {
   async asyncData(params) {
     const factcheck = await axios
       .get(
-        `${process.env.apiUri}/api/v1/factchecks/?client_id=${
+        `${process.env.apiUri}/api/v1/factchecks/?client=${
           process.env.clientId
         }&slug=${params.params.slug}`
       )
       .then((response) => response.data)
       .catch(err => console.log(err));
+      return{
+        factchecks: factcheck
+      };
   },
   head () {
     return {

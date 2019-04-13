@@ -88,7 +88,7 @@ export default {
     // console.log(params.params.slug);
     const posts = await axios
       .get(
-        `${process.env.apiUri}/api/v1/posts/?client_id=${
+        `${process.env.apiUri}/api/v1/posts/?client=${
           process.env.clientId
         }
         &author=${params.params.slug}&sortBy=lastUpdatedDate&sortAsc=false`
@@ -98,7 +98,7 @@ export default {
       
     const factchecks = await axios
       .get(
-        `${process.env.apiUri}/api/v1/factchecks/?client_id=${
+        `${process.env.apiUri}/api/v1/factchecks/?client=${
           process.env.clientId
         }
         &author=${params.params.slug}&sortBy=lastUpdatedDate&sortAsc=false`
