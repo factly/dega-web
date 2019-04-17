@@ -32,7 +32,13 @@
           <div
             class="box has-text-weight-semibold"
             style="color: #1976d2; text-align:left;">
-            <div class="is-uppercase">List of claims in the story</div><br>
+            <div v-if="factchecks[0].claims.length > 1">
+              <div class="is-uppercase has-text-centered">List of claims in the story</div>
+            </div>
+            <div v-else>
+              <div class="is-uppercase has-text-centered">Claims in the story</div>
+            </div>
+            <br>
             <div class="has-text-centered">
               <SocialSharing :url="$nuxt.$route.path"/>
             </div>
