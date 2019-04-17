@@ -142,7 +142,9 @@
         </div>
       </div>
     </nav>
-    <nuxt class="page"/>
+    <div><br><br>
+    <nuxt/>
+    </div>
     <footer class="footer">
       <div class="content has-text-centered">
         <p>
@@ -155,9 +157,7 @@
   </div>
 </template>
 <style>
-.page {
-  margin-block-start: 6em;
-}
+
 </style>
 
 <script>
@@ -167,6 +167,13 @@ export default {
       toggleNavBar: false,
       toggleMore: true
     };
+  },
+  head() {
+    return {
+      htmlAttrs: {
+          class: "has-navbar-fixed-top"
+      }
+    }
   }
 };
 </script>

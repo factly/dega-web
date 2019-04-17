@@ -22,9 +22,9 @@ div.sticky {
 }
 /***************************************************/
 
-.navbar.is-fixed-top{
+/* .navbar.is-fixed-top{
   position: fixed;
-}
+} */
 
 .page-enter-active{
   animation: bounce-in .8s;
