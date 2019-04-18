@@ -86,7 +86,7 @@ export default {
       .get(
         `${process.env.apiUri}/api/v1/posts/?client=${
           process.env.clientId
-        }&sortBy=lastUpdatedDate&sortAsc=false`
+        }&sortBy=publishedDate&sortAsc=false`
       )
       .then(response => response.data)
       .catch(err => console.log(err));

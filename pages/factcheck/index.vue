@@ -82,7 +82,7 @@ export default {
       .get(
         `${process.env.apiUri}/api/v1/factchecks/?client=${
           process.env.clientId
-        }&sortBy=lastUpdatedDate&sortAsc=false`
+        }&sortBy=publishedDate&sortAsc=false`
       )
       .then(response => response.data)
       .catch(error => console.log(error));
