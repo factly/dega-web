@@ -19,7 +19,7 @@
                   v-for="(p, index) in factchecks.slice(1)"
                   :key="index"
                   class="container columns">
-                  <nuxt-link :to="'/factCheck/'+ p.slug">
+                  <nuxt-link :to="'/factcheck/'+ p.slug">
                     <MoreStories
                       :story="p"
                       :categories="false"/>
@@ -78,17 +78,17 @@ export default {
     }
   },
   async asyncData() {
-    const factChecks = await axios
+    const factcheck = await axios
       .get(
-        `${process.env.apiUri}/api/v1/factchecks/?client_id=${
+        `${process.env.apiUri}/api/v1/factchecks/?client=${
           process.env.clientId
-        }&sortBy=lastUpdatedDate&sortAsc=false`
+        }&sortBy=publishedDate&sortAsc=false`
       )
       .then(response => response.data)
       .catch(error => console.log(error));
-    return {
-      factchecks: factChecks
-    };
+      return{
+        factchecks: factcheck
+      };
   }
 };
 </script>

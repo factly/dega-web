@@ -1,22 +1,25 @@
 <template>
   <div>
-    <section class="hero-title has-text-centered">
-      <Hero :story="post[0]" :categories= "true"/>
-    </section>
-    <!-- post content -->
-    <section class="section">
-      <div class="container">
-        <article
-          class="post has-text-justified"
-          v-html="post[0].content">
-          {{ post[0].content }}
-        </article>
-      </div>
-    </section>
-    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
+    <div v-if="post && post.length">
+      <section class="hero-title has-text-centered">
+        <Hero :story="post[0]" :categories= "true"/>
+      </section>
+      <section class="section">
+        <div class="container">
+          <article
+            class="post has-text-justified"
+            v-html="post[0].content">
+            {{ post[0].content }}
+          </article>
+        </div>
+      </section>
+      <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
+    </div>
+    <div v-else class="subtitle is-6 is-uppercase has-text-centered">
+      Dega API is not responding.<br> Please contact the administrator.
+    </div>
   </div>
 </template>
-
 <script>
 import axios from 'axios';
 import Hero from '~/components/Hero';
@@ -60,7 +63,7 @@ export default {
   async asyncData(params) {
     const posts = await axios
       .get(
-        `${process.env.apiUri}/api/v1/posts/?client_id=${
+        `${process.env.apiUri}/api/v1/posts/?client=${
           process.env.clientId
         }&slug=${params.params.slug}`
       )

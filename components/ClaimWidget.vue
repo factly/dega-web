@@ -1,7 +1,7 @@
 <template>
   <div>
     <br>
-    <article :id="'claim'+(index+1)" class="post" style="text-align: justify;">
+    <article class="post" style="text-align: justify;">
       <p v-html="claim.description">{{ claim.description }}</p>
     </article>
     <div class="card column is-full" style="background-color: #f5faff; margin: 1rem 0 1rem 0;">
