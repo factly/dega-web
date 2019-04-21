@@ -10,7 +10,6 @@
           </nuxt-link>
           <hr class="spacer is-1-5">
           <div class="columns">
-            <!-- MoreStories Section -->
             <div class="column is-12">
               <section>
                 <h3>MORE STORIES</h3>
@@ -38,7 +37,6 @@
         </div>
       </div>
     </div>
-    <!-- <PopularArticles></PopularArticles> -->
     <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
   </div>
 </template>
@@ -85,13 +83,11 @@ export default {
     }
   },
   async asyncData(params) {
-    // console.log(params.params.slug);
     const posts = await axios
       .get(
         `${process.env.apiUri}/api/v1/posts/?client=${
           process.env.clientId
-        }
-        &author=${params.params.slug}&sortBy=publishedDate&sortAsc=false`
+        }&author=${params.params.slug}&sortBy=publishedDate&sortAsc=false`
       )
       .then(response => response.data)
       .catch(err => console.log(err));
@@ -100,8 +96,7 @@ export default {
       .get(
         `${process.env.apiUri}/api/v1/factchecks/?client=${
           process.env.clientId
-        }
-        &author=${params.params.slug}&sortBy=publishedDate&sortAsc=false`
+        }&user=${params.params.slug}&sortBy=publishedDate&sortAsc=false`
       )
       .then(response => response.data)
       .catch(err => console.log(err));
