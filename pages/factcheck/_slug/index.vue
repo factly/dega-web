@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <div>
     <Hero :story="factchecks[0]" :categories= "true"/>
     <div class="column is-divider is-hidden-mobile is-offset-one-quarter is-half"/>
     <div class="columns">
@@ -11,6 +11,7 @@
               <p v-html="factchecks[0].introduction">{{ factchecks[0].introduction }}</p>
             </article>
             <div v-for="(claim,index) in factchecks[0].claims" :key="index">
+              <a class="anchor" :id="'claim'+(index+1)"></a>
               <ClaimWidget :claim="claim" :index="index"/>
             </div>
             <article class="post" style="text-align: justify;">
@@ -25,9 +26,15 @@
       <div class="column is-1"/>
     </div>
     <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
-  </section>
+  </div>
 </template>
-
+<style>
+a.anchor {
+    display: block;
+    position: relative;
+    top: -80px;
+}
+</style>
 <script>
 import axios from 'axios';
 import '~/node_modules/bulma-divider';
