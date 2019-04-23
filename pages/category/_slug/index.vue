@@ -37,7 +37,7 @@
         </div>
       </div>
     </div>
-    <!-- <PopularArticles></PopularArticles> -->
+    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
   </div>
 </template>
 
@@ -47,12 +47,14 @@ import axios from 'axios';
 import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
+import SocialSharingVertical from '~/components/SocialSharingVertical';
 
 export default {
   components: {
     MoreStories,
     PopularArticles,
-    Hero
+    Hero,
+    SocialSharingVertical
   },
   data() {
     return {
@@ -60,6 +62,9 @@ export default {
     };
   },
   methods: {
+    validate({ params }) {
+      return params.slug;
+    },
     getDate(datetime) {
       const date = new Date(datetime);
       const ms = [
@@ -79,12 +84,12 @@ export default {
       return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   },
-  async asyncData() {
+  async asyncData(params) {
     const posts = await axios
       .get(
         `${process.env.apiUri}/api/v1/posts/?client=${
           process.env.clientId
-        }&sortBy=publishedDate&sortAsc=false`
+        }&category=${params.params.slug}&sortBy=publishedDate&sortAsc=false`
       )
       .then(response => response.data)
       .catch(err => console.log(err));
@@ -93,7 +98,7 @@ export default {
       .get(
         `${process.env.apiUri}/api/v1/factchecks/?client=${
           process.env.clientId
-        }&sortBy=publishedDate&sortAsc=false`
+        }&category=${params.params.slug}&sortBy=publishedDate&sortAsc=false`
       )
       .then(response => response.data)
       .catch(err => console.log(err));

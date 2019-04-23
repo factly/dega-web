@@ -32,7 +32,7 @@
             to="/post"
             class="navbar-item">Stories</nuxt-link>
           <nuxt-link
-            to="/fakenews"
+            to="/category/fake-news"
             class="navbar-item">Fake News</nuxt-link>
           <nuxt-link
             to="/factcheck"
