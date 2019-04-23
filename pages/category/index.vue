@@ -1,55 +1,112 @@
 <template>
-  <div>
-    <section class="section-hero-title"> <br><br><br>
-      <div class="container  has-text-centered">
-        <div class="column ">
-          <h1 class="title is-2 has-text-weight-bold"> Politics</h1>
+  <div class="columns">
+    <div class="column">
+      <div class="main-content">
+        <div
+          v-if="story && story.length"
+          class="container">
+          <nuxt-link :to="'/'+ story[0]._class.split('.').pop().toLowerCase()+ '/' + story[0].slug">
+            <Hero :story="story[0]" :categories= "true"/>
+          </nuxt-link>
+          <hr class="spacer is-1-5">
+          <div class="columns">
+            <div class="column is-12">
+              <section>
+                <h3>MORE STORIES</h3>
+                <br>
+                <div
+                  v-for="(p, index) in story.slice(1)"
+                  :key="index"
+                  class="container columns">
+                  <nuxt-link :to="'/'+ p._class.split('.').pop().toLowerCase()+ '/' +p.slug">
+                    <MoreStories
+                      :story="p"
+                      :categories= "true"/>
+                  </nuxt-link>
+                  <hr class="spacer is-1-5 is-hidden-desktop">
+                </div>
+              </section>
+              
+            </div>
+          </div>
+        </div>
+        <div
+          v-else
+          class="subtitle is-6 is-uppercase has-text-centered">
+          Dega API is not responding.<br> Please contact the administrator.
         </div>
       </div>
-    </section>
-
-    <!-- First-Post -->
-    <section
-      class="section"
-      @click="LoadPost">
-      <ListBig />
-      <br>
-      <!-- Second post -->
-      <div class="container ">
-        <div class="columns is-centered">
-          <ListSmall />
-          <!-- Third Post -->
-          <ListSmall />
-        </div>
-      </div>
-      <br>
-      <!-- other single post -->
-      <ListBig />
-      <br>
-      <!-- other 2 posts -->
-      <div class="container">
-        ~<div class="columns is-centered">
-          <ListSmall />
-          <ListSmall />
-        </div>
-      </div>
-    </section>
+    </div>
+    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
   </div>
 </template>
 
 <script>
-import ListBig from '~/components/ListBig';
-import ListSmall from '~/components/ListSmall';
-
+import axios from 'axios';
+import MoreStories from '~/components/MoreStories';
+import PopularArticles from '~/components/PopularArticles';
+import Hero from '~/components/Hero';
+import SocialSharingVertical from '~/components/SocialSharingVertical';
 export default {
   components: {
-    ListBig,
-    ListSmall
+    MoreStories,
+    PopularArticles,
+    Hero,
+    SocialSharingVertical
+  },
+  data() {
+    return {
+      story: null
+    };
   },
   methods: {
-    LoadPost() {
-      this.$router.push('/story');
+    getDate(datetime) {
+      const date = new Date(datetime);
+      const ms = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ];
+      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
+  },
+  async asyncData() {
+    const posts = await axios
+      .get(
+        `${process.env.apiUri}/api/v1/posts/?client=${
+          process.env.clientId
+        }&sortBy=publishedDate&sortAsc=false`
+      )
+      .then(response => response.data)
+      .catch(err => console.log(err));
+      
+    const factchecks = await axios
+      .get(
+        `${process.env.apiUri}/api/v1/factchecks/?client=${
+          process.env.clientId
+        }&sortBy=publishedDate&sortAsc=false`
+      )
+      .then(response => response.data)
+      .catch(err => console.log(err));
+
+    const stories = (posts || []).concat(factchecks || []);
+    const sortedStories = stories.sort(
+      (storyFirst, storySecond) =>
+        storyFirst.published_date < storySecond.published_date ? 1 : -1
+    );
+
+    return {
+      story: sortedStories
+    };
   }
 };
 </script>
