@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <!-- <PopularArticles></PopularArticles> -->
+    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
   </div>
 </template>
 
@@ -45,12 +45,14 @@ import axios from 'axios';
 import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
+import SocialSharingVertical from '~/components/SocialSharingVertical';
 
 export default {
   components: {
     MoreStories,
     PopularArticles,
-    Hero
+    Hero,
+    SocialSharingVertical
   },
   data() {
     return {
