@@ -44,7 +44,7 @@
             </div>
           </div>
         </div>
-        <div class="column is-2">
+        <div class="column is-2 is-6-mobile is-centered">
           <div class="card-image">
             <figure class="image is-square">
               <img :src="claim.rating.icon_url" alt="Claim Rating" width="90%">

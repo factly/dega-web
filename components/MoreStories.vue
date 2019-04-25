@@ -26,10 +26,10 @@
     <!-- story-title-column -->
     <div class="column is-4">
       <div class="content">
-        <p class="title is-4 is-size-3-mobile">{{ story.title }}</p><br>
+        <p class="title is-4 is-size-5-mobile">{{ story.title }}</p><br>
         <div
           v-if="story.authors"
-          class="subtitle is-6 is-uppercase is-size-3-mobile">
+          class="subtitle is-6 is-uppercase is-size-6-mobile">
           BY
           <span
             v-for="(author, index) in story.authors"
@@ -40,7 +40,7 @@
             <span v-if="index != story.authors.length -1"> , </span>
           </span>
         </div>
-        <div class="is-size-4-mobile">{{ getDate(story.last_updated_date) }}</div><br>
+        <div class="is-size-6-mobile">{{ getDate(story.last_updated_date) }}</div><br>
       </div>
     </div>
     <!-- story-blockquote-column -->

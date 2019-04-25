@@ -142,7 +142,9 @@
         </div>
       </div>
     </nav>
-    <div><br><br>
+    <div>
+      <br class="is-hidden-mobile">
+      <br>
     <nuxt/>
     </div>
     <footer class="footer">
