@@ -1,11 +1,11 @@
 const pkg = require('./package');
+const getGATracking = require('./utils/getGATracking.js');
 
 module.exports = {
   env: {
     apiUri: process.env.API_URI || 'http://api.factly.in',
     clientId: process.env.CLIENT_ID || 'factly',
     domainHostname: process.env.DOMAIN_HOSTNAME || 'http://factcheck.factly.in'
-  // eslint-disable-next-line linebreak-style
   },
   mode: 'universal',
 
@@ -54,6 +54,7 @@ module.exports = {
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
     '@nuxtjs/pwa',
+    '@nuxtjs/google-analytics',
   ],
   /*
   ** Axios module configuration
@@ -83,5 +84,8 @@ module.exports = {
         });
       }
     }
+  },
+  googleAnalytics: {
+    id: getGATracking()
   }
 };
