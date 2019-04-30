@@ -38,7 +38,7 @@
       </div>
     </div>
     <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
-    <SocialSharingHorizontal class="is-hidden-desktop" :url="$nuxt.$route.path"/>
+    <SocialSharingHorizontal class="is-hidden-desktop is-hidden-tablet" :url="$nuxt.$route.path"/>
   </div>
 </template>
 
