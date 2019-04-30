@@ -116,6 +116,16 @@ export default {
     return {
       story: sortedStories
     };
+  },
+  head () {
+    return {
+      title: this.story[0].tags[0].name,
+      meta: [
+        { hid: 'og:title', name: 'og:title', content: this.story[0].tags[0].name },
+        // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
+        { hid: 'og:image', name: 'og:image', content: '~/assets/images/dega-default-image.png' }
+      ]
+    }
   }
 };
 </script>

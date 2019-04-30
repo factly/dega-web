@@ -84,6 +84,18 @@ export default {
     return {
       posts: post
     };
+  },
+  head () {
+    return {
+      /* eslint no-underscore-dangle: 0 */
+      title: this.posts[0]._class.split('.').pop(),
+      meta: [
+        /* eslint no-underscore-dangle: 0 */
+        { hid: 'og:title', name: 'og:title', content: this.posts[0]._class.split('.').pop() },
+        // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
+        { hid: 'og:image', name: 'og:image', content: '~/assets/images/dega-default-image.png' }
+      ]
+    }
   }
 };
 </script>
