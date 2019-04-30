@@ -39,7 +39,7 @@
             </div>
             <div class="columns">
               <p class="column title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile" style="color: #1976d2;" >
-                <SocialSharing :url="$nuxt.$route.path"/>
+                <SocialSharing :url="$nuxt.$route.path" :org="org"/>
               </p>
             </div>
           </div>
@@ -76,6 +76,11 @@ export default {
   },
   props: {
     claim: {
+      type: Object,
+      required: true,
+      default: null
+    },
+    org: {
       type: Object,
       required: true,
       default: null

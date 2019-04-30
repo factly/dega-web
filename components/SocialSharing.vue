@@ -24,7 +24,12 @@ export default {
       type: String,
       required: true,
       default: null
-    }
+    },
+    org: {
+      type: Object,
+      required: false,
+      default: null
+    },
   },
   data(){
      return {
