@@ -27,6 +27,7 @@
       </div>
     </div>
     <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
+    <SocialSharingHorizontal class="is-hidden-desktop" :url="$nuxt.$route.path"/>
   </div>
 </template>
 <script>
@@ -35,12 +36,14 @@ import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
+import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 
 export default {
   components: {
     MoreStories,
     PopularArticles,
     Hero,
+    SocialSharingHorizontal,
     SocialSharingVertical
   },
   data() {

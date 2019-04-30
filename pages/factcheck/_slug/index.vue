@@ -25,7 +25,8 @@
       </div>
       <div class="column is-1"/>
     </div>
-    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
+    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path" :org="organizations"/>
+    <SocialSharingHorizontal class="is-hidden-desktop" :url="$nuxt.$route.path"/>
   </div>
 </template>
 <style>
@@ -42,6 +43,7 @@ import Hero from '~/components/Hero';
 import ClaimWidget from '~/components/ClaimWidget';
 import SocialSharing from '~/components/SocialSharing';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
+import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 import ListClaims from '~/components/ListClaims.vue';
 
 export default {
@@ -50,11 +52,13 @@ export default {
     ClaimWidget,
     SocialSharing,
     SocialSharingVertical,
+    SocialSharingHorizontal,
     ListClaims
   },
   data() {
     return {
       factchecks: null,
+      organizations: null,
       ListClaimsHidden: false
     };
   },
@@ -91,9 +95,18 @@ export default {
       )
       .then((response) => response.data)
       .catch(err => console.log(err));
-      return{
-        factchecks: factcheck
-      };
+
+    const organizations = await axios
+      .get(
+        `${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`
+      )
+      .then(response => response.data)
+      .catch(err => console.log(err));
+
+    return{
+      factchecks: factcheck,
+      organizations: organizations
+    };
   },
   head () {
     return {
