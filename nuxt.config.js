@@ -1,4 +1,5 @@
 const pkg = require('./package');
+// const getAppRoutes = require('./utils/getRoutes.js');
 const getGATracking = require('./utils/getGATracking.js');
 
 module.exports = {
@@ -54,7 +55,9 @@ module.exports = {
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
     '@nuxtjs/pwa',
+    '@nuxtjs/dotenv',
     '@nuxtjs/google-analytics',
+    '@nuxtjs/sitemap',
   ],
   /*
   ** Axios module configuration
@@ -85,6 +88,53 @@ module.exports = {
       }
     }
   },
+
+  sitemap: {
+    hostname: process.env.DOMAIN_HOSTNAME,
+    gzip: true,
+    generate: false,
+    exclude: [
+    ],
+    // routes() {
+    //   return getAppRoutes();
+    // }
+    routes: [
+      // 'authors',
+      // 'category',
+      // 'tags',
+      // {
+      //   url: '/pages/author',
+      //   changefreq: 'daily',
+      //   priority: 1,
+      //   lastmodISO: '2017-06-30T13:30:00.000Z'
+      // },
+      // {
+      //   url: '/pages/category',
+      //   changefreq: 'daily',
+      //   priority: 1,
+      //   lastmodISO: '2017-06-30T13:30:00.000Z'
+      // },
+      // {
+      //   url: '/pages/factcheck',
+      //   changefreq: 'daily',
+      //   priority: 1,
+      //   lastmodISO: '2017-06-30T13:30:00.000Z'
+      // },
+      // {
+      //   url: '/pages/post',
+      //   changefreq: 'daily',
+      //   priority: 1,
+      //   lastmodISO: '2017-06-30T13:30:00.000Z'
+      // },
+      // {
+      //   url: '/pages/tag',
+      //   changefreq: 'daily',
+      //   priority: 1,
+      //   lastmodISO: '2017-06-30T13:30:00.000Z'
+      // },
+    ]
+  },
+
   googleAnalytics: {
     id: getGATracking()
   }
