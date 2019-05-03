@@ -18,33 +18,33 @@
             <div class="" style="padding-bottom: 0.75rem">
               <a :href="claim.claim_source">
                 <span
-                  class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
+                  class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
                   style="color: #1976d2;"
                 >Claimed by {{ claim.claimant.name }}</span>
               </a>
               <span
                 v-if="claim.claim_date"
-                class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
+                class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
                 style="color: #1976d2;"
               >on {{ getDate(claim.claim_date) }}</span>
             </div>
             <div class style="padding-bottom: 0.75rem">
               <span
-                class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
+                class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
                 style="color: #1976d2;"
               >Claim:</span>
               <span
-                class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
+                class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
               >{{ claim.claim }}</span>
             </div>
             <div class="columns">
-              <p class="column title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile" style="color: #1976d2;" >
+              <p class="column title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile" style="color: #1976d2;" >
                 <SocialSharing :url="$nuxt.$route.path" :org="org"/>
               </p>
             </div>
           </div>
         </div>
-        <div class="column is-2 is-6-mobile is-centered">
+        <div class="column is-2 is-6-mobile is-size-6-tablet is-centered">
           <div class="card-image">
             <figure class="image is-square">
               <img :src="claim.rating.icon_url" alt="Claim Rating" width="90%">
@@ -56,10 +56,10 @@
         <p>
           <span
             style="color: #1976d2;"
-            class="title is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
+            class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
           >Fact:</span>
           <span
-            class="subtitle is-size-3 is-size-4-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
+            class="subtitle is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2 has-text-justified"
           >{{ claim.review }}</span>
         </p>
       </div>
@@ -82,7 +82,7 @@ export default {
     },
     org: {
       type: Object,
-      required: true,
+      required: false,
       default: null
     },
     index: {
