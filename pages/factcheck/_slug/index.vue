@@ -59,7 +59,8 @@ export default {
     return {
       factchecks: null,
       organizations: null,
-      ListClaimsHidden: false
+      ListClaimsHidden: false,
+      structuredData: null
     };
   },
   methods: {
@@ -95,7 +96,7 @@ export default {
       )
       .then((response) => response.data)
       .catch(err => console.log(err));
-
+    console.log(factcheck.schemas)
     const organizations = await axios
       .get(
         `${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`
@@ -106,10 +107,13 @@ export default {
     return{
       factchecks: factcheck,
       organizations: organizations
+      // structuredData: factcheck.schemas[0]
     };
   },
   head () {
     return {
+      script: [
+        { src: JSON.stringify(this.factchecks.schemas), type: 'application/ld+json' }],
       title: this.factchecks[0].title,
       meta: [
         { hid: 'og:title', name: 'og:title', content: this.factchecks[0].title },

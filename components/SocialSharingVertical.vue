@@ -39,7 +39,7 @@ export default {
       default: null
     },
     org: {
-      type: Object,
+      type: Array,
       required: false,
       default: null
     },

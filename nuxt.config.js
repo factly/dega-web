@@ -137,5 +137,6 @@ module.exports = {
 
   googleAnalytics: {
     id: getGATracking()
+    // id: 'UA-139226775-1'
   }
 };
