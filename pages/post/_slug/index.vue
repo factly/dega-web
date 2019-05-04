@@ -14,6 +14,7 @@
         </div>
       </section>
       <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
+      <SocialSharingHorizontal class="is-hidden-desktop is-hidden-tablet" :url="$nuxt.$route.path"/>
     </div>
     <div v-else class="subtitle is-6 is-uppercase has-text-centered">
       Dega API is not responding.<br> Please contact the administrator.
@@ -24,10 +25,12 @@
 import axios from 'axios';
 import Hero from '~/components/Hero';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
+import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 
 export default {
   components: {
     Hero,
+    SocialSharingHorizontal,
     SocialSharingVertical
   },
   data() {

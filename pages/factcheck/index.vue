@@ -37,6 +37,7 @@
       </div>
     </div>
     <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
+    <SocialSharingHorizontal class="is-hidden-desktop is-hidden-tablet" :url="$nuxt.$route.path"/>
   </div>
 </template>
 
@@ -46,12 +47,14 @@ import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
+import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 
 export default {
   components: {
     MoreStories,
     PopularArticles,
     Hero,
+    SocialSharingHorizontal,
     SocialSharingVertical
   },
   data() {
@@ -91,6 +94,18 @@ export default {
       return{
         factchecks: factcheck
       };
+  },
+  head () {
+    return {
+      /* eslint no-underscore-dangle: 0 */
+      title: this.factchecks[0]._class.split('.').pop(),
+      meta: [
+        /* eslint no-underscore-dangle: 0 */
+        { hid: 'og:title', name: 'og:title', content: this.factchecks[0]._class.split('.').pop() },
+        // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
+        { hid: 'og:image', name: 'og:image', content: '~/assets/images/dega-default-image.png' }
+      ]
+    }
   }
 };
 </script>

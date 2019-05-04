@@ -25,7 +25,8 @@
       </div>
       <div class="column is-1"/>
     </div>
-    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
+    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path" :org="organizations"/>
+    <SocialSharingHorizontal class="is-hidden-desktop is-hidden-tablet" :url="$nuxt.$route.path"/>
   </div>
 </template>
 <style>
@@ -42,6 +43,7 @@ import Hero from '~/components/Hero';
 import ClaimWidget from '~/components/ClaimWidget';
 import SocialSharing from '~/components/SocialSharing';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
+import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 import ListClaims from '~/components/ListClaims.vue';
 
 export default {
@@ -50,12 +52,15 @@ export default {
     ClaimWidget,
     SocialSharing,
     SocialSharingVertical,
+    SocialSharingHorizontal,
     ListClaims
   },
   data() {
     return {
       factchecks: null,
-      ListClaimsHidden: false
+      organizations: null,
+      ListClaimsHidden: false,
+      structuredData: null
     };
   },
   methods: {
@@ -91,12 +96,24 @@ export default {
       )
       .then((response) => response.data)
       .catch(err => console.log(err));
-      return{
-        factchecks: factcheck
-      };
+    console.log(factcheck.schemas)
+    const organizations = await axios
+      .get(
+        `${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`
+      )
+      .then(response => response.data)
+      .catch(err => console.log(err));
+
+    return{
+      factchecks: factcheck,
+      organizations: organizations
+      // structuredData: factcheck.schemas[0]
+    };
   },
   head () {
     return {
+      script: [
+        { src: JSON.stringify(this.factchecks.schemas), type: 'application/ld+json' }],
       title: this.factchecks[0].title,
       meta: [
         { hid: 'og:title', name: 'og:title', content: this.factchecks[0].title },

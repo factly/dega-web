@@ -14,11 +14,11 @@
     </div>
     <div class= "column is-5" >
       <div class="content subtitle has-text-centered">
-        <p class="title is-size-5 is-size-4-tablet is-size-3-mobile is-size-3-desktop has-text-centered-desktop">{{ story.title }}</p>
+        <p class="title is-size-5 is-size-4-tablet is-size-5-mobile is-size-3-desktop has-text-centered-desktop">{{ story.title }}</p>
       </div>
       <div
         v-if="story.authors"
-        class="subtitle is-6 is-uppercase has-text-centered is-size-3-mobile">
+        class="subtitle is-6 is-uppercase has-text-centered is-size-6-mobile">
         BY
         <span
           v-for="(author, index) in story.authors"
@@ -29,7 +29,7 @@
           <span v-if="index != story.authors.length -1">, </span>
         </span>
       </div>
-      <div class="has-text-centered is-size-4-mobile">{{ getDate(story.last_updated_date) }}</div><br>
+      <div class="has-text-centered is-size-6-mobile">{{ getDate(story.last_updated_date) }}</div><br>
       <div class="has-text-justified is-hidden-mobile ">
         {{ story.excerpt }}
       </div>
