@@ -11,7 +11,7 @@
           <hr class="spacer is-1-5">
           <div class="columns">
             <!-- MoreStories Section -->
-            <div class="column is-12">
+            <div class="column is-12" v-if="story.length > 1">
               <section>
                 <h3>MORE STORIES</h3>
                 <br>

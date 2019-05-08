@@ -9,7 +9,7 @@
             <Hero :story="factchecks[0]" :categories= "true"/>
           </nuxt-link>
           <hr class="spacer is-1-5 is-hidden-mobile">
-          <div class="columns">
+          <div class="columns" v-if="factchecks.length > 1">
             <!-- MoreStories Section -->
             <div class="column is-12">
               <section>

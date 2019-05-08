@@ -8,7 +8,7 @@
           </nuxt-link>
           <hr class="spacer is-1-5 is-hidden-mobile">
           <div class="columns">
-            <div class="column is-12">
+            <div class="column is-12" v-if="posts.length > 1">
               <section>
                 <h3>MORE STORIES</h3>
                 <br>

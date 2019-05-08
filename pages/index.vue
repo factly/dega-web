@@ -9,7 +9,7 @@
             <Hero :story="story[0]" :categories= "true"/>
           </nuxt-link>
           <hr class="spacer is-1-5">
-          <div class="columns">
+          <div class="columns" v-if="story.length > 1">
             <div class="column is-12">
               <section>
                 <h3>MORE STORIES</h3>
