@@ -1,6 +1,6 @@
 const pkg = require('./package');
 // const getAppRoutes = require('./utils/getRoutes.js');
-const getGATracking = require('./utils/getGATracking.js');
+// const getGATracking = require('./utils/getGATracking.js');
 
 module.exports = {
   env: {
@@ -56,7 +56,7 @@ module.exports = {
     'nuxt-buefy',
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
-    '@nuxtjs/google-analytics',
+    // '@nuxtjs/google-analytics',
     '@nuxtjs/sitemap',
   ],
   /*
@@ -133,10 +133,10 @@ module.exports = {
       //   lastmodISO: '2017-06-30T13:30:00.000Z'
       // },
     ]
-  },
-
-  googleAnalytics: {
-    id: getGATracking()
-    // id: 'UA-139226775-1'
   }
+
+  // googleAnalytics: {
+  // id: getGATracking()
+  // id: 'UA-139226775-1'
+  // }
 };
