@@ -23,7 +23,7 @@
           BY
           <span v-for="(author, index) in story.authors" :key="index" >
             <no-ssr>
-            <nuxt-link :to="'author/' + author.slug">
+            <nuxt-link :to="'/author/' + author.slug">
               {{ author.display_name }}
             </nuxt-link>
             </no-ssr>
@@ -46,17 +46,17 @@
 <style>
 .story-art {
   position: relative;
-  max-width: 800px; 
+  max-width: 800px;
   margin: 0 auto;
 }
 
 .story-art .fact-strip {
   position: absolute;
   bottom: 0;
-  background: rgb(0, 0, 0); 
+  background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0.5);
   color: #f1f1f1;
-  width: 100%; 
+  width: 100%;
   padding: 20px;
 }
 </style>

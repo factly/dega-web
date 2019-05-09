@@ -17,7 +17,7 @@
         BY
         <span v-for="(author, index) in story.authors" :key="index" >
           <no-ssr>
-          <nuxt-link :to="'author/' + author.slug">
+          <nuxt-link :to="'/author/' + author.slug">
             {{ author.display_name }}
           </nuxt-link>
           </no-ssr>
