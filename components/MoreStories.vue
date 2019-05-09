@@ -9,7 +9,7 @@
           <figure class ="image is-5by3">
             <img
               :src="story.featured_media"
-              :alt="story._class.split('.').pop()">
+              :alt="story._class.split('.').pop()"/>
             <div
               v-if="categories"
               class="story-art">

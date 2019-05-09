@@ -1,5 +1,6 @@
 <template>
   <div>
+    <no-ssr>
     <nav
       class="navbar header has-shadow is-spaced is-fixed-top"
       role="navigation"
@@ -11,7 +12,7 @@
           <img
             src="~assets/images/logo.png"
             alt="Dega"
-            height="110">
+            height="110"/>
         </nuxt-link>
         <div
           class="navbar-burger burger"
@@ -145,7 +146,7 @@
     <div>
       <br class="is-hidden-mobile">
       <br>
-    <nuxt/>
+      <nuxt/>
     </div>
     <footer class="footer">
       <div class="content has-text-centered">
@@ -156,6 +157,7 @@
         </p>
       </div>
     </footer>
+    </no-ssr>
   </div>
 </template>
 <style>

@@ -7,7 +7,7 @@
             <img
               :src="story.featured_media"
               alt="Factcheck"
-              style="border-radius: 0px 0px 0px 0px;">
+              style="border-radius: 0px 0px 0px 0px;"/>
           </figure>
         </div>
       </div>
