@@ -1,22 +1,14 @@
 <template>
   <div>
-    <no-ssr>
     <nav
       class="navbar header has-shadow is-spaced is-fixed-top"
       role="navigation"
       aria-label="main navigation">
       <div class="navbar-brand">
-        <nuxt-link
-          class="navbar-item"
-          to="/">
-          <img
-            src="~assets/images/logo.png"
-            alt="Dega"
-            height="110"/>
+        <nuxt-link class="navbar-item" to="/">
+          <img src="~assets/images/logo.png" alt="Dega" height="110"/>
         </nuxt-link>
-        <div
-          class="navbar-burger burger"
-          @click="toggleNavBar = !toggleNavBar">
+        <div class="navbar-burger burger" @click="toggleNavBar = !toggleNavBar">
           <span/>
           <span/>
           <span/>
@@ -26,54 +18,27 @@
         :class="{ 'is-active': toggleNavBar }"
         class="navbar-menu">
         <div class="navbar-start is-uppercase">
-          <nuxt-link
-            to="/"
-            class="navbar-item">Home</nuxt-link>
-          <nuxt-link
-            to="/post"
-            class="navbar-item">Stories</nuxt-link>
-          <nuxt-link
-            to="/category/fake-news"
-            class="navbar-item">Fake News</nuxt-link>
-          <nuxt-link
-            to="/factcheck"
-            class="navbar-item">Fact Check</nuxt-link>
+          <nuxt-link to="/"  class="navbar-item">Home</nuxt-link>
+          <nuxt-link to="/post" class="navbar-item">Stories</nuxt-link>
+          <nuxt-link to="/category/fake-news" class="navbar-item">Fake News</nuxt-link>
+          <nuxt-link to="/factcheck" class="navbar-item">Fact Check</nuxt-link>
           <!--<nuxt-link to="/category/fake-news" class="navbar-item">Fake News</nuxt-link>-->
           <div class="navbar-item has-dropdown is-hoverable">
-            <div
-              class="navbar-link has-dropdown"
-              @click="toggleMore = !toggleMore">More
-              <div
-                id="aboutUsDropdown"
-                :class="{ 'is-hidden-mobile': toggleMore }"
-                class="navbar-dropdown">
-                <nuxt-link
-                  to="/page/about-us"
-                  class="navbar-item">About us</nuxt-link>
+            <div class="navbar-link has-dropdown" @click="toggleMore = !toggleMore">More
+              <div id="aboutUsDropdown" :class="{ 'is-hidden-mobile': toggleMore }" class="navbar-dropdown">
+                <nuxt-link to="/page/about-us" class="navbar-item">About us</nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link
-                  to="/page/corrections-policy"
-                  class="navbar-item">Corrections Policy</nuxt-link>
+                <nuxt-link to="/page/corrections-policy" class="navbar-item">Corrections Policy</nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link
-                  to="/page/team"
-                  class="navbar-item">Team</nuxt-link>
+                <nuxt-link to="/page/team" class="navbar-item">Team</nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link
-                  to="/page/fact-check-methodology"
-                  class="navbar-item">Fact Check Methodology</nuxt-link>
+                <nuxt-link to="/page/fact-check-methodology" class="navbar-item">Fact Check Methodology</nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link
-                  to="/page/submit-a-claim"
-                  class="navbar-item">Submit a Claim</nuxt-link>
+                <nuxt-link to="/page/submit-a-claim" class="navbar-item">Submit a Claim</nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link
-                  to="/page/funding-details"
-                  class="navbar-item">Funding Details</nuxt-link>
+                <nuxt-link to="/page/funding-details" class="navbar-item">Funding Details</nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link
-                  to="/page/contact-us"
-                  class="navbar-item">Contact Us</nuxt-link>
+                <nuxt-link to="/page/contact-us" class="navbar-item">Contact Us</nuxt-link>
               </div>
             </div>
           </div>
@@ -157,7 +122,6 @@
         </p>
       </div>
     </footer>
-    </no-ssr>
   </div>
 </template>
 <style>
