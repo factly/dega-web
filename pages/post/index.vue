@@ -37,6 +37,7 @@ import Hero from '~/components/Hero';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
 
 export default {
+  //authenticated: true,
   components: {
     MoreStories,
     PopularArticles,
@@ -47,6 +48,10 @@ export default {
     return {
       posts: null
     };
+  },
+  mounted(){
+     
+        
   },
   methods: {
     getDate(datetime) {
@@ -76,7 +81,11 @@ export default {
           process.env.clientId
         }&sortBy=publishedDate&sortAsc=false`
       )
-      .then(response => response.data)
+      .then((response)=>
+      {
+        //console.log(response.data);
+        return response.data
+      })
       .catch(err => console.log(err));
     return {
       posts: post
