@@ -6,7 +6,8 @@
       aria-label="main navigation">
       <div class="navbar-brand">
         <nuxt-link class="navbar-item" to="/">
-          <img src="~assets/images/logo.png" alt="Dega" height="110"/>
+          <!--<img src="~assets/images/logo.png" alt="Dega" height="110"/>-->
+          <img src="https://gateway.factly.in/core/dega-content/factly-telugu/2019/5/factly-telugu-logo.png" alt="Dega" height="110"/>
         </nuxt-link>
         <div class="navbar-burger burger" @click="toggleNavBar = !toggleNavBar">
           <span/>

@@ -4,9 +4,9 @@ const pkg = require('./package');
 
 module.exports = {
   env: {
-    apiUri: process.env.API_URI || 'http://api.factly.in',
-    clientId: process.env.CLIENT_ID || 'factly',
-    domainHostname: process.env.DOMAIN_HOSTNAME || 'http://factcheck.factly.in'
+    apiUri: process.env.API_URI || 'https://api.factly.in',
+    clientId: process.env.CLIENT_ID || 'factly-telugu',
+    domainHostname: process.env.DOMAIN_HOSTNAME || 'https://factcheck.factly.in'
   },
   mode: 'universal',
 
