@@ -139,6 +139,10 @@ export default {
   },
   head() {
     return {
+      ////Following needs to be dynamically updated from Organization entity
+      link: [
+        { rel: 'shortcut icon', type:'image/png', href: 'https://gateway.factly.in/core/dega-content/factly-telugu/2019/5/factly-telugu-favicon.png' }
+      ],
       htmlAttrs: {
           class: "has-navbar-fixed-top"
       }

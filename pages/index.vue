@@ -26,7 +26,7 @@
                   <hr class="spacer is-1-5 is-hidden-desktop">
                 </div>
               </section>
-              
+
             </div>
           </div>
         </div>
@@ -56,6 +56,18 @@ export default {
     Hero,
     SocialSharingHorizontal,
     SocialSharingVertical
+    },
+  head() {
+    return {
+      //Following needs to be dynamically updated from Organization entity
+      title: 'Factly Telugu - Making Public Data Meaningful',
+      meta: [
+        { property: 'og:description', content: 'FACTLY is a platform that brings you various aspects of life that directly or indirectly affects the common man but with ONE difference. Each news story on FACTLY is backed by factual evidence/data that is either available in the public domain or that is collated/gathered/collected using tools such as the Right to Information (RTI).'}
+      ],
+      htmlAttrs: {
+        class: "has-navbar-fixed-top"
+      }
+    }
   },
   data() {
     return {
@@ -91,7 +103,7 @@ export default {
       )
       .then(response => response.data)
       .catch(err => console.log(err));
-      
+
     const factchecks = await axios
       .get(
         `${process.env.apiUri}/api/v1/factchecks/?client=${
