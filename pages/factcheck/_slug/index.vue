@@ -87,20 +87,12 @@ export default {
     }
   },
   async asyncData(params) {
-    
     const factcheck = await axios
-      .get(
-        `${process.env.apiUri}/api/v1/factchecks/?client=${
-          process.env.clientId
-        }&slug=${params.params.slug}`
-      )
+      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&slug=${params.params.slug}`))
       .then((response) => response.data)
       .catch(err => console.log(err));
-    console.log(factcheck.schemas)
     const organizations = await axios
-      .get(
-        `${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`
-      )
+      .get(encodeURI(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`))
       .then(response => response.data)
       .catch(err => console.log(err));
 
