@@ -29,7 +29,7 @@
     <SocialSharingHorizontal class="is-hidden-desktop is-hidden-tablet" :url="$nuxt.$route.path"/>
   </div>
 </template>
-<style>
+<style scoped>
 a.anchor {
     display: block;
     position: relative;
