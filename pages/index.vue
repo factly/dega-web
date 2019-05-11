@@ -82,8 +82,7 @@ export default {
       return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   },
-  async asyncData(context) {
-    console.log(context);
+  async asyncData() {
     const posts = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
