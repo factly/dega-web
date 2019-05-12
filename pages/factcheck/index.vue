@@ -84,11 +84,7 @@ export default {
   },
   async asyncData() {
     const factcheck = await axios
-      .get(
-        `${process.env.apiUri}/api/v1/factchecks/?client=${
-          process.env.clientId
-        }&sortBy=publishedDate&sortAsc=false`
-      )
+      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(error => console.log(error));
       return{

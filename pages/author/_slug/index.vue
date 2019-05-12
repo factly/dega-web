@@ -87,20 +87,12 @@ export default {
   },
   async asyncData(params) {
     const posts = await axios
-      .get(
-        `${process.env.apiUri}/api/v1/posts/?client=${
-          process.env.clientId
-        }&author=${params.params.slug}&sortBy=publishedDate&sortAsc=false`
-      )
+      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&author=${params.params.slug}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
       
     const factchecks = await axios
-      .get(
-        `${process.env.apiUri}/api/v1/factchecks/?client=${
-          process.env.clientId
-        }&user=${params.params.slug}&sortBy=publishedDate&sortAsc=false`
-      )
+      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&user=${params.params.slug}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
 
@@ -117,9 +109,9 @@ export default {
   },
   head () {
     return {
-      title: this.story[0].authors,
+      title: this.story[0].authors[0],
       meta: [
-        { hid: 'og:title', name: 'og:title', content: this.story[0].authors },
+        { hid: 'og:title', name: 'og:title', content: this.story[0].authors[0] },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
         { hid: 'og:image', name: 'og:image', content: '~/assets/images/dega-default-image.png' }
       ]

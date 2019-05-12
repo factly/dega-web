@@ -4,7 +4,7 @@
     <article class="post" style="text-align: justify;">
       <p v-html="claim.description">{{ claim.description }}</p>
     </article>
-    <div class="card column is-full" style="background-color: #f5faff; margin: 1rem 0 1rem 0;">
+    <div class="card column is-full is-desktop" style="background-color: #f5faff; margin: 1rem 0 1rem 0;">
       <div class="columns is-vcentered">
         <div class="column is-2 is-hidden-mobile">
           <div class="card-image">
@@ -44,15 +44,15 @@
             </div>
           </div>
         </div>
-        <div class="column is-2 is-6-mobile is-size-6-tablet is-centered">
+        <div class="column is-size-6-mobile is-centered">
           <div class="card-image">
-            <figure class="image is-square">
-              <img :src="claim.rating.icon_url" alt="Claim Rating" width="90%">
+            <figure class="image is-square ">
+              <img :src="claim.rating.icon_url" alt="Claim Rating" style="max-width:50%, max-height:50%">
             </figure>
           </div>
         </div>
       </div>
-      <div class="is-hidden-mobile">
+      <div class="is-vcentered">
         <p>
           <span
             style="color: #1976d2;"
