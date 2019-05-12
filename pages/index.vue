@@ -49,6 +49,8 @@ import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
 import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
+import BackgroundImage from '~/assets/images/dega-default-image.png';
+
 export default {
   components: {
     MoreStories,
@@ -71,7 +73,8 @@ export default {
   },
   data() {
     return {
-      story: null
+      story: null,
+      prodBaseUrl: process.env.domainHostname
     };
   },
   methods: {
@@ -114,6 +117,17 @@ export default {
     return {
       story: sortedStories
     };
+  },
+
+  head () {
+    return {
+      title: "Factly",
+      meta: [
+        { hid: 'og:title', name: 'og:title', content: "Factly" },
+        // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
+        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + BackgroundImage }
+      ]
+    }
   }
 };
 </script>

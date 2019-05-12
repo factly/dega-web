@@ -37,6 +37,7 @@ import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
 import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
+import BackgroundImage from '~/assets/images/dega-default-image.png';
 
 export default {
   components: {
@@ -48,7 +49,8 @@ export default {
   },
   data() {
     return {
-      posts: null
+      posts: null,
+      prodBaseUrl: process.env.domainHostname
     };
   },
   methods: {
@@ -95,7 +97,7 @@ export default {
         /* eslint no-underscore-dangle: 0 */
         { hid: 'og:title', name: 'og:title', content: this.posts[0]._class.split('.').pop() },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        { hid: 'og:image', name: 'og:image', content: '~/assets/images/dega-default-image.png' }
+        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + BackgroundImage }
       ]
     }
   }
