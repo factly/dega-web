@@ -17,7 +17,7 @@
     </a>
   </div>
 </template>
-<style>
+<style scoped>
     .sticky-horizontal-container {
         background-color: #55ACEE;
         box-shadow: gray -1px 1px;

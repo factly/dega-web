@@ -89,20 +89,12 @@ export default {
   },
   async asyncData(params) {
     const posts = await axios
-      .get(
-        `${process.env.apiUri}/api/v1/posts/?client=${
-          process.env.clientId
-        }&tag=${params.params.slug}&sortBy=publishedDate&sortAsc=false`
-      )
+      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&tag=${params.params.slug}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
 
     const factchecks = await axios
-      .get(
-        `${process.env.apiUri}/api/v1/factchecks/?client=${
-          process.env.clientId
-        }&tag=${params.params.slug}&sortBy=publishedDate&sortAsc=false`
-      )
+      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&tag=${params.params.slug}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
 

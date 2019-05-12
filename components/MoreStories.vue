@@ -43,7 +43,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .story-art {
   position: relative;
   max-width: 800px;
