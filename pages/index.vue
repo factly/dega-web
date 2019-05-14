@@ -50,7 +50,7 @@ import Hero from '~/components/Hero';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
 import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 import BackgroundImage from '~/assets/images/dega-default-image.png';
-
+import _ from 'lodash';
 export default {
   components: {
     MoreStories,
@@ -109,10 +109,10 @@ export default {
       .catch(err => console.log(err));
 
     const stories = (posts || []).concat(factchecks || []);
-    const sortedStories = stories.sort(
-      (storyFirst, storySecond) =>
-        storyFirst.published_date < storySecond.published_date ? 1 : -1
-    );
+    const sortedStories = _.sortBy(stories, ["published_date"]);
+    //   (storyFirst, storySecond) =>
+    //     storyFirst.published_date < storySecond.published_date ? 1 : -1
+    // );
     
     return {
       story: sortedStories
