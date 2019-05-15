@@ -30,7 +30,7 @@
             <span v-show="index != story.authors.length -1"> , </span>
           </span>
         </div>
-        <div class="is-size-6-mobile">{{ getDate(story.last_updated_date) }}</div><br>
+        <div class="is-size-6-mobile">{{ getDate(story.published_date) }}</div><br>
       </div>
     </div>
     <!-- story-blockquote-column -->
