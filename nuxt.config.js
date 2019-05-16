@@ -4,9 +4,9 @@ const pkg = require('./package');
 
 module.exports = {
   env: {
-    apiUri: process.env.API_URI || 'http://api.factly.in',
-    clientId: process.env.CLIENT_ID || 'factly',
-    domainHostname: process.env.DOMAIN_HOSTNAME || 'http://factcheck.factly.in'
+    apiUri: process.env.API_URI || 'https://api.factly.in',
+    clientId: process.env.CLIENT_ID || 'factly-telugu',
+    domainHostname: process.env.DOMAIN_HOSTNAME || 'https://factcheck.factly.in'
   },
   mode: 'universal',
 
@@ -21,7 +21,7 @@ module.exports = {
       // { hid: 'description', name: 'description', content: pkg.description },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
 
       /* ,{ rel:"stylesheet",href:"https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"} */
     ]
