@@ -1,5 +1,5 @@
 /* eslint-disable */
-const getGATracking = require('../utils/getGATracking.js');
+// const getGATracking = require('../utils/getGATracking.js');
 export default ({ app }) => {
     /*
     ** Only run on client-side and only in production mode
@@ -15,7 +15,8 @@ export default ({ app }) => {
     /*
     ** Set the current page
     */
-    ga('create', getGATracking(), 'auto')
+    // ga('create', getGATracking(), 'auto')
+    ga('create', 'UA-139226775-1', 'auto')
     /*
     ** Every time the route changes (fired on initialization too)
     */
