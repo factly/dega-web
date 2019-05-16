@@ -87,15 +87,13 @@ export default {
   },
   async asyncData() {
     const posts = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client_id=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
+      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
-    // console.log(encodeURI(`${process.env.apiUri}/api/v1/posts/?client_id=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`));
     const factchecks = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client_id=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
+      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
-    // console.log(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client_id=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`));
     const stories = (posts || []).concat(factchecks || []);
     const sortedStories = _.orderBy(stories, ['published_date'], ['desc']);
     return {
