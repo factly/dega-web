@@ -58,18 +58,6 @@ export default {
     Hero,
     SocialSharingHorizontal,
     SocialSharingVertical
-    },
-  head() {
-    return {
-      //Following needs to be dynamically updated from Organization entity
-      title: 'Factly Telugu - Making Public Data Meaningful',
-      meta: [
-        { property: 'og:description', content: 'FACTLY is a platform that brings you various aspects of life that directly or indirectly affects the common man but with ONE difference. Each news story on FACTLY is backed by factual evidence/data that is either available in the public domain or that is collated/gathered/collected using tools such as the Right to Information (RTI).'}
-      ],
-      htmlAttrs: {
-        class: "has-navbar-fixed-top"
-      }
-    }
   },
   data() {
     return {
@@ -113,21 +101,24 @@ export default {
     //   (storyFirst, storySecond) =>
     //     storyFirst.published_date < storySecond.published_date ? 1 : -1
     // );
-    
     return {
       story: sortedStories
     };
   },
 
-  head () {
+  head() {
     return {
       title: "Factly",
       meta: [
         { hid: 'og:title', name: 'og:title', content: "Factly" },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + BackgroundImage }
-      ]
-    }
+        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + BackgroundImage },
+        { property: 'og:description', content: 'FACTLY is a platform that brings you various aspects of life that directly or indirectly affects the common man but with ONE difference. Each news story on FACTLY is backed by factual evidence/data that is either available in the public domain or that is collated/gathered/collected using tools such as the Right to Information (RTI).'}
+      ],
+      htmlAttrs: {
+        class: "has-navbar-fixed-top"
+      }
+    };
   }
 };
 </script>
