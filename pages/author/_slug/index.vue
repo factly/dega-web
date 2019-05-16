@@ -49,6 +49,7 @@ import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
 import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
+import _ from 'lodash';
 export default {
   components: {
     MoreStories,
@@ -98,10 +99,7 @@ export default {
 
     const stories = (posts || []).concat(factchecks || []);
 
-    const sortedStories = stories.sort(
-      (storyFirst, storySecond) =>
-        storyFirst.published_date > storySecond.published_date ? 1 : -1
-    );
+    const sortedStories = _.orderBy(stories, ['published_date'], ['desc']);
 
     return {
       story: sortedStories

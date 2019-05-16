@@ -80,7 +80,7 @@ export default {
 
   async asyncData() {
     const post = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
+      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client_id=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
     // console.log("Hello");
