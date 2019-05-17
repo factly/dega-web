@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="factchecks && factchecks.length > 0">
     <Hero :story="factchecks[0]" :categories= "true"/>
     <div class="column is-divider is-hidden-mobile is-offset-one-quarter is-half"/>
     <div class="columns">
