@@ -95,7 +95,7 @@ export default {
       .then(response => response.data)
       .catch(err => console.log(err));
     const stories = (posts || []).concat(factchecks || []);
-    const sortedStories = _.orderBy(stories, ['published_date'], ['desc']);
+    const sortedStories = _.orderBy(stories, ["published_date"], ['desc']);
     return {
       story: sortedStories
     };
