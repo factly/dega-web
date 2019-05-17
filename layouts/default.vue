@@ -19,28 +19,28 @@
         :class="{ 'is-active': toggleNavBar }"
         class="navbar-menu">
         <div class="navbar-start is-uppercase">
-          <nuxt-link to="/"  class="navbar-item">Home</nuxt-link>
-          <nuxt-link to="/post" class="navbar-item">Stories</nuxt-link>
-          <nuxt-link to="/category/fake-news" class="navbar-item">Fake News</nuxt-link>
-          <nuxt-link to="/category/video" class="navbar-item">Videos</nuxt-link>
-          <nuxt-link to="/factcheck" class="navbar-item">Fact Check</nuxt-link>
+          <nuxt-link to="/"  class="navbar-item has-text-weight-semibold">Home</nuxt-link>
+          <nuxt-link to="/post" class="navbar-item has-text-weight-semibold">Stories</nuxt-link>
+          <nuxt-link to="/category/fake-news" class="navbar-item has-text-weight-semibold">Fake News</nuxt-link>
+          <nuxt-link to="/category/video" class="navbar-item has-text-weight-semibold">Videos</nuxt-link>
+          <nuxt-link to="/factcheck" class="navbar-item has-text-weight-semibold">Fact Check</nuxt-link>
           <!--<nuxt-link to="/category/fake-news" class="navbar-item">Fake News</nuxt-link>-->
           <div class="navbar-item has-dropdown is-hoverable">
             <div class="navbar-link has-dropdown" @click="toggleMore = !toggleMore">More
               <div id="aboutUsDropdown" :class="{ 'is-hidden-mobile': toggleMore }" class="navbar-dropdown">
-                <nuxt-link to="/page/about-us" class="navbar-item">About us</nuxt-link>
+                <nuxt-link to="/page/about-us" class="navbar-item has-text-weight-semibold">About us</nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link to="/page/corrections-policy" class="navbar-item">Corrections Policy</nuxt-link>
+                <nuxt-link to="/page/corrections-policy" class="navbar-item has-text-weight-semibold">Corrections Policy</nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link to="/page/team" class="navbar-item">Team</nuxt-link>
+                <nuxt-link to="/page/team" class="navbar-item has-text-weight-semibold">Team</nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link to="/page/fact-check-methodology" class="navbar-item">Fact Check Methodology</nuxt-link>
+                <nuxt-link to="/page/fact-check-methodology" class="navbar-item has-text-weight-semibold">Fact Check Methodology</nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link to="/page/submit-a-claim" class="navbar-item">Submit a Claim</nuxt-link>
+                <nuxt-link to="/page/submit-a-claim" class="navbar-item has-text-weight-semibold">Submit a Claim</nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link to="/page/funding-details" class="navbar-item">Funding Details</nuxt-link>
+                <nuxt-link to="/page/funding-details" class="navbar-item has-text-weight-semibold">Funding Details</nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link to="/page/contact-us" class="navbar-item">Contact Us</nuxt-link>
+                <nuxt-link to="/page/contact-us" class="navbar-item has-text-weight-semibold">Contact Us</nuxt-link>
               </div>
             </div>
           </div>
