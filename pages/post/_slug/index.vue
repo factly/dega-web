@@ -26,7 +26,7 @@ import axios from 'axios';
 import Hero from '~/components/Hero';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
 import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
-
+import _ from 'lodash';
 export default {
   components: {
     Hero,
@@ -68,8 +68,9 @@ export default {
       .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&slug=${params.params.slug}`))
       .then(response => response.data)
       .catch(err => console.log(err));
+    const sortedPosts = _.orderBy(posts, ['published_date'], ['desc']);
     return {
-      post: posts
+      post: sortedPosts
     };
   },
   head () {

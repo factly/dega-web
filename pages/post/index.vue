@@ -38,7 +38,7 @@ import Hero from '~/components/Hero';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
 import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 import BackgroundImage from '~/assets/images/dega-default-image.png';
-
+import _ from 'lodash';
 export default {
   components: {
     MoreStories,
@@ -83,10 +83,9 @@ export default {
       .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
-    // console.log("Hello");
-    // console.log(post);
+    const sortedPost = _.orderBy(post, ['published_date'], ['desc']);
     return {
-      posts: post
+      posts: sortedPost
     };
   },
   head () {

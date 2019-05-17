@@ -49,7 +49,7 @@ import Hero from '~/components/Hero';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
 import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 import BackgroundImage from '~/assets/images/dega-default-image.png';
-
+import _ from 'lodash';
 export default {
   components: {
     MoreStories,
@@ -89,8 +89,9 @@ export default {
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(error => console.log(error));
+      const sortedFactcheck = _.orderBy(factcheck, ['published_date'], ['desc']);
       return{
-        factchecks: factcheck
+        factchecks: sortedFactcheck
       };
   },
   head () {
