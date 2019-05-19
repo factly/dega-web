@@ -83,9 +83,9 @@ export default {
       .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
-    const sortedPost = _.orderBy(post, ['published_date'], ['desc']);
+    const sortedPosts = _.orderBy(post, ['published_date'], ['desc']);
     return {
-      posts: sortedPost
+      posts: sortedPosts
     };
   },
   head () {
