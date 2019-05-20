@@ -95,9 +95,9 @@ export default {
       .get(encodeURI(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`))
       .then(response => response.data)
       .catch(err => console.log(err));
-    const sortedFactchecks = _.orderBy(factcheck, ['published_date'], ['desc']);
+    const sortedFactcheck = _.orderBy(factcheck, ['published_date'], ['desc']);
     return{
-      factchecks: sortedFactchecks,
+      factchecks: sortedFactcheck,
       organizations: organizations
       // structuredData: factcheck.schemas[0]
     };

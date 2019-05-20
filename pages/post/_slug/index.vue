@@ -64,13 +64,13 @@ export default {
   },
 
   async asyncData(params) {
-    const posts = await axios
+    const post = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&slug=${params.params.slug}`))
       .then(response => response.data)
       .catch(err => console.log(err));
-    const sortedPosts = _.orderBy(posts, ['published_date'], ['desc']);
+      const sortedPost = _.orderBy(post, ['published_date'], ['desc']);
     return {
-      post: sortedPosts
+      post: sortedPost
     };
   },
   head () {

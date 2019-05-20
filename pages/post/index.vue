@@ -73,17 +73,12 @@ export default {
       return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   },
-  // created(){
-  //   this.$store.dispatch('setPosts', this.loadedPosts)
-  //   console.log(this.$store.getters.loadedPosts)
-  // },
-
   async asyncData() {
-    const post = await axios
+    const posts = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
-    const sortedPosts = _.orderBy(post, ['published_date'], ['desc']);
+    const sortedPosts = _.orderBy(posts, ['published_date'], ['desc']);
     return {
       posts: sortedPosts
     };

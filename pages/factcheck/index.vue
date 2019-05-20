@@ -85,11 +85,11 @@ export default {
     }
   },
   async asyncData() {
-    const factcheck = await axios
+    const factchecks = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(error => console.log(error));
-      const sortedFactchecks = _.orderBy(factcheck, ['published_date'], ['desc']);
+      const sortedFactchecks = _.orderBy(factchecks, ['published_date'], ['desc']);
       return{
         factchecks: sortedFactchecks
       };
