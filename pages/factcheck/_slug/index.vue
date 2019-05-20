@@ -45,7 +45,6 @@ import SocialSharing from '~/components/SocialSharing';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
 import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 import ListClaims from '~/components/ListClaims.vue';
-
 export default {
   components: {
     Hero,
@@ -95,7 +94,6 @@ export default {
       .get(encodeURI(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`))
       .then(response => response.data)
       .catch(err => console.log(err));
-
     return{
       factchecks: factcheck,
       organizations: organizations
