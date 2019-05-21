@@ -32,14 +32,10 @@
 <script>
 import axios from 'axios';
 import Hero from '~/components/Hero';
-import SocialSharingVertical from '~/components/SocialSharingVertical';
-import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 
 export default {
   components: {
-    Hero,
-    SocialSharingHorizontal,
-    SocialSharingVertical
+    Hero
   },
   data() {
     return {

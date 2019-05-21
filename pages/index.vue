@@ -55,8 +55,6 @@ import axios from 'axios';
 import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
-import SocialSharingVertical from '~/components/SocialSharingVertical';
-import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 import BackgroundImage from '~/assets/images/dega-default-image.png';
 import _ from 'lodash';
 
@@ -64,9 +62,7 @@ export default {
   components: {
     MoreStories,
     PopularArticles,
-    Hero,
-    SocialSharingHorizontal,
-    SocialSharingVertical
+    Hero
   },
   data() {
     return {

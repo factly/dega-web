@@ -60,18 +60,12 @@ import axios from 'axios';
 import '~/node_modules/bulma-divider';
 import Hero from '~/components/Hero';
 import ClaimWidget from '~/components/ClaimWidget';
-import SocialSharing from '~/components/SocialSharing';
-import SocialSharingVertical from '~/components/SocialSharingVertical';
-import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 import ListClaims from '~/components/ListClaims.vue';
 
 export default {
   components: {
     Hero,
     ClaimWidget,
-    SocialSharing,
-    SocialSharingVertical,
-    SocialSharingHorizontal,
     ListClaims
   },
   data() {
