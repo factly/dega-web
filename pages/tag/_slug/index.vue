@@ -6,12 +6,16 @@
           v-if="story && story.length"
           class="container">
           <nuxt-link :to="'/'+ story[0]._class.split('.').pop().toLowerCase()+ '/' + story[0].slug">
-            <Hero :story="story[0]" :categories= "true"/>
+            <Hero
+              :story="story[0]"
+              :categories= "true"/>
           </nuxt-link>
           <hr class="spacer is-1-5">
           <div class="columns">
             <!-- MoreStories Section -->
-            <div class="column is-12" v-if="story.length > 1">
+            <div
+              v-if="story.length > 1"
+              class="column is-12">
               <section>
                 <h3>MORE STORIES</h3>
                 <br>
@@ -37,8 +41,12 @@
         </div>
       </div>
     </div>
-    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
-    <SocialSharingHorizontal class="is-hidden-desktop is-hidden-tablet" :url="$nuxt.$route.path"/>
+    <SocialSharingVertical
+      :url="$nuxt.$route.path"
+      class="is-hidden-mobile"/>
+    <SocialSharingHorizontal
+      :url="$nuxt.$route.path"
+      class="is-hidden-desktop is-hidden-tablet"/>
   </div>
 </template>
 
@@ -48,16 +56,13 @@ import axios from 'axios';
 import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
-import SocialSharingVertical from '~/components/SocialSharingVertical';
-import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 import _ from 'lodash';
+
 export default {
   components: {
     MoreStories,
     PopularArticles,
-    Hero,
-    SocialSharingHorizontal,
-    SocialSharingVertical
+    Hero
   },
   data() {
     return {
@@ -106,15 +111,15 @@ export default {
       story: sortedStories
     };
   },
-  head () {
+  head() {
     return {
       title: this.story[0].tags[0].name,
       meta: [
         { hid: 'og:title', name: 'og:title', content: this.story[0].tags[0].name },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        { hid: 'og:image', name: 'og:image', content: '~/assets/images/dega-default-image.png' }
+        { hid: 'og:image', name: 'og:image', content: '~/assets/images/dega-default-image.png' },
       ]
-    }
+    };
   }
 };
 </script>
