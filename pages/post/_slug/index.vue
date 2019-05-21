@@ -2,9 +2,7 @@
   <div>
     <div v-if="post && post.length">
       <section class="hero-title has-text-centered">
-        <Hero
-          :story="post[0]"
-          :categories= "true"/>
+        <Hero :story="post[0]" :categories= "true"/>
       </section>
       <section class="section">
         <div class="container">
@@ -15,16 +13,10 @@
           </article>
         </div>
       </section>
-      <SocialSharingVertical
-        :url="$nuxt.$route.path"
-        class="is-hidden-mobile"/>
-      <SocialSharingHorizontal
-        :url="$nuxt.$route.path"
-        class="is-hidden-desktop is-hidden-tablet"/>
+      <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
+      <SocialSharingHorizontal class="is-hidden-desktop is-hidden-tablet" :url="$nuxt.$route.path"/>
     </div>
-    <div
-      v-else
-      class="subtitle is-6 is-uppercase has-text-centered">
+    <div v-else class="subtitle is-6 is-uppercase has-text-centered">
       Dega API is not responding.<br> Please contact the administrator.
     </div>
   </div>
@@ -32,10 +24,13 @@
 <script>
 import axios from 'axios';
 import Hero from '~/components/Hero';
-
+import SocialSharingVertical from '~/components/SocialSharingVertical';
+import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 export default {
   components: {
-    Hero
+    Hero,
+    SocialSharingHorizontal,
+    SocialSharingVertical
   },
   data() {
     return {
@@ -73,18 +68,18 @@ export default {
       .then(response => response.data)
       .catch(err => console.log(err));
     return {
-      post
+      post: post
     };
   },
-  head() {
+  head () {
     return {
       title: this.post[0].title,
       meta: [
         { hid: 'og:title', name: 'og:title', content: this.post[0].title },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        { hid: 'og:image', name: 'og:image', content: this.post[0].featured_media },
+        { hid: 'og:image', name: 'og:image', content: this.post[0].featured_media }
       ]
-    };
+    }
   }
 };
 </script>

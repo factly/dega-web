@@ -28,7 +28,7 @@
                 <p>
                   {{ $t('aboutus.background') }}
                 </p>
-                <p/>
+                <p></p>
               </div>
             </div>
           </div>

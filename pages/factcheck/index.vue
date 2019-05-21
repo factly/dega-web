@@ -6,14 +6,10 @@
           v-if="factchecks && factchecks.length"
           class="container">
           <nuxt-link :to="'/factcheck/'+ factchecks[0].slug">
-            <Hero
-              :story="factchecks[0]"
-              :categories= "true"/>
+            <Hero :story="factchecks[0]" :categories= "true"/>
           </nuxt-link>
           <hr class="spacer is-1-5 is-hidden-mobile">
-          <div
-            v-if="factchecks.length > 1"
-            class="columns">
+          <div class="columns" v-if="factchecks.length > 1">
             <!-- MoreStories Section -->
             <div class="column is-12">
               <section>
@@ -40,12 +36,8 @@
         </div>
       </div>
     </div>
-    <SocialSharingVertical
-      :url="$nuxt.$route.path"
-      class="is-hidden-mobile"/>
-    <SocialSharingHorizontal
-      :url="$nuxt.$route.path"
-      class="is-hidden-desktop is-hidden-tablet"/>
+    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
+    <SocialSharingHorizontal class="is-hidden-desktop is-hidden-tablet" :url="$nuxt.$route.path"/>
   </div>
 </template>
 
@@ -54,14 +46,17 @@ import axios from 'axios';
 import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
+import SocialSharingVertical from '~/components/SocialSharingVertical';
+import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 import BackgroundImage from '~/assets/images/dega-default-image.png';
 import _ from 'lodash';
-
 export default {
   components: {
     MoreStories,
     PopularArticles,
-    Hero
+    Hero,
+    SocialSharingHorizontal,
+    SocialSharingVertical
   },
   data() {
     return {
@@ -94,12 +89,12 @@ export default {
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(error => console.log(error));
-    const sortedFactchecks = _.orderBy(factchecks, ['published_date'], ['desc']);
-    return {
-      factchecks: sortedFactchecks
-    };
+      const sortedFactchecks = _.orderBy(factchecks, ['published_date'], ['desc']);
+      return{
+        factchecks: sortedFactchecks
+      };
   },
-  head() {
+  head () {
     return {
       /* eslint no-underscore-dangle: 0 */
       title: this.factchecks[0]._class.split('.').pop(),
@@ -107,9 +102,9 @@ export default {
         /* eslint no-underscore-dangle: 0 */
         { hid: 'og:title', name: 'og:title', content: this.factchecks[0]._class.split('.').pop() },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + BackgroundImage },
+        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + BackgroundImage }
       ]
-    };
+    }
   }
 };
 </script>
