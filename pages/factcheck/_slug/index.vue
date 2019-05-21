@@ -1,6 +1,6 @@
 <template>
-  <div v-if="factchecks && factchecks.length > 0">
-    <Hero :story="factchecks[0]" :categories= "true"/>
+  <div v-if="factcheck && factcheck.length > 0">
+    <Hero :story="factcheck[0]" :categories= "true"/>
     <div class="column is-divider is-hidden-mobile is-offset-one-quarter is-half"/>
     <div class="columns">
       <div class="column is-1"/>
@@ -8,20 +8,20 @@
         <div class="column is-full">
           <div>
             <article class="post" style="text-align: justify;">
-              <p v-html="factchecks[0].introduction">{{ factchecks[0].introduction }}</p>
+              <p v-html="factcheck[0].introduction">{{ factcheck[0].introduction }}</p>
             </article>
-            <div v-for="(claim,index) in factchecks[0].claims" :key="index">
+            <div v-for="(claim,index) in factcheck[0].claims" :key="index">
               <a class="anchor" :id="'claim'+(index+1)"></a>
               <ClaimWidget :claim="claim" :index="index"/>
             </div>
             <article class="post" style="text-align: justify;">
-              <p v-html="factchecks[0].summary">{{ factchecks[0].summary }}</p>
+              <p v-html="factcheck[0].summary">{{ factcheck[0].summary }}</p>
             </article>
           </div>
         </div>
       </div>
-      <div v-if="factchecks[0].claims.length > 1" class="column is-one-quarter is-hidden-mobile">
-        <ListClaims :factchecks="factchecks"/> 
+      <div v-if="factcheck[0].claims.length > 1" class="column is-one-quarter is-hidden-mobile">
+        <ListClaims :factcheck="factcheck"/> 
       </div>
       <div class="column is-1"/>
     </div>
@@ -56,7 +56,7 @@ export default {
   },
   data() {
     return {
-      factchecks: null,
+      factcheck: null,
       organizations: null,
       ListClaimsHidden: false,
       structuredData: null
@@ -95,7 +95,7 @@ export default {
       .then(response => response.data)
       .catch(err => console.log(err));
     return{
-      factchecks: factcheck,
+      factcheck: factcheck,
       organizations: organizations
       // structuredData: factcheck.schemas[0]
     };
@@ -103,12 +103,12 @@ export default {
   head () {
     return {
       script: [
-        { src: JSON.stringify(this.factchecks.schemas), type: 'application/ld+json' }],
-      title: this.factchecks[0].title,
+        { src: JSON.stringify(this.factcheck.schemas), type: 'application/ld+json' }],
+      title: this.factcheck[0].title,
       meta: [
-        { hid: 'og:title', name: 'og:title', content: this.factchecks[0].title },
+        { hid: 'og:title', name: 'og:title', content: this.factcheck[0].title },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        { hid: 'og:image', name: 'og:image', content: this.factchecks[0].featured_media }
+        { hid: 'og:image', name: 'og:image', content: this.factcheck[0].featured_media }
       ]
     }
   }
