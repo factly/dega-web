@@ -15,7 +15,7 @@
         </div>
         <div class="column is-8">
           <div class="card-content" style="padding-top: 0px; padding-bottom: 0px;">
-            <div class="" style="padding-bottom: 0.75rem">
+            <div style="padding-bottom: 0.75rem">
               <a :href="claim.claim_source">
                 <span
                   class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
@@ -28,7 +28,7 @@
                 style="color: #1976d2;"
               >on {{ getDate(claim.claim_date) }}</span>
             </div>
-            <div class style="padding-bottom: 0.75rem">
+            <div style="padding-bottom: 0.75rem">
               <span
                 class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
                 style="color: #1976d2;"
@@ -42,9 +42,17 @@
                 <SocialSharing :url="$nuxt.$route.path" :org="org"/>
               </p>
             </div>
+            <div>
+              <span class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2" style="color: #1976d2;">
+                Rating:
+              </span>
+              <span class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2">
+                {{ claim.rating.name }}
+              </span>
+            </div>
           </div>
         </div>
-        <div class="column is-size-6-mobile is-centered">
+        <div class="column is-size-6-mobile is-size-3-tablet is-hidden-mobile is-centered">
           <div class="card-image">
             <figure class="image is-square ">
               <img :src="claim.rating.icon_url" alt="Claim Rating" style="max-width:50%, max-height:50%">
@@ -53,15 +61,11 @@
         </div>
       </div>
       <div class="is-vcentered">
-        <p>
-          <span
-            style="color: #1976d2;"
-            class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
-          >Fact:</span>
-          <span
-            class="subtitle is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2 has-text-justified" v-html="claim.review"
-          ></span>
-        </p>
+        <span style="color: #1976d2;" class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2">
+          Fact:
+        </span>
+        <span class="subtitle is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2 has-text-justified" v-html="claim.review">
+        </span>
       </div>
     </div>
   </div>
