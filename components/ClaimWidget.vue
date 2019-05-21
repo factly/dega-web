@@ -28,7 +28,7 @@
                 style="color: #1976d2;"
               >on {{ getDate(claim.claim_date) }}</span>
             </div>
-            <div style="padding-bottom: 0.75rem">
+            <div>
               <span
                 class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
                 style="color: #1976d2;"
@@ -37,18 +37,18 @@
                 class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
               >{{ claim.claim }}</span>
             </div>
-            <div class="columns">
-              <p class="column title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile" style="color: #1976d2;" >
-                <SocialSharing :url="$nuxt.$route.path" :org="org"/>
-              </p>
-            </div>
-            <div>
+            <div style="padding-bottom: 0.75rem">
               <span class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2" style="color: #1976d2;">
                 Rating:
               </span>
               <span class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2">
                 {{ claim.rating.name }}
               </span>
+            </div>
+            <div class="columns">
+              <p class="column title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile" style="color: #1976d2;" >
+                <SocialSharing :url="$nuxt.$route.path" :org="org"/>
+              </p>
             </div>
           </div>
         </div>
