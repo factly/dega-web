@@ -31,7 +31,7 @@
           <span v-if="index != story.authors.length -1">, </span>
         </span>
       </div>
-      <div class="has-text-centered is-size-6-mobile">{{ getDate(story.published_date) }}</div><br>
+      <div class="has-text-centered is-size-6-mobile">{{ story.published_date | date }}</div><br>
       <div class="has-text-justified is-hidden-mobile ">
         {{ story.excerpt }}
       </div>
@@ -51,26 +51,6 @@ export default {
       type: Boolean,
       required: true,
       default: false
-    }
-  },
-  methods: {
-    getDate(datetime) {
-      const date = new Date(datetime);
-      const ms = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ];
-      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   }
 };

@@ -37,7 +37,7 @@
                 v-if="claim.claim_date"
                 class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
                 style="color: #1976d2;"
-              >on {{ getDate(claim.claim_date) }}</span>
+              >on {{ claim.claim_date | date }}</span>
             </div>
             <div
               class
@@ -109,26 +109,6 @@ export default {
       type: Number,
       required: true,
       default: null
-    }
-  },
-  methods: {
-    getDate(datetime) {
-      const date = new Date(datetime);
-      const ms = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ];
-      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   }
 };
