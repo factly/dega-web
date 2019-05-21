@@ -2,17 +2,17 @@
 
 import Vuex from 'vuex'
 import axios from 'axios'
-const state = () => {
+const createStore = () => {
   return new Vuex.Store({
     
     state: {
-      loadedPosts: [],
+      organisation: Object,
       locales: ['en'],
       locale: 'en',
     },
     mutations: {
-      setPosts(state, posts){
-        state.loadedPosts = posts
+      setOrganisation(state, organisation){
+        state.organisation = organisation
       },
       SET_LANG(state, locale) {
         if (state.locales.indexOf(locale) !== -1) {
@@ -21,24 +21,23 @@ const state = () => {
       }
     },
     actions: {
-      setPosts(vuexContext, posts){
-        vuexContext.commit('setPosts', posts)
-      },
       nuxtServerInit(vuexContext, context){
         return axios.get(encodeURI(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`))
-        .then(response => response.data)
-        .catch(err => console.log(err));
+        .then(res => {
+          vuexContext.commit("setOrganisation", res.data[0])
+        })
+        .catch(e => context.error(e));
       }
     },
     getters: {
-      loadedPosts(state){
-        return state.loadedPosts
+      getOrganisation(state){
+        return state.organisation;
       }
-    }
-  })
+  }
+})
 }
 
-export default state
+export default createStore
 // export const state = () => ({
 //   locales: ['en'],
 //   locale: 'en'
