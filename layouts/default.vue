@@ -7,7 +7,7 @@
       <div class="navbar-brand">
         <nuxt-link class="navbar-item" to="/">
           <!--<img src="~assets/images/logo.png" alt="Dega" height="110"/>-->
-          <img src="https://gateway.factly.in/core/dega-content/factly-telugu/2019/5/factly-telugu-logo.png" alt="Dega" height="110"/>
+          <img :src="organisation.logo_url" alt="Dega" height="110"/>
         </nuxt-link>
         <div class="navbar-burger burger" @click="toggleNavBar = !toggleNavBar">
           <span/>
@@ -48,7 +48,7 @@
         <div class="navbar-end">
           <a
             class="navbar-item is-hidden-touch is-hidden-desktop-only"
-            href="https://facebook.com/factlydotin"
+            :href= "organisation.facebook_url"
             target="_blank">
             <span
               class="icon"
@@ -65,7 +65,7 @@
           </a>
           <a
             class="navbar-item is-hidden-touch is-hidden-desktop-only"
-            href="https://twitter.com/factlydotin"
+            :href="organisation.twitter_url"
             target="_blank">
             <span
               class="icon"
@@ -87,7 +87,7 @@
           </a>
           <a
             class="navbar-item is-hidden-touch is-hidden-desktop-only"
-            href="https://www.youtube.com/channel/UCpi2S8wW4xLlUCVryhyBtsA"
+            :href="organisation.you_tube_url"
             target="_blank">
             <span
               class="icon"
@@ -108,8 +108,7 @@
     <footer class="footer">
       <div class="content has-text-centered">
         <p>
-          <strong>DEGA</strong> by
-          <a href="https://factly.in/">FACTLY</a>. The source code is licensed
+          <a :href="organisation.site_address">{{organisation.site_title}}. </a> {{organisation.tag_line}}<br>The source code is licensed
           <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
         </p>
       </div>
@@ -125,14 +124,21 @@ export default {
   data() {
     return {
       toggleNavBar: false,
-      toggleMore: true
+      toggleMore: true,
+      organisation: Object
     };
+  },
+  created(){
+    this.organisation = this.$store.getters.getOrganisation
   },
   head() {
     return {
-      ////Following needs to be dynamically updated from Organization entity
+      //Following needs to be dynamically updated from Organization entity
       link: [
-        { rel: 'shortcut icon', type:'image/png', href: 'https://gateway.factly.in/core/dega-content/factly-telugu/2019/5/factly-telugu-favicon.png' }
+        { rel: 'shortcut icon', type:'image/png', href: this.organisation.logo_url }
+      ],
+      meta: [
+        { property: 'og:description', content: this.organisation.description}
       ],
       htmlAttrs: {
           class: "has-navbar-fixed-top"
