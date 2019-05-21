@@ -59,8 +59,8 @@
             class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
           >Fact:</span>
           <span
-            class="subtitle is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2 has-text-justified"
-          >{{ claim.review }}</span>
+            class="subtitle is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2 has-text-justified" v-html="claim.review"
+          ></span>
         </p>
       </div>
     </div>
