@@ -7,6 +7,7 @@
       <div class="column is-full-mobile">
         <div class="column is-full">
           <div>
+            <hr class="spacer is-1-5 is-hidden-mobile">
             <article class="post" style="text-align: justify;">
               <p v-html="factcheck[0].introduction">{{ factcheck[0].introduction }}</p>
             </article>

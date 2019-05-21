@@ -6,6 +6,7 @@
       </section>
       <section class="section">
         <div class="container">
+          <hr class="spacer is-1-5 is-hidden-mobile">
           <article
             class="post has-text-justified"
             v-html="post[0].content">
