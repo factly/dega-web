@@ -17,10 +17,8 @@
       </section>
       <SocialSharingVertical
         :url="$nuxt.$route.path"
-        class="is-hidden-mobile"/>
-      <SocialSharingHorizontal
-        :url="$nuxt.$route.path"
-        class="is-hidden-desktop is-hidden-tablet"/>
+        :quote="post[0].title"
+      />
     </div>
     <div
       v-else

@@ -41,11 +41,9 @@
     </div>
     <SocialSharingVertical
       :url="$nuxt.$route.path"
-      :org="organizations"
-      class="is-hidden-mobile"/>
-    <SocialSharingHorizontal
-      :url="$nuxt.$route.path"
-      class="is-hidden-desktop is-hidden-tablet"/>
+      :quote="factchecks[0].title"
+    />
+
   </div>
 </template>
 <style scoped>

@@ -40,12 +40,6 @@
         </div>
       </div>
     </div>
-    <SocialSharingVertical
-      :url="$nuxt.$route.path"
-      class="is-hidden-mobile"/>
-    <SocialSharingHorizontal
-      :url="$nuxt.$route.path"
-      class="is-hidden-desktop is-hidden-tablet"/>
   </div>
 </template>
 
@@ -68,26 +62,6 @@ export default {
       factchecks: null,
       prodBaseUrl: process.env.domainHostname
     };
-  },
-  methods: {
-    getDate(datetime) {
-      const date = new Date(datetime);
-      const ms = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ];
-      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
-    }
   },
   async asyncData() {
     const factchecks = await axios
