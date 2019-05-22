@@ -4,7 +4,6 @@ const axios = require('axios');
 
 async function getGATracking(app) {
   const gaTrackingCode = await axios
-    // .get(`${process.env.API_URI}/api/v1/organizations/?client=${process.env.CLIENT_ID}`)
     .get(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`)
     .then(response => response.data[0].ga_tracking_code)
     .catch(err => console.log(err));
@@ -17,8 +16,6 @@ async function getGATracking(app) {
     ga('set', 'page', to.fullPath)
     ga('send', 'pageview')
   })
-  // console.log("finished")
-  // return gaTrackingCode;
 }
 
 export default ({ app }) => {
@@ -36,26 +33,5 @@ export default ({ app }) => {
     /*
     ** Set the current page
     */
-  //  axios
-  //   // .get(`${process.env.API_URI}/api/v1/organizations/?client=${process.env.CLIENT_ID}`)
-  //   .get(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`)
-  //   .then(response => {
-  //     ga('create', response.data[0].ga_tracking_code, 'auto')
-  //   })
-  //   .catch(err => console.log(err));
    getGATracking(app)
-  //  console.log(k)
-  // console.log("plasenskdfdkjfsn")
-    // ga('create', getGATracking(), 'auto')
-    // ga('create', 'UA-139226775-1', 'auto')
-    /*
-    ** Every time the route changes (fired on initialization too)
-    */
-    // app.router.afterEach((to, from) => {
-    //   /*
-    //   ** We tell Google Analytics to add a `pageview`
-    //   */
-    //   ga('set', 'page', to.fullPath)
-    //   ga('send', 'pageview')
-    // })
   }
