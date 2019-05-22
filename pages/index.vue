@@ -5,7 +5,7 @@
         <div
           v-if="story && story.length"
           class="container">
-          <nuxt-link :to="'/'+ story[0]._class.split('.').pop().toLowerCase()+ 's/' + story[0].slug">
+          <nuxt-link :to="'/'+ story[0]._class.split('.').pop().toLowerCase()+ '/' + story[0].slug">
             <Hero :story="story[0]" :categories= "true"/>
           </nuxt-link>
           <hr class="spacer is-1-5">
@@ -18,7 +18,7 @@
                   v-for="(p, index) in story.slice(1)"
                   :key="index"
                   class="container columns">
-                  <nuxt-link :to="'/'+ p._class.split('.').pop().toLowerCase()+ 's/' +p.slug">
+                  <nuxt-link :to="'/'+ p._class.split('.').pop().toLowerCase()+ '/' +p.slug">
                     <MoreStories
                       :story="p"
                       :categories= "true"/>
