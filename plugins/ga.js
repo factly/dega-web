@@ -4,7 +4,6 @@ const axios = require('axios');
 
 async function getGATracking(app) {
   const gaTrackingCode = await axios
-  // .get(`${process.env.API_URI}/api/v1/organizations/?client=${process.env.CLIENT_ID}`)
     .get(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`)
     .then(response => response.data[0].ga_tracking_code)
     .catch(err => console.log(err));
@@ -17,7 +16,6 @@ async function getGATracking(app) {
     ga('set', 'page', to.fullPath)
     ga('send', 'pageview')
   })
-  console.log("finished")
 }
 
 export default ({ app }) => {
@@ -31,9 +29,9 @@ export default ({ app }) => {
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  /*
-  ** Set the current page
-  */
-  getGATracking(app)
-}
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    /*
+    ** Set the current page
+    */
+   getGATracking(app)
+  }

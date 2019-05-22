@@ -103,8 +103,9 @@ export default {
   },
   head () {
     return {
+      __dangerouslyDisableSanitizers: ['script'],
       script: [
-        { src: JSON.stringify(this.factcheck.schemas), type: 'application/ld+json' }],
+        { innerHTML: JSON.stringify(this.factcheck[0].schemas), type: 'application/ld+json' }],
       title: this.factcheck[0].title,
       meta: [
         { hid: 'og:title', name: 'og:title', content: this.factcheck[0].title },
