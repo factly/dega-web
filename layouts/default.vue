@@ -135,7 +135,8 @@ export default {
     return {
       //Following needs to be dynamically updated from Organization entity
       link: [
-        { rel: 'shortcut icon', type:'image/png', href: this.organisation.logo_url }
+        { rel: 'shortcut icon', type:'image/png', href: this.organisation.logo_url },
+        { rel: 'icon', type: 'image/x-icon', href: this.organisation.fav_icon_url },
       ],
       meta: [
         { property: 'og:description', content: this.organisation.description}
