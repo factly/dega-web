@@ -4,7 +4,8 @@
       <section class="hero-title has-text-centered">
         <Hero :story="post[0]" :categories= "true"/>
       </section>
-      <section class="section">
+      <section class="columns section">
+        <div class="column is-2"/>
         <div class="container">
           <hr class="spacer is-1-5 is-hidden-mobile">
           <article
@@ -13,6 +14,7 @@
             {{ post[0].content }}
           </article>
         </div>
+        <div class="column is-2"/>
       </section>
       <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
       <SocialSharingHorizontal class="is-hidden-desktop is-hidden-tablet" :url="$nuxt.$route.path"/>
