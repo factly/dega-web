@@ -2,36 +2,26 @@
   <div class="columns">
     <div class="column">
       <div class="main-content">
-        <div
-          v-if="factchecks && factchecks.length"
-          class="container">
-          <nuxt-link :to="'/factcheck/'+ factchecks[0].slug">
-            <Hero :story="factchecks[0]" :categories= "true"/>
+        <div v-if="posts && posts.length" class="container">
+          <nuxt-link :to="'/posts/'+ posts[0].slug">
+            <Hero :story="posts[0]" :categories= "true"/>
           </nuxt-link>
           <hr class="spacer is-1-5 is-hidden-mobile">
-          <div class="columns" v-if="factchecks.length > 1">
-            <!-- MoreStories Section -->
-            <div class="column is-12">
+          <div class="columns">
+            <div class="column is-12" v-if="posts.length > 1">
               <section>
                 <h3>MORE STORIES</h3>
                 <br>
-                <div
-                  v-for="(p, index) in factchecks.slice(1)"
-                  :key="index"
-                  class="container columns">
-                  <nuxt-link :to="'/factcheck/'+ p.slug">
-                    <MoreStories
-                      :story="p"
-                      :categories="false"/>
+                <div v-for="(p, index) in posts.slice(1)" :key="index" class="container columns">
+                  <nuxt-link :to="'/posts/'+ p.slug">
+                    <MoreStories :story="p" :categories="true"/>
                   </nuxt-link>
                 </div>
               </section>
             </div>
           </div>
         </div>
-        <div
-          v-else
-          class="subtitle is-6 is-uppercase has-text-centered">
+        <div v-else class="subtitle is-6 is-uppercase has-text-centered">
           Dega API is not responding.<br> Please contact the administrator.
         </div>
       </div>
@@ -40,7 +30,6 @@
     <SocialSharingHorizontal class="is-hidden-desktop is-hidden-tablet" :url="$nuxt.$route.path"/>
   </div>
 </template>
-
 <script>
 import axios from 'axios';
 import MoreStories from '~/components/MoreStories';
@@ -60,7 +49,7 @@ export default {
   },
   data() {
     return {
-      factchecks: null,
+      posts: null,
       prodBaseUrl: process.env.domainHostname
     };
   },
@@ -84,23 +73,27 @@ export default {
       return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   },
+  // created(){
+  //   console.log("created");
+  //   this.posts = _.orderBy(this.$store.getters.getPosts, ['published_date'], ['desc']);
+  // },
   async asyncData() {
-    const factchecks = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
+    const posts = await axios
+      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
-      .catch(error => console.log(error));
-      const sortedFactchecks = _.orderBy(factchecks, ['published_date'], ['desc']);
-      return{
-        factchecks: sortedFactchecks
-      };
+      .catch(err => console.log(err));
+    const sortedPosts = _.orderBy(posts, ['published_date'], ['desc']);
+    return {
+      posts: sortedPosts
+    };
   },
   head () {
     return {
       /* eslint no-underscore-dangle: 0 */
-      title: this.factchecks[0]._class.split('.').pop(),
+      title: this.posts[0]._class.split('.').pop(),
       meta: [
         /* eslint no-underscore-dangle: 0 */
-        { hid: 'og:title', name: 'og:title', content: this.factchecks[0]._class.split('.').pop() },
+        { hid: 'og:title', name: 'og:title', content: this.posts[0]._class.split('.').pop() },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
         { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + BackgroundImage }
       ]
