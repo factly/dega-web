@@ -92,10 +92,6 @@ export default {
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&slug=${params.params.slug}`))
       .then((response) => response.data)
       .catch(err => console.log(err));
-    const organizations = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`))
-      .then(response => response.data)
-      .catch(err => console.log(err));
     return{
       factcheck: factcheck,
       organizations: organizations
