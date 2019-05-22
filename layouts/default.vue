@@ -20,10 +20,10 @@
         class="navbar-menu">
         <div class="navbar-start is-uppercase has-text-weight-semibold">
           <nuxt-link to="/"  class="navbar-item">Home</nuxt-link>
-          <nuxt-link to="/post" class="navbar-item">Stories</nuxt-link>
+          <nuxt-link to="/posts" class="navbar-item">Stories</nuxt-link>
           <nuxt-link to="/category/fake-news" class="navbar-item">Fake News</nuxt-link>
           <nuxt-link to="/category/video" class="navbar-item">Videos</nuxt-link>
-          <nuxt-link to="/factcheck" class="navbar-item">Fact Check</nuxt-link>
+          <nuxt-link to="/factchecks" class="navbar-item">Fact Check</nuxt-link>
           <!--<nuxt-link to="/category/fake-news" class="navbar-item">Fake News</nuxt-link>-->
           <div class="navbar-item has-dropdown is-hoverable">
             <div class="navbar-link has-dropdown" @click="toggleMore = !toggleMore">More
