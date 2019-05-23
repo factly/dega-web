@@ -47,7 +47,7 @@
             </div>
             <div class="columns is-hidden-mobile padded-top">
               <span class="column" style="color: #1976d2;">
-                <SocialSharing :url="$nuxt.$route.path" :org="org"/>
+                <SocialSharing :url="$nuxt.$route.path"/>
               </span>
             </div>
           </div>
@@ -69,7 +69,7 @@
       </div>
       <div class="columns is-hidden-desktop is-hidden-tablet padded-top">
         <span class="column" style="color: #1976d2;">
-          <SocialSharing :url="$nuxt.$route.path" :org="org"/>
+          <SocialSharing :url="$nuxt.$route.path"/>
         </span>
       </div>
     </div>
@@ -92,11 +92,6 @@ export default {
     claim: {
       type: Object,
       required: true,
-      default: null
-    },
-    org: {
-      type: Object,
-      required: false,
       default: null
     },
     index: {

@@ -37,12 +37,7 @@ export default {
       type: String,
       required: true,
       default: null
-    },
-    org: {
-      type: Array,
-      required: false,
-      default: null
-    },
+    }
   },
   data(){
      return {

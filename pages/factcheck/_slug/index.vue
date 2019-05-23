@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path" :org="organizations"/>
+    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path" />
     <SocialSharingHorizontal class="is-hidden-desktop is-hidden-tablet" :url="$nuxt.$route.path"/>
   </div>
 </template>
@@ -59,7 +59,6 @@ export default {
   data() {
     return {
       factcheck: null,
-      organizations: null,
       ListClaimsHidden: false,
       structuredData: null
     };
@@ -92,14 +91,8 @@ export default {
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&slug=${params.params.slug}`))
       .then((response) => response.data)
       .catch(err => console.log(err));
-    const organizations = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`))
-      .then(response => response.data)
-      .catch(err => console.log(err));
     return{
-      factcheck: factcheck,
-      organizations: organizations
-      // structuredData: factcheck.schemas[0]
+      factcheck: factcheck
     };
   },
   head () {
