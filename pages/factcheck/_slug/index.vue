@@ -3,7 +3,7 @@
     <Hero :story="factcheck[0]" :categories= "true"/>
     <div class="column is-divider is-hidden-mobile is-offset-one-quarter is-half"/>
     <div class="columns">
-      <div class="column is-1"/>
+      <div class="column is-2"/>
       <div class="column is-full-mobile">
         <div class="column is-full">
           <div>
@@ -21,10 +21,11 @@
           </div>
         </div>
       </div>
-      <div v-if="factcheck[0].claims.length > 1" class="column is-one-quarter is-hidden-mobile">
-        <ListClaims :factcheck="factcheck"/> 
+      <div class="column is-2">
+        <div v-if="factcheck[0].claims.length > 1" class="column is-hidden-mobile">
+          <ListClaims :factcheck="factcheck[0]"/> 
+        </div>
       </div>
-      <div class="column is-1"/>
     </div>
     <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path" :org="organizations"/>
     <SocialSharingHorizontal class="is-hidden-desktop is-hidden-tablet" :url="$nuxt.$route.path"/>
@@ -103,8 +104,9 @@ export default {
   },
   head () {
     return {
+      __dangerouslyDisableSanitizers: ['script'],
       script: [
-        { src: JSON.stringify(this.factcheck.schemas), type: 'application/ld+json' }],
+        { innerHTML: JSON.stringify(this.factcheck[0].schemas), type: 'application/ld+json' }],
       title: this.factcheck[0].title,
       meta: [
         { hid: 'og:title', name: 'og:title', content: this.factcheck[0].title },

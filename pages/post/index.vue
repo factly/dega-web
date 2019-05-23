@@ -26,8 +26,6 @@
         </div>
       </div>
     </div>
-    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
-    <SocialSharingHorizontal class="is-hidden-desktop is-hidden-tablet" :url="$nuxt.$route.path"/>
   </div>
 </template>
 <script>
@@ -35,17 +33,13 @@ import axios from 'axios';
 import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
-import SocialSharingVertical from '~/components/SocialSharingVertical';
-import SocialSharingHorizontal from '~/components/SocialSharingHorizontal';
 import BackgroundImage from '~/assets/images/dega-default-image.png';
 import _ from 'lodash';
 export default {
   components: {
     MoreStories,
     PopularArticles,
-    Hero,
-    SocialSharingHorizontal,
-    SocialSharingVertical
+    Hero
   },
   data() {
     return {
@@ -73,6 +67,10 @@ export default {
       return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   },
+  // created(){
+  //   console.log("created");
+  //   this.posts = _.orderBy(this.$store.getters.getPosts, ['published_date'], ['desc']);
+  // },
   async asyncData() {
     const posts = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
