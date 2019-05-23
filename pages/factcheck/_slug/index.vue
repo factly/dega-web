@@ -5,7 +5,6 @@
       :categories= "true"/>
     <div class="column is-divider is-hidden-mobile is-offset-one-quarter is-half"/>
     <div class="columns">
-      <div class="column is-1"/>
       <div class="column is-full-mobile">
         <div class="column is-full">
           <div>
@@ -37,7 +36,6 @@
         class="column is-one-quarter is-hidden-mobile">
         <ListClaims :factchecks="factchecks"/>
       </div>
-      <div class="column is-1"/>
     </div>
     <SocialSharingVertical
       :url="$nuxt.$route.path"

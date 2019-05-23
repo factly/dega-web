@@ -142,11 +142,13 @@
         </div>
       </div>
     </nav>
-    <div>
-      <br class="is-hidden-mobile">
-      <br>
-      <nuxt/>
-    </div>
+    <br >
+    <br >
+    <main>
+      <div class="container is-widescreen">
+        <nuxt/>
+      </div>
+    </main>
     <footer class="footer">
       <div class="content has-text-centered">
         <p>

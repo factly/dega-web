@@ -7,7 +7,7 @@
           :categories= "true"/>
       </section>
       <section class="section">
-        <div class="container">
+        <div>
           <article
             class="post has-text-justified"
             v-html="post[0].content">

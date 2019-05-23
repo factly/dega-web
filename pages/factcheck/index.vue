@@ -13,23 +13,15 @@
           <hr class="spacer is-1-5 is-hidden-mobile">
           <div
             v-if="factchecks.length > 1"
-            class="columns">
-            <!-- MoreStories Section -->
-            <div class="column is-12">
-              <section>
-                <h3>MORE STORIES</h3>
-                <br>
-                <div
-                  v-for="(p, index) in factchecks.slice(1)"
-                  :key="index"
-                  class="container columns">
-                  <nuxt-link :to="'/factcheck/'+ p.slug">
-                    <MoreStories
-                      :story="p"
-                      :categories="false"/>
-                  </nuxt-link>
-                </div>
-              </section>
+            class="columns is-multiline">
+            <div
+              v-for="(p, index) in factchecks.slice(1)"
+              :key="index"
+              class="column is-4"
+            >
+              <StoryPreview
+                :story="p"
+              />
             </div>
           </div>
         </div>
@@ -45,17 +37,15 @@
 
 <script>
 import axios from 'axios';
-import MoreStories from '~/components/MoreStories';
-import PopularArticles from '~/components/PopularArticles';
+import StoryPreview from '@/components/StoryPreview';
 import Hero from '~/components/Hero';
 import BackgroundImage from '~/assets/images/dega-default-image.png';
 import _ from 'lodash';
 
 export default {
   components: {
-    MoreStories,
-    PopularArticles,
-    Hero
+    Hero,
+    StoryPreview
   },
   data() {
     return {

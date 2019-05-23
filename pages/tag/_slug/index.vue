@@ -11,26 +11,17 @@
               :categories= "true"/>
           </nuxt-link>
           <hr class="spacer is-1-5">
-          <div class="columns">
-            <!-- MoreStories Section -->
+          <div
+            v-if="story.length > 1"
+            class="columns is-multiline">
             <div
-              v-if="story.length > 1"
-              class="column is-12">
-              <section>
-                <h3>MORE STORIES</h3>
-                <br>
-                <div
-                  v-for="(p, index) in story.slice(1)"
-                  :key="index"
-                  class="container columns">
-                  <nuxt-link :to="'/'+ p._class.split('.').pop().toLowerCase()+ '/' +p.slug">
-                    <MoreStories
-                      :story="p"
-                      :categories= "true"/>
-                  </nuxt-link>
-                  <hr class="spacer is-1-5 is-hidden-desktop">
-                </div>
-              </section>
+              v-for="(p, index) in story.slice(1)"
+              :key="index"
+              class="column is-4"
+            >
+              <StoryPreview
+                :story="p"
+              />
             </div>
           </div>
         </div>
@@ -47,16 +38,14 @@
 
 <script>
 import axios from 'axios';
-import MoreStories from '~/components/MoreStories';
-import PopularArticles from '~/components/PopularArticles';
+import StoryPreview from '@/components/StoryPreview';
 import Hero from '~/components/Hero';
 import _ from 'lodash';
 
 export default {
   components: {
-    MoreStories,
-    PopularArticles,
-    Hero
+    Hero,
+    StoryPreview
   },
   data() {
     return {
