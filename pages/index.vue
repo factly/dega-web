@@ -4,7 +4,7 @@
       <div class="main-content">
         <div
           v-if="story && story.length"
-          class="container">
+        >
           <nuxt-link :to="'/'+ story[0]._class.split('.').pop().toLowerCase()+ '/' + story[0].slug">
             <Hero
               :story="story[0]"
@@ -37,9 +37,9 @@
 
 <script>
 import axios from 'axios';
-import StoryPreview from '~/components/StoryPreview';
-import Hero from '~/components/Hero';
-import BackgroundImage from '~/assets/images/dega-default-image.png';
+import StoryPreview from '@/components/StoryPreview';
+import Hero from '@/components/Hero';
+import BackgroundImage from '@/assets/images/dega-default-image.png';
 import _ from 'lodash';
 
 export default {

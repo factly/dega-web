@@ -146,7 +146,14 @@
     <br >
     <main>
       <div class="container is-widescreen">
-        <nuxt/>
+        <div class="columns">
+          <div class="column is-9">
+            <nuxt/>
+          </div>
+          <div class="column is-3">
+            <PopularArticles />
+          </div>
+        </div>
       </div>
     </main>
     <footer class="footer">
@@ -165,7 +172,12 @@
 </style>
 
 <script>
+import PopularArticles from '@/components/PopularArticles';
+
 export default {
+  components: {
+    PopularArticles
+  },
   data() {
     return {
       toggleNavBar: false,
