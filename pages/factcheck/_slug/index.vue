@@ -1,47 +1,52 @@
 <template>
-  <div v-if="factchecks && factchecks.length > 0">
-    <Hero
-      :story="factchecks[0]"
-      :categories= "true"/>
-    <div class="column is-divider is-hidden-mobile is-offset-one-quarter is-half"/>
+  <div>
     <div class="columns">
-      <div class="column is-full-mobile">
-        <div class="column is-full">
-          <div>
-            <article
-              class="post"
-              style="text-align: justify;">
-              <p v-html="factchecks[0].introduction">{{ factchecks[0].introduction }}</p>
-            </article>
-            <div
-              v-for="(claim,index) in factchecks[0].claims"
-              :key="index">
-              <a
-                :id="'claim'+(index+1)"
-                class="anchor"/>
-              <ClaimWidget
-                :claim="claim"
-                :index="index"/>
+      <div class="column is-8">
+        <div v-if="factchecks && factchecks.length > 0">
+          <StoryHead :story="factchecks[0]"/>
+          <div class="columns">
+            <div class="column is-full-mobile">
+              <div class="column is-full">
+                <div>
+                  <article
+                    class="post"
+                    style="text-align: justify;">
+                    <p v-html="factchecks[0].introduction">{{ factchecks[0].introduction }}</p>
+                  </article>
+                  <div
+                    v-for="(claim,index) in factchecks[0].claims"
+                    :key="index">
+                    <a
+                      :id="'claim'+(index+1)"
+                      class="anchor"/>
+                    <ClaimWidget
+                      :claim="claim"
+                      :index="index"/>
+                  </div>
+                  <article
+                    class="post"
+                    style="text-align: justify;">
+                    <p v-html="factchecks[0].summary">{{ factchecks[0].summary }}</p>
+                  </article>
+                </div>
+              </div>
             </div>
-            <article
-              class="post"
-              style="text-align: justify;">
-              <p v-html="factchecks[0].summary">{{ factchecks[0].summary }}</p>
-            </article>
+            <div
+              v-if="factchecks[0].claims.length > 1"
+              class="column is-one-quarter is-hidden-mobile">
+              <ListClaims :factchecks="factchecks"/>
+            </div>
           </div>
         </div>
       </div>
-      <div
-        v-if="factchecks[0].claims.length > 1"
-        class="column is-one-quarter is-hidden-mobile">
-        <ListClaims :factchecks="factchecks"/>
+      <div class="column is-4">
+        <PopularArticles />
       </div>
     </div>
     <SocialSharingVertical
       :url="$nuxt.$route.path"
       :quote="factchecks[0].title"
     />
-
   </div>
 </template>
 <style scoped>
@@ -53,16 +58,17 @@ a.anchor {
 </style>
 <script>
 import axios from 'axios';
-import '~/node_modules/bulma-divider';
-import Hero from '~/components/Hero';
+import StoryHead from '@/components/StoryHead';
+import PopularArticles from '@/components/PopularArticles';
 import ClaimWidget from '~/components/ClaimWidget';
 import ListClaims from '~/components/ListClaims.vue';
 
 export default {
   components: {
-    Hero,
+    StoryHead,
     ClaimWidget,
-    ListClaims
+    ListClaims,
+    PopularArticles
   },
   data() {
     return {

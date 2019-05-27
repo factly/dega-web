@@ -2,14 +2,8 @@
   <div class="columns">
     <div class="column">
       <div class="main-content">
-        <div
-          v-if="factchecks && factchecks.length"
-          class="container">
-          <nuxt-link :to="'/factcheck/'+ factchecks[0].slug">
-            <Hero
-              :story="factchecks[0]"
-              :categories= "true"/>
-          </nuxt-link>
+        <div v-if="factchecks && factchecks.length">
+          <Hero :story="factchecks[0]"/>
           <hr class="spacer is-1-5 is-hidden-mobile">
           <div
             v-if="factchecks.length > 1"

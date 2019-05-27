@@ -1,72 +1,26 @@
 <!-- Popular articles -->
 <template>
-  <div>
+  <div style="padding: 2rem; padding-top: 0rem">
     <div>
-      <p class="title is-4 has-text-centered">Popular Articles</p>
+      <p
+        class="title is-4"
+        style="padding-bottom: 2rem;">Popular Articles</p>
     </div>
-    <div
-      class="card"
-      style="margin: 1.5rem">
-      <div class="card-image">
-        <figure class="images is-5by3">
-          <img
-            src="https://gateway.factly.in/core/dega-content/factly-telugu/2019/5/ep5-thumbnail.png"
-            alt="Placeholder image">
-        </figure>
-      </div>
-      <div
-        class="card-content"
-        style="padding: 0.25rem;">
-        <p class="subtitle is-6">HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo</p>
-      </div>
-    </div>
-    <div
-      class="card"
-      style="margin: 1.5rem">
-      <div class="card-image">
-        <figure class="images is-5by3">
-          <img
-            src="https://gateway.factly.in/core/dega-content/factly-telugu/2019/5/ep5-thumbnail.png"
-            alt="Placeholder image">
-        </figure>
-      </div>
-      <div
-        class="card-content"
-        style="padding: 0.25rem;">
-        <p class="subtitle is-6">HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo</p>
-      </div>
-    </div>
-    <div
-      class="card"
-      style="margin: 1.5rem">
-      <div class="card-image">
-        <figure class="images is-5by3">
-          <img
-            src="https://gateway.factly.in/core/dega-content/factly-telugu/2019/5/ep5-thumbnail.png"
-            alt="Placeholder image">
-        </figure>
-      </div>
-      <div
-        class="card-content"
-        style="padding: 0.25rem;">
-        <p class="subtitle is-6">HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo</p>
-      </div>
-    </div>
-    <div
-      class="card"
-      style="margin: 1.5rem">
-      <div class="card-image">
-        <figure class="images is-5by3">
-          <img
-            src="https://gateway.factly.in/core/dega-content/factly-telugu/2019/5/ep5-thumbnail.png"
-            alt="Placeholder image">
-        </figure>
-      </div>
-      <div
-        class="card-content"
-        style="padding: 0.25rem;">
-        <p class="subtitle is-6">HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo HEllo</p>
-      </div>
+    <div>
+      <PopularArticlePreview rank="01"/>
+      <PopularArticlePreview rank="02"/>
+      <PopularArticlePreview rank="03"/>
+      <PopularArticlePreview rank="04"/>
+      <PopularArticlePreview rank="05"/>
     </div>
   </div>
 </template>
+<script>
+import PopularArticlePreview from '@/components/PopularArticlePreview';
+
+export default {
+  components: {
+    PopularArticlePreview
+  }
+};
+</script>

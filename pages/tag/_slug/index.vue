@@ -2,26 +2,23 @@
   <div class="columns">
     <div class="column">
       <div class="main-content">
-        <div
-          v-if="story && story.length"
-          class="container">
-          <nuxt-link :to="'/'+ story[0]._class.split('.').pop().toLowerCase()+ '/' + story[0].slug">
-            <Hero
-              :story="story[0]"
-              :categories= "true"/>
-          </nuxt-link>
-          <hr class="spacer is-1-5">
-          <div
-            v-if="story.length > 1"
-            class="columns is-multiline">
-            <div
-              v-for="(p, index) in story.slice(1)"
-              :key="index"
-              class="column is-4"
-            >
-              <StoryPreview
-                :story="p"
-              />
+        <div v-if="story && story.length">
+          <div class="columns">
+            <div class="column is-8">
+              <div class="columns is-multiline">
+                <div
+                  v-for="(p, index) in story"
+                  :key="index"
+                  class="column is-6"
+                >
+                  <StoryPreview
+                    :story="p"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="column is-4">
+              <PopularArticles />
             </div>
           </div>
         </div>

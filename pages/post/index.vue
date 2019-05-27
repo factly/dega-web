@@ -2,14 +2,8 @@
   <div class="columns">
     <div class="column">
       <div class="main-content">
-        <div
-          v-if="posts && posts.length"
-          class="container">
-          <nuxt-link :to="'/post/'+ posts[0].slug">
-            <Hero
-              :story="posts[0]"
-              :categories= "true"/>
-          </nuxt-link>
+        <div v-if="posts && posts.length">
+          <Hero :story="posts[0]" />
           <hr class="spacer is-1-5 is-hidden-mobile">
           <div
             v-if="posts.length > 1"
