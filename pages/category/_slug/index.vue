@@ -104,7 +104,6 @@ export default {
       meta: [
         { hid: 'og:title', name: 'og:title', content: this.story[0].categories[0].name },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        { hid: 'og:image', name: 'og:image', content: '~/assets/images/dega-default-image.png' }
       ]
     }
   }

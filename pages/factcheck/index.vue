@@ -44,7 +44,6 @@ import axios from 'axios';
 import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
-import BackgroundImage from '~/assets/images/dega-default-image.png';
 import _ from 'lodash';
 export default {
   components: {
@@ -54,8 +53,7 @@ export default {
   },
   data() {
     return {
-      factchecks: null,
-      prodBaseUrl: process.env.domainHostname
+      factchecks: null
     };
   },
   methods: {
@@ -96,7 +94,6 @@ export default {
         /* eslint no-underscore-dangle: 0 */
         { hid: 'og:title', name: 'og:title', content: this.factchecks[0]._class.split('.').pop() },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + BackgroundImage }
       ]
     }
   }
