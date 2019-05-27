@@ -45,7 +45,6 @@ import axios from 'axios';
 import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
-import BackgroundImage from '~/assets/images/dega-default-image.png';
 import _ from 'lodash';
 export default {
   components: {
@@ -55,8 +54,7 @@ export default {
   },
   data() {
     return {
-      story: null,
-      prodBaseUrl: process.env.domainHostname
+      story: null
     };
   },
   methods: {
@@ -101,9 +99,7 @@ export default {
       meta: [
         { hid: 'og:title', name: 'og:title', content: "Factly" },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + BackgroundImage },
-        { property: 'og:description', content: 'FACTLY is a platform that brings you various aspects of life that directly or indirectly affects the common man but with ONE difference. Each news story on FACTLY is backed by factual evidence/data that is either available in the public domain or that is collated/gathered/collected using tools such as the Right to Information (RTI).'}
-      ],
+        ],
       htmlAttrs: {
         class: "has-navbar-fixed-top"
       }
