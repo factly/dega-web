@@ -127,14 +127,14 @@ export default {
   },
   head() {
     return {
-      // Following needs to be dynamically updated from Organization entity
       link: [
         { rel: 'shortcut icon', type: 'image/png', href: this.organisation.logo_url },
         { rel: 'icon', type: 'image/x-icon', href: this.organisation.fav_icon_url },
       ],
       meta: [
         { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + DefaultImage },
-        { property: 'og:description', content: this.organisation.description}
+        { hid: 'og:description', name: 'og:description', content: this.organisation.description},
+        { name: 'google-site-verification', content: this.organisation.google_verification_code}
       ],
       htmlAttrs: {
         class: 'has-navbar-fixed-top'
