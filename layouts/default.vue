@@ -70,7 +70,7 @@
 </style>
 
 <script>
-import BackgroundImage from '~/assets/images/dega-default-image.png';
+import DefaultImage from '~/assets/images/dega-default-image.png';
 import ClientSocialButtons from '~/components/ClientSocialButtons.vue'
 export default {
   components:{
@@ -95,7 +95,7 @@ export default {
         { rel: 'icon', type: 'image/x-icon', href: this.organisation.fav_icon_url },
       ],
       meta: [
-        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + BackgroundImage },
+        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + DefaultImage },
         { property: 'og:description', content: this.organisation.description}
       ],
       htmlAttrs: {
