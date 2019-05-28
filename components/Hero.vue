@@ -37,9 +37,46 @@
             </span> in <nuxt-link :to="'/category/' + story.categories[0].slug">{{ story.categories[0].name }}</nuxt-link>
           </div>
           <div class="has-text-grey headline-time">{{ story.published_date | date }}</div>
+<<<<<<< HEAD
           <Bookmark :story=story />
+=======
+          <br>
+          <div v-if="userModule">
+            <Button v-if="!saved" class="button is-icon" @click="save()">
+              <span class="icon" style="color: #55acee;">
+                <!--<svg class="svg-inline--fa fa-twitter fa-w-16 fa-lg" aria-hidden="true" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">-->
+                <svg
+                  width="1792"
+                  height="1792"
+                  viewBox="0 0 1792 1792"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1408 256h-1024v1242l423-406 89-85 89 85 423 406v-1242zm12-128q23 0 44 9 33 13 52.5 41t19.5 62v1289q0 34-19.5 62t-52.5 41q-19 8-44 8-48 0-83-32l-441-424-441 424q-36 33-83 33-23 0-44-9-33-13-52.5-41t-19.5-62v-1289q0-34 19.5-62t52.5-41q21-9 44-9h1048z"
+                  ></path>
+                </svg>
+              </span>
+            </Button>
+            <Button v-if="saved" class="button" @click="undoSave()">
+              <span class="icon" style="color: #55acee;">
+                <!--<svg class="svg-inline--fa fa-twitter fa-w-16 fa-lg" aria-hidden="true" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">-->
+                <svg
+                  width="1792"
+                  height="1792"
+                  viewBox="0 0 1792 1792"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1420 128q23 0 44 9 33 13 52.5 41t19.5 62v1289q0 34-19.5 62t-52.5 41q-19 8-44 8-48 0-83-32l-441-424-441 424q-36 33-83 33-23 0-44-9-33-13-52.5-41t-19.5-62v-1289q0-34 19.5-62t52.5-41q21-9 44-9h1048z"
+                  ></path>
+                </svg>
+              </span>
+            </Button>
+          </div>
+>>>>>>> 9c9b93a5b0ffa7a6070056ce36f247f49dbeb9d5
         </div>
       </div>
+      <div class="has-text-justified is-hidden-mobile">{{ story.excerpt }}</div>
     </div>
   </div>
 </template>

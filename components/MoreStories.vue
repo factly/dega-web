@@ -26,21 +26,23 @@
     <!-- story-title-column -->
     <div class="column is-4">
       <div class="content">
-        <p class="title is-4 is-size-3-mobile">{{ story.title }}</p><br>
+        <p class="title is-4 is-size-5-mobile">{{ story.title }}</p><br>
         <div
-          v-if="story.authors"
-          class="subtitle is-6 is-uppercase is-size-3-mobile">
+          v-show="story.authors"
+          class="subtitle is-6 is-uppercase is-size-6-mobile">
           BY
           <span
             v-for="(author, index) in story.authors"
             :key="index" >
-            <nuxt-link :to="'/author/' + author.slug">
-              {{ author.display_name }}
-            </nuxt-link>
-            <span v-if="index != story.authors.length -1"> , </span>
+            <no-ssr>
+              <nuxt-link :to="'/author/' + author.slug">
+                {{ author.display_name }}
+              </nuxt-link>
+            </no-ssr>
+            <span v-show="index != story.authors.length -1"> , </span>
           </span>
         </div>
-        <div class="is-size-4-mobile">{{ getDate(story.last_updated_date) }}</div><br>
+        <div class="is-size-6-mobile">{{ story.published_date | date }}</div><br>
       </div>
     </div>
     <!-- story-blockquote-column -->
@@ -53,20 +55,20 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .story-art {
   position: relative;
-  max-width: 800px; 
+  max-width: 800px;
   margin: 0 auto;
 }
 
 .story-art .fact-strip {
   position: absolute;
   bottom: 0;
-  background: rgb(0, 0, 0); 
+  background: rgb(0, 0, 0);
   background: rgba(0, 0, 0, 0.5);
   color: #f1f1f1;
-  width: 100%; 
+  width: 100%;
   padding: 20px;
 }
 </style>
@@ -83,26 +85,6 @@ export default {
       type: Boolean,
       required: true,
       default: false
-    }
-  },
-  methods: {
-    getDate(datetime) {
-      const date = new Date(datetime);
-      const ms = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ];
-      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   }
 };

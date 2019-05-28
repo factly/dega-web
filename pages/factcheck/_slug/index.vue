@@ -1,34 +1,55 @@
 <template>
   <div>
-    <Hero :story="factchecks[0]" :categories= "true"/>
-    <div class="column is-divider is-hidden-mobile is-offset-one-quarter is-half"/>
     <div class="columns">
-      <div class="column is-1"/>
-      <div class="column is-full-mobile">
-        <div class="column is-full">
-          <div>
-            <article class="post" style="text-align: justify;">
-              <p v-html="factchecks[0].introduction">{{ factchecks[0].introduction }}</p>
-            </article>
-            <div v-for="(claim,index) in factchecks[0].claims" :key="index">
-              <a class="anchor" :id="'claim'+(index+1)"></a>
-              <ClaimWidget :claim="claim" :index="index"/>
+      <div class="column is-8">
+        <div v-if="factcheck && factcheck.length > 0">
+          <StoryHead :story="factcheck[0]"/>
+          <div class="columns">
+            <div class="column is-full-mobile">
+              <div class="column is-full">
+                <div>
+                  <article
+                    class="post"
+                    style="text-align: justify;">
+                    <p v-html="factcheck[0].introduction">{{ factcheck[0].introduction }}</p>
+                  </article>
+                  <div
+                    v-for="(claim,index) in factcheck[0].claims"
+                    :key="index">
+                    <a
+                      :id="'claim'+(index+1)"
+                      class="anchor"/>
+                    <ClaimWidget
+                      :claim="claim"
+                      :index="index"/>
+                  </div>
+                  <article
+                    class="post"
+                    style="text-align: justify;">
+                    <p v-html="factcheck[0].summary">{{ factcheck[0].summary }}</p>
+                  </article>
+                </div>
+              </div>
             </div>
-            <article class="post" style="text-align: justify;">
-              <p v-html="factchecks[0].summary">{{ factchecks[0].summary }}</p>
-            </article>
+            <div
+              v-if="factcheck[0].claims.length > 1"
+              class="column is-one-quarter is-hidden-mobile">
+              <ListClaims :factcheck="factcheck"/>
+            </div>
           </div>
         </div>
       </div>
-      <div v-if="factchecks[0].claims.length > 1" class="column is-one-quarter is-hidden-mobile">
-        <ListClaims :factchecks="factchecks"/> 
+      <div class="column is-4">
+        <PopularArticles />
       </div>
-      <div class="column is-1"/>
     </div>
-    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
+    <SocialSharingVertical
+      :url="$nuxt.$route.path"
+      :quote="factcheck[0].title"
+    />
   </div>
 </template>
-<style>
+<style scoped>
 a.anchor {
     display: block;
     position: relative;
@@ -37,73 +58,51 @@ a.anchor {
 </style>
 <script>
 import axios from 'axios';
-import '~/node_modules/bulma-divider';
-import Hero from '~/components/Hero';
+import StoryHead from '@/components/StoryHead';
+import PopularArticles from '@/components/PopularArticles';
 import ClaimWidget from '~/components/ClaimWidget';
-import SocialSharing from '~/components/SocialSharing';
-import SocialSharingVertical from '~/components/SocialSharingVertical';
 import ListClaims from '~/components/ListClaims.vue';
 
 export default {
   components: {
-    Hero,
+    StoryHead,
     ClaimWidget,
-    SocialSharing,
-    SocialSharingVertical,
-    ListClaims
+    ListClaims,
+    PopularArticles
   },
   data() {
     return {
-      factchecks: null,
-      ListClaimsHidden: false
+      factcheck: null,
+      ListClaimsHidden: false,
+      structuredData: null
     };
   },
   methods: {
     validate({ params }) {
       return params.slug;
-    },
-    getDate(datetime) {
-      const date = new Date(datetime);
-      const ms = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ];
-      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   },
   async asyncData(params) {
-    
     const factcheck = await axios
-      .get(
-        `${process.env.apiUri}/api/v1/factchecks/?client=${
-          process.env.clientId
-        }&slug=${params.params.slug}`
-      )
-      .then((response) => response.data)
+      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&slug=${params.params.slug}`))
+      .then(response => response.data)
       .catch(err => console.log(err));
-      return{
-        factchecks: factcheck
-      };
-  },
-  head () {
     return {
-      title: this.factchecks[0].title,
+      factcheck
+    };
+  },
+  head() {
+    return {
+      __dangerouslyDisableSanitizers: ['script'],
+      script: [
+        { innerHTML: JSON.stringify(this.factcheck[0].schemas), type: 'application/ld+json' }],
+      title: this.factcheck[0].title,
       meta: [
-        { hid: 'og:title', name: 'og:title', content: this.factchecks[0].title },
+        { hid: 'og:title', name: 'og:title', content: this.factcheck[0].title },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        { hid: 'og:image', name: 'og:image', content: this.factchecks[0].featured_media }
+        { hid: 'og:image', name: 'og:image', content: this.factcheck[0].featured_media },
       ]
-    }
+    };
   }
 };
 </script>
