@@ -3,16 +3,12 @@
     <div class="column">
       <div class="main-content">
         <div v-if="posts && posts.length" class="container">
-          <nuxt-link :to="'/post/'+ posts[0].slug">
-            <Hero :story="posts[0]" :categories= "true"/>
-          </nuxt-link>
-          <hr class="spacer is-1-5 is-hidden-mobile">
           <div class="columns">
             <div class="column is-12">
               <section>
-                <h3>MORE STORIES</h3>
+                <h3>POSTS YOU LIKED</h3>
                 <br>
-                <div v-for="(p, index) in posts.slice(1)" :key="index" class="container columns">
+                <div v-for="(p, index) in posts" :key="index" class="container columns">
                   <nuxt-link :to="'/post/'+ p.slug">
                     <MoreStories :story="p" :categories="true"/>
                   </nuxt-link>
@@ -22,7 +18,7 @@
           </div>
         </div>
         <div v-else class="subtitle is-6 is-uppercase has-text-centered">
-          Dega API is not responding.<br> Please contact the administrator.
+          You havent bookmarked any posts<br>
         </div>
       </div>
     </div>
@@ -74,16 +70,17 @@ export default {
     }
   },
 
-  async asyncData() {
+  async asyncData({app}) {
     const post = await axios
-      .get(
-        `${process.env.apiUri}/api/v1/posts/?client=${
-          process.env.clientId
-        }&sortBy=publishedDate&sortAsc=false`
+      .post(
+        `${process.env.userDataApiUri}/saved/posts`,
+        {
+          "user":app.$auth.user
+        }
       )
       .then((response)=>
       {
-        console.log(response.data);
+        console.log("liked posts",response.data);
         return response.data
       })
       .catch(err => console.log(err));

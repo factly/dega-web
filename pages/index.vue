@@ -48,6 +48,7 @@ import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
 export default {
+  authenticated: true,
   components: {
     MoreStories,
     PopularArticles,

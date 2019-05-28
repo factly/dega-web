@@ -6,7 +6,10 @@ module.exports = {
     clientId: process.env.CLIENT_ID || 'factly',
     domainHostname: process.env.DOMAIN_HOSTNAME || 'http://factcheck.factly.in',
     userDataApiUri: process.env.USER_DATA_API_URI || 'http://localhost:8081',
-  // eslint-disable-next-line linebreak-style
+    logoutUri: process.env.LOGOUT_ENDPOINT,
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+    userModule: process.env.userModule || 'true'
+    // eslint-disable-next-line linebreak-style
   },
   mode: 'universal',
 
@@ -23,7 +26,7 @@ module.exports = {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
 
-      /* ,{ rel:"stylesheet",href:"https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"} */
+      //  { rel:"stylesheet",href:"https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"}
     ]
   },
 
@@ -55,64 +58,42 @@ module.exports = {
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
     '@nuxtjs/pwa',
-    'nuxt-oauth'
+    '@nuxtjs/auth'
   ],
   /*
   ** Axios module configuration
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-  },
-  oauth: {
-	sessionName: 'mySession',
-	secretKey: process.env.SECRET_KEY,
-	oauthHost: process.env.OAUTH_HOST,
-	oauthClientID: process.env.OAUTH_CLIENT_ID,
-	oauthClientSecret: process.env.OAUTH_CLIENT_SECRET,
-	authorizationPath:process.env.AUTHORIZATION_PATH,
-	accessTokenPath:process.env.ACCESS_TOKEN_PATH,
-	scopes: ['openid','profile','email'],
-	onLogout: (req, res) => {
-	  console.log("req",req);
-	  console.log("res",res);
-	  console.log("Log out");
-	},
-  fetchUser: async (accessToken) => {
-    console.log("Fetching User called");
-      var config = {
-        headers: {'Authorization': "bearer " + accessToken}
-    };
-    
-    var bodyParameters = {
-      key: "value"
-    }
-    let user;
-    let axios = require('axios')
-    let usercall = await axios.post( 
-      'http://localhost:8080/auth/realms/Factly/protocol/openid-connect/userinfo',
-      bodyParameters,
-      config
-    ).then((response) => {
-      user = response.data;
-      //console.log("fetch user response",response.data)
-    }).catch((error) => {
-      //console.log("fetch user error",error)
-    });
-    //const user = User.findByToken(accessToken, request)
+    credentials: false
 
-    let userLiked = await axios.post(
-      'http://localhost:8081/getliked',
-      {
-        user:user,
-        accessToken:accessToken
-      }).then((response)=>{
-        console.log(response.data)
-        user["prefs"] = response.data;
-      })
-    
-    return user
-  }
-},
+  },
+  auth: {
+    plugins: ['~/plugins/auth-refresh-token.js'],
+    rewriteRedirect: true,
+    strategies: {
+      social: {
+        _scheme: 'oauth2',
+        authorization_endpoint: process.env.AUTHORIZATION_ENDPOINT,
+        userinfo_endpoint: process.env.USERINFO_ENDPOINT,
+        //propertyName: false,
+        scope: ['openid', 'profile', 'email'],
+        response_type: 'code',
+        //token_type: 'id_token',
+        client_id: process.env.OAUTH_CLIENT_ID,
+        client_secret: process.env.OAUTH_CLIENT_SECRET,
+        access_token_endpoint: process.env.ACCESS_TOKEN_ENDPOINT,
+        end_session_endpoint: process.env.LOGOUT_ENDPOINT,
+        grant_type: 'authorization_code',
+        // token_key:  'access_token',
+        //state: 'UNIQUE_AND_NON_GUESSABLE'
+        fetchUser: function () {
+          console.log("Fetching User");
+        }
+      }
+    }
+  },
+
   /*
   ** Build configuration
   */

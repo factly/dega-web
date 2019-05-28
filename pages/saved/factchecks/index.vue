@@ -2,19 +2,15 @@
   <div class="columns">
     <div class="column">
       <div class="main-content">
-        <div v-if="posts && posts.length" class="container">
-          <nuxt-link :to="'/post/'+ posts[0].slug">
-            <Hero :story="posts[0]" :categories= "true"/>
-          </nuxt-link>
-          <hr class="spacer is-1-5 is-hidden-mobile">
+        <div v-if="factchecks && factchecks.length" class="container">
           <div class="columns">
             <div class="column is-12">
               <section>
-                <h3>MORE STORIES</h3>
+                <h3>FACTCHECKS YOU LIKED</h3>
                 <br>
-                <div v-for="(p, index) in posts.slice(1)" :key="index" class="container columns">
-                  <nuxt-link :to="'/post/'+ p.slug">
-                    <MoreStories :story="p" :categories="true"/>
+                <div v-for="(f, index) in factchecks" :key="index" class="container columns">
+                  <nuxt-link :to="'/factchecks/'+ f.slug">
+                    <MoreStories :story="f" :categories="true"/>
                   </nuxt-link>
                 </div>
               </section>
@@ -22,7 +18,7 @@
           </div>
         </div>
         <div v-else class="subtitle is-6 is-uppercase has-text-centered">
-          Dega API is not responding.<br> Please contact the administrator.
+          You havent bookmarked any factcheck stories.<br>
         </div>
       </div>
     </div>
@@ -46,7 +42,7 @@ export default {
   },
   data() {
     return {
-      posts: null
+      factchecks: null
     };
   },
   mounted(){
@@ -74,21 +70,22 @@ export default {
     }
   },
 
-  async asyncData() {
-    const post = await axios
-      .get(
-        `${process.env.apiUri}/api/v1/posts/?client=${
-          process.env.clientId
-        }&sortBy=publishedDate&sortAsc=false`
+  async asyncData({app}) {
+    const factcheck = await axios
+      .post(
+        `${process.env.userDataApiUri}/saved/factchecks`,
+        {
+          "user":app.$auth.user
+        }
       )
       .then((response)=>
       {
-        console.log(response.data);
+        console.log("liked factchecks",response.data);
         return response.data
       })
       .catch(err => console.log(err));
     return {
-      posts: post
+      factchecks: factcheck
     };
   }
 };
