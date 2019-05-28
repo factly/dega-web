@@ -7,9 +7,9 @@
 # build stage
 FROM node:10.14.2-alpine
 ENV APP_ROOT /app
-ARG API_URI=http://api.factly.in
+ARG API_URI=https://api.factly.in
 ARG CLIENT_ID=factly-telugu
-ARG DOMAIN_HOSTNAME=http://telugu.factly.in
+ARG DOMAIN_HOSTNAME=https://telugu.factly.in
 
 # create and setup working directory
 RUN mkdir ${APP_ROOT}

@@ -1,8 +1,8 @@
 <template>
-  <div class="sticky-horizontal-container share-box">
+  <div class="sticky-vertical-container share-box">
     <div class="share-icon">
       <a
-        :href="'https://www.facebook.com/sharer/sharer.php?u='+ organisation.site_address + url + '&quote='+quote"
+        :href="'https://www.facebook.com/sharer/sharer.php?u='+ organisation.site_address + url"
         target="_blank" >
         <div
           role="button"
@@ -32,7 +32,7 @@
     </div>
     <div class="share-icon">
       <a
-        :href="'https://twitter.com/share?text=' + quote + '&url=' + organisation.site_address + url"
+        :href="'https://twitter.com/intent/tweet?text='+ organisation.site_address + url"
         target="_blank">
         <div
           role="button"
@@ -62,7 +62,7 @@
     </div>
     <div class="share-icon">
       <a
-        :href="'https://api.whatsapp.com/send?text='+ quote + ' ' + organisation.site_address + url"
+        :href="'https://api.whatsapp.com/send?text='+ organisation.site_address + url"
         target="_blank">
         <div
           role="button"
@@ -97,15 +97,20 @@
     padding: 5px;
   }
   .share-box {
-    display: block;
-    padding: 1.5rem;
+    display: inline-block;
+    width: 100%;
+    margin-left: auto;
+    left: auto;
+    right: auto;
   }
-  .sticky-horizontal-container {
-    position: fixed;
-    top: 50%;
-    right: 0px;
-    height: auto;
-    z-index: 9999;
+  .sticky-vertical-container {
+    position: fixed !important;
+    bottom: 0;
+    background: #fff;
+    z-index: 10001;
+    text-align: right;
+    padding: 5px 20px 5px 0 !important;
+    border-top: 1px solid #e0e0e0;
   }
 </style>
 <script>
@@ -114,14 +119,10 @@ export default {
     url: {
       type: String,
       required: true
-    },
-    quote: {
-      type: String,
-      default: ''
     }
   },
-  data() {
-    return {
+  data(){
+     return {
       organisation: this.$store.getters.getOrganisation
     };
   }

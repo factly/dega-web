@@ -1,72 +1,99 @@
 <template>
-  <div class="columns is-vcentered is-centered">
-    <div class="column is-6">
-      <div class="card">
-        <div class="card-image">
-          <figure class="image is-5by3">
-            <img
-              :src="story.featured_media"
-              alt="Factcheck"
-              style="border-radius: 0px 0px 0px 0px;"
-            >
-          </figure>
+  <div style="margin: 1rem;">
+    <div class="columns">
+      <div class= "column is-6">
+        <div class="card">
+          <div class="card-image">
+            <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' + story.slug">
+              <figure class ="image is-16by9">
+                <img
+                  :src="story.featured_media"
+                  :alt="story._class.split('.').pop()">
+              </figure>
+            </nuxt-link>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="column is-5">
-      <div class="content subtitle has-text-centered">
-        <p
-          class="title is-size-5 is-size-4-tablet is-size-3-mobile is-size-3-desktop has-text-centered-desktop"
-        >{{ story.title }}</p>
-      </div>
-      <div
-        v-if="story.authors"
-        class="subtitle is-6 is-uppercase has-text-centered is-size-3-mobile"
-      >
-        BY
-        <span v-for="(author, index) in story.authors" :key="index">
-          <nuxt-link :to="'/author/' + author.slug">{{ author.display_name }}</nuxt-link>
-          <span v-if="index != story.authors.length -1">,</span>
-        </span>
-      </div>
-      <div class="has-text-centered is-size-4-mobile">{{ getDate(story.last_updated_date) }}</div>
-      <br>
-      <div v-if="userModule">
-        <Button v-if="!saved" class="button is-icon" @click="save()">
-          <span class="icon" style="color: #55acee;">
-            <!--<svg class="svg-inline--fa fa-twitter fa-w-16 fa-lg" aria-hidden="true" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">-->
-            <svg
-              width="1792"
-              height="1792"
-              viewBox="0 0 1792 1792"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1408 256h-1024v1242l423-406 89-85 89 85 423 406v-1242zm12-128q23 0 44 9 33 13 52.5 41t19.5 62v1289q0 34-19.5 62t-52.5 41q-19 8-44 8-48 0-83-32l-441-424-441 424q-36 33-83 33-23 0-44-9-33-13-52.5-41t-19.5-62v-1289q0-34 19.5-62t52.5-41q21-9 44-9h1048z"
-              ></path>
-            </svg>
-          </span>
-        </Button>
-        <Button v-if="saved" class="button" @click="undoSave()">
-          <span class="icon" style="color: #55acee;">
-            <!--<svg class="svg-inline--fa fa-twitter fa-w-16 fa-lg" aria-hidden="true" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">-->
-            <svg
-              width="1792"
-              height="1792"
-              viewBox="0 0 1792 1792"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1420 128q23 0 44 9 33 13 52.5 41t19.5 62v1289q0 34-19.5 62t-52.5 41q-19 8-44 8-48 0-83-32l-441-424-441 424q-36 33-83 33-23 0-44-9-33-13-52.5-41t-19.5-62v-1289q0-34 19.5-62t52.5-41q21-9 44-9h1048z"
-              ></path>
-            </svg>
-          </span>
-        </Button>
+      <div class="column is-6">
+        <div class="content">
+          <div>
+            <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' + story.slug">
+              <div>
+                <p class="title is-4 headline-title">{{ story.title }}</p>
+              </div>
+              <div>
+                <p class="subtitle is-6 headline-preview">{{ story.excerpt }}</p>
+              </div>
+            </nuxt-link>
+          </div>
+          <div class="has-text-black-bis headline-meta">
+            <span
+              v-for="(author, index) in story.authors"
+              :key="index" >
+              <nuxt-link :to="'/author/' + author.slug">
+                {{ author.display_name }}
+              </nuxt-link>
+              <span v-show="index != story.authors.length -1"> , </span>
+            </span> in <nuxt-link :to="'/category/' + story.categories[0].slug">{{ story.categories[0].name }}</nuxt-link>
+          </div>
+          <div class="has-text-grey headline-time">{{ story.published_date | date }}</div>
+          <br>
+          <div v-if="userModule">
+            <Button v-if="!saved" class="button is-icon" @click="save()">
+              <span class="icon" style="color: #55acee;">
+                <!--<svg class="svg-inline--fa fa-twitter fa-w-16 fa-lg" aria-hidden="true" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">-->
+                <svg
+                  width="1792"
+                  height="1792"
+                  viewBox="0 0 1792 1792"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1408 256h-1024v1242l423-406 89-85 89 85 423 406v-1242zm12-128q23 0 44 9 33 13 52.5 41t19.5 62v1289q0 34-19.5 62t-52.5 41q-19 8-44 8-48 0-83-32l-441-424-441 424q-36 33-83 33-23 0-44-9-33-13-52.5-41t-19.5-62v-1289q0-34 19.5-62t52.5-41q21-9 44-9h1048z"
+                  ></path>
+                </svg>
+              </span>
+            </Button>
+            <Button v-if="saved" class="button" @click="undoSave()">
+              <span class="icon" style="color: #55acee;">
+                <!--<svg class="svg-inline--fa fa-twitter fa-w-16 fa-lg" aria-hidden="true" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">-->
+                <svg
+                  width="1792"
+                  height="1792"
+                  viewBox="0 0 1792 1792"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1420 128q23 0 44 9 33 13 52.5 41t19.5 62v1289q0 34-19.5 62t-52.5 41q-19 8-44 8-48 0-83-32l-441-424-441 424q-36 33-83 33-23 0-44-9-33-13-52.5-41t-19.5-62v-1289q0-34 19.5-62t52.5-41q21-9 44-9h1048z"
+                  ></path>
+                </svg>
+              </span>
+            </Button>
+          </div>
+        </div>
       </div>
       <div class="has-text-justified is-hidden-mobile">{{ story.excerpt }}</div>
     </div>
   </div>
 </template>
+
+<style scoped>
+  .headline-meta {
+    margin-top: 1.5rem;
+  }
+  .headline-title {
+    font-family: 'Ramabhadra', sans-serif;
+    font-size: 2rem;
+    line-height: 2.2rem;
+    margin-bottom: 2rem;
+  }
+  .headline-preview {
+    font-family: 'Mallanna', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.3rem;
+  }
+</style>
+
 
 <script>
 import axios from 'axios'
@@ -102,11 +129,6 @@ export default {
       type: Object,
       required: true,
       default: null
-    },
-    categories: {
-      type: Boolean,
-      required: true,
-      default: false
     }
   },
   methods: {
@@ -193,24 +215,6 @@ export default {
         }
       })
     },
-    getDate(datetime) {
-      const date = new Date(datetime)
-      const ms = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec'
-      ]
-      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`
-    }
   }
 }
 </script>
