@@ -45,6 +45,7 @@ import PopularArticles from '@/components/PopularArticles';
 import _ from 'lodash';
 
 export default {
+  authenticated: true,
   components: {
     Hero,
     StoryPreview,
