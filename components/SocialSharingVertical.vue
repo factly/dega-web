@@ -114,6 +114,10 @@ export default {
     url: {
       type: String,
       required: true
+    },
+    quote: {
+      type: String,
+      default: ''
     }
   },
   data() {

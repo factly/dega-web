@@ -39,7 +39,7 @@
     border-radius: 5px;
   }
   .story-preview-headline {
-    font-family: 'Ramabhadra', "Lucida Grande","Lucida Sans Unicode","Lucida Sans", "Geneva", "Arial", "sans-serif" !important;
+    font-family: "Ramabhadra", sans-serif;
     font-size: 21px !important;
     line-height: 24px !important;
     overflow: hidden !important;

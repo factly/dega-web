@@ -5,17 +5,22 @@
         <div v-if="factchecks && factchecks.length">
           <Hero :story="factchecks[0]"/>
           <hr class="spacer is-1-5 is-hidden-mobile">
-          <div
-            v-if="factchecks.length > 1"
-            class="columns is-multiline">
-            <div
-              v-for="(p, index) in factchecks.slice(1)"
-              :key="index"
-              class="column is-4"
-            >
-              <StoryPreview
-                :story="p"
-              />
+          <div class="columns">
+            <div class="column is-8">
+              <div class="columns is-multiline">
+                <div
+                  v-for="(p, index) in factchecks.slice(1)"
+                  :key="index"
+                  class="column is-6"
+                >
+                  <StoryPreview
+                    :story="p"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="column is-4">
+              <PopularArticles />
             </div>
           </div>
         </div>
@@ -33,12 +38,14 @@
 import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '~/components/Hero';
+import PopularArticles from '@/components/PopularArticles';
 import _ from 'lodash';
 
 export default {
   components: {
     Hero,
-    StoryPreview
+    StoryPreview,
+    PopularArticles
   },
   data() {
     return {

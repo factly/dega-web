@@ -6,12 +6,14 @@
         class="title is-4"
         style="padding-bottom: 2rem;">Popular Articles</p>
     </div>
-    <div>
-      <PopularArticlePreview rank="01"/>
-      <PopularArticlePreview rank="02"/>
-      <PopularArticlePreview rank="03"/>
-      <PopularArticlePreview rank="04"/>
-      <PopularArticlePreview rank="05"/>
+    <div
+      v-for="(p, index) in popular"
+      :key="'popular' + index"
+    >
+      <PopularArticlePreview
+        :rank="'0' + (index + 1)"
+        :story="p"
+      />
     </div>
   </div>
 </template>
@@ -21,6 +23,11 @@ import PopularArticlePreview from '@/components/PopularArticlePreview';
 export default {
   components: {
     PopularArticlePreview
+  },
+  data() {
+    return {
+      popular: this.$store.getters.getPopular
+    };
   }
 };
 </script>
