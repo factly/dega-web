@@ -96,7 +96,8 @@ export default {
       ],
       meta: [
         { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + BackgroundImage },
-        { property: 'og:description', content: this.organisation.description}
+        { property: 'og:description', content: this.organisation.description},
+        { name: 'google-site-verification', content: this.organisation.google_verification_code}
       ],
       htmlAttrs: {
           class: "has-navbar-fixed-top"
