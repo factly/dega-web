@@ -31,21 +31,26 @@
 <script>
 import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
-import Hero from '~/components/Hero';
-import BackgroundImage from '~/assets/images/dega-default-image.png';
+import PopularArticles from '@/components/PopularArticles';
+import Hero from '@/components/Hero';
 import _ from 'lodash';
 
 export default {
   components: {
     StoryPreview,
+    PopularArticles,
     Hero
   },
   data() {
     return {
-      posts: null,
-      prodBaseUrl: process.env.domainHostname
+      posts: null
     };
   },
+
+  // created(){
+  //   console.log("created");
+  //   this.posts = _.orderBy(this.$store.getters.getPosts, ['published_date'], ['desc']);
+  // },
   async asyncData() {
     const posts = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
@@ -64,7 +69,6 @@ export default {
         /* eslint no-underscore-dangle: 0 */
         { hid: 'og:title', name: 'og:title', content: this.posts[0]._class.split('.').pop() },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + BackgroundImage },
       ]
     };
   }

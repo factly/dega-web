@@ -2,7 +2,7 @@
   <div class="sticky-vertical-container share-box">
     <div class="share-icon">
       <a
-        :href="'https://www.facebook.com/sharer/sharer.php?u='+ domainHostname + url"
+        :href="'https://www.facebook.com/sharer/sharer.php?u='+ organisation.site_address + url"
         target="_blank" >
         <div
           role="button"
@@ -32,7 +32,7 @@
     </div>
     <div class="share-icon">
       <a
-        :href="'https://twitter.com/intent/tweet?text='+ domainHostname + url"
+        :href="'https://twitter.com/intent/tweet?text='+ organisation.site_address + url"
         target="_blank">
         <div
           role="button"
@@ -62,7 +62,7 @@
     </div>
     <div class="share-icon">
       <a
-        :href="'https://api.whatsapp.com/send?text='+ domainHostname + url"
+        :href="'https://api.whatsapp.com/send?text='+ organisation.site_address + url"
         target="_blank">
         <div
           role="button"
@@ -118,18 +118,12 @@ export default {
   props: {
     url: {
       type: String,
-      required: true,
-      default: null
-    },
-    org: {
-      type: Object,
-      required: false,
-      default: null
+      required: true
     }
   },
-  data() {
-    return {
-      domainHostname: process.env.domainHostname
+  data(){
+     return {
+      organisation: this.$store.getters.getOrganisation
     };
   }
 };

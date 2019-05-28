@@ -2,8 +2,8 @@
   <div>
     <div class="columns">
       <div class="column is-8">
-        <div v-if="factchecks && factchecks.length > 0">
-          <StoryHead :story="factchecks[0]"/>
+        <div v-if="factcheck && factcheck.length > 0">
+          <StoryHead :story="factcheck[0]"/>
           <div class="columns">
             <div class="column is-full-mobile">
               <div class="column is-full">
@@ -11,10 +11,10 @@
                   <article
                     class="post"
                     style="text-align: justify;">
-                    <p v-html="factchecks[0].introduction">{{ factchecks[0].introduction }}</p>
+                    <p v-html="factcheck[0].introduction">{{ factcheck[0].introduction }}</p>
                   </article>
                   <div
-                    v-for="(claim,index) in factchecks[0].claims"
+                    v-for="(claim,index) in factcheck[0].claims"
                     :key="index">
                     <a
                       :id="'claim'+(index+1)"
@@ -26,15 +26,15 @@
                   <article
                     class="post"
                     style="text-align: justify;">
-                    <p v-html="factchecks[0].summary">{{ factchecks[0].summary }}</p>
+                    <p v-html="factcheck[0].summary">{{ factcheck[0].summary }}</p>
                   </article>
                 </div>
               </div>
             </div>
             <div
-              v-if="factchecks[0].claims.length > 1"
+              v-if="factcheck[0].claims.length > 1"
               class="column is-one-quarter is-hidden-mobile">
-              <ListClaims :factchecks="factchecks"/>
+              <ListClaims :factcheck="factcheck"/>
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
     </div>
     <SocialSharingVertical
       :url="$nuxt.$route.path"
-      :quote="factchecks[0].title"
+      :quote="factcheck[0].title"
     />
   </div>
 </template>
@@ -72,8 +72,7 @@ export default {
   },
   data() {
     return {
-      factchecks: null,
-      organizations: null,
+      factcheck: null,
       ListClaimsHidden: false,
       structuredData: null
     };
@@ -88,25 +87,20 @@ export default {
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&slug=${params.params.slug}`))
       .then(response => response.data)
       .catch(err => console.log(err));
-    const organizations = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`))
-      .then(response => response.data)
-      .catch(err => console.log(err));
     return {
-      factchecks: factcheck,
-      organizations
-      // structuredData: factcheck.schemas[0]
+      factcheck
     };
   },
   head() {
     return {
+      __dangerouslyDisableSanitizers: ['script'],
       script: [
-        { src: JSON.stringify(this.factchecks.schemas), type: 'application/ld+json' }],
-      title: this.factchecks[0].title,
+        { innerHTML: JSON.stringify(this.factcheck[0].schemas), type: 'application/ld+json' }],
+      title: this.factcheck[0].title,
       meta: [
-        { hid: 'og:title', name: 'og:title', content: this.factchecks[0].title },
+        { hid: 'og:title', name: 'og:title', content: this.factcheck[0].title },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        { hid: 'og:image', name: 'og:image', content: this.factchecks[0].featured_media },
+        { hid: 'og:image', name: 'og:image', content: this.factcheck[0].featured_media },
       ]
     };
   }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <a
-      :href="'https://www.facebook.com/sharer/sharer.php?u='+ domainHostname + url"
+      :href="'https://www.facebook.com/sharer/sharer.php?u='+ organisation.site_address + url"
       target="_blank" >
       <span
         class="icon facebook"
@@ -14,7 +14,7 @@
       </span>
     </a>
     <a
-      :href="'https://twitter.com/intent/tweet?text='+ domainHostname + url"
+      :href="'https://twitter.com/intent/tweet?text='+ organisation.site_address + url"
       target="_blank"
       class="twitter">
       <span
@@ -28,7 +28,7 @@
       </span>
     </a>
     <a
-      :href="'https://www.linkedin.com/cws/share/?token&isFramed=false&url='+ domainHostname + url"
+      :href="'https://www.linkedin.com/cws/share/?token&isFramed=false&url='+ organisation.site_address + url"
       target="_blank"
       class="linkedin">
       <span
@@ -48,18 +48,12 @@ export default {
   props: {
     url: {
       type: String,
-      required: true,
-      default: null
-    },
-    org: {
-      type: Object,
-      required: false,
-      default: null
+      required: true
     }
   },
   data() {
     return {
-      domainHostname: process.env.domainHostname
+      organisation: this.$store.getters.getOrganisation
     };
   }
 };

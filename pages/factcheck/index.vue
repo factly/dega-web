@@ -33,7 +33,6 @@
 import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '~/components/Hero';
-import BackgroundImage from '~/assets/images/dega-default-image.png';
 import _ from 'lodash';
 
 export default {
@@ -43,8 +42,7 @@ export default {
   },
   data() {
     return {
-      factchecks: null,
-      prodBaseUrl: process.env.domainHostname
+      factchecks: null
     };
   },
   async asyncData() {
@@ -65,7 +63,6 @@ export default {
         /* eslint no-underscore-dangle: 0 */
         { hid: 'og:title', name: 'og:title', content: this.factchecks[0]._class.split('.').pop() },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + BackgroundImage },
       ]
     };
   }
