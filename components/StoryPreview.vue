@@ -1,6 +1,6 @@
 <template>
   <div class="story-preview-box">
-    <div style="margin-bottom: 1rem;">
+    <div>
       <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' +story.slug">
         <figure class="images is-16by9">
           <img
@@ -56,12 +56,10 @@
     text-overflow: ellipsis !important;
   }
   .story-author-category{
-    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Geneva", "Arial", sans-serif;
     font-size: 12px !important;
     line-height: 20px !important;
   }
   .story-time{
-    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "Geneva", "Arial", sans-serif;
     font-size: 12px !important;
   }
 </style>

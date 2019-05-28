@@ -18,7 +18,7 @@
         <div class="content">
           <div>
             <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' + story.slug">
-              <div style="margin-bottom:1rem;">
+              <div>
                 <p class="title is-4 headline-title">{{ story.title }}</p>
               </div>
               <div>
@@ -51,6 +51,7 @@
     font-family: 'Ramabhadra', sans-serif;
     font-size: 2rem;
     line-height: 2.2rem;
+    margin-bottom: 2rem;
   }
   .headline-preview {
     font-family: 'Mallanna', sans-serif;

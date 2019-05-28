@@ -1,10 +1,10 @@
 <!-- Popular articles -->
 <template>
   <div style="padding: 2rem; padding-top: 0rem">
-    <div>
-      <p
-        class="title is-4"
-        style="padding-bottom: 2rem;">Popular Articles</p>
+    <div
+      class="has-background-dark"
+      style="padding: 0.75rem; margin-bottom: 1rem;">
+      <p class="title is-5 has-text-white-ter">Popular Articles</p>
     </div>
     <div
       v-for="(p, index) in popular"
