@@ -9,9 +9,7 @@
     <div
       class="card column is-full is-desktop"
       style="background-color: #f5faff; margin: 1rem 0 1rem 0;">
-      <div
-        class="columns is-vcentered"
-        style="margin-bottom: 0;">
+      <div class="columns is-vcentered">
         <div class="column is-2 is-hidden-mobile">
           <div class="card-image">
             <figure class="image is-square">
@@ -35,7 +33,7 @@
                 v-if="claim.claim_date"
                 class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
                 style="color: #1976d2;"
-              >on {{ getDate(claim.claim_date) }}</span>
+              >on {{ claim.claim_date | date }}</span>
             </div>
             <div class="padded-top">
               <span
@@ -119,26 +117,6 @@ export default {
       type: Number,
       required: true,
       default: null
-    }
-  },
-  methods: {
-    getDate(datetime) {
-      const date = new Date(datetime);
-      const ms = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ];
-      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   }
 };

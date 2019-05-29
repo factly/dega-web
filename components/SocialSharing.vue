@@ -48,8 +48,7 @@ export default {
   props: {
     url: {
       type: String,
-      required: true,
-      default: null
+      required: true
     }
   },
   data() {

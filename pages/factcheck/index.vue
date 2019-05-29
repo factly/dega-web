@@ -2,34 +2,26 @@
   <div class="columns">
     <div class="column">
       <div class="main-content">
-        <div
-          v-if="factchecks && factchecks.length"
-          class="container">
-          <nuxt-link :to="'/factcheck/'+ factchecks[0].slug">
-            <Hero
-              :story="factchecks[0]"
-              :categories= "true"/>
-          </nuxt-link>
+        <div v-if="factchecks && factchecks.length">
+          <Hero :story="factchecks[0]"/>
           <hr class="spacer is-1-5 is-hidden-mobile">
-          <div
-            v-if="factchecks.length > 1"
-            class="columns">
-            <!-- MoreStories Section -->
-            <div class="column is-12">
-              <section>
-                <h3>MORE STORIES</h3>
-                <br>
+          <div class="columns">
+            <div class="column is-8">
+              <div class="columns is-multiline">
+                >>>>>>> 78de374bb8b96bcbb9ed908b5f78e9c3dd7b4616
                 <div
                   v-for="(p, index) in factchecks.slice(1)"
                   :key="index"
-                  class="container columns">
-                  <nuxt-link :to="'/factcheck/'+ p.slug">
-                    <MoreStories
-                      :story="p"
-                      :categories="false"/>
-                  </nuxt-link>
+                  class="column is-6"
+                >
+                  <StoryPreview
+                    :story="p"
+                  />
                 </div>
-              </section>
+              </div>
+            </div>
+            <div class="column is-4">
+              <PopularArticles />
             </div>
           </div>
         </div>
@@ -45,41 +37,21 @@
 
 <script>
 import axios from 'axios';
-import MoreStories from '~/components/MoreStories';
-import PopularArticles from '~/components/PopularArticles';
+import StoryPreview from '@/components/StoryPreview';
 import Hero from '~/components/Hero';
+import PopularArticles from '@/components/PopularArticles';
 import _ from 'lodash';
 
 export default {
   components: {
-    MoreStories,
-    PopularArticles,
-    Hero
+    Hero,
+    StoryPreview,
+    PopularArticles
   },
   data() {
     return {
       factchecks: null
     };
-  },
-  methods: {
-    getDate(datetime) {
-      const date = new Date(datetime);
-      const ms = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ];
-      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
-    }
   },
   async asyncData() {
     const factchecks = await axios
