@@ -67,10 +67,6 @@
                   class="navbar-item">Fact Check Methodology</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/privacy-policy"
-                  class="navbar-item">Privacy Policy</nuxt-link>
-                <hr class="navbar-divider">
-                <nuxt-link
                   to="/page/submit-a-claim"
                   class="navbar-item">Submit a Claim</nuxt-link>
                 <hr class="navbar-divider">
@@ -81,6 +77,10 @@
                 <nuxt-link
                   to="/page/contact-us"
                   class="navbar-item">Contact Us</nuxt-link>
+                <hr class="navbar-divider">
+                <nuxt-link
+                  to="/page/privacy-policy"
+                  class="navbar-item">Privacy Policy</nuxt-link>
               </div>
             </div>
           </div>
