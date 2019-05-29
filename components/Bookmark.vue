@@ -1,6 +1,5 @@
 <template>
     <div v-if="userModule">
-        <br>
         <Button v-if="!saved" class="button is-icon" @click="save()">
             <span class="icon" style="color: #55acee;">
             <svg

@@ -43,6 +43,7 @@
           </span>
         </div>
         <div class="is-size-6-mobile">{{ story.published_date | date }}</div><br>
+        
       </div>
     </div>
     <!-- story-blockquote-column -->
@@ -51,6 +52,9 @@
         <p>{{ story.excerpt }}
         </p>
       </div>
+    </div>
+    <div class="column is-1">
+      <Bookmark :story=story />
     </div>
   </div>
 </template>
@@ -74,7 +78,11 @@
 </style>
 
 <script>
+import Bookmark from '~/components/Bookmark.vue';
 export default {
+  components:{
+    Bookmark
+  },
   props: {
     story: {
       type: Object,

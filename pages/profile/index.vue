@@ -37,14 +37,22 @@
                 </div>
                 <div class="column is-half">Date Of Birth</div>
                 <div class="column is-half">
-                  <div v-if="user.dob">{{user.dob}}</div>
-                  <input v-else v-model="dob" style="width:40%" class="input" type="date">
+                  <div v-if="user.dob">{{user.dob.toLocaleString('en', {year: 'numeric', month: 'long', day: 'numeric' })}}</div>
+                  <!-- <input v-else v-model="dob" style="width:40%" class="input" type="date"> -->
+                  <b-field  v-else label="Select a date">
+                    <b-datepicker
+                        placeholder="Type or select a date..."
+                        icon="calendar-today"
+                        editable
+                        v-model="dob">
+                    </b-datepicker>
+                  </b-field>
                 </div>
               </div>
             </div>
             <footer class="card-footer">
               <a
-                v-if="dob!=user.dob || gender!=user.gender"
+                v-if="dob!==(user.dob) || gender!=user.gender"
                 href="#"
                 class="card-footer-item"
                 v-on:click="update"
@@ -64,6 +72,8 @@ export default {
     console.log(this.$auth.user)
     if (process.env.userModule === 'true' && this.$auth.loggedIn) {
       let { user } = this.$auth
+      if(user.dob)
+      user.dob = new Date(user.dob)
       //user["gender"] = "Male"
       //user.dob="10/12/15"
       if (!user.gender) {
@@ -100,6 +110,7 @@ export default {
             console.log('fetched User')
           this.user = this.$auth.user
           this.gender= this.user.gender;
+          this.user.dob = new Date(this.user.dob)
           this.dob = this.user.dob;
           console.log("gender",this.gender)
           console.log("dob",this.dob)

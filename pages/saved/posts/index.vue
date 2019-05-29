@@ -6,7 +6,7 @@
           <div class="columns">
             <div class="column is-12">
               <section>
-                <h3>POSTS YOU LIKED</h3>
+                <h3>POSTS YOU SAVED</h3>
                 <br>
                 <div v-for="(p, index) in posts" :key="index" class="container columns">
                   <nuxt-link :to="'/post/'+ p.slug">
@@ -22,7 +22,6 @@
         </div>
       </div>
     </div>
-    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
   </div>
 </template>
 <script>
