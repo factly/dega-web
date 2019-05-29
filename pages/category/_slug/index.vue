@@ -76,7 +76,6 @@ export default {
       title: this.story[0].categories[0].name,
       meta: [
         { hid: 'og:title', name: 'og:title', content: this.story[0].categories[0].name },
-        // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
       ]
     };
   }

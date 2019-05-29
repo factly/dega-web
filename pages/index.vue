@@ -74,11 +74,6 @@ export default {
 
   head() {
     return {
-      title: 'Factly',
-      meta: [
-        { hid: 'og:title', name: 'og:title', content: 'Factly' },
-        // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-      ],
       htmlAttrs: {
         class: 'has-navbar-fixed-top'
       }

@@ -99,7 +99,6 @@ export default {
       title: this.factcheck[0].title,
       meta: [
         { hid: 'og:title', name: 'og:title', content: this.factcheck[0].title },
-        // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
         { hid: 'og:image', name: 'og:image', content: this.factcheck[0].featured_media },
       ]
     };

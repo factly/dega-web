@@ -123,7 +123,6 @@ export default {
       toggleNavBar: false,
       toggleMore: true,
       organisation: Object,
-      prodBaseUrl: process.env.domainHostname
     };
   },
   created() {
@@ -131,14 +130,17 @@ export default {
   },
   head() {
     return {
+      title: this.organisation.name,
       link: [
         { rel: 'shortcut icon', type: 'image/png', href: this.organisation.logo_url },
         { rel: 'icon', type: 'image/x-icon', href: this.organisation.fav_icon_url },
       ],
       meta: [
-        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + DefaultImage },
+        { name: 'google-site-verification', content: this.organisation.google_verification_code},
+        { hid: 'og:title', name: 'og:title', content: this.organisation.name },
+        { hid: 'og:url', name: 'og:url', content:  this.organisation.site_address + this.$nuxt.$route.path},
+        { hid: 'og:image', name: 'og:image', content: this.organisation.site_address + DefaultImage },
         { hid: 'og:description', name: 'og:description', content: this.organisation.description},
-        { name: 'google-site-verification', content: this.organisation.google_verification_code}
       ],
       htmlAttrs: {
         class: 'has-navbar-fixed-top'
