@@ -6,10 +6,14 @@
           v-if="factchecks && factchecks.length"
           class="container">
           <nuxt-link :to="'/factcheck/'+ factchecks[0].slug">
-            <Hero :story="factchecks[0]" :categories= "true"/>
+            <Hero
+              :story="factchecks[0]"
+              :categories= "true"/>
           </nuxt-link>
           <hr class="spacer is-1-5 is-hidden-mobile">
-          <div class="columns" v-if="factchecks.length > 1">
+          <div
+            v-if="factchecks.length > 1"
+            class="columns">
             <!-- MoreStories Section -->
             <div class="column is-12">
               <section>
@@ -45,6 +49,7 @@ import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
 import _ from 'lodash';
+
 export default {
   components: {
     MoreStories,
@@ -81,12 +86,12 @@ export default {
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(error => console.log(error));
-      const sortedFactchecks = _.orderBy(factchecks, ['published_date'], ['desc']);
-      return{
-        factchecks: sortedFactchecks
-      };
+    const sortedFactchecks = _.orderBy(factchecks, ['published_date'], ['desc']);
+    return {
+      factchecks: sortedFactchecks
+    };
   },
-  head () {
+  head() {
     return {
       /* eslint no-underscore-dangle: 0 */
       title: this.factchecks[0]._class.split('.').pop(),
@@ -95,7 +100,7 @@ export default {
         { hid: 'og:title', name: 'og:title', content: this.factchecks[0]._class.split('.').pop() },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
       ]
-    }
+    };
   }
 };
 </script>

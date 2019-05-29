@@ -6,10 +6,14 @@
           v-if="story && story.length"
           class="container">
           <nuxt-link :to="'/'+ story[0]._class.split('.').pop().toLowerCase()+ '/' + story[0].slug">
-            <Hero :story="story[0]" :categories= "true"/>
+            <Hero
+              :story="story[0]"
+              :categories= "true"/>
           </nuxt-link>
           <hr class="spacer is-1-5">
-          <div class="columns" v-if="story.length > 1">
+          <div
+            v-if="story.length > 1"
+            class="columns">
             <div class="column is-12">
               <section>
                 <h3>MORE STORIES</h3>
@@ -46,6 +50,7 @@ import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
 import _ from 'lodash';
+
 export default {
   components: {
     MoreStories,
@@ -87,7 +92,7 @@ export default {
       .then(response => response.data)
       .catch(err => console.log(err));
     const stories = (posts || []).concat(factchecks || []);
-    const sortedStories = _.orderBy(stories, ["published_date"], ['desc']);
+    const sortedStories = _.orderBy(stories, ['published_date'], ['desc']);
     return {
       story: sortedStories
     };
@@ -95,15 +100,15 @@ export default {
 
   head() {
     return {
-      title: "Factly",
+      title: 'Factly',
       meta: [
-        { hid: 'og:title', name: 'og:title', content: "Factly" },
+        { hid: 'og:title', name: 'og:title', content: 'Factly' },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        ],
+      ],
       htmlAttrs: {
-        class: "has-navbar-fixed-top"
+        class: 'has-navbar-fixed-top'
       }
+    };
   }
-}
-}
+};
 </script>
