@@ -39,14 +39,12 @@
 import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '~/components/Hero';
-import PopularArticles from '@/components/PopularArticles';
 import _ from 'lodash';
 
 export default {
   components: {
     Hero,
-    StoryPreview,
-    PopularArticles
+    StoryPreview
   },
   data() {
     return {

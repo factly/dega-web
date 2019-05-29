@@ -35,13 +35,11 @@
 <script>
 import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
-import PopularArticles from '@/components/PopularArticles';
 import _ from 'lodash';
 
 export default {
   components: {
-    StoryPreview,
-    PopularArticles
+    StoryPreview
   },
   data() {
     return {

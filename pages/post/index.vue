@@ -36,14 +36,12 @@
 <script>
 import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
-import PopularArticles from '@/components/PopularArticles';
 import Hero from '@/components/Hero';
 import _ from 'lodash';
 
 export default {
   components: {
     StoryPreview,
-    PopularArticles,
     Hero
   },
   data() {
