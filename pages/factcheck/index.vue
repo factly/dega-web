@@ -8,7 +8,6 @@
           <div class="columns">
             <div class="column is-8">
               <div class="columns is-multiline">
-                >>>>>>> 78de374bb8b96bcbb9ed908b5f78e9c3dd7b4616
                 <div
                   v-for="(p, index) in factchecks.slice(1)"
                   :key="index"

@@ -12,9 +12,11 @@
     <div>
       <div style="margin-bottom: 1rem;">
         <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' +story.slug">
-          <h2 class="has-text-black-bis story-preview-headline">{{ story.title }}</h2>
-          <p class="subtitle story-preview-summary has-text-grey has-text-justified">{{ story.excerpt }}</p>
+          <p class="has-text-black-bis story-preview-headline">{{ story.title }}</p>
         </nuxt-link>
+        <div>
+          <p class="subtitle story-preview-summary has-text-grey has-text-justified">{{ story.excerpt }}</p>
+        </div>
       </div>
       <div class="has-text-black-bis story-author-category">
         <span

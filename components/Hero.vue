@@ -18,13 +18,11 @@
         <div class="content">
           <div>
             <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' + story.slug">
-              <div>
-                <p class="title is-4 headline-title">{{ story.title }}</p>
-              </div>
-              <div>
-                <p class="subtitle is-6 headline-preview">{{ story.excerpt }}</p>
-              </div>
+              <p class="title is-4 headline-title">{{ story.title }}</p>
             </nuxt-link>
+            <div>
+              <p class="subtitle is-6 headline-preview">{{ story.excerpt }}</p>
+            </div>
           </div>
           <div class="has-text-black-bis headline-meta">
             <span
