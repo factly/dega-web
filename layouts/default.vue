@@ -90,7 +90,9 @@
     <br >
     <main>
       <div class="container is-widescreen">
-        <nuxt/>
+        <div style="padding: 1rem;">
+          <nuxt/>
+        </div>
       </div>
     </main>
     <footer class="footer">

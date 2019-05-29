@@ -1,5 +1,5 @@
 <template>
-  <div style="margin: 1rem;">
+  <div>
     <div class="columns">
       <div class= "column is-6">
         <div class="card">

@@ -7,11 +7,10 @@
           <hr class="spacer is-1-5 is-hidden-mobile">
           <div class="columns">
             <div class="column is-8">
-              <div class="columns is-multiline">
+              <div>
                 <div
                   v-for="(p, index) in posts.slice(1)"
                   :key="index"
-                  class="column is-6"
                 >
                   <StoryPreview
                     :story="p"
