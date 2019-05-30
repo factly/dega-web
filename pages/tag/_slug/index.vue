@@ -46,7 +46,8 @@ export default {
   },
   data() {
     return {
-      story: null
+      story: null,
+      metaData: null
     };
   },
   methods: {
@@ -70,16 +71,19 @@ export default {
     const sortedStories = _.orderBy(stories, ['published_date'], ['desc']);
 
     return {
-      story: sortedStories
+      story: sortedStories,
+      metaData: {
+        title: sortedStories[0].tags[0].name,
+        meta: [
+          { hid: 'og:title', name: 'og:title', content: sortedStories[0].tags[0].name },
+        ]
+      }
     };
   },
   head() {
-    return {
-      title: this.story[0].tags[0].name,
-      meta: [
-        { hid: 'og:title', name: 'og:title', content: this.story[0].tags[0].name },
-      ]
-    };
+    if(this.story[0].tags[0].description)
+      this.metaData["meta"].push({ hid: 'og:description', name: 'og:description', content: this.story[0].tags[0].description });
+    return this.metaData;
   }
 };
 </script>

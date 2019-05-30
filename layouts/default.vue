@@ -137,7 +137,8 @@ export default {
       ],
       meta: [
         { name: 'google-site-verification', content: this.organisation.google_verification_code},
-        { hid: 'og:title', name: 'og:title', content: this.organisation.name },
+        { hid: 'og:site_name', name: 'og:site_name', content: this.organisation.name },
+        { hid: 'og:title', name: 'og:title', content: this.$nuxt.$route.path.split('/').pop() },
         { hid: 'og:url', name: 'og:url', content:  this.organisation.site_address + this.$nuxt.$route.path},
         { hid: 'og:image', name: 'og:image', content: this.organisation.site_address + DefaultImage },
         { hid: 'og:description', name: 'og:description', content: this.organisation.description},
