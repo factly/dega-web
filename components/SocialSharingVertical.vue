@@ -2,7 +2,7 @@
   <div class="sticky-horizontal-container share-box">
     <div class="share-icon">
       <a
-        :href="'https://www.facebook.com/sharer/sharer.php?u='+ organisation.site_address + url + '&quote='+quote"
+        :href="'https://www.facebook.com/sharer/sharer.php?u='+ encodeURI(organisation.site_address + url) + '&quote='+quote"
         target="_blank" >
         <div
           role="button"
@@ -32,7 +32,7 @@
     </div>
     <div class="share-icon">
       <a
-        :href="'https://twitter.com/share?text=' + quote + '&url=' + organisation.site_address + url"
+        :href="'https://twitter.com/share?text=' + quote + '&url=' + encodeURI(organisation.site_address + url)"
         target="_blank">
         <div
           role="button"
@@ -62,7 +62,7 @@
     </div>
     <div class="share-icon">
       <a
-        :href="'https://api.whatsapp.com/send?text='+ quote + ' ' + organisation.site_address + url"
+        :href="'https://api.whatsapp.com/send?text='+ quote + ' ' + encodeURI(organisation.site_address + url)"
         target="_blank">
         <div
           role="button"

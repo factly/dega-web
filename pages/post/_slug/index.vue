@@ -36,12 +36,10 @@
 <script>
 import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
-import PopularArticles from '@/components/PopularArticles';
 
 export default {
   components: {
-    StoryHead,
-    PopularArticles
+    StoryHead
   },
   data() {
     return {

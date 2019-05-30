@@ -1,10 +1,12 @@
 <!-- Popular articles -->
 <template>
-  <div style="padding: 2rem; padding-top: 0rem">
+  <div
+    class="is-hidden-mobile"
+    style="padding-left: 3rem;">
     <div
       class="has-background-dark"
       style="padding: 0.75rem; margin-bottom: 1rem;">
-      <p class="title is-5 has-text-white-ter">Popular Articles</p>
+      <p class="title is-5 has-text-white-ter">Recent Videos</p>
     </div>
     <div
       v-for="(p, index) in popular"
@@ -17,6 +19,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import PopularArticlePreview from '@/components/PopularArticlePreview';
 

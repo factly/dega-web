@@ -5,11 +5,10 @@
         <div v-if="story && story.length">
           <div class="columns">
             <div class="column is-8">
-              <div class="columns is-multiline">
+              <div>
                 <div
                   v-for="(p, index) in story"
                   :key="index"
-                  class="column is-6"
                 >
                   <StoryPreview
                     :story="p"
@@ -36,13 +35,11 @@
 <script>
 import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
-import PopularArticles from '@/components/PopularArticles';
 import _ from 'lodash';
 
 export default {
   components: {
-    StoryPreview,
-    PopularArticles
+    StoryPreview
   },
   data() {
     return {
@@ -60,16 +57,12 @@ export default {
       .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&tag=${params.params.slug}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
-
     const factchecks = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&tag=${params.params.slug}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
-
     const stories = (posts || []).concat(factchecks || []);
-
     const sortedStories = _.orderBy(stories, ['published_date'], ['desc']);
-
     return {
       story: sortedStories,
       metaData: {

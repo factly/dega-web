@@ -59,7 +59,6 @@ a.anchor {
 <script>
 import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
-import PopularArticles from '@/components/PopularArticles';
 import ClaimWidget from '~/components/ClaimWidget';
 import ListClaims from '~/components/ListClaims.vue';
 
@@ -67,8 +66,7 @@ export default {
   components: {
     StoryHead,
     ClaimWidget,
-    ListClaims,
-    PopularArticles
+    ListClaims
   },
   data() {
     return {

@@ -67,10 +67,6 @@
                   class="navbar-item">Fact Check Methodology</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/privacy-policy"
-                  class="navbar-item">Privacy Policy</nuxt-link>
-                <hr class="navbar-divider">
-                <nuxt-link
                   to="/page/submit-a-claim"
                   class="navbar-item">Submit a Claim</nuxt-link>
                 <hr class="navbar-divider">
@@ -81,6 +77,10 @@
                 <nuxt-link
                   to="/page/contact-us"
                   class="navbar-item">Contact Us</nuxt-link>
+                <hr class="navbar-divider">
+                <nuxt-link
+                  to="/page/privacy-policy"
+                  class="navbar-item">Privacy Policy</nuxt-link>
               </div>
             </div>
           </div>
@@ -94,7 +94,9 @@
     <br >
     <main>
       <div class="container is-widescreen">
-        <nuxt/>
+        <div style="padding: 1rem;">
+          <nuxt/>
+        </div>
       </div>
     </main>
     <footer class="footer">
@@ -108,12 +110,12 @@
   </div>
 </template>
 <style>
-
 </style>
 
 <script>
 import DefaultImage from '~/assets/images/dega-default-image.png';
-import ClientSocialButtons from '~/components/ClientSocialButtons.vue'
+import ClientSocialButtons from '~/components/ClientSocialButtons.vue';
+
 export default {
   components: {
     ClientSocialButtons
