@@ -6,12 +6,16 @@
           v-if="story && story.length"
           class="container">
           <nuxt-link :to="'/'+ story[0]._class.split('.').pop().toLowerCase()+ '/' + story[0].slug">
-            <Hero :story="story[0]" :categories= "true"/>
+            <Hero
+              :story="story[0]"
+              :categories= "true"/>
           </nuxt-link>
           <hr class="spacer is-1-5">
           <div class="columns">
             <!-- MoreStories Section -->
-            <div class="column is-12" v-if="story.length > 1">
+            <div
+              v-if="story.length > 1"
+              class="column is-12">
               <section>
                 <h3>MORE STORIES</h3>
                 <br>
@@ -47,6 +51,7 @@ import MoreStories from '~/components/MoreStories';
 import PopularArticles from '~/components/PopularArticles';
 import Hero from '~/components/Hero';
 import _ from 'lodash';
+
 export default {
   components: {
     MoreStories,
@@ -98,14 +103,14 @@ export default {
       story: sortedStories
     };
   },
-  head () {
+  head() {
     return {
       title: this.story[0].categories[0].name,
       meta: [
         { hid: 'og:title', name: 'og:title', content: this.story[0].categories[0].name },
         // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
       ]
-    }
+    };
   }
 };
 </script>
