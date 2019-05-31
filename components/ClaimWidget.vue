@@ -1,101 +1,64 @@
 <template>
   <div>
     <br>
+    <div class="card has-background-light">
+      <div class="card-content">
+        <div style="margin-bottom: 1rem;">
+          <div class="columns">
+            <div class="column is-6">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                    <img
+                      :src="claim.rating.icon_url"
+                      alt="Placeholder image">
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <p class="is-size-6 has-text-weight-bold">Rating.</p>
+                  <p class="is-size-6">{{ claim.rating.name }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="column is-6">
+              <div class="media">
+                <div class="media-content">
+                  <p class="title is-6 has-text-right">Claimed by {{ claim.claimant.name }}</p>
+                  <p class="subtitle is-7 has-text-right">{{ claim.claim_date | date }}</p>
+                </div>
+                <div class="media-right">
+                  <figure class="image is-48x48">
+                    <img
+                      :src="claim.claimant.image_url"
+                      alt="Placeholder image">
+                  </figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <p class="is-size-6 has-text-weight-bold">Claim.</p>
+          <p class="is-size-6">{{ claim.claim }}</p>
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <p class="is-size-6 has-text-weight-bold">Fact.</p>
+          <span
+            class="is-size-6"
+            v-html="claim.review" />
+        </div>
+        <div style="margin-bottom: 1rem;"/>
+      </div>
+    </div>
+    <br>
     <article
       class="post"
       style="text-align: justify;">
       <p v-html="claim.description">{{ claim.description }}</p>
     </article>
-    <div
-      class="card column is-full is-desktop"
-      style="background-color: #f5faff; margin: 1rem 0 1rem 0;">
-      <div
-        class="columns is-vcentered"
-        style="margin-bottom: 0;">
-        <div class="column is-2 is-hidden-mobile">
-          <div class="card-image">
-            <figure class="image is-square">
-              <img
-                :src="claim.claimant.image_url"
-                alt="Claim Source"
-                width="100%">
-            </figure>
-          </div>
-        </div>
-        <div class="column is-8">
-          <div>
-            <div>
-              <a :href="claim.claim_source">
-                <span
-                  class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
-                  style="color: #1976d2;"
-                >Claimed by {{ claim.claimant.name }}</span>
-              </a>
-              <span
-                v-if="claim.claim_date"
-                class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
-                style="color: #1976d2;"
-              >on {{ getDate(claim.claim_date) }}</span>
-            </div>
-            <div class="padded-top">
-              <span
-                class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
-                style="color: #1976d2;"
-              >Claim:</span>
-              <span
-                class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
-              >{{ claim.claim }}</span>
-            </div>
-            <div class="padded-top">
-              <span
-                class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2"
-                style="color: #1976d2;">
-                Rating:
-              </span>
-              <span class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2">
-                {{ claim.rating.name }}
-              </span>
-            </div>
-            <div class="columns is-hidden-mobile padded-top">
-              <span
-                class="column"
-                style="color: #1976d2;">
-                <SocialSharing :url="$nuxt.$route.path"/>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="column is-size-3-tablet is-hidden-mobile is-centered">
-          <div class="card-image">
-            <figure class="image is-square ">
-              <img
-                :src="claim.rating.icon_url"
-                alt="Claim Rating"
-                style="max-width:50%, max-height:50%">
-            </figure>
-          </div>
-        </div>
-      </div>
-      <div>
-        <span
-          style="color: #1976d2;"
-          class="title is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2">
-          Fact:
-        </span>
-        <span
-          class="subtitle is-size-3 is-size-6-tablet is-size-6-desktop is-size-6-mobile is-spaced is-2 has-text-justified"
-          v-html="claim.review"/>
-      </div>
-      <div class="columns is-hidden-desktop is-hidden-tablet padded-top">
-        <span
-          class="column"
-          style="color: #1976d2;">
-          <SocialSharing :url="$nuxt.$route.path"/>
-        </span>
-      </div>
-    </div>
   </div>
 </template>
+
 <style>
 .padded-top{
   padding-top: 0.75rem
@@ -119,26 +82,6 @@ export default {
       type: Number,
       required: true,
       default: null
-    }
-  },
-  methods: {
-    getDate(datetime) {
-      const date = new Date(datetime);
-      const ms = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'May',
-        'Jun',
-        'Jul',
-        'Aug',
-        'Sep',
-        'Oct',
-        'Nov',
-        'Dec',
-      ];
-      return `${date.getDate()} ${ms[date.getMonth()]} ${date.getFullYear()}`;
     }
   }
 };

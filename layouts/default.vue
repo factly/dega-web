@@ -77,6 +77,10 @@
                 <nuxt-link
                   to="/page/contact-us"
                   class="navbar-item">Contact Us</nuxt-link>
+                <hr class="navbar-divider">
+                <nuxt-link
+                  to="/page/privacy-policy"
+                  class="navbar-item">Privacy Policy</nuxt-link>
               </div>
             </div>
           </div>
@@ -86,11 +90,15 @@
         </div>
       </div>
     </nav>
-    <div>
-      <br class="is-hidden-mobile">
-      <br>
-      <nuxt/>
-    </div>
+    <br >
+    <br >
+    <main>
+      <div class="container is-widescreen">
+        <div style="padding: 1rem;">
+          <nuxt/>
+        </div>
+      </div>
+    </main>
     <footer class="footer">
       <div class="content has-text-centered">
         <p>
@@ -102,11 +110,10 @@
   </div>
 </template>
 <style>
-
 </style>
 
 <script>
-import BackgroundImage from '~/assets/images/dega-default-image.png';
+import DefaultImage from '~/assets/images/dega-default-image.png';
 import ClientSocialButtons from '~/components/ClientSocialButtons.vue';
 
 export default {
@@ -126,14 +133,14 @@ export default {
   },
   head() {
     return {
-      // Following needs to be dynamically updated from Organization entity
       link: [
         { rel: 'shortcut icon', type: 'image/png', href: this.organisation.logo_url },
         { rel: 'icon', type: 'image/x-icon', href: this.organisation.fav_icon_url },
       ],
       meta: [
-        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + BackgroundImage },
-        { property: 'og:description', content: this.organisation.description },
+        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + DefaultImage },
+        { hid: 'og:description', name: 'og:description', content: this.organisation.description },
+        { name: 'google-site-verification', content: this.organisation.google_verification_code },
       ],
       htmlAttrs: {
         class: 'has-navbar-fixed-top'
