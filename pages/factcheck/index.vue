@@ -66,7 +66,6 @@ export default {
       meta: [
         /* eslint no-underscore-dangle: 0 */
         { hid: 'og:title', name: 'og:title', content: this.factchecks[0]._class.split('.').pop() },
-        // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
       ]
     };
   }
