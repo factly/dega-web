@@ -36,16 +36,15 @@
 <script>
 import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
-import PopularArticles from '@/components/PopularArticles';
 
 export default {
   components: {
-    StoryHead,
-    PopularArticles
+    StoryHead
   },
   data() {
     return {
-      post: null
+      post: null,
+      metaData: null
     };
   },
 
@@ -59,18 +58,20 @@ export default {
       .then(response => response.data)
       .catch(err => console.log(err));
     return {
-      post
+      post,
+      metaData: {
+        title: post[0].title,
+        meta: [
+          { hid: 'og:title', name: 'og:title', content: post[0].title },
+          { hid: 'og:image', name: 'og:image', content: post[0].featured_media },
+        ]
+      }
     };
   },
   head() {
-    return {
-      title: this.post[0].title,
-      meta: [
-        { hid: 'og:title', name: 'og:title', content: this.post[0].title },
-        // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        { hid: 'og:image', name: 'og:image', content: this.post[0].featured_media },
-      ]
-    };
+    if(this.post[0].excerpt)
+      this.metaData["meta"].push({ hid: 'og:description', name: 'og:description', content: this.post[0].excerpt });
+    return this.metaData;
   }
 };
 </script>

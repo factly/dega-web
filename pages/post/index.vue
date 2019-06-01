@@ -7,11 +7,10 @@
           <hr class="spacer is-1-5 is-hidden-mobile">
           <div class="columns">
             <div class="column is-8">
-              <div class="columns is-multiline">
+              <div>
                 <div
                   v-for="(p, index) in posts.slice(1)"
                   :key="index"
-                  class="column is-6"
                 >
                   <StoryPreview
                     :story="p"
@@ -36,7 +35,6 @@
 <script>
 import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
-import PopularArticles from '@/components/PopularArticles';
 import Hero from '@/components/Hero';
 import _ from 'lodash';
 
@@ -44,7 +42,6 @@ export default {
   authenticated: true,
   components: {
     StoryPreview,
-    PopularArticles,
     Hero
   },
   data() {
@@ -52,7 +49,6 @@ export default {
       posts: null
     };
   },
-
   // created(){
   //   console.log("created");
   //   this.posts = _.orderBy(this.$store.getters.getPosts, ['published_date'], ['desc']);
@@ -74,7 +70,6 @@ export default {
       meta: [
         /* eslint no-underscore-dangle: 0 */
         { hid: 'og:title', name: 'og:title', content: this.posts[0]._class.split('.').pop() },
-        // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
       ]
     };
   }
