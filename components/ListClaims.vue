@@ -11,7 +11,7 @@
           <SocialSharing :url="$nuxt.$route.path"/>
         </div>
         <div
-          v-for="(claim, index) in factcheck.claims"
+          v-for="(claim, index) in factcheck[0].claims"
           :key="index">
           <hr>
           <a :href="'#claim'+(index+1)">
@@ -21,16 +21,6 @@
           </a>
         </div>
       </div>
-    </div>
-    <div
-      v-for="(claim, index) in factchecks[0].claims"
-      :key="index">
-      <hr>
-      <a :href="'#claim'+(index+1)">
-        <h2
-          class="has-text-weight-semibold"
-          style="color:#034f84;" >#{{ index+1 }}. {{ claim.claim }}</h2>
-      </a>
     </div>
   </div>
 </template>
@@ -44,7 +34,7 @@ export default {
   },
   props: {
     factcheck: {
-      type: Object,
+      type: Array,
       required: true,
       default: null
     }
