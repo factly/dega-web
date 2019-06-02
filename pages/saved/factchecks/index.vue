@@ -9,9 +9,7 @@
                 <h3>FACTCHECKS YOU SAVED</h3>
                 <br>
                 <div v-for="(f, index) in factchecks" :key="index" class="container columns">
-                  <nuxt-link :to="'/factchecks/'+ f.slug">
                     <MoreStories :story="f" :categories="true"/>
-                  </nuxt-link>
                 </div>
               </section>
             </div>
@@ -74,7 +72,8 @@ export default {
       .post(
         `${process.env.userDataApiUri}/saved/factchecks`,
         {
-          "user":app.$auth.user
+          "user":app.$auth.user,
+          "accessToken": app.$auth.getToken('social')
         }
       )
       .then((response)=>

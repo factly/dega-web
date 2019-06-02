@@ -1,6 +1,6 @@
 <template>
     <div v-if="userModule">
-        <Button v-if="!saved" class="button is-icon" @click="save()">
+        <Button v-if="!saved" class="button is-icon" v-on:click.stop="save()">
             <span class="icon" style="color: #55acee;">
             <svg
                 width="1792"
@@ -14,7 +14,7 @@
             </svg>
             </span>
         </Button>
-        <Button v-if="saved" class="button" @click="undoSave()">
+        <Button v-if="saved" class="button" v-on:click.stop="undoSave()">
             <span class="icon" style="color: #55acee;">
             <svg
                 width="1792"
@@ -94,11 +94,9 @@ export default {
               .pop()
               .toLowerCase(),
             id: id,
-            user: {
-              id: this.$auth.user.sub,
-              mail: this.$auth.user.email
-            },
+            user: this.$auth.user,
             accessToken: this.$auth.getToken('social')
+            // accessToken: '1242342341324'
           }
         })
         save.then(response => {
@@ -130,10 +128,7 @@ export default {
             .pop()
             .toLowerCase(),
           id: id,
-          user: {
-            id: this.$auth.user.sub,
-            mail: this.$auth.user.email
-          },
+          user: this.$auth.user,
           accessToken: this.$auth.getToken('social')
         }
       })

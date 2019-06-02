@@ -1,60 +1,53 @@
 <template>
-  <div
-    class="columns"
-    style="margin-bottom: 1rem; margin: 0.5rem"> <!--<div class="container columns">-->
+  <div class="columns" style="margin-bottom: 1rem; margin: 0.5rem">
+    <!--<div class="container columns">-->
     <!-- story-image  column-->
-    <div class= "column is-4">
+    <div class="column is-4">
       <div class="card">
         <div class="card-image">
-          <figure class ="image is-5by3">
-            <img
-              :src="story.featured_media"
-              :alt="story._class.split('.').pop()">
-            <div
-              v-if="categories"
-              class="story-art">
-              <div
-                v-if="story._class.split('.').pop() == 'Factcheck'"
-                class="fact-strip">
-                <h1>FACTCHECK</h1>
+          <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' +story.slug">
+            <figure class="image is-5by3">
+              <img :src="story.featured_media" :alt="story._class.split('.').pop()">
+              <div v-if="categories" class="story-art">
+                <div v-if="story._class.split('.').pop() == 'Factcheck'" class="fact-strip">
+                  <h1>FACTCHECK</h1>
+                </div>
               </div>
-            </div>
-          </figure>
+            </figure>
+          </nuxt-link>
         </div>
       </div>
     </div>
     <!-- story-title-column -->
     <div class="column is-4">
       <div class="content">
-        <p class="title is-4 is-size-5-mobile">{{ story.title }}</p><br>
-        <div
-          v-show="story.authors"
-          class="subtitle is-6 is-uppercase is-size-6-mobile">
+        <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' +story.slug">
+          <p class="title is-4 is-size-5-mobile">{{ story.title }}</p>
+          <br>
+        </nuxt-link>
+        <div v-show="story.authors" class="subtitle is-6 is-uppercase is-size-6-mobile">
           BY
-          <span
-            v-for="(author, index) in story.authors"
-            :key="index" >
+          <span v-for="(author, index) in story.authors" :key="index">
             <no-ssr>
-              <nuxt-link :to="'/author/' + author.slug">
-                {{ author.display_name }}
-              </nuxt-link>
+              <nuxt-link :to="'/author/' + author.slug">{{ author.display_name }}</nuxt-link>
             </no-ssr>
-            <span v-show="index != story.authors.length -1"> , </span>
+            <span v-show="index != story.authors.length -1">,</span>
           </span>
         </div>
-        <div class="is-size-6-mobile">{{ story.published_date | date }}</div><br>
-        
+        <div class="is-size-6-mobile">{{ story.published_date | date }}</div>
+        <br>
       </div>
     </div>
     <!-- story-blockquote-column -->
     <div class="column is-4">
       <div class="content is-hidden-mobile has-text-justified">
-        <p>{{ story.excerpt }}
-        </p>
+        <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' +story.slug">
+          <p>{{ story.excerpt }}</p>
+        </nuxt-link>
       </div>
     </div>
     <div class="column is-1">
-      <Bookmark :story=story />
+      <Bookmark :story="story"/>
     </div>
   </div>
 </template>
@@ -78,9 +71,9 @@
 </style>
 
 <script>
-import Bookmark from '~/components/Bookmark.vue';
+import Bookmark from '~/components/Bookmark.vue'
 export default {
-  components:{
+  components: {
     Bookmark
   },
   props: {
@@ -95,5 +88,5 @@ export default {
       default: false
     }
   }
-};
+}
 </script>

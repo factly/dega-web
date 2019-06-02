@@ -9,9 +9,7 @@
                 <h3>POSTS YOU SAVED</h3>
                 <br>
                 <div v-for="(p, index) in posts" :key="index" class="container columns">
-                  <nuxt-link :to="'/post/'+ p.slug">
                     <MoreStories :story="p" :categories="true"/>
-                  </nuxt-link>
                 </div>
               </section>
             </div>
@@ -74,7 +72,8 @@ export default {
       .post(
         `${process.env.userDataApiUri}/saved/posts`,
         {
-          "user":app.$auth.user
+          "user":app.$auth.user,
+          "accessToken": app.$auth.getToken('social')
         }
       )
       .then((response)=>
