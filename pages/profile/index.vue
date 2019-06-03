@@ -67,7 +67,6 @@
                   <div
                     v-else-if="!editing && user.isDOBConfidential"
                   >Confidential</div>
-                  <!-- <input v-else v-model="dob" style="width:40%" class="input" type="date"> -->
                   <div v-if="editing || !user.dob">
                     <b-field label="Select a date">
                       <b-datepicker v-if="!isDOBConfidential"
@@ -104,7 +103,6 @@
 import axios from 'axios'
 export default {
   data() {
-    console.log('user', this.$auth.user)
     if (process.env.userModule === 'true' && this.$auth.loggedIn) {
       let { user } = this.$auth
       if (user.dob && user.dob!=="Confidential")
@@ -113,8 +111,6 @@ export default {
         user.isDOBConfidential = true
         user.dob = new Date()
       }
-      //user["gender"] = "Male"
-      //user.dob="10/12/15"
       if (!user.gender) {
         user.gender = 'Choose'
       }
@@ -136,7 +132,6 @@ export default {
       modifiedUser.dob = this.dob
       if(this.isDOBConfidential)
         modifiedUser.dob = "Confidential"
-      console.log('modifiedUser', modifiedUser)
       if (modifiedUser['gender'] === 'Choose') modifiedUser['gender'] = null
       const updateUserInfo = axios({
         method: 'POST',
@@ -147,12 +142,9 @@ export default {
         }
       })
       updateUserInfo.then(response => {
-        console.log(response)
-        //debugger;
         if (response.data.success) {
           this.editing = false
           this.$auth.fetchUser().then(() => {
-            console.log('fetched User')
             this.user = this.$auth.user
             this.gender = this.user.gender
             if(this.user.dob==="Confidential"){
@@ -163,15 +155,12 @@ export default {
               this.user.dob = new Date(this.user.dob)
             this.dob = this.user.dob
             this.isDOBConfidential = this.user.isDOBConfidential
-            console.log('gender', this.gender)
-            console.log('dob', this.dob)
           })
         }
       })
     },
     edit() {
       this.editing = true
-      console.log('edit')
     },
     cancelEditing() {
       this.editing = false

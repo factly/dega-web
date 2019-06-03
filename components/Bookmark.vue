@@ -35,9 +35,8 @@
 import axios from 'axios'
 export default {
   data() {
-    console.log(process.env.userModule, Boolean(process.env.userModule))
     if (process.env.userModule === 'true') {
-      let type = this.story._class
+      const type = this.story._class
         .split('.')
         .pop()
         .toLowerCase()
@@ -46,10 +45,6 @@ export default {
         this.$auth.user.prefs &&
         this.$auth.user.prefs[type]
       ) {
-        console.log(this.$auth.user.prefs.posts)
-        console.log({
-          saved: this.$auth.user.prefs[type].includes(this.story._id)
-        })
         return {
           saved: this.$auth.user.prefs[type].includes(this.story._id),
           type: type,
@@ -68,23 +63,9 @@ export default {
     }
   },
   methods: {
-    save() {
-      console.log('categories', this.categories)
-      console.log('story', this.story)
-      /* eslint no-underscore-dang  le: 0 */
-      console.log(
-        'type',
-        this.story._class
-          .split('.')
-          .pop()
-          .toLowerCase()
-      )
+    save() {    
       const id = this.story._id
-      console.log(id)
-      console.log(this.$auth)
       if (this.$auth.loggedIn) {
-        console.log('send save request')
-        console.log(this.$auth.user)
         const save = axios({
           method: 'POST',
           url: process.env.userDataApiUri + '/story/save',
@@ -100,7 +81,6 @@ export default {
           }
         })
         save.then(response => {
-          console.log(response)
           //debugger;
           if (response.data.success) {
             this.saved = true
@@ -108,17 +88,13 @@ export default {
           }
         })
       } else {
-        console.log('redirect to login')
         this.$auth.loginWith('social').then(() => {
-          console.log('Login Success')
         })
       }
     },
     undoSave() {
-      console.log(this.$auth.getToken('social'))
       /* eslint no-underscore-dangle: 0 */
       const id = this.story._id
-      console.log(id)
       const save = axios({
         method: 'POST',
         url: process.env.userDataApiUri + '/story/unsave',
@@ -133,7 +109,6 @@ export default {
         }
       })
       save.then(response => {
-        console.log(response)
         if (response.data.success) {
           this.saved = false
           this.$auth.fetchUser()

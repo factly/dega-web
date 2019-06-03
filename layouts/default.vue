@@ -348,18 +348,14 @@ export default {
   },
   methods: {
     logout(){
-      console.log(this.loggedIn);
-      let url=process.env.logoutUri+"?redirect_uri="+(process.env.baseUrl);
-      console.log(url);
+      const url=process.env.logoutUri+"?redirect_uri="+(process.env.baseUrl);
       const logout = this.$auth.logout();
       logout.then(()=>{
-        console.log("Logged Out");
         window.location.replace(encodeURI(url))
       })
     },
     async login(){
       this.$auth.loginWith('social').then(()=>{
-            console.log("Login Success");
             this.loggedIn = true;
           })
     }

@@ -78,7 +78,6 @@ export default {
       )
       .then((response)=>
       {
-        console.log("liked factchecks",response.data);
         return response.data
       })
       .catch(err => console.log(err));
