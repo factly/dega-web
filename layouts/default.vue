@@ -376,12 +376,12 @@ export default {
         { rel: 'icon', type: 'image/x-icon', href: this.organisation.fav_icon_url },
       ],
       meta: [
-        { name: 'google-site-verification', content: this.organisation.google_verification_code},
+        { name: 'google-site-verification', content: this.organisation.google_verification_code },
         { hid: 'og:site_name', name: 'og:site_name', content: this.organisation.name },
         { hid: 'og:title', name: 'og:title', content: this.$nuxt.$route.path.split('/').pop() },
-        { hid: 'og:url', name: 'og:url', content:  this.organisation.site_address + this.$nuxt.$route.path},
+        { hid: 'og:url', name: 'og:url', content: this.organisation.site_address + this.$nuxt.$route.path },
         { hid: 'og:image', name: 'og:image', content: this.organisation.site_address + DefaultImage },
-        { hid: 'og:description', name: 'og:description', content: this.organisation.description},
+        { hid: 'og:description', name: 'og:description', content: this.organisation.description },
       ],
       htmlAttrs: {
         class: 'has-navbar-fixed-top'

@@ -1,8 +1,6 @@
 <!-- Popular articles -->
 <template>
-  <div
-    class="is-hidden-mobile"
-    style="padding-left: 3rem;">
+  <div>
     <div
       class="has-background-dark"
       style="padding: 0.75rem; margin-bottom: 1rem;">

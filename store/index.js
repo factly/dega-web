@@ -24,16 +24,16 @@ const createStore = () => {
       }
     },
     actions: {
-      nuxtServerInit(vuexContext, context){
+      nuxtServerInit({ commit }, context){
         axios.get(encodeURI(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`))
         .then(res => {
-          vuexContext.commit("setOrganisation", res.data[0])
+          commit("setOrganisation", res.data[0])
         })
         .catch(e => context.error(e));
 
         axios.get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&category=video&sortBy=publishedDate&sortAsc=false`))
         .then(res => {
-          vuexContext.commit("setPopular", res.data)
+          commit("setPopular", res.data)
         })
         .catch(e => context.error(e));        
       }
