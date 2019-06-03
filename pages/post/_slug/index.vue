@@ -9,13 +9,11 @@
           <section class="section">
             <div>
               <article
-                class="post"
                 v-html="post[0].content">
                 {{ post[0].content }}
               </article>
             </div>
           </section>
-
         </div>
         <div
           v-else
@@ -24,7 +22,9 @@
         </div>
       </div>
       <div class="column is-4">
-        <PopularArticles/>
+        <div class="is-hidden-mobile">
+          <PopularArticles />
+        </div>
       </div>
     </div>
     <SocialSharingVertical
@@ -69,8 +69,7 @@ export default {
     };
   },
   head() {
-    if(this.post[0].excerpt)
-      this.metaData["meta"].push({ hid: 'og:description', name: 'og:description', content: this.post[0].excerpt });
+    if (this.post[0].excerpt) { this.metaData.meta.push({ hid: 'og:description', name: 'og:description', content: this.post[0].excerpt }); }
     return this.metaData;
   }
 };

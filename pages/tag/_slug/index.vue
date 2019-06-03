@@ -17,7 +17,9 @@
               </div>
             </div>
             <div class="column is-4">
-              <PopularArticles />
+              <div class="is-hidden-mobile">
+                <PopularArticles />
+              </div>
             </div>
           </div>
         </div>
@@ -74,8 +76,7 @@ export default {
     };
   },
   head() {
-    if(this.story[0].tags[0].description)
-      this.metaData["meta"].push({ hid: 'og:description', name: 'og:description', content: this.story[0].tags[0].description });
+    if (this.story[0].tags[0].description) { this.metaData.meta.push({ hid: 'og:description', name: 'og:description', content: this.story[0].tags[0].description }); }
     return this.metaData;
   }
 };
