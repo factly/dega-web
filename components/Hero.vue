@@ -38,7 +38,6 @@
           <Bookmark :story=story />
         </div>
       </div>
-      <div class="has-text-justified is-hidden-mobile">{{ story.excerpt }}</div>
     </div>
   </div>
 </template>
