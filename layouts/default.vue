@@ -77,6 +77,10 @@
                 <nuxt-link
                   to="/page/contact-us"
                   class="navbar-item">Contact Us</nuxt-link>
+                <hr class="navbar-divider">
+                <nuxt-link
+                  to="/page/privacy-policy"
+                  class="navbar-item">Privacy Policy</nuxt-link>
               </div>
             </div>
           </div>
@@ -312,7 +316,9 @@
     <br >
     <main>
       <div class="container is-widescreen">
-        <nuxt/>
+        <div style="padding: 1rem;">
+          <nuxt/>
+        </div>
       </div>
     </main>
     <footer class="footer">
@@ -326,12 +332,12 @@
   </div>
 </template>
 <style>
-
 </style>
 
 <script>
 import DefaultImage from '~/assets/images/dega-default-image.png';
-import ClientSocialButtons from '~/components/ClientSocialButtons.vue'
+import ClientSocialButtons from '~/components/ClientSocialButtons.vue';
+
 export default {
   components: {
     ClientSocialButtons
@@ -343,7 +349,6 @@ export default {
       loggedIn:this.$auth.loggedIn,
       userModule:(process.env.userModule === "true"),
       organisation: Object,
-      prodBaseUrl: process.env.domainHostname
     };
   },
   methods: {
@@ -365,14 +370,18 @@ export default {
   },
   head() {
     return {
+      title: this.organisation.name,
       link: [
         { rel: 'shortcut icon', type: 'image/png', href: this.organisation.logo_url },
         { rel: 'icon', type: 'image/x-icon', href: this.organisation.fav_icon_url },
       ],
       meta: [
-        { hid: 'og:image', name: 'og:image', content: this.prodBaseUrl + DefaultImage },
+        { name: 'google-site-verification', content: this.organisation.google_verification_code},
+        { hid: 'og:site_name', name: 'og:site_name', content: this.organisation.name },
+        { hid: 'og:title', name: 'og:title', content: this.$nuxt.$route.path.split('/').pop() },
+        { hid: 'og:url', name: 'og:url', content:  this.organisation.site_address + this.$nuxt.$route.path},
+        { hid: 'og:image', name: 'og:image', content: this.organisation.site_address + DefaultImage },
         { hid: 'og:description', name: 'og:description', content: this.organisation.description},
-        { name: 'google-site-verification', content: this.organisation.google_verification_code}
       ],
       htmlAttrs: {
         class: 'has-navbar-fixed-top'

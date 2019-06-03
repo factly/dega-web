@@ -59,7 +59,6 @@ a.anchor {
 <script>
 import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
-import PopularArticles from '@/components/PopularArticles';
 import ClaimWidget from '~/components/ClaimWidget';
 import ListClaims from '~/components/ListClaims.vue';
 
@@ -67,14 +66,14 @@ export default {
   components: {
     StoryHead,
     ClaimWidget,
-    ListClaims,
-    PopularArticles
+    ListClaims
   },
   data() {
     return {
       factcheck: null,
       ListClaimsHidden: false,
-      structuredData: null
+      structuredData: null,
+      metaData: null,
     };
   },
   methods: {
@@ -88,21 +87,23 @@ export default {
       .then(response => response.data)
       .catch(err => console.log(err));
     return {
-      factcheck
+      factcheck,
+      metaData: {
+        __dangerouslyDisableSanitizers: ['script'],
+        script: [
+          { innerHTML: JSON.stringify(factcheck[0].schemas), type: 'application/ld+json' }],
+        title: factcheck[0].title,
+        meta: [
+          { hid: 'og:title', name: 'og:title', content: factcheck[0].title },
+          { hid: 'og:image', name: 'og:image', content: factcheck[0].featured_media },
+        ]
+      }
     };
   },
   head() {
-    return {
-      __dangerouslyDisableSanitizers: ['script'],
-      script: [
-        { innerHTML: JSON.stringify(this.factcheck[0].schemas), type: 'application/ld+json' }],
-      title: this.factcheck[0].title,
-      meta: [
-        { hid: 'og:title', name: 'og:title', content: this.factcheck[0].title },
-        // { hid: 'og:url', name: 'og:url', content:  process.env.domainHostname + $nuxt.$route.name},
-        { hid: 'og:image', name: 'og:image', content: this.factcheck[0].featured_media },
-      ]
-    };
+    if(this.factcheck[0].excerpt)
+      this.metaData["meta"].push({ hid: 'og:description', name: 'og:description', content: this.factcheck[0].excerpt });
+    return this.metaData;
   }
 };
 </script>

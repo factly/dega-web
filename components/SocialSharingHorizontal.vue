@@ -121,8 +121,8 @@ export default {
       required: true
     }
   },
-  data(){
-     return {
+  data() {
+    return {
       organisation: this.$store.getters.getOrganisation
     };
   }
