@@ -19,7 +19,9 @@
               </div>
             </div>
             <div class="column is-4">
-              <PopularArticles />
+              <div class="is-hidden-mobile">
+                <PopularArticles />
+              </div>
             </div>
           </div>
         </div>

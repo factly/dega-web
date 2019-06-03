@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <div>
+      <div style="margin-bottom: 1rem;">
         <div>
           <p class="title is-4 headline-title">{{ story.title }}</p>
         </div>
@@ -10,15 +10,19 @@
         <div v-if="story.authors.length == 1">
           <article class="media">
             <div class="media-left">
-              <figure class="image is-64x64">
-                <img
-                  :src="story.authors[0].profile_picture"
-                  class="is-rounded">
-              </figure>
+              <nuxt-link :to="'/author/' + story.authors[0].slug">
+                <figure class="image is-64x64">
+                  <img
+                    :src="story.authors[0].profile_picture"
+                    class="is-rounded">
+                </figure>
+              </nuxt-link>
             </div>
             <div class="media-content">
-              <p class="is-size-5 has-text-link">{{ story.authors[0].display_name }}</p>
-              <p class="is-size-6">{{ story.published_date | date }}</p>
+              <nuxt-link :to="'/author/' + story.authors[0].slug">
+                <p class="is-size-6 has-text-link">{{ story.authors[0].display_name }}</p>
+              </nuxt-link>
+              <p class="is-size-7">{{ story.published_date | date }}</p>
             </div>
           </article>
         </div>
@@ -27,20 +31,27 @@
             <div
               v-for="(p, index) in story.authors"
               :key="'author'+index"
-              class="contorl">
-              <figure class="image is-64x64">
-                <img
-                  :src="p.profile_picture"
-                  class="is-rounded">
-              </figure>
+              class="contorl"
+              style="margin-right:0.5rem;">
+              <nuxt-link :to="'/author/' + p.slug">
+                <figure class="image is-64x64">
+                  <img
+                    :src="p.profile_picture"
+                    class="is-rounded">
+                </figure>
+              </nuxt-link>
             </div>
           </div>
           <div class="field is-grouped is-grouped-multiline">
             <div
               v-for="(p, index) in story.authors"
               :key="'author'+index"
-              class="contorl">
-              <p class="is-size-5 has-text-link">{{ p.display_name }}</p>
+            >
+              <div class="contorl">
+                <nuxt-link :to="'/author/' + p.slug">
+                  <p class="is-size-6 has-text-link">{{ p.display_name }}<span v-if="index !== story.authors.length - 1">,&nbsp;</span></p>
+                </nuxt-link>
+              </div>
             </div>
           </div>
         </div>
