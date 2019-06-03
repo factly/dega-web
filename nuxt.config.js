@@ -5,7 +5,7 @@ require('dotenv').config();
 
 module.exports = {
   env: {
-    apiUri: process.env.API_URI || 'https://localhost:8000',
+    apiUri: process.env.API_URI || 'https://api.factly.in',
     clientId: process.env.CLIENT_ID || 'factly-telugu',
     domainHostname: process.env.DOMAIN_HOSTNAME || 'https://factcheck.factly.in',
     userDataApiUri: process.env.USER_DATA_API_URI || 'http://localhost:8081',

@@ -30,7 +30,7 @@ import Hero from '~/components/Hero';
 import SocialSharingVertical from '~/components/SocialSharingVertical';
 
 export default {
-  authenticated: true,
+  authenticated: false,
   components: {
     MoreStories,
     PopularArticles,

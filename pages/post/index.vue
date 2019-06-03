@@ -39,7 +39,6 @@ import Hero from '@/components/Hero';
 import _ from 'lodash';
 
 export default {
-  authenticated: true,
   components: {
     StoryPreview,
     Hero
