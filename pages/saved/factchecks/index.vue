@@ -6,12 +6,10 @@
           <div class="columns">
             <div class="column is-12">
               <section>
-                <h3>FACTCHECKS YOU LIKED</h3>
+                <h3>FACTCHECKS YOU SAVED</h3>
                 <br>
                 <div v-for="(f, index) in factchecks" :key="index" class="container columns">
-                  <nuxt-link :to="'/factchecks/'+ f.slug">
                     <MoreStories :story="f" :categories="true"/>
-                  </nuxt-link>
                 </div>
               </section>
             </div>
@@ -22,7 +20,6 @@
         </div>
       </div>
     </div>
-    <SocialSharingVertical class="is-hidden-mobile" :url="$nuxt.$route.path"/>
   </div>
 </template>
 <script>
@@ -75,12 +72,12 @@ export default {
       .post(
         `${process.env.userDataApiUri}/saved/factchecks`,
         {
-          "user":app.$auth.user
+          "user":app.$auth.user,
+          "accessToken": app.$auth.getToken('social')
         }
       )
       .then((response)=>
       {
-        console.log("liked factchecks",response.data);
         return response.data
       })
       .catch(err => console.log(err));

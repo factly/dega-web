@@ -10,8 +10,8 @@ module.exports = {
     domainHostname: process.env.DOMAIN_HOSTNAME || 'https://factcheck.factly.in',
     userDataApiUri: process.env.USER_DATA_API_URI || 'http://localhost:8081',
     logoutUri: process.env.LOGOUT_ENDPOINT,
-    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
-    userModule: process.env.userModule || 'true'
+    baseUrl: process.env.BASE_URL || 'http://127.0.0.1:3000',
+    userModule: process.env.userModule || 'false'
     // eslint-disable-next-line linebreak-style
   },
   mode: 'universal',
