@@ -31,16 +31,21 @@
                 </div>
               </div>
             </div>
-            <div
-              v-if="factcheck[0].claims.length > 1"
-              class="column is-one-quarter is-hidden-mobile">
-              <ListClaims :factcheck="factcheck"/>
-            </div>
           </div>
         </div>
       </div>
       <div class="column is-4">
-        <PopularArticles />
+        <div>
+          <div
+            v-if="factcheck[0].claims.length > 1"
+            class="is-hidden-mobile"
+            style="margin-bottom: 1rem;">
+            <ListClaims :factcheck="factcheck"/>
+          </div>
+          <div class="is-hidden-mobile">
+            <PopularArticles />
+          </div>
+        </div>
       </div>
     </div>
     <SocialSharingVertical

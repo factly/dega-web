@@ -9,13 +9,11 @@
           <section class="section">
             <div>
               <article
-                class="post"
                 v-html="post[0].content">
                 {{ post[0].content }}
               </article>
             </div>
           </section>
-
         </div>
         <div
           v-else
