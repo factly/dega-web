@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar-end">
+  <div>
     <!-- Sharingbutton Facebook -->
     <a
       v-if="organisation.facebook_url"

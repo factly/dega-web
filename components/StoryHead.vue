@@ -17,6 +17,7 @@
         </span> in <nuxt-link :to="'/category/' + story.categories[0].slug">{{ story.categories[0].name }}</nuxt-link>
       </div>
       <div class="has-text-grey headline-time">{{ story.published_date | date }}</div>
+      <Bookmark :story=story />
     </div>
   </div>
 
@@ -38,9 +39,12 @@
   }
 </style>
 
-
 <script>
+import Bookmark from '~/components/Bookmark.vue';
 export default {
+  components:{
+    Bookmark
+  },
   props: {
     story: {
       type: Object,
