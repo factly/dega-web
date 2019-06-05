@@ -87,20 +87,20 @@ export default {
     }
   },
   async asyncData(params) {
-    const factcheck = await axios
+    const Factcheck = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&slug=${params.params.slug}`))
       .then(response => response.data)
       .catch(err => console.log(err));
     return {
-      factcheck,
+      factcheck: Factcheck,
       metaData: {
         __dangerouslyDisableSanitizers: ['script'],
         script: [
-          { innerHTML: JSON.stringify(factcheck[0].schemas), type: 'application/ld+json' }],
-        title: factcheck[0].title,
+          { innerHTML: JSON.stringify(Factcheck[0].schemas), type: 'application/ld+json' }],
+        title: Factcheck[0].title,
         meta: [
-          { hid: 'og:title', name: 'og:title', content: factcheck[0].title },
-          { hid: 'og:image', name: 'og:image', content: factcheck[0].featured_media },
+          { hid: 'og:title', name: 'og:title', content: Factcheck[0].title },
+          { hid: 'og:image', name: 'og:image', content: Factcheck[0].featured_media },
         ]
       }
     };

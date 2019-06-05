@@ -53,17 +53,17 @@ export default {
   },
 
   async asyncData(params) {
-    const post = await axios
+    const Post = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&slug=${params.params.slug}`))
       .then(response => response.data)
       .catch(err => console.log(err));
     return {
-      post,
+      post: Post,
       metaData: {
-        title: post[0].title,
+        title: Post[0].title,
         meta: [
-          { hid: 'og:title', name: 'og:title', content: post[0].title },
-          { hid: 'og:image', name: 'og:image', content: post[0].featured_media },
+          { hid: 'og:title', name: 'og:title', content: Post[0].title },
+          { hid: 'og:image', name: 'og:image', content: Post[0].featured_media },
         ]
       }
     };
