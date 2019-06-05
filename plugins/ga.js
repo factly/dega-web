@@ -2,21 +2,6 @@
 // const getGATracking = require('../utils/getGATracking.js');
 const axios = require('axios');
 
-async function getGATracking(app) {
-  const gaTrackingCode = await axios
-    .get(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`)
-    .then(response => response.data[0].ga_tracking_code)
-    .catch(err => console.log(err));
-  console.log(gaTrackingCode);
-  ga('create', gaTrackingCode, 'auto')
-  app.router.afterEach((to, from) => {
-    /*
-    ** We tell Google Analytics to add a `pageview`
-    */
-    ga('set', 'page', to.fullPath)
-    ga('send', 'pageview')
-  })
-}
 
 export default ({ app }) => {
   /*
@@ -33,5 +18,18 @@ export default ({ app }) => {
     /*
     ** Set the current page
     */
-   getGATracking(app)
-  }
+  const GAC = axios
+  .get(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`)
+  .then(response => {
+    ga('create', response.data[0].ga_tracking_code, 'auto')
+    ga('send', 'pageview')
+    app.router.afterEach((to, from) => {
+      /*
+      ** We tell Google Analytics to add a `pageview`
+      */
+      ga('set', 'page', to.fullPath)
+      ga('send', 'pageview')
+    })
+  })
+  .catch(err => console.log(err));
+}
