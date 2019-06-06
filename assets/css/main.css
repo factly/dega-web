@@ -44,20 +44,30 @@ div.sticky {
   font-family: 'Mallanna', "sans-serif";
 }
 .false-background {
-  background-color: #e9b6b9
+  background-color: #e9b6b9;
 }
 .misleading-background {
-  background-color: #c0fff0
+  background-color: #c0fff0;
 }
 .unverified-background {
-  background-color: #ffe0b3
+  background-color: #ffe0b3;
 }
 .partly-true-background {
-  background-color: #e8fc97
+  background-color: #e8fc97;
 }
 .true-background {
-  background-color: #a2fcc7
+  background-color: #a2fcc7;
+}
+.padding-none{
+  padding: 0rem;
 }
 .padding-half{
-  padding: 0.5rem
+  padding: 0.5rem;
+}
+.margin-top-half{
+  margin-top: 0.5rem;
+}
+.box-shadow-none{
+  box-shadow: 0rem 0rem;
+  border-radius: 0rem;
 }

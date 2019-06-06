@@ -6,14 +6,11 @@
           <div class="columns">
             <div class="column is-8">
               <div>
-                <div
+                <StoryPreview
                   v-for="(p, index) in story"
                   :key="index"
-                >
-                  <StoryPreview
-                    :story="p"
-                  />
-                </div>
+                  :story="p"
+                />
               </div>
             </div>
             <div class="column is-4">
@@ -32,7 +29,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 import axios from 'axios';

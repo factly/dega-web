@@ -8,14 +8,11 @@
           <div class="columns">
             <div class="column is-8">
               <div>
-                <div
+                <StoryPreview
+                  :story="p"
                   v-for="(p, index) in factchecks.slice(1)"
                   :key="index"
-                >
-                  <StoryPreview
-                    :story="p"
-                  />
-                </div>
+                />
               </div>
             </div>
             <div class="column is-4">

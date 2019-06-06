@@ -2,63 +2,43 @@
   <div>
     <div class="columns">
       <div class= "column is-6">
-        <div class="card">
-          <div class="card-image">
-            <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' + story.slug">
-              <figure class ="image is-16by9">
-                <img
-                  :src="story.featured_media"
-                  :alt="story._class.split('.').pop()">
-              </figure>
-            </nuxt-link>
-          </div>
-        </div>
+        <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' + story.slug">
+          <figure class ="image is-16by9">
+            <img
+              :src="story.featured_media"
+              :alt="story._class.split('.').pop()">
+          </figure>
+        </nuxt-link>
       </div>
       <div class="column is-6">
-        <div class="content">
+        <div>
+          <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' + story.slug">
+            <p class="is-size-4 has-text-black-bis has-text-weight-bold mallanna-font">{{ story.title }}</p>
+          </nuxt-link>
           <div>
-            <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' + story.slug">
-              <p class="title is-4 headline-title">{{ story.title }}</p>
-            </nuxt-link>
-            <div>
-              <p class="subtitle is-6 headline-preview">{{ story.excerpt }}</p>
+            <p class="is-size-6 has-text-grey has-text-justified mallanna-font">{{ story.excerpt }}</p>
+          </div>
+        </div>
+        <div class="margin-top-half">
+          <div class="field is-grouped is-grouped-multiline">
+            <div
+              v-for="(p, index) in story.authors"
+              :key="'author'+index"
+            >
+              <div class="contorl">
+                <nuxt-link :to="'/author/' + p.slug">
+                  <p class="is-size-7 has-text-link">{{ p.display_name }}<span v-if="index !== story.authors.length - 1">,&nbsp;</span></p>
+                </nuxt-link>
+              </div>
             </div>
           </div>
-          <div class="has-text-black-bis headline-meta">
-            <span
-              v-for="(author, index) in story.authors"
-              :key="index" >
-              <nuxt-link :to="'/author/' + author.slug">
-                {{ author.display_name }}
-              </nuxt-link>
-              <span v-show="index != story.authors.length -1"> , </span>
-            </span> in <nuxt-link :to="'/category/' + story.categories[0].slug">{{ story.categories[0].name }}</nuxt-link>
-          </div>
-          <div class="has-text-grey headline-time">{{ story.published_date | date }}</div>
+          <div class="is-size-7 has-text-grey">{{ story.published_date | date }}</div>
           <Bookmark :story=story />
         </div>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-  .headline-meta {
-    margin-top: 1.5rem;
-  }
-  .headline-title {
-    font-family: 'Ramabhadra', sans-serif;
-    font-size: 2rem;
-    line-height: 2.2rem;
-    margin-bottom: 2rem;
-  }
-  .headline-preview {
-    font-family: 'Mallanna', sans-serif;
-    font-size: 1.2rem;
-    line-height: 1.3rem;
-  }
-</style>
-
 
 <script>
 import Bookmark from '~/components/Bookmark.vue';
