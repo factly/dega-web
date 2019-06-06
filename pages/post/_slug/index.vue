@@ -3,17 +3,12 @@
     <div class="columns">
       <div class="column is-8">
         <div v-if="post && post.length">
-          <section class="hero-title">
-            <StoryHead :story="post[0]"/>
-          </section>
-          <section class="section">
-            <div>
-              <article
-                v-html="post[0].content">
-                {{ post[0].content }}
-              </article>
-            </div>
-          </section>
+          <StoryHead :story="post[0]"/>
+          <div>
+            <article>
+              <div class="has-text-justify is-size-5 mallanna-font" v-html="post[0].content" />
+            </article>
+          </div>
         </div>
         <div
           v-else

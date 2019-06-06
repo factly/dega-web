@@ -38,32 +38,16 @@
       </div>
     </div>
     <article>
-      <p v-html="claim.description" class="has-text-justified">{{ claim.description }}</p>
+      <div v-html="claim.description" class="has-text-justify is-size-5 mallanna-font" />
     </article>
   </div>
 </template>
 
-<style>
-.padded-top{
-  padding-top: 0.75rem
-}
-</style>
-
 <script>
-import SocialSharing from '~/components/SocialSharing';
-
 export default {
-  components: {
-    SocialSharing
-  },
   props: {
     claim: {
       type: Object,
-      required: true,
-      default: null
-    },
-    index: {
-      type: Number,
       required: true,
       default: null
     }
