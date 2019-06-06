@@ -1,73 +1,35 @@
 <template>
   <div>
-    <br>
-    <div class="card has-background-light">
-      <div class="card-content">
-        <div style="margin-bottom: 1rem;">
-          <div class="columns">
-            <div class="column is-6">
-              <div class="media">
-                <div class="media-left">
-                  <figure class="image is-48x48">
-                    <img
-                      :src="claim.rating.icon_url"
-                      alt="Placeholder image">
-                  </figure>
-                </div>
-                <div class="media-content">
-                  <p class="is-size-6">Rating</p>
-                  <p class="is-size-6 has-text-weight-bold">{{ claim.rating.name }}</p>
-                </div>
-              </div>
-            </div>
-            <div class="column is-6 is-hidden-mobile">
-              <div class="media">
-                <div class="media-content">
-                  <p class="title is-6 has-text-right">Claimed by {{ claim.claimant.name }}</p>
-                  <p class="subtitle is-7 has-text-right">{{ claim.claim_date | date }}</p>
-                </div>
-                <div class="media-right">
-                  <figure class="image is-48x48">
-                    <img
-                      :src="claim.claimant.image_url"
-                      alt="Placeholder image">
-                  </figure>
-                </div>
-              </div>
-            </div>
+    <div class="box" :class="widgetBackground">
+      <div class="media">
+        <div class="media-left">
+          <figure class="image is-32x32">
+            <img
+              :src="claim.claimant.image_url"
+              alt="Placeholder image">
+          </figure>
+        </div>
+        <div class="media-content">
+          <p class="title is-5 has-text-weight-bold">{{ claim.claimant.name }}</p>
+          <p class="subtitle is-6">{{ claim.claim }}</p>
+          <div class="is-hidden-tablet">
+            <figure class="image is-128x128">
+              <img
+                :src="claim.rating.icon_url"
+                alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="subtitle">
+            <span class="is-size-6 has-text-weight-bold">Fact</span>
+            <span class="is-size-6">{{ claim.review }}</span>
           </div>
         </div>
-        <div style="margin-bottom: 1rem;">
-          <p class="is-size-6 has-text-weight-bold">Claim</p>
-          <p class="is-size-6">{{ claim.claim }}</p>
-        </div>
-        <div style="margin-bottom: 1rem;">
-          <p class="is-size-6 has-text-weight-bold">Fact</p>
-          <span
-            class="is-size-6"
-            v-html="claim.review" />
-        </div>
-        <div
-          class="is-hidden-desktop"
-          style="margin-bottom: 1rem;">
-          <div class="columns">
-            <div class="column is-6"/>
-            <div class="column is-6">
-              <div class="media">
-                <div class="media-content">
-                  <p class="title is-6 has-text-right">Claimed by {{ claim.claimant.name }}</p>
-                  <p class="subtitle is-7 has-text-right">{{ claim.claim_date | date }}</p>
-                </div>
-                <div class="media-right">
-                  <figure class="image is-48x48">
-                    <img
-                      :src="claim.claimant.image_url"
-                      alt="Placeholder image">
-                  </figure>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="media-left is-hidden-mobile">
+          <figure class="image is-96x96">
+            <img
+              :src="claim.rating.icon_url"
+              alt="Placeholder image">
+          </figure>
         </div>
       </div>
     </div>
@@ -104,6 +66,12 @@ export default {
       required: true,
       default: null
     }
-  }
+  },
+  computed: {
+    widgetBackground() {
+      const backgrounglist = ['false-background', 'misleading-background', 'unverified-background', 'partly-true-background', 'true-background']
+      return backgrounglist[parseInt(this.claim.rating.numeric_value, 10) - 1]
+    }
+  },
 };
 </script>

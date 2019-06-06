@@ -40,3 +40,19 @@ div.sticky {
   0% {transform: scale(1); opacity: 1;}
   100% { transform: scale(.9); opacity: 0;}
 }
+
+.false-background {
+  background-color: #e9b6b9
+}
+.misleading-background {
+  background-color: #c0fff0
+}
+.unverified-background {
+  background-color: #ffe0b3
+}
+.partly-true-background {
+  background-color: #e8fc97
+}
+.true-background {
+  background-color: #a2fcc7
+}
