@@ -3,11 +3,11 @@
     <div class="box" :class="widgetBackground">
       <div class="media">
         <div class="media-content">
-          <div class="media" style="border: none; margin-bottom: 1rem;">
+          <div class="media">
             <div class="media-left">
               <figure class="image is-24x24">
                 <img
-                  src="https://bulma.io/images/placeholders/32x32.png"
+                  :src="claim.claimant.image_url"
                   alt="Placeholder image">
               </figure>
             </div>
@@ -24,8 +24,10 @@
             </figure>
           </div>
           <div>
-            <span class="is-size-6 has-text-weight-bold">Fact.</span>
-            <span class="is-size-6">{{ claim.review }}</span>
+            <p class="is-size-6">
+              <span class="has-text-weight-bold">Fact.</span>
+              {{ claim.review }}
+            </p>
           </div>
         </div>
         <div class="media-left is-hidden-mobile">
