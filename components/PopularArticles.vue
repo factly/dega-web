@@ -6,15 +6,13 @@
       style="padding: 0.75rem; margin-bottom: 1rem;">
       <p class="title is-5 has-text-white-ter">Recent Videos</p>
     </div>
-    <div
-      v-for="(p, index) in popular"
-      :key="'popular' + index"
-    >
+    
       <PopularArticlePreview
+        v-for="(p, index) in popular"
+        :key="'popular' + index"
         :rank="'0' + (index + 1)"
         :story="p"
       />
-    </div>
   </div>
 </template>
 
