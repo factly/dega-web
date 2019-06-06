@@ -40,7 +40,9 @@ div.sticky {
   0% {transform: scale(1); opacity: 1;}
   100% { transform: scale(.9); opacity: 0;}
 }
-
+.mallanna-font {
+  font-family: 'Mallanna', "sans-serif";
+}
 .false-background {
   background-color: #e9b6b9
 }
@@ -55,4 +57,7 @@ div.sticky {
 }
 .true-background {
   background-color: #a2fcc7
+}
+.padding-half{
+  padding: 0.5rem
 }
