@@ -58,6 +58,30 @@ div.sticky {
 .true-background {
   background-color: #a2fcc7;
 }
+.facebook-color {
+  color: #3b5998;
+}
+.twitter-color {
+  color: #38A1F3
+}
+.youtube-color {
+  color: #c4302b 
+}
+.github-color {
+  color: #767676
+}
+.tumbler-color {
+  color: #34526f 
+}
+.pinterest-color {
+  color: #c8232c 
+}
+.linkedin-color {
+  color: #0077B5
+}
+.whatsapp-color {
+  color: #25D366
+}
 .padding-none{
   padding: 0rem;
 }
