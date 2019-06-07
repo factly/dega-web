@@ -1,33 +1,29 @@
 <template>
-  <div class="columns">
-    <div class="column">
-      <div class="main-content">
-        <div v-if="factchecks && factchecks.length">
-          <Hero :story="factchecks[0]"/>
-          <hr class="spacer is-1-5 is-hidden-mobile">
-          <div class="columns">
-            <div class="column is-8">
-              <div>
-                <StoryPreview
-                  :story="p"
-                  v-for="(p, index) in factchecks.slice(1)"
-                  :key="index"
-                />
-              </div>
-            </div>
-            <div class="column is-4">
-              <div class="is-hidden-mobile">
-                <PopularArticles />
-              </div>
-            </div>
+  <div class="main-content">
+    <div v-if="factchecks && factchecks.length">
+      <Hero :story="factchecks[0]"/>
+      <hr class="spacer is-1-5 is-hidden-mobile">
+      <div class="columns">
+        <div class="column is-8">
+          <div>
+            <StoryPreview
+              :story="p"
+              v-for="(p, index) in factchecks.slice(1)"
+              :key="index"
+            />
           </div>
         </div>
-        <div
-          v-else
-          class="subtitle is-6 is-uppercase has-text-centered">
-          Dega API is not responding.<br> Please contact the administrator.
+        <div class="column is-4">
+          <div class="is-hidden-mobile">
+            <PopularArticles />
+          </div>
         </div>
       </div>
+    </div>
+    <div
+      v-else
+      class="subtitle is-6 is-uppercase has-text-centered">
+      Dega API is not responding.<br> Please contact the administrator.
     </div>
   </div>
 </template>

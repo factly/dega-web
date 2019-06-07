@@ -312,11 +312,11 @@
         </div>
       </div>
     </nav>
-    <br >
-    <br >
+    <br class="is-hidden-mobile">
+    <br class="is-hidden-mobile">
     <main>
       <div class="container is-widescreen">
-        <div style="padding: 1rem;">
+        <div class="padding-half">
           <nuxt/>
         </div>
       </div>

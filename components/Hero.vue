@@ -2,19 +2,21 @@
   <div>
     <div class="columns">
       <div class= "column is-6">
-        <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' + story.slug">
-          <figure class ="image is-16by9">
+        <figure class ="image is-16by9">
+          <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' + story.slug">
             <img
               :src="story.featured_media"
               :alt="story._class.split('.').pop()">
-          </figure>
-        </nuxt-link>
+          </nuxt-link>
+        </figure>
       </div>
       <div class="column is-6">
         <div>
-          <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' + story.slug">
-            <p class="is-size-4 has-text-black-bis has-text-weight-bold mallanna-font">{{ story.title }}</p>
-          </nuxt-link>
+          <p class="is-size-4 has-text-weight-bold mallanna-font">
+            <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' + story.slug" class="has-text-black-bis">
+            {{ story.title }}
+            </nuxt-link>
+          </p>
           <div>
             <p class="is-size-6 has-text-grey has-text-justified mallanna-font">{{ story.excerpt }}</p>
           </div>
@@ -24,12 +26,17 @@
             <div
               v-for="(p, index) in story.authors"
               :key="'author'+index"
+              class="contorl"
             >
-              <div class="contorl">
-                <nuxt-link :to="'/author/' + p.slug">
-                  <p class="is-size-7 has-text-link">{{ p.display_name }}<span v-if="index !== story.authors.length - 1">,&nbsp;</span></p>
+              <p class="is-size-7">
+                <nuxt-link :to="'/author/' + p.slug" class="has-text-link">
+                {{ p.display_name }}
                 </nuxt-link>
-              </div>
+                <span v-if="index !== story.authors.length - 1">,&nbsp;</span>
+              </p>
+            </div>
+            <div class="contorl">
+              <p class="is-size-7">&nbsp;in&nbsp;<nuxt-link :to="'/category/' + story.categories[0].slug" class="has-text-link">{{ story.categories[0].name }}</nuxt-link></p>
             </div>
           </div>
           <div class="is-size-7 has-text-grey">{{ story.published_date | date }}</div>

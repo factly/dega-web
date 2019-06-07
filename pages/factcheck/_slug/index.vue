@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-content">
     <div class="columns">
       <div class="column is-8">
         <div v-if="factcheck && factcheck.length > 0">
