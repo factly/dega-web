@@ -4,7 +4,7 @@
       <div class="column is-8">
         <div v-if="factcheck && factcheck.length > 0">
           <StoryHead :story="factcheck[0]"/>
-          <div>
+          <div class="margin-top-half">
             <article>
               <div class="has-text-justify is-size-5 mallanna-font" v-html="factcheck[0].introduction" />
             </article>

@@ -4,15 +4,15 @@
     <div class="media">
       <figure class="media-left">
         <div class="image is-48x48">
-          <p
-            class="title has-text-grey-light is-3 has-text-centered"
-          >{{ rank }}</p>
+          <p class="title has-text-grey-light is-3 has-text-centered">{{ rank }}</p>
         </div>
       </figure>
       <div class="media-content">
-        <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' +story.slug">
-          <p class="is-size-5 has-text-black-bis has-text-weight-bold mallanna-font">{{ story.title }}</p>
-        </nuxt-link>
+        <p class="is-size-5 has-text-weight-bold mallanna-font">
+          <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' +story.slug" class="has-text-black-bis">
+          {{ story.title }}
+          </nuxt-link>
+        </p>
         <div>
           <div class="field is-grouped is-grouped-multiline">
             <div
@@ -20,9 +20,12 @@
               :key="'author'+index"
             >
               <div class="contorl">
-                <nuxt-link :to="'/author/' + p.slug">
-                  <p class="is-size-7 has-text-link">{{ p.display_name }}<span v-if="index !== story.authors.length - 1">,&nbsp;</span></p>
-                </nuxt-link>
+                <p class="is-size-7">
+                  <nuxt-link :to="'/author/' + p.slug" class="has-text-link">
+                    {{ p.display_name }}
+                  </nuxt-link>  
+                  <span v-if="index !== story.authors.length - 1">,&nbsp;</span>
+                </p>
               </div>
             </div>
           </div>

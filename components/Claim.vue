@@ -3,19 +3,19 @@
     <div class="box" :class="widgetBackground">
       <div class="media">
         <div class="media-content">
-          <div class="media">
-            <div class="media-left">
+          <div class="field is-grouped">
+            <div class="contorl">
               <figure class="image is-24x24">
                 <img
                   :src="claim.claimant.image_url"
                   alt="Placeholder image">
               </figure>
             </div>
-            <div class="media-content">
-              <p class="title is-5 has-text-weight-bold">{{ claim.claimant.name }}</p>
+            <div class="contorl">
+              <p class="is-size-5 has-text-weight-bold">{{ claim.claimant.name }}</p>
             </div>
           </div>
-          <p class="subtitle is-6">{{ claim.claim }}</p>
+          <p class="is-size-6">{{ claim.claim }}</p>
           <div class="is-hidden-tablet">
             <figure class="image is-128x128">
               <img
