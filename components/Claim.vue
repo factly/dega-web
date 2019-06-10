@@ -3,7 +3,7 @@
     <div class="box" :class="widgetBackground">
       <div class="media">
         <div class="media-content">
-          <div class="field is-grouped">
+          <div class="field is-grouped is-grouped-multiline">
             <div class="contorl">
               <figure class="image is-24x24">
                 <img
