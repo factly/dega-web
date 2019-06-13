@@ -1,6 +1,6 @@
 <template>
     <div v-if="userModule">
-        <Button v-if="!saved" class="button is-icon" v-on:click.stop="save()">
+        <Button v-if="!saved" class="button is-icon " style="border-radius: 9999px;" v-on:click.stop="save()">
             <span class="icon" style="color: #55acee;">
             <svg
                 width="1792"
@@ -14,7 +14,7 @@
             </svg>
             </span>
         </Button>
-        <Button v-if="saved" class="button" v-on:click.stop="undoSave()">
+        <Button v-if="saved" class="button" style="border-radius: 9999px;" v-on:click.stop="undoSave()">
             <span class="icon" style="color: #55acee;">
             <svg
                 width="1792"
