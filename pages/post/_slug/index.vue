@@ -30,6 +30,7 @@
     <SocialSharingVertical
       :url="$nuxt.$route.path"
       :quote="post[0].title"
+      :story="post[0]"
     />
   </div>
 </template>
