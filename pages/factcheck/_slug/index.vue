@@ -1,36 +1,24 @@
 <template>
-  <div>
+  <div class="main-content">
     <div class="columns">
       <div class="column is-8">
         <div v-if="factcheck && factcheck.length > 0">
           <StoryHead :story="factcheck[0]"/>
-          <div class="columns">
-            <div class="column is-full-mobile">
-              <div class="column is-full">
-                <div>
-                  <article
-                    class="post"
-                    style="text-align: justify;">
-                    <p v-html="factcheck[0].introduction">{{ factcheck[0].introduction }}</p>
-                  </article>
-                  <div
-                    v-for="(claim,index) in factcheck[0].claims"
-                    :key="index">
-                    <a
-                      :id="'claim'+(index+1)"
-                      class="anchor"/>
-                    <ClaimWidget
-                      :claim="claim"
-                      :index="index"/>
-                  </div>
-                  <article
-                    class="post"
-                    style="text-align: justify;">
-                    <p v-html="factcheck[0].summary">{{ factcheck[0].summary }}</p>
-                  </article>
-                </div>
-              </div>
+          <div class="margin-top-half">
+            <article>
+              <div class="has-text-justify is-size-5 mallanna-font" v-html="factcheck[0].introduction" />
+            </article>
+            <div>
+              <Claim
+                v-for="(claim,index) in factcheck[0].claims"
+                :key="index"
+                :id="'claim'+index"
+                :claim="claim"
+                :index="index"/>
             </div>
+            <article>
+              <div class="has-text-justify is-size-5 mallanna-font" v-html="factcheck[0].summary" />
+            </article>
           </div>
         </div>
       </div>
@@ -54,23 +42,17 @@
     />
   </div>
 </template>
-<style scoped>
-a.anchor {
-    display: block;
-    position: relative;
-    top: -80px;
-}
-</style>
+
 <script>
 import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
-import ClaimWidget from '~/components/ClaimWidget';
+import Claim from '~/components/Claim';
 import ListClaims from '~/components/ListClaims.vue';
 
 export default {
   components: {
     StoryHead,
-    ClaimWidget,
+    Claim,
     ListClaims
   },
   data() {
