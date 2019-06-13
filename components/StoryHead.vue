@@ -19,7 +19,7 @@
             <p class="is-size-6">
               <nuxt-link :to="'/author/' + story.authors[0].slug" class="has-text-link">
                 {{ story.authors[0].display_name }}
-              </nuxt-link>  
+              </nuxt-link>
             </p>
             <p class="is-size-6">{{ story.published_date | date }}</p>
           </div>
@@ -30,7 +30,7 @@
           <div
             v-for="(p, index) in story.authors"
             :key="'author'+index"
-            class="contorl"
+            class="control"
             style="margin-right:0.5rem;">
             <figure class="image is-64x64">
               <nuxt-link :to="'/author/' + p.slug">
@@ -45,7 +45,7 @@
           <div
             v-for="(p, index) in story.authors"
             :key="'author'+index"
-            class="contorl"
+            class="control"
           >
             <div>
               <p class="is-size-6">

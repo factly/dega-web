@@ -16,14 +16,14 @@
               <div
                 v-for="(p, index) in story.authors"
                 :key="'author'+index"
-                class="contorl"
+                class="control"
               >
                 <p class="is-size-7">
                   <nuxt-link :to="'/author/' + p.slug" class="has-text-link">{{ p.display_name }}</nuxt-link>
                   <span v-if="index !== story.authors.length - 1">,&nbsp;</span>
                 </p>
               </div>
-              <div class="contorl">
+              <div class="control">
                 <p class="is-size-7">&nbsp;in&nbsp;<nuxt-link :to="'/category/' + story.categories[0].slug" class="has-text-link">{{ story.categories[0].name }}</nuxt-link></p>
               </div>
             </div>
@@ -44,7 +44,7 @@
   </div>
 </template>
 
-<style> 
+<style>
   .story-preview-summary{
     overflow: hidden !important;
     max-height: 20px !important;
