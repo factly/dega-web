@@ -24,18 +24,26 @@ const createStore = () => {
       }
     },
     actions: {
-      nuxtServerInit(vuexContext, context){
-        axios.get(encodeURI(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`))
-        .then(res => {
-          vuexContext.commit("setOrganisation", res.data[0])
-        })
-        .catch(e => context.error(e));
-
-        axios.get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&category=video&sortBy=publishedDate&sortAsc=false`))
-        .then(res => {
-          vuexContext.commit("setPopular", res.data)
-        })
-        .catch(e => context.error(e));        
+      nuxtServerInit({ commit }, context){
+        const getOrg = () => {
+          return axios.get(encodeURI(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`))
+          .then(res => {
+            commit("setOrganisation", res.data[0])
+          })
+          .catch(e => context.error(e));
+        }
+        const getPopular = () => {
+          return axios.get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&category=video&sortBy=publishedDate&sortAsc=false`))
+          .then(res => {
+            commit("setPopular", res.data)
+          })
+          .catch(e => context.error(e));
+        } 
+        
+        return Promise.all([
+          getOrg(),
+          getPopular()
+        ])
       }
     },
     getters: {

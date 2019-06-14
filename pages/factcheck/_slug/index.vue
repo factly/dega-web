@@ -1,46 +1,39 @@
 <template>
-  <div>
+  <div class="main-content">
     <div class="columns">
       <div class="column is-8">
         <div v-if="factcheck && factcheck.length > 0">
           <StoryHead :story="factcheck[0]"/>
-          <div class="columns">
-            <div class="column is-full-mobile">
-              <div class="column is-full">
-                <div>
-                  <article
-                    class="post"
-                    style="text-align: justify;">
-                    <p v-html="factcheck[0].introduction">{{ factcheck[0].introduction }}</p>
-                  </article>
-                  <div
-                    v-for="(claim,index) in factcheck[0].claims"
-                    :key="index">
-                    <a
-                      :id="'claim'+(index+1)"
-                      class="anchor"/>
-                    <ClaimWidget
-                      :claim="claim"
-                      :index="index"/>
-                  </div>
-                  <article
-                    class="post"
-                    style="text-align: justify;">
-                    <p v-html="factcheck[0].summary">{{ factcheck[0].summary }}</p>
-                  </article>
-                </div>
-              </div>
+          <div class="margin-top-half">
+            <article>
+              <div class="has-text-justify is-size-5 mallanna-font" v-html="factcheck[0].introduction" />
+            </article>
+            <div>
+              <Claim
+                v-for="(claim,index) in factcheck[0].claims"
+                :key="index"
+                :id="'claim'+index"
+                :claim="claim"
+                :index="index"/>
             </div>
-            <div
-              v-if="factcheck[0].claims.length > 1"
-              class="column is-one-quarter is-hidden-mobile">
-              <ListClaims :factcheck="factcheck"/>
-            </div>
+            <article>
+              <div class="has-text-justify is-size-5 mallanna-font" v-html="factcheck[0].summary" />
+            </article>
           </div>
         </div>
       </div>
       <div class="column is-4">
-        <PopularArticles />
+        <div>
+          <div
+            v-if="factcheck[0].claims.length > 1"
+            class="is-hidden-mobile"
+            style="margin-bottom: 1rem;">
+            <ListClaims :factcheck="factcheck"/>
+          </div>
+          <div class="is-hidden-mobile">
+            <PopularArticles />
+          </div>
+        </div>
       </div>
     </div>
     <SocialSharingVertical
@@ -50,23 +43,17 @@
     />
   </div>
 </template>
-<style scoped>
-a.anchor {
-    display: block;
-    position: relative;
-    top: -80px;
-}
-</style>
+
 <script>
 import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
-import ClaimWidget from '~/components/ClaimWidget';
+import Claim from '~/components/Claim';
 import ListClaims from '~/components/ListClaims.vue';
 
 export default {
   components: {
     StoryHead,
-    ClaimWidget,
+    Claim,
     ListClaims
   },
   data() {
@@ -74,7 +61,7 @@ export default {
       factcheck: null,
       ListClaimsHidden: false,
       structuredData: null,
-      metaData: null,
+      metaData: null
     };
   },
   methods: {
@@ -102,8 +89,7 @@ export default {
     };
   },
   head() {
-    if(this.factcheck[0].excerpt)
-      this.metaData["meta"].push({ hid: 'og:description', name: 'og:description', content: this.factcheck[0].excerpt });
+    if (this.factcheck[0].excerpt) { this.metaData.meta.push({ hid: 'og:description', name: 'og:description', content: this.factcheck[0].excerpt }); }
     return this.metaData;
   }
 };

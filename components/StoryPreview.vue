@@ -1,25 +1,34 @@
 <template>
-  <div class="story-preview-box">
+  <div class="box padding-none box-shadow-none">
     <div class="columns is-mobile">
-      <div class="column is-8 story-preview-content">
+      <div class="column is-8">
         <div>
           <div>
-            <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' +story.slug">
-              <h2 class="has-text-black-bis story-preview-headline">{{ story.title }}</h2>
-            </nuxt-link>
-            <p class="subtitle has-text-grey has-text-justified story-preview-summary">{{ story.excerpt }}</p>
-          </div>
-          <div class="has-text-black-bis story-author-category">
-            <span
-              v-for="(author, index) in story.authors"
-              :key="index">
-              <nuxt-link :to="'/author/' + author.slug">
-                {{ author.display_name }}
+            <p class="is-size-4 has-text-weight-bold mallanna-font">
+              <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' +story.slug" class="has-text-black-bis">
+              {{ story.title }}
               </nuxt-link>
-              <span v-show="index != story.authors.length -1"> , </span>
-            </span> in <nuxt-link :to="'/category/' + story.categories[0].slug">{{ story.categories[0].name }}</nuxt-link>
+            </p>
+            <p class="is-size-6 has-text-grey has-text-justified mallanna-font story-preview-summary">{{ story.excerpt }}</p>
           </div>
-          <div class="has-text-grey story-time">{{ story.published_date | date }}</div>
+          <div class="margin-top-half">
+            <div class="field is-grouped is-grouped-multiline">
+              <div
+                v-for="(p, index) in story.authors"
+                :key="'author'+index"
+                class="contorl"
+              >
+                <p class="is-size-7">
+                  <nuxt-link :to="'/author/' + p.slug" class="has-text-link">{{ p.display_name }}</nuxt-link>
+                  <span v-if="index !== story.authors.length - 1">,&nbsp;</span>
+                </p>
+              </div>
+              <div class="contorl">
+                <p class="is-size-7">&nbsp;in&nbsp;<nuxt-link :to="'/category/' + story.categories[0].slug" class="has-text-link">{{ story.categories[0].name }}</nuxt-link></p>
+              </div>
+            </div>
+            <div class="is-size-7 has-text-grey">{{ story.published_date | date }}</div>
+          </div>
         </div>
       </div>
       <div class="column is-4">
@@ -35,37 +44,11 @@
   </div>
 </template>
 
-<style>
-  .story-preview-box {
-    margin-bottom: 1rem;
-  }
-  .story-preview-content {
-    padding-right: 1rem;
-  }
-  .story-preview-headline {
-    font-family: 'Mallanna', sans-serif;
-    font-size: 24px !important;
-    line-height: 28px !important;
-    max-height: 56px !important;
-    font-weight: 600 !important;
-    overflow: hidden !important;
-    text-decoration-style: solid !important;
-  }
+<style> 
   .story-preview-summary{
-    margin-top: 0.25rem;
-    font-family: 'Mallanna', sans-serif;
-    font-size: 16px !important;
-    line-height: 20px !important;
     overflow: hidden !important;
     max-height: 20px !important;
     text-overflow: ellipsis !important;
-  }
-  .story-author-category{
-    margin-top: 0.60rem;
-    font-size: 13px !important;
-  }
-  .story-time{
-    font-size: 13px !important;
   }
 </style>
 

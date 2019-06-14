@@ -1,58 +1,41 @@
 <!-- Popular articles -->
 <template>
-  <div class="card popular-card">
+  <div class="box padding-half">
     <div class="media">
       <figure class="media-left">
         <div class="image is-48x48">
-          <p
-            class="title has-text-grey-light is-3 has-text-centered"
-          >{{ rank }}</p>
+          <p class="title has-text-grey-light is-3 has-text-centered">{{ rank }}</p>
         </div>
       </figure>
       <div class="media-content">
-        <div class="content">
-          <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' +story.slug">
-            <h2 class="has-text-black-bis popular-headline">{{ story.title }}</h2>
+        <p class="is-size-5 has-text-weight-bold mallanna-font">
+          <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' +story.slug" class="has-text-black-bis">
+          {{ story.title }}
           </nuxt-link>
-          <div>
-            <div class="has-text-black-bis popular-author">
-              <span
-                v-for="(author, index) in story.authors"
-                :key="index" >
-                <nuxt-link :to="'/author/' + author.slug">
-                  {{ author.display_name }}
-                </nuxt-link>
-                <span v-show="index != story.authors.length -1"> , </span>
-              </span>
+        </p>
+        <div>
+          <div class="field is-grouped is-grouped-multiline">
+            <div
+              v-for="(p, index) in story.authors"
+              :key="'author'+index"
+            >
+              <div class="contorl">
+                <p class="is-size-7">
+                  <nuxt-link :to="'/author/' + p.slug" class="has-text-link">
+                    {{ p.display_name }}
+                  </nuxt-link>  
+                  <span v-if="index !== story.authors.length - 1">,&nbsp;</span>
+                </p>
+              </div>
             </div>
-            <div class="has-text-grey popular-time">{{ story.published_date | date }}</div>
           </div>
+          <div class="is-size-7 has-text-grey">{{ story.published_date | date }}</div>
         </div>
       </div>
     </div>
   </div>
 </template>
-<style>
-  .popular-card {
-    margin-bottom: 0.5rem;
-    padding: 0.5rem;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 5px;
-  }
-  .popular-headline {
-    font-family: 'Mallanna', "sans-serif" !important;
-    font-size: 21px !important;
-    line-height: 24px !important;
-    font-weight: 300;
-  }
-  .popular-author{
-    font-size: 12px !important;
-    line-height: 16px !important;
-  }
-  .popular-time{
-    font-size: 12px !important;
-  }
-</style>
+
 <script>
 export default {
   props: {

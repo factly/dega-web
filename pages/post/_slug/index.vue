@@ -1,21 +1,14 @@
 <template>
-  <div>
+  <div class="main-content">
     <div class="columns">
       <div class="column is-8">
         <div v-if="post && post.length">
-          <section class="hero-title">
-            <StoryHead :story="post[0]"/>
-          </section>
-          <section class="section">
-            <div>
-              <article
-                class="post"
-                v-html="post[0].content">
-                {{ post[0].content }}
-              </article>
-            </div>
-          </section>
-
+          <StoryHead :story="post[0]"/>
+          <div>
+            <article>
+              <div class="has-text-justify is-size-5 mallanna-font" v-html="post[0].content" />
+            </article>
+          </div>
         </div>
         <div
           v-else
@@ -24,7 +17,9 @@
         </div>
       </div>
       <div class="column is-4">
-        <PopularArticles/>
+        <div class="is-hidden-mobile">
+          <PopularArticles />
+        </div>
       </div>
     </div>
     <SocialSharingVertical
@@ -70,8 +65,7 @@ export default {
     };
   },
   head() {
-    if(this.post[0].excerpt)
-      this.metaData["meta"].push({ hid: 'og:description', name: 'og:description', content: this.post[0].excerpt });
+    if (this.post[0].excerpt) { this.metaData.meta.push({ hid: 'og:description', name: 'og:description', content: this.post[0].excerpt }); }
     return this.metaData;
   }
 };
