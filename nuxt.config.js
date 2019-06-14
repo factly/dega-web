@@ -8,7 +8,7 @@ module.exports = {
     apiUri: process.env.API_URI || 'https://api.factly.in',
     clientId: process.env.CLIENT_ID || 'factly-telugu',
     domainHostname: process.env.DOMAIN_HOSTNAME || 'https://factcheck.factly.in',
-    userDataApiUri: process.env.USER_DATA_API_URI || 'http://localhost:8081',
+    userDataApiUri: process.env.USER_DATA_API_URI || 'http://localhost:8081/api/v1',
     logoutUri: process.env.LOGOUT_ENDPOINT,
     baseUrl: process.env.BASE_URL || 'http://127.0.0.1:3000',
     userModule: process.env.userModule || 'false'
