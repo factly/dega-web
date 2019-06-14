@@ -44,32 +44,47 @@
             <div class="card-content has-text-justified">
               <div class="content columns is-multiline">
                 <div class="column is-half">Name</div>
-                <div class="column is-half">{{ user.name }}</div>
+                <div v-if="editing" class="column is-half">
+                  <b-field>
+                    <b-input v-model="name"></b-input>
+                  </b-field>
+                </div>
+                <div v-else class="column is-half">{{ name }}</div>
                 <div class="column is-half">Email</div>
                 <div class="column is-half">{{ user.email }}</div>
                 <div class="column is-half">Gender</div>
-                <div class="column is-half">
+                <div class="column">
                   <div v-if="!editing && user.gender!='Choose'">{{ user.gender }}</div>
                   <div v-else class="select">
                     <select v-model="gender">
                       <option disabled>Choose</option>
-                      <option>Confidential</option>
                       <option>Male</option>
                       <option>Female</option>
                     </select>
                   </div>
                 </div>
+                <div v-if="editing || (user.gender=='Choose' && gender!='Choose')" class="column is-1">
+                  <span class="icon" style="color: #333;" v-on:click="clearGender">
+                    <svg
+                      width="1792"
+                      height="1792"
+                      viewBox="0 0 1792 1792"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1490 1322q0 40-28 68l-136 136q-28 28-68 28t-68-28l-294-294-294 294q-28 28-68 28t-68-28l-136-136q-28-28-28-68t28-68l294-294-294-294q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 294 294-294q28-28 68-28t68 28l136 136q28 28 28 68t-28 68l-294 294 294 294q28 28 28 68z"
+                      ></path>
+                    </svg>
+                  </span>
+                </div>
                 <div class="column is-half">Date Of Birth</div>
-                <div class="column is-half">
+                <div class="column">
                   <div
-                    v-if="!editing && !user.isDOBConfidential && user.dob"
+                    v-if="!editing && user.dob"
                   >{{user.dob.toLocaleString('en', {year: 'numeric', month: 'long', day: 'numeric' })}}</div>
-                  <div
-                    v-else-if="!editing && user.isDOBConfidential"
-                  >Confidential</div>
                   <div v-if="editing || !user.dob">
-                    <b-field label="Select a date">
-                      <b-datepicker v-if="!isDOBConfidential"
+                    <b-field>
+                      <b-datepicker
                         placeholder="Type or select a date..."
                         icon="calendar-today"
                         editable
@@ -77,16 +92,27 @@
                         :max-date="today"
                       ></b-datepicker>
                     </b-field>
-                    <b-checkbox v-model="isDOBConfidential">
-                        I dont want to reveal
-                    </b-checkbox>
                   </div>
+                </div>
+                <div v-if="editing || (!user.dob && dob)" class="column is-1">
+                  <span class="icon" style="color: #333;" v-on:click="clearDOB">
+                    <svg
+                      width="1792"
+                      height="1792"
+                      viewBox="0 0 1792 1792"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M1490 1322q0 40-28 68l-136 136q-28 28-68 28t-68-28l-294-294-294 294q-28 28-68 28t-68-28l-136-136q-28-28-28-68t28-68l294-294-294-294q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 294 294-294q28-28 68-28t68 28l136 136q28 28 28 68t-28 68l-294 294 294 294q28 28 28 68z"
+                      ></path>
+                    </svg>
+                  </span>
                 </div>
               </div>
             </div>
             <footer class="card-footer">
               <a
-                v-if="isDOBConfidential != user.isDOBConfidential || dob!==(user.dob) || gender!=user.gender "
+                v-if="dob!==(user.dob) || gender!=user.gender || user.name!=name"
                 href="#"
                 class="card-footer-item"
                 v-on:click="update"
@@ -105,12 +131,8 @@ export default {
   data() {
     if (process.env.userModule === 'true' && this.$auth.loggedIn) {
       let { user } = this.$auth
-      if (user.dob && user.dob!=="Confidential")
+      if (user.dob) 
         user.dob = new Date(user.dob)
-      if(user.dob==="Confidential"){
-        user.isDOBConfidential = true
-        user.dob = new Date()
-      }
       if (!user.gender) {
         user.gender = 'Choose'
       }
@@ -118,10 +140,10 @@ export default {
         userModule: true,
         user: user,
         gender: user.gender,
-        isDOBConfidential:user.isDOBConfidential,
         dob: user.dob,
+        name: user.name,
         editing: false,
-        today:new Date()
+        today: new Date()
       }
     } else return { userModule: false }
   },
@@ -130,9 +152,11 @@ export default {
       let modifiedUser = Object.assign({}, this.user)
       modifiedUser.gender = this.gender
       modifiedUser.dob = this.dob
-      if(this.isDOBConfidential)
-        modifiedUser.dob = "Confidential"
-      if (modifiedUser['gender'] === 'Choose') modifiedUser['gender'] = null
+      modifiedUser.name = this.name
+      if (modifiedUser['gender'] === 'Choose')
+        modifiedUser['gender'] = ''
+      if(!modifiedUser.dob)
+        modifiedUser.dob = ''
       const updateUserInfo = axios({
         method: 'POST',
         url: process.env.userDataApiUri + '/user/update',
@@ -146,15 +170,13 @@ export default {
           this.editing = false
           this.$auth.fetchUser().then(() => {
             this.user = this.$auth.user
-            this.gender = this.user.gender
-            if(this.user.dob==="Confidential"){
-              this.user.isDOBConfidential = true
-              this.user.dob = new Date()
-            }
-            if (this.user.dob!=="Confidential")
+            if(!this.user.gender)
+              this.user.gender = 'Choose';
+            if(this.user.dob)
               this.user.dob = new Date(this.user.dob)
-            this.dob = this.user.dob
-            this.isDOBConfidential = this.user.isDOBConfidential
+            this.gender = this.user.gender;
+            this.dob = this.user.dob;
+            this.name = this.user.name;
           })
         }
       })
@@ -167,6 +189,13 @@ export default {
       this.gender = this.user.gender
       if (this.user.dob) this.user.dob = new Date(this.user.dob)
       this.dob = this.user.dob
+      this.name = this.user.name
+    },
+    clearGender(){
+      this.gender = "Choose";
+    },
+    clearDOB(){
+      this.dob = null;
     }
   }
 }
