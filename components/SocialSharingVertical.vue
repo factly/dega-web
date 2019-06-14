@@ -1,5 +1,6 @@
 <template>
   <div class="sticky-horizontal-container share-box">
+    <Bookmark :story=story style="text-align:center;padding-bottom:5px"/>
     <div class="share-icon">
       <a
         :href="'https://www.facebook.com/sharer/sharer.php?u='+ encodeURI(organisation.site_address + url) + '&quote='+quote"
@@ -109,7 +110,11 @@
   }
 </style>
 <script>
+import Bookmark from '~/components/Bookmark.vue';
 export default {
+  components:{
+    Bookmark
+  },
   props: {
     url: {
       type: String,
@@ -118,6 +123,11 @@ export default {
     quote: {
       type: String,
       default: ''
+    },
+    story: {
+      type: Object,
+      required: true,
+      default: null
     }
   },
   data() {

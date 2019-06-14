@@ -59,7 +59,6 @@
         </div>
       </div>
     </div>
-    <Bookmark :story=story />
   </div>
 </template>
 
@@ -75,11 +74,7 @@
 </style>
 
 <script>
-import Bookmark from '~/components/Bookmark.vue';
 export default {
-  components:{
-    Bookmark
-  },
   props: {
     story: {
       type: Object,
