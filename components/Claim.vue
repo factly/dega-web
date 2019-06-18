@@ -15,7 +15,10 @@
               <p class="is-size-5 has-text-weight-bold">{{ claim.claimant.name }}</p>
             </div>
           </div>
-          <p class="is-size-6">{{ claim.claim }}</p>
+          <div class="field is-horizontal">
+            <div class="field-label"><span class="has-text-weight-bold">Claim:&nbsp;</span></div>
+            <div class="field-body"><span class="is-size-6">{{ claim.claim }}</span></div>
+          </div>
           <div class="is-hidden-tablet">
             <figure class="image is-128x128">
               <img
@@ -23,11 +26,9 @@
                 alt="Placeholder image">
             </figure>
           </div>
-          <div>
-            <p class="is-size-6">
-              <span class="has-text-weight-bold">Fact.</span>
-              {{ claim.review }}
-            </p>
+          <div class="field is-horizontal">
+              <div class="field-label"><p class="has-text-weight-bold">Fact:&nbsp;</p></div>
+              <div class="field-body"><span class="has-text-weight-bold" v-html="claim.review"></span></div>
           </div>
         </div>
         <div class="media-left is-hidden-mobile">
@@ -44,6 +45,13 @@
     </article>
   </div>
 </template>
+<style>
+
+.field-label{
+    margin-right: 0rem;
+    flex-grow: 0;
+}
+</style>
 
 <script>
 export default {
