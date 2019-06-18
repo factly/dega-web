@@ -19,11 +19,11 @@
               v-for="(p, index) in story.authors"
               :key="'author'+index"
             >
-              <div class="contorl">
+              <div class="control">
                 <p class="is-size-7">
                   <nuxt-link :to="'/author/' + p.slug" class="has-text-link">
                     {{ p.display_name }}
-                  </nuxt-link>  
+                  </nuxt-link>
                   <span v-if="index !== story.authors.length - 1">,&nbsp;</span>
                 </p>
               </div>

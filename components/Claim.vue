@@ -4,14 +4,14 @@
       <div class="media">
         <div class="media-content">
           <div class="field is-grouped is-grouped-multiline">
-            <div class="contorl">
+            <div class="control">
               <figure class="image is-24x24">
                 <img
                   :src="claim.claimant.image_url"
                   alt="Placeholder image">
               </figure>
             </div>
-            <div class="contorl">
+            <div class="control">
               <p class="is-size-5 has-text-weight-bold">{{ claim.claimant.name }}</p>
             </div>
           </div>
