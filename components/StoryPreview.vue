@@ -16,14 +16,13 @@
               <div
                 v-for="(p, index) in story.authors"
                 :key="'author'+index"
-                class="control"
               >
                 <p class="is-size-7">
                   <nuxt-link :to="'/author/' + p.slug" class="has-text-link">{{ p.display_name }}</nuxt-link>
                   <span v-if="index !== story.authors.length - 1">,&nbsp;</span>
                 </p>
               </div>
-              <div class="control">
+              <div>
                 <p class="is-size-7">&nbsp;in&nbsp;<nuxt-link :to="'/category/' + story.categories[0].slug" class="has-text-link">{{ story.categories[0].name }}</nuxt-link></p>
               </div>
             </div>
