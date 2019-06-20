@@ -8,13 +8,9 @@
             <article>
               <div class="has-text-justify is-size-5 mallanna-font" v-html="factcheck[0].introduction" />
             </article>
-            <div>
-              <Claim
-                v-for="(claim,index) in factcheck[0].claims"
-                :key="index"
-                :id="'claim'+index"
-                :claim="claim"
-                :index="index"/>
+            <div v-for="(claim,index) in factcheck[0].claims" :key="index" :id="'claim'+index">
+              <a class="anchor" :id="'claim'+(index+1)"></a>
+              <Claim :claim="claim" :index="index"/>
             </div>
             <article>
               <div class="has-text-justify is-size-5 mallanna-font" v-html="factcheck[0].summary" />
@@ -43,7 +39,13 @@
     />
   </div>
 </template>
-
+<style>
+a.anchor {
+    display: block;
+    position: relative;
+    top: -80px;
+}
+</style>
 <script>
 import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
