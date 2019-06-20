@@ -12,7 +12,8 @@
             v-for="(claim, index) in factcheck[0].claims"
             :key="index"
             :href="'#claim'+(index+1)"
-            class="panel-block">
+            class="panel-block"
+            style="text-decoration: none">
             <h2 class="claims-text">#{{ index+1 }}. {{ claim.claim }}</h2>
           </a>
         </div>
