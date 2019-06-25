@@ -34,7 +34,7 @@
                 <span v-if="index !== story.authors.length - 1">,&nbsp;</span>
               </p>
             </div>
-            <div>
+            <div v-if="story.categories.length">
               <p class="is-size-7">&nbsp;in&nbsp;<nuxt-link :to="'/category/' + story.categories[0].slug" class="has-text-link">{{ story.categories[0].name }}</nuxt-link></p>
             </div>
           </div>
