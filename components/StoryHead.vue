@@ -26,7 +26,7 @@
         </article>
       </div>
       <div v-else>
-        <div class="field">
+        <div class="field is-grouped">
           <div
             v-for="(p, index) in story.authors"
             :key="'author'+index"
@@ -41,7 +41,7 @@
             </figure>
           </div>
         </div>
-        <div class="field">
+        <div class="field is-grouped">
           <div
             v-for="(p, index) in story.authors"
             :key="'author'+index"
@@ -52,7 +52,7 @@
                 <nuxt-link :to="'/author/' + p.slug" class="has-text-link">
                   {{ p.display_name }}
                 </nuxt-link>
-                <span v-if="index !== story.authors.length - 1">,&nbsp;</span>
+                <span v-if="index !== story.authors.length - 1">,</span>
               </p>
             </div>
           </div>
