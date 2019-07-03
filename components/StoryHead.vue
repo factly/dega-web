@@ -16,12 +16,12 @@
             </figure>
           </div>
           <div class="media-content">
-            <p class="is-size-6">
-              <nuxt-link :to="'/author/' + story.authors[0].slug" class="has-text-link">
-                {{ story.authors[0].display_name }}
-              </nuxt-link>
-            </p>
-            <p class="is-size-6">{{ story.published_date | date }}</p>
+            <MetaData
+              :authors="story.authors"
+              :category="story.categories[0]"
+              :published="story.published_date"
+              size="is-size-6"
+            />
           </div>
         </article>
       </div>
@@ -43,7 +43,7 @@
         </div>
         <MetaData
           :authors="story.authors"
-          :category="story.categories[0]"
+          :category="story.categories ? story.categories[0] : underfined"
           :published="story.published_date"
           size="is-size-6"
         />
