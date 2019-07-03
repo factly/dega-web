@@ -11,23 +11,11 @@
             </p>
             <p class="is-size-6 has-text-grey has-text-justified mallanna-font story-preview-summary">{{ story.excerpt }}</p>
           </div>
-          <div class="margin-top-half">
-            <div class="field is-grouped is-grouped-multiline">
-              <div
-                v-for="(p, index) in story.authors"
-                :key="'author'+index"
-              >
-                <p class="is-size-7">
-                  <nuxt-link :to="'/author/' + p.slug" class="has-text-link">{{ p.display_name }}</nuxt-link>
-                  <span v-if="index !== story.authors.length - 1">,&nbsp;</span>
-                </p>
-              </div>
-              <div>
-                <p class="is-size-7">&nbsp;in&nbsp;<nuxt-link :to="'/category/' + story.categories[0].slug" class="has-text-link">{{ story.categories[0].name }}</nuxt-link></p>
-              </div>
-            </div>
-            <div class="is-size-7 has-text-grey">{{ story.published_date | date }}</div>
-          </div>
+          <MetaData
+            :authors="story.authors"
+            :category="story.categories[0]"
+            :published="story.published_date"
+          />
         </div>
       </div>
       <div class="column is-4">
@@ -52,7 +40,11 @@
 </style>
 
 <script>
+import MetaData from '@/components/MetaData';
 export default {
+  components: {
+    MetaData
+  },
   props: {
     story: {
       type: Object,
