@@ -5,16 +5,16 @@
         v-for="(p, index) in authors"
         :key="'author'+index"
       >
-        <p class="is-size-7">
+        <p :class="size">
           <span v-if="index !== 0">,&nbsp;</span>
           <nuxt-link :to="'/author/' + p.slug" class="has-text-link">{{ p.display_name }}</nuxt-link>
         </p>
       </div>
       <div v-if="category">
-        <p class="is-size-7">&nbsp;in&nbsp;<nuxt-link :to="'/category/' + category.slug" class="has-text-link">{{ category.name }}</nuxt-link></p>
+        <p :class="size">&nbsp;in&nbsp;<nuxt-link :to="'/category/' + category.slug" class="has-text-link">{{ category.name }}</nuxt-link></p>
       </div>
     </div>
-    <div class="is-size-7 has-text-grey">{{ published | date }}</div>
+    <div class="has-text-grey" :class="size">{{ published | date }}</div>
   </div>
 </template>
 
@@ -32,6 +32,10 @@ export default {
     published: {
       type: String,
       required: true
+    },
+    size: {
+      type: String,
+      default: 'is-size-7'
     }
   }
 }

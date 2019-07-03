@@ -26,7 +26,7 @@
         </article>
       </div>
       <div v-else>
-        <div class="field">
+        <div class="field is-grouped">
           <div
             v-for="(p, index) in story.authors"
             :key="'author'+index"
@@ -41,22 +41,12 @@
             </figure>
           </div>
         </div>
-        <div class="field">
-          <div
-            v-for="(p, index) in story.authors"
-            :key="'author'+index"
-            class="control"
-          >
-            <div>
-              <p class="is-size-6">
-                <nuxt-link :to="'/author/' + p.slug" class="has-text-link">
-                  {{ p.display_name }}
-                </nuxt-link>
-                <span v-if="index !== story.authors.length - 1">,&nbsp;</span>
-              </p>
-            </div>
-          </div>
-        </div>
+        <MetaData
+          :authors="story.authors"
+          :category="story.categories[0]"
+          :published="story.published_date"
+          size="is-size-6"
+        />
       </div>
     </div>
   </div>
@@ -74,7 +64,11 @@
 </style>
 
 <script>
+import MetaData from '@/components/MetaData';
 export default {
+  components: {
+    MetaData
+  },
   props: {
     story: {
       type: Object,
