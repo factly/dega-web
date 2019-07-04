@@ -58,6 +58,15 @@ div.sticky {
 .true-background {
   background-color: #a2fcc7;
 }
+.facebook-background {
+  background-color: #3b5998;
+}
+.twitter-background {
+  background-color: #38A1F3;
+}
+.whatsapp-background {
+  background-color: #25D366;
+}
 .facebook-color {
   color: #3b5998;
 }
@@ -82,6 +91,9 @@ div.sticky {
 .whatsapp-color {
   color: #25D366
 }
+.white-color {
+  color: #ffffff
+}
 .padding-none{
   padding: 0rem;
 }
@@ -90,6 +102,9 @@ div.sticky {
 }
 .margin-top-half{
   margin-top: 0.5rem;
+}
+.margin-top-3{
+  margin-top: 3rem;
 }
 .box-shadow-none{
   box-shadow: 0rem 0rem;

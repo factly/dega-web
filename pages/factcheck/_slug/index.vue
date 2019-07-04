@@ -8,6 +8,7 @@
             <article>
               <div class="has-text-justify is-size-5 mallanna-font" v-html="factcheck[0].introduction" />
             </article>
+            <br>
             <div v-for="(claim,index) in factcheck[0].claims" :key="index" :id="'claim'+index">
               <a class="anchor" :id="'claim'+(index+1)"></a>
               <Claim :claim="claim" :index="index"/>
