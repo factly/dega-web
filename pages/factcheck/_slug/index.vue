@@ -1,8 +1,8 @@
 <template>
   <div class="main-content">
-    <div class="columns">
-      <div class="column is-8">
-        <div v-if="factcheck && factcheck.length > 0">
+    <div v-if="factcheck && factcheck.length > 0">
+      <div class="columns">
+        <div class="column is-8">
           <StoryHead :story="factcheck[0]"/>
           <div class="margin-top-half">
             <article>
@@ -17,27 +17,31 @@
               <div class="has-text-justify is-size-5 mallanna-font" v-html="factcheck[0].summary" />
             </article>
           </div>
+          <StoryFooter 
+            :tags="factcheck[0].tags"
+            :authors="factcheck[0].authors"
+          />
+        </div>
+        <div class="column is-4">
+          <div>
+            <div
+              v-if="factcheck[0].claims.length > 1"
+              class="is-hidden-mobile"
+              style="margin-bottom: 1rem;">
+              <ListClaims :factcheck="factcheck"/>
+            </div>
+            <div class="is-hidden-mobile">
+              <PopularArticles />
+            </div>
+          </div>
         </div>
       </div>
-      <div class="column is-4">
-        <div>
-          <div
-            v-if="factcheck[0].claims.length > 1"
-            class="is-hidden-mobile"
-            style="margin-bottom: 1rem;">
-            <ListClaims :factcheck="factcheck"/>
-          </div>
-          <div class="is-hidden-mobile">
-            <PopularArticles />
-          </div>
-        </div>
-      </div>
+      <SocialSharingVertical
+        :url="$nuxt.$route.path"
+        :quote="factcheck[0].title"
+        :story="factcheck[0]"
+      />
     </div>
-    <SocialSharingVertical
-      :url="$nuxt.$route.path"
-      :quote="factcheck[0].title"
-      :story="factcheck[0]"
-    />
   </div>
 </template>
 <style>
@@ -50,12 +54,14 @@ a.anchor {
 <script>
 import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
+import StoryFooter from '@/components/StoryFooter';
 import Claim from '~/components/Claim';
 import ListClaims from '~/components/ListClaims.vue';
 
 export default {
   components: {
     StoryHead,
+    StoryFooter,
     Claim,
     ListClaims
   },

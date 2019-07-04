@@ -1,41 +1,42 @@
 <template>
   <div class="main-content">
-    <div class="columns">
-      <div class="column is-8">
-        <div v-if="post && post.length">
+    <div v-if="post && post.length">
+      <div class="columns">
+        <div class="column is-8">
           <StoryHead :story="post[0]"/>
           <div>
             <article>
               <div class="has-text-justify is-size-5 mallanna-font" v-html="post[0].content" />
             </article>
           </div>
+          <StoryFooter 
+            :tags="post[0].tags"
+            :authors="post[0].authors"
+          />
         </div>
-        <div
-          v-else
-          class="subtitle is-6 is-uppercase has-text-centered">
-          Dega API is not responding.<br> Please contact the administrator.
+        <div class="column is-4">
+          <div class="is-hidden-mobile">
+            <PopularArticles />
+          </div>
         </div>
       </div>
-      <div class="column is-4">
-        <div class="is-hidden-mobile">
-          <PopularArticles />
-        </div>
-      </div>
+      <SocialSharingVertical
+        :url="$nuxt.$route.path"
+        :quote="post[0].title"
+        :story="post[0]"
+      />
     </div>
-    <SocialSharingVertical
-      :url="$nuxt.$route.path"
-      :quote="post[0].title"
-      :story="post[0]"
-    />
   </div>
 </template>
 <script>
 import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
+import StoryFooter from '@/components/StoryFooter';
 
 export default {
   components: {
-    StoryHead
+    StoryHead,
+    StoryFooter
   },
   data() {
     return {

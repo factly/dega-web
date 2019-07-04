@@ -94,19 +94,22 @@ div.sticky {
 .white-color {
   color: #ffffff
 }
-.padding-none{
+.padding-none {
   padding: 0rem;
 }
-.padding-half{
+.padding-half {
   padding: 0.5rem;
 }
-.margin-top-half{
+.margin-top-half {
   margin-top: 0.5rem;
 }
-.margin-top-3{
+.margin-top-2 {
+  margin-top: 2rem;
+}
+.margin-top-3 {
   margin-top: 3rem;
 }
-.box-shadow-none{
+.box-shadow-none {
   box-shadow: 0rem 0rem;
   border-radius: 0rem;
 }
