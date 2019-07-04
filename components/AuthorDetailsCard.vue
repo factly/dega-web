@@ -20,7 +20,7 @@
             <i class="mdi mdi-email"></i>
           </span>
           <span>
-            <a :href="'mailto:'+author.email" class="has-text-link">rakesh@factly.in</a>
+            <a :href="'mailto:'+author.email" class="has-text-link">{{author.email}}</a>
           </span>
         </p>
       </div>
