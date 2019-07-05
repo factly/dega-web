@@ -22,10 +22,8 @@
         </div>
       </div>
     </div>
-    <div
-      v-else
-      class="subtitle is-6 is-uppercase has-text-centered">
-      Dega API is not responding.<br> Please contact the administrator.
+    <div v-else>
+      <ErrorBox />
     </div>
   </div>
 </template>

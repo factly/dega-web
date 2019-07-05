@@ -38,7 +38,7 @@ export default {
   },
   data() {
     return {
-      story: null
+      story: []
     };
   },
   methods: {
