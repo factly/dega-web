@@ -68,9 +68,6 @@ export default {
   data() {
     return {
       factcheck: null,
-      ListClaimsHidden: false,
-      structuredData: null,
-      metaData: null
     };
   },
   methods: {
@@ -79,27 +76,29 @@ export default {
     }
   },
   async asyncData(params) {
-    const Factcheck = await axios
+    const factcheck = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&slug=${params.params.slug}`))
       .then(response => response.data)
       .catch(err => console.log(err));
-    return {
-      factcheck: Factcheck,
-      metaData: {
-        __dangerouslyDisableSanitizers: ['script'],
-        script: [
-          { innerHTML: JSON.stringify(Factcheck[0].schemas), type: 'application/ld+json' }],
-        title: Factcheck[0].title,
-        meta: [
-          { hid: 'og:title', name: 'og:title', content: Factcheck[0].title },
-          { hid: 'og:image', name: 'og:image', content: Factcheck[0].featured_media },
-        ]
-      }
-    };
+    return { factcheck: factcheck }
   },
   head() {
-    if (this.factcheck[0].excerpt) { this.metaData.meta.push({ hid: 'og:description', name: 'og:description', content: this.factcheck[0].excerpt }); }
-    return this.metaData;
+    var metadata = {
+      __dangerouslyDisableSanitizers: ['script'],
+    }
+    const { factcheck } = this
+    if(factcheck && factcheck.length === 1){
+      metadata['title'] = factcheck[0].title
+      metadata['script'] = [
+        { innerHTML: JSON.stringify(factcheck[0].schemas), type: 'application/ld+json' }
+      ]
+      metadata['meta'] = [
+        { hid: 'og:title', name: 'og:title', content: factcheck[0].title },
+        { hid: 'og:image', name: 'og:image', content: factcheck[0].featured_media },
+        { hid: 'og:description', name: 'og:description', content: factcheck[0].excerpt ? factcheck[0].excerpt : null}
+      ]
+    }
+    return metadata
   }
 };
 </script>
