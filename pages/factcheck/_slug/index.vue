@@ -42,6 +42,12 @@
         :story="factcheck[0]"
       />
     </div>
+    <div v-else-if="factcheck && factcheck.length === 0">
+      <LostBox />
+    </div>
+    <div v-else>
+      <ErrorBox />
+    </div>
   </div>
 </template>
 <style>
@@ -80,7 +86,7 @@ export default {
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&slug=${params.params.slug}`))
       .then(response => response.data)
       .catch(err => console.log(err));
-    return { factcheck: factcheck }
+    return { factcheck }
   },
   head() {
     var metadata = {
@@ -97,7 +103,9 @@ export default {
         { hid: 'og:image', name: 'og:image', content: factcheck[0].featured_media },
         { hid: 'og:description', name: 'og:description', content: factcheck[0].excerpt ? factcheck[0].excerpt : null}
       ]
-    }
+    } else 
+      metadata['title'] = this.$store.getters.getOrganisation.site_title
+
     return metadata
   }
 };

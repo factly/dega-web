@@ -26,6 +26,12 @@
         :story="post[0]"
       />
     </div>
+    <div v-else-if="post && post.length === 0">
+      <LostBox />
+    </div>
+    <div v-else>
+      <ErrorBox />
+    </div>
   </div>
 </template>
 <script>
@@ -40,8 +46,7 @@ export default {
   },
   data() {
     return {
-      post: null,
-      metaData: null
+      post: null
     };
   },
 
@@ -50,24 +55,26 @@ export default {
   },
 
   async asyncData(params) {
-    const Post = await axios
+    const post = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&slug=${params.params.slug}`))
       .then(response => response.data)
       .catch(err => console.log(err));
-    return {
-      post: Post,
-      metaData: {
-        title: Post[0].title,
-        meta: [
-          { hid: 'og:title', name: 'og:title', content: Post[0].title },
-          { hid: 'og:image', name: 'og:image', content: Post[0].featured_media },
-        ]
-      }
-    };
+    return { post };
   },
   head() {
-    if (this.post[0].excerpt) { this.metaData.meta.push({ hid: 'og:description', name: 'og:description', content: this.post[0].excerpt }); }
-    return this.metaData;
+    var metadata = {}
+    const { post } = this
+    if(post && post.length === 1){
+      metadata['title'] = post[0].title
+      metadata['meta'] = [
+        { hid: 'og:title', name: 'og:title', content: post[0].title },
+        { hid: 'og:image', name: 'og:image', content: post[0].featured_media },
+        { hid: 'og:description', name: 'og:description', content: post[0].excerpt ? post[0].excerpt : null}
+      ]
+    } else 
+      metadata['title'] = this.$store.getters.getOrganisation.site_title
+
+    return metadata
   }
 };
 </script>
