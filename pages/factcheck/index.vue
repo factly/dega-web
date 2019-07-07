@@ -47,7 +47,7 @@ export default {
   async asyncData() {
     const factchecks = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
-      .then(response => response.data)
+      .then(response => response.data.data)
       .catch(error => console.log(error));
     const sortedFactchecks = _.orderBy(factchecks, ['published_date'], ['desc']);
     return {

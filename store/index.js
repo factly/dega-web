@@ -35,7 +35,7 @@ const createStore = () => {
         const getPopular = () => {
           return axios.get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&category=video&sortBy=publishedDate&sortAsc=false`))
           .then(res => {
-            commit("setPopular", res.data)
+            commit("setPopular", res.data.data)
           })
           .catch(e => context.error(e));
         } 

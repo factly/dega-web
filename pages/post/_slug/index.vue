@@ -51,7 +51,7 @@ export default {
   async asyncData(params) {
     const Post = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&slug=${params.params.slug}`))
-      .then(response => response.data)
+      .then(response => response.data.data)
       .catch(err => console.log(err));
     return {
       post: Post,

@@ -74,7 +74,7 @@ export default {
   async asyncData(params) {
     const Factcheck = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&slug=${params.params.slug}`))
-      .then(response => response.data)
+      .then(response => response.data.data)
       .catch(err => console.log(err));
     return {
       factcheck: Factcheck,
