@@ -87,37 +87,6 @@
         </div>
         <div>
           <div class="navbar-end">
-            <div v-if="userModule" class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                <span
-                  class="icon"
-                  style="color: #333;">
-                  <svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      fill="currentColor"
-                      d="M896 0q182 0 348 71t286 191 191 286 71 348q0 181-70.5 347t-190.5 286-286 191.5-349 71.5-349-71-285.5-191.5-190.5-286-71-347.5 71-348 191-286 286-191 348-71zm619 1351q149-205 149-455 0-156-61-298t-164-245-245-164-298-61-298 61-245 164-164 245-61 298q0 250 149 455 66-327 306-327 131 128 313 128t313-128q240 0 306 327zm-235-647q0-159-112.5-271.5t-271.5-112.5-271.5 112.5-112.5 271.5 112.5 271.5 271.5 112.5 271.5-112.5 112.5-271.5z"/>
-                  </svg>
-                </span>
-              </a>
-              <div class="navbar-dropdown">
-                <nuxt-link to="/saved/posts" v-if="loggedIn" class="navbar-item">
-                  Saved Posts
-                </nuxt-link>
-                <nuxt-link to="/saved/factchecks" v-if="loggedIn" class="navbar-item">
-                  Saved Factchecks
-                </nuxt-link>
-                <nuxt-link to="/profile" v-if="loggedIn" class="navbar-item">
-                  Profile
-                </nuxt-link>
-                <hr class="navbar-divider">
-                <a v-if="loggedIn" class="navbar-item" v-on:click="logout()">
-                  Logout
-                </a>
-                <a v-if="!loggedIn" class="navbar-item" v-on:click="login()">
-                  Login
-                </a>
-              </div>
-            </div>
             <!-- <ClientSocialButtons/> -->
             <a
               v-if="organisation.facebook_url"
@@ -140,7 +109,6 @@
                 <i class="mdi mdi-twitter"></i>
               </span>
             </a>
-
             <!-- Sharingbutton Youtube -->
             <a
               v-if="organisation.you_tube_url"
@@ -152,7 +120,6 @@
                 <i class="mdi mdi-youtube"></i>
               </span>
             </a>
-
             <!-- Sharingbutton Github -->
             <a
               v-if="organisation.github_url"
@@ -164,7 +131,6 @@
                 <i class="mdi mdi-github-circle"></i>
               </span>
             </a>
-
             <!-- Sharingbutton Tumblr -->
             <a
               v-if="organisation.tumbler_url"
@@ -176,7 +142,6 @@
                 <i class="mdi mdi-tumblr"></i>
               </span>
             </a>
-
             <!-- Sharingbutton Pinterest -->
             <a
               v-if="organisation.pinterest_url"
@@ -188,7 +153,6 @@
                 <i class="mdi mdi-pinterest"></i>
               </span>
             </a>
-
             <!-- Sharingbutton LinkedIn -->
             <a
               v-if="organisation.linkedin_url"
@@ -200,7 +164,6 @@
                 <i class="mdi mdi-linkedin"></i>
               </span>
             </a>
-
             <!-- Sharingbutton WhatsApp -->
             <a
               v-if="organisation.whatsapp_url"
@@ -212,6 +175,44 @@
                 <i class="mdi mdi-whatsapp"></i>
               </span>
             </a>
+            <div v-if="userModule" class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link button">
+                <span class="icon is-size-4">
+                  <i class="mdi mdi-account"></i>
+                </span>
+                <span>Account</span>
+              </a>
+              <div class="navbar-dropdown is-right">
+                <div v-if="loggedIn">
+                  <nuxt-link to="/saved/posts" class="navbar-item">
+                    Saved Posts
+                  </nuxt-link>
+                  <nuxt-link to="/saved/factchecks" class="navbar-item">
+                    Saved Factchecks
+                  </nuxt-link>
+                  <nuxt-link to="/profile" class="navbar-item">
+                    <span class="icon is-size-4">
+                      <i class="mdi mdi-account-settings-variant"></i>
+                    </span>
+                    <span>Profile</span>
+                  </nuxt-link>
+                  <a class="navbar-item has-text-danger" v-on:click="logout()">
+                    <span class="icon is-size-4">
+                      <i class="mdi mdi-logout-variant"></i>
+                    </span>
+                    <span>Logout</span>
+                  </a>
+                </div>
+                <div v-if="!loggedIn">
+                  <a class="navbar-item" v-on:click="login()">
+                    <span class="icon is-size-4">
+                      <i class="mdi mdi-login-variant"></i>
+                    </span>
+                    <span>Log In</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
