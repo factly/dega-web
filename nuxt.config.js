@@ -1,4 +1,4 @@
-const pkg = require('./package');
+// const pkg = require('./package');
 const SitemapRoutes = require('./utils/getSitemapRoutes.js');
 require('dotenv').config();
 
@@ -19,7 +19,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    // title: pkg.name,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
