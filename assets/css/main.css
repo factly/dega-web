@@ -58,6 +58,15 @@ div.sticky {
 .true-background {
   background-color: #a2fcc7;
 }
+.facebook-background {
+  background-color: #3b5998;
+}
+.twitter-background {
+  background-color: #38A1F3;
+}
+.whatsapp-background {
+  background-color: #25D366;
+}
 .facebook-color {
   color: #3b5998;
 }
@@ -82,16 +91,39 @@ div.sticky {
 .whatsapp-color {
   color: #25D366
 }
-.padding-none{
+.white-color {
+  color: #ffffff
+}
+.padding-none {
   padding: 0rem;
 }
-.padding-half{
+.padding-half {
   padding: 0.5rem;
 }
-.margin-top-half{
+.margin-top-half {
   margin-top: 0.5rem;
 }
-.box-shadow-none{
+.margin-top-2 {
+  margin-top: 2rem;
+}
+.margin-top-3 {
+  margin-top: 3rem;
+}
+.box-shadow-none {
   box-shadow: 0rem 0rem;
   border-radius: 0rem;
+}
+/* editor css */
+.custom-parent-container-for-embedded-data {
+  width: 100%;
+  position: relative;
+  padding: 0;
+  padding-top: 56.25%;
+}
+.ql-custom-embedd {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  bottom: 0px;
 }

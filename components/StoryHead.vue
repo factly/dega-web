@@ -16,12 +16,12 @@
             </figure>
           </div>
           <div class="media-content">
-            <p class="is-size-6">
-              <nuxt-link :to="'/author/' + story.authors[0].slug" class="has-text-link">
-                {{ story.authors[0].display_name }}
-              </nuxt-link>
-            </p>
-            <p class="is-size-6">{{ story.published_date | date }}</p>
+            <MetaData
+              :authors="story.authors"
+              :category="story.categories[0]"
+              :published="story.published_date"
+              size="is-size-6"
+            />
           </div>
         </article>
       </div>
@@ -41,22 +41,12 @@
             </figure>
           </div>
         </div>
-        <div class="field is-grouped">
-          <div
-            v-for="(p, index) in story.authors"
-            :key="'author'+index"
-            class="control"
-          >
-            <div>
-              <p class="is-size-6">
-                <nuxt-link :to="'/author/' + p.slug" class="has-text-link">
-                  {{ p.display_name }}
-                </nuxt-link>
-                <span v-if="index !== story.authors.length - 1">,</span>
-              </p>
-            </div>
-          </div>
-        </div>
+        <MetaData
+          :authors="story.authors"
+          :category="story.categories ? story.categories[0] : underfined"
+          :published="story.published_date"
+          size="is-size-6"
+        />
       </div>
     </div>
   </div>
@@ -74,7 +64,11 @@
 </style>
 
 <script>
+import MetaData from '@/components/MetaData';
 export default {
+  components: {
+    MetaData
+  },
   props: {
     story: {
       type: Object,

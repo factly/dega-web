@@ -13,31 +13,22 @@
           {{ story.title }}
           </nuxt-link>
         </p>
-        <div>
-          <div class="field is-grouped is-grouped-multiline">
-            <div
-              v-for="(p, index) in story.authors"
-              :key="'author'+index"
-            >
-              <div class="control">
-                <p class="is-size-7">
-                  <nuxt-link :to="'/author/' + p.slug" class="has-text-link">
-                    {{ p.display_name }}
-                  </nuxt-link>
-                  <span v-if="index !== story.authors.length - 1">,&nbsp;</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="is-size-7 has-text-grey">{{ story.published_date | date }}</div>
-        </div>
+        <MetaData
+          :authors="story.authors"
+          :category="story.categories[0]"
+          :published="story.published_date"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import MetaData from '@/components/MetaData';
 export default {
+  components: {
+    MetaData
+  },
   props: {
     rank: {
       type: String,
