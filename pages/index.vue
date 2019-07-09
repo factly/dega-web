@@ -60,14 +60,6 @@ export default {
     return {
       story: sortedStories
     };
-  },
-
-  head() {
-    return {
-      htmlAttrs: {
-        class: 'has-navbar-fixed-top'
-      }
-    };
   }
 };
 </script>

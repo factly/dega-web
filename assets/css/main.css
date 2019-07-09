@@ -2,7 +2,19 @@
 .ql-align-center{
   text-align: center;
 }
-
+.custom-parent-container-for-embedded-data {
+  width: 100%;
+  position: relative;
+  padding: 0;
+  padding-top: 56.25%;
+}
+.ql-custom-embedd {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  bottom: 0px;
+}
 /* Quill JS related classes end here */
 
 .navbar-item img {
@@ -109,21 +121,10 @@ div.sticky {
 .margin-top-3 {
   margin-top: 3rem;
 }
+.margin-top-6 {
+  margin-top: 6rem;
+}
 .box-shadow-none {
   box-shadow: 0rem 0rem;
   border-radius: 0rem;
-}
-/* editor css */
-.custom-parent-container-for-embedded-data {
-  width: 100%;
-  position: relative;
-  padding: 0;
-  padding-top: 56.25%;
-}
-.ql-custom-embedd {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0px;
-  bottom: 0px;
 }

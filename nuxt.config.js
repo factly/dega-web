@@ -87,17 +87,13 @@ module.exports = {
         _scheme: 'oauth2',
         authorization_endpoint: process.env.AUTHORIZATION_ENDPOINT,
         userinfo_endpoint: process.env.USERINFO_ENDPOINT,
-        // propertyName: false,
         scope: ['openid', 'profile', 'email'],
         response_type: 'code',
-        // token_type: 'id_token',
         client_id: process.env.OAUTH_CLIENT_ID,
         client_secret: process.env.OAUTH_CLIENT_SECRET,
         access_token_endpoint: process.env.ACCESS_TOKEN_ENDPOINT,
         end_session_endpoint: process.env.LOGOUT_ENDPOINT,
         grant_type: 'authorization_code',
-        // token_key:  'access_token',
-        // state: 'UNIQUE_AND_NON_GUESSABLE'
         fetchUser() {
           console.log('Fetching User');
         }

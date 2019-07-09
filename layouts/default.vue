@@ -8,7 +8,6 @@
         <nuxt-link
           class="navbar-item"
           to="/">
-          <!--<img src="~assets/images/logo.png" alt="Dega" height="110"/>-->
           <img
             :src="organisation.logo_url"
             alt="Dega"
@@ -41,7 +40,6 @@
           <nuxt-link
             to="/factcheck"
             class="navbar-item">Fact Check</nuxt-link>
-          <!--<nuxt-link to="/category/fake-news" class="navbar-item">Fake News</nuxt-link>-->
           <div class="navbar-item has-dropdown is-hoverable">
             <div
               class="navbar-link has-dropdown"
@@ -85,141 +83,149 @@
             </div>
           </div>
         </div>
-        <div>
-          <div class="navbar-end">
-            <!-- <ClientSocialButtons/> -->
-            <a
-              v-if="organisation.facebook_url"
-              :href="organisation.facebook_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 facebook-color">
-                <i class="mdi mdi-facebook"></i>
+        <div class="navbar-end">
+          <div class="navbar-item is-hidden-touch is-hidden-desktop-only">
+            <div class="field is-grouped">
+              <p 
+                v-if="organisation.facebook_url" 
+                class="control">
+                <a
+                  :href="organisation.facebook_url"
+                  target="_blank"
+                >
+                  <span class="icon is-size-4 facebook-color">
+                    <i class="mdi mdi-facebook"></i>
+                  </span>
+                </a>
+              </p>
+              <p 
+                v-if="organisation.twitter_url" 
+                class="control">
+                <a
+                  :href="organisation.twitter_url"
+                  target="_blank"
+                >
+                  <span class="icon is-size-4 twitter-color">
+                    <i class="mdi mdi-twitter"></i>
+                  </span>
+                </a>
+              </p>
+              <p 
+                v-if="organisation.you_tube_url"
+                class="control">
+                <a
+                  :href="organisation.you_tube_url"
+                  target="_blank"
+                >
+                  <span class="icon is-size-4 youtube-color">
+                    <i class="mdi mdi-youtube"></i>
+                  </span>
+                </a>
+              </p>
+              <p 
+                v-if="organisation.github_url"
+                class="control">
+                <a
+                  :href="organisation.github_url"
+                  target="_blank"
+                >
+                  <span class="icon is-size-4 github-color">
+                    <i class="mdi mdi-github-circle"></i>
+                  </span>
+                </a>
+              </p>
+              <p
+                v-if="organisation.tumbler_url"  
+                class="control">
+                <a
+                  :href="organisation.tumbler_url"
+                  target="_blank"
+                >
+                  <span class="icon is-size-4 tunbler-color">
+                    <i class="mdi mdi-tumblr"></i>
+                  </span>
+                </a>
+              </p>
+              <p
+                v-if="organisation.pinterest_url"
+                class="control">
+                <a
+                  :href="organisation.pinterest_url"
+                  target="_blank"
+                >
+                  <span class="icon is-size-4 pinterest-color">
+                    <i class="mdi mdi-pinterest"></i>
+                  </span>
+                </a>
+              </p>
+              <p 
+                v-if="organisation.linkedin_url"
+                class="control">
+                <a
+                  :href="organisation.linkedin_url"
+                  target="_blank"
+                >
+                  <span class="icon is-size-4 linkedin-color">
+                    <i class="mdi mdi-linkedin"></i>
+                  </span>
+                </a>
+              </p>
+              <p
+                v-if="organisation.whatsapp_url"  
+                class="control">
+                <a
+                  :href="organisation.whatsapp_url"
+                  target="_blank"
+                >
+                  <span class="icon is-size-4 whatsapp-color">
+                    <i class="mdi mdi-whatsapp"></i>
+                  </span>
+                </a>
+              </p>
+            </div>
+          </div>
+          <div class="navbar-item">
+            <a class="navbar-item button" v-if="userModule && !loggedIn" v-on:click="login()">
+              <span class="icon">
+                <i class="mdi mdi-account"></i>
               </span>
+              <span>Sign Up / Log In</span>
             </a>
-            <!-- Sharingbutton Twitter -->
-            <a
-              v-if="organisation.twitter_url"
-              :href="organisation.twitter_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 twitter-color">
-                <i class="mdi mdi-twitter"></i>
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable" v-if="userModule && loggedIn">
+            <a class="navbar-link button has-dropdown">
+              <span class="icon">
+                <i class="mdi mdi-account"></i>
               </span>
+              <span>Account</span>
             </a>
-            <!-- Sharingbutton Youtube -->
-            <a
-              v-if="organisation.you_tube_url"
-              :href="organisation.you_tube_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 youtube-color">
-                <i class="mdi mdi-youtube"></i>
-              </span>
-            </a>
-            <!-- Sharingbutton Github -->
-            <a
-              v-if="organisation.github_url"
-              :href="organisation.github_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 github-color">
-                <i class="mdi mdi-github-circle"></i>
-              </span>
-            </a>
-            <!-- Sharingbutton Tumblr -->
-            <a
-              v-if="organisation.tumbler_url"
-              :href="organisation.tumbler_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 tunbler-color">
-                <i class="mdi mdi-tumblr"></i>
-              </span>
-            </a>
-            <!-- Sharingbutton Pinterest -->
-            <a
-              v-if="organisation.pinterest_url"
-              :href="organisation.pinterest_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 pinterest-color">
-                <i class="mdi mdi-pinterest"></i>
-              </span>
-            </a>
-            <!-- Sharingbutton LinkedIn -->
-            <a
-              v-if="organisation.linkedin_url"
-              :href="organisation.linkedin_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 linkedin-color">
-                <i class="mdi mdi-linkedin"></i>
-              </span>
-            </a>
-            <!-- Sharingbutton WhatsApp -->
-            <a
-              v-if="organisation.whatsapp_url"
-              :href="organisation.whatsapp_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 whatsapp-color">
-                <i class="mdi mdi-whatsapp"></i>
-              </span>
-            </a>
-            <div v-if="userModule" class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link button">
-                <span class="icon is-size-4">
-                  <i class="mdi mdi-account"></i>
-                </span>
-                <span>Account</span>
-              </a>
-              <div class="navbar-dropdown is-right">
-                <div v-if="loggedIn">
-                  <nuxt-link to="/saved/posts" class="navbar-item">
-                    Saved Posts
-                  </nuxt-link>
-                  <nuxt-link to="/saved/factchecks" class="navbar-item">
-                    Saved Factchecks
-                  </nuxt-link>
-                  <nuxt-link to="/profile" class="navbar-item">
-                    <span class="icon is-size-4">
-                      <i class="mdi mdi-account-settings-variant"></i>
-                    </span>
-                    <span>Profile</span>
-                  </nuxt-link>
-                  <a class="navbar-item has-text-danger" v-on:click="logout()">
-                    <span class="icon is-size-4">
-                      <i class="mdi mdi-logout-variant"></i>
-                    </span>
-                    <span>Logout</span>
-                  </a>
-                </div>
-                <div v-if="!loggedIn">
-                  <a class="navbar-item" v-on:click="login()">
-                    <span class="icon is-size-4">
-                      <i class="mdi mdi-login-variant"></i>
-                    </span>
-                    <span>Log In</span>
-                  </a>
-                </div>
+            <div class="navbar-dropdown is-right">
+              <div>
+                <nuxt-link to="/saved/posts" class="navbar-item">
+                  Saved Posts
+                </nuxt-link>
+                <nuxt-link to="/saved/factchecks" class="navbar-item">
+                  Saved Factchecks
+                </nuxt-link>
+                <nuxt-link to="/profile" class="navbar-item">
+                  <span class="icon is-size-4">
+                    <i class="mdi mdi-account-settings-variant"></i>
+                  </span>
+                  <span>Profile</span>
+                </nuxt-link>
+                <a class="navbar-item has-text-danger" v-on:click="logout()">
+                  <span class="icon is-size-4">
+                    <i class="mdi mdi-logout-variant"></i>
+                  </span>
+                  <span>Logout</span>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </nav>
-    <br class="is-hidden-mobile">
-    <br class="is-hidden-mobile">
-    <main>
+    <main class="margin-top-6">
       <div class="container is-widescreen">
         <div class="padding-half">
           <nuxt/>
@@ -249,8 +255,8 @@ export default {
     return {
       toggleNavBar: false,
       toggleMore: true,
-      loggedIn:this.$auth.loggedIn,
-      userModule:(process.env.userModule === "true"),
+      loggedIn: this.$auth.loggedIn,
+      userModule: (process.env.userModule === "true"),
       organisation: Object,
     };
   },
@@ -263,9 +269,7 @@ export default {
       })
     },
     async login(){
-      this.$auth.loginWith('social').then(()=>{
-            this.loggedIn = true;
-          })
+      this.$auth.loginWith('social')
     }
   },
   created() {
@@ -285,10 +289,7 @@ export default {
         { hid: 'og:url', name: 'og:url', content: this.organisation.site_address + this.$nuxt.$route.path },
         { hid: 'og:image', name: 'og:image', content: this.organisation.site_address + DefaultImage },
         { hid: 'og:description', name: 'og:description', content: this.organisation.description },
-      ],
-      htmlAttrs: {
-        class: 'has-navbar-fixed-top'
-      }
+      ]
     };
   }
 };
