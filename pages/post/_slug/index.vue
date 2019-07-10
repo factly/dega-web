@@ -6,7 +6,7 @@
           <StoryHead :story="post[0]"/>
           <div>
             <article>
-              <div class="has-text-justify is-size-5 mallanna-font" v-html="post[0].content" />
+              <div class="has-text-justify is-size-5 post-content-font" v-html="post[0].content" />
             </article>
           </div>
           <StoryFooter 

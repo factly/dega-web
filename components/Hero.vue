@@ -12,13 +12,13 @@
       </div>
       <div class="column is-6">
         <div>
-          <p class="is-size-4 has-text-weight-bold mallanna-font">
+          <p class="is-size-4 has-text-weight-bold hero-title-font">
             <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' + story.slug" class="has-text-black-bis">
             {{ story.title }}
             </nuxt-link>
           </p>
           <div>
-            <p class="is-size-6 has-text-grey has-text-justified mallanna-font">{{ story.excerpt }}</p>
+            <p class="is-size-6 has-text-grey has-text-justified hero-excerpt-font">{{ story.excerpt }}</p>
           </div>
         </div>
         <MetaData

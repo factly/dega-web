@@ -40,7 +40,7 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ['@/assets/css/main.css'],
+  css: ['@/assets/css/main.css', '@/assets/css/custom.css'],
 
   router: {
     middleware: 'i18n'

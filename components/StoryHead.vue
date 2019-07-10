@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <p class="is-size-4 has-text-black-bis has-text-weight-bold mallanna-font">{{ story.title }}</p>
+      <p class="is-size-4 has-text-black-bis has-text-weight-bold post-title-font">{{ story.title }}</p>
     </div>
     <div class="margin-top-half">
       <div v-if="story.authors.length == 1">
@@ -51,17 +51,6 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-  .headline-meta {
-    margin-top: 1.5rem;
-  }
-  .headline-preview {
-    font-family: 'Mallanna', sans-serif;
-    font-size: 1.2rem;
-    line-height: 1.3rem;
-  }
-</style>
 
 <script>
 import MetaData from '@/components/MetaData';

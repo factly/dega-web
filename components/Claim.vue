@@ -41,7 +41,7 @@
       </div>
     </div>
     <article>
-      <div v-html="claim.description" class="has-text-justify is-size-5 mallanna-font" />
+      <div v-html="claim.description" class="has-text-justify is-size-5 claim-desc-font" />
     </article>
   </div>
 </template>

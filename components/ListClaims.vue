@@ -36,7 +36,7 @@ export default {
 
 <style>
   .claims-text {
-    font-family: 'Mallanna', "sans-serif" !important;
+    font-family: "sans-serif" !important;
     font-size: 21px !important;
     line-height: 24px !important;
     font-weight: 300;

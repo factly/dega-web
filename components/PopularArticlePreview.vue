@@ -8,7 +8,7 @@
         </div>
       </figure>
       <div class="media-content">
-        <p class="is-size-5 has-text-weight-bold mallanna-font">
+        <p class="is-size-5 has-text-weight-bold popular-title-font">
           <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' +story.slug" class="has-text-black-bis">
           {{ story.title }}
           </nuxt-link>

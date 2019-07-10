@@ -6,7 +6,7 @@
           <StoryHead :story="factcheck[0]"/>
           <div class="margin-top-half">
             <article>
-              <div class="has-text-justify is-size-5 mallanna-font" v-html="factcheck[0].introduction" />
+              <div class="has-text-justify is-size-5 factcheck-intro-font" v-html="factcheck[0].introduction" />
             </article>
             <br>
             <div v-for="(claim,index) in factcheck[0].claims" :key="index" :id="'claim'+index">
@@ -14,7 +14,7 @@
               <Claim :claim="claim" :index="index"/>
             </div>
             <article>
-              <div class="has-text-justify is-size-5 mallanna-font" v-html="factcheck[0].summary" />
+              <div class="has-text-justify is-size-5 factcheck-summary-font" v-html="factcheck[0].summary" />
             </article>
           </div>
           <StoryFooter 

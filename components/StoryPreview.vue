@@ -4,12 +4,12 @@
       <div class="column is-8">
         <div>
           <div>
-            <p class="is-size-4 has-text-weight-bold mallanna-font">
+            <p class="is-size-4 has-text-weight-bold story-preview-title">
               <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' +story.slug" class="has-text-black-bis">
               {{ story.title }}
               </nuxt-link>
             </p>
-            <p class="is-size-6 has-text-grey has-text-justified mallanna-font story-preview-summary">{{ story.excerpt }}</p>
+            <p class="is-size-6 has-text-grey has-text-justified story-preview-summary story-preview-excerpt">{{ story.excerpt }}</p>
           </div>
           <MetaData
             :authors="story.authors"
