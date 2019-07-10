@@ -28,7 +28,7 @@
           </div>
           <div class="field is-horizontal">
               <div class="field-label"><p class="has-text-weight-bold">Fact:&nbsp;</p></div>
-              <div class="field-body"><span class="has-text-weight-bold" v-html="claim.review"></span></div>
+              <div class="field-body"><span v-html="claim.review"></span></div>
           </div>
         </div>
         <div class="media-left is-hidden-mobile">

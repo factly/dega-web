@@ -11,7 +11,6 @@ module.exports = {
     logoutUri: process.env.LOGOUT_ENDPOINT,
     baseUrl: process.env.BASE_URL || 'http://127.0.0.1:3000',
     userModule: process.env.userModule || 'true'
-    // eslint-disable-next-line linebreak-style
   },
   mode: 'universal',
 
