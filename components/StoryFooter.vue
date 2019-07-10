@@ -1,6 +1,13 @@
 <template>
   <div>
-    <div class="margin-top-2">
+    <div class="updates margin-horizontal-1" v-if="updates">
+      <article class="message is-info">
+        <div class="message-body">
+          {{ updates }}
+        </div>
+      </article>
+    </div>
+    <div class="margin-horizontal-1" v-if="tags.length > 0">
       <div class="tags">
         <span 
           v-for="(t, index) in tags" 
@@ -10,7 +17,7 @@
         </span>
       </div>
     </div>
-    <div class="margin-top-2">
+    <div class="margin-horizontal-1">
       <div>
         <p class="is-size-4 has-text-info">About authors</p>
       </div>
@@ -39,6 +46,10 @@ export default {
     authors: {
       type: Array,
       required: true
+    },
+    updates: {
+      type: String,
+      default: ""
     }
   }
 }

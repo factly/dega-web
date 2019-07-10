@@ -20,6 +20,7 @@
           <StoryFooter 
             :tags="factcheck[0].tags"
             :authors="factcheck[0].authors"
+            :updates="factcheck[0].updates"
           />
         </div>
         <div class="column is-4">

@@ -121,6 +121,10 @@ div.sticky {
 .margin-top-6 {
   margin-top: 6rem;
 }
+.margin-horizontal-1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 .box-shadow-none {
   box-shadow: 0rem 0rem;
   border-radius: 0rem;

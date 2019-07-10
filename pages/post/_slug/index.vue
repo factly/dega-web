@@ -12,6 +12,7 @@
           <StoryFooter 
             :tags="post[0].tags"
             :authors="post[0].authors"
+            :updates="post[0].updates"
           />
         </div>
         <div class="column is-4">
