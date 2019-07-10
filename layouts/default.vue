@@ -201,11 +201,11 @@
             </a>
             <div class="navbar-dropdown is-right">
               <div>
-                <nuxt-link to="/saved/posts" class="navbar-item">
-                  Saved Posts
-                </nuxt-link>
-                <nuxt-link to="/saved/factchecks" class="navbar-item">
-                  Saved Factchecks
+                <nuxt-link to="/saved" class="navbar-item">
+                  <span class="icon is-size-4">
+                    <i class="mdi mdi-bookmark"></i>
+                  </span>
+                  <span>Saved</span>
                 </nuxt-link>
                 <nuxt-link to="/profile" class="navbar-item">
                   <span class="icon is-size-4">
