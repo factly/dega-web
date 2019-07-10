@@ -44,8 +44,8 @@
   }
   .sticky-horizontal-container {
     position: fixed;
-    top: 50%;
-    right: 0px;
+    top: 40%;
+    left: 0px;
     height: auto;
     z-index: 9999;
   }
