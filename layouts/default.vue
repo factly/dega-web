@@ -182,6 +182,18 @@
                   </span>
                 </a>
               </p>
+              <p
+                v-if="organisation.instagram_url"  
+                class="control">
+                <a
+                  :href="organisation.instagram_url"
+                  target="_blank"
+                >
+                  <span class="icon is-size-4 instagram-color">
+                    <i class="mdi mdi-instagram"></i>
+                  </span>
+                </a>
+              </p>
             </div>
           </div>
           <div class="navbar-item">
