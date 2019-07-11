@@ -63,27 +63,27 @@
 import axios from 'axios'
 export default {
   data() {
+    var userTemp = this.$auth.user
+    userTemp.dob = new Date(userTemp.dob) 
     return {
       userModule: process.env.userModule,
-      user: this.$auth.user,
+      user: userTemp,
     }
   },
   methods: {
     update() {
-      let { name, gender, dob} = this.user
+      let { name, gender, dob, sub} = this.user
       const updateUserInfo = axios({
         method: 'POST',
         url: process.env.userDataApiUri + '/user/update',
         data: {
-          user: { name, gender, dob}, 
+          user: { name, gender, dob, sub}, 
           accessToken: this.$auth.getToken('social')
         }
       })
       updateUserInfo.then(response => {
         if (response.data.success) {
-          this.$auth.fetchUser().then(() => {
-            this.user = this.$auth.user
-          })
+          this.$auth.fetchUser()
         }
       })
     }

@@ -31,16 +31,14 @@ export default {
   },
   methods: {
     callSaved: function() {
-      console.log("Hello")
       axios.post(
         process.env.userDataApiUri+'/saved/'+this.type,
         {
-          "user":this.$auth.user,
+          "user": { 'sub' : this.$auth.user.sub },
           "accessToken": this.$auth.getToken('social')
         }
       )
-      .then((response)=>
-      {
+      .then((response)=>{
         this.stories = response.data
       })
       .catch(err => console.log(err)); 

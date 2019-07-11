@@ -257,12 +257,8 @@
 
 <script>
 import DefaultImage from '~/assets/images/dega-default-image.png';
-import ClientSocialButtons from '~/components/ClientSocialButtons.vue';
 
 export default {
-  components: {
-    ClientSocialButtons
-  },
   data() {
     return {
       toggleNavBar: false,

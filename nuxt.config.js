@@ -25,7 +25,7 @@ module.exports = {
       // { hid: 'description', name: 'description', content: pkg.description },
     ],
     link: [
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Mallanna|Ramabhadra&display=swap' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Mallanna&display=swap' },
       // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
 
       //  { rel:"stylesheet",href:"https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"}
@@ -80,7 +80,6 @@ module.exports = {
 
 
   auth: {
-    rewriteRedirect: true,
     strategies: {
       social: {
         _scheme: 'oauth2',
@@ -92,11 +91,11 @@ module.exports = {
         client_secret: process.env.OAUTH_CLIENT_SECRET,
         access_token_endpoint: process.env.ACCESS_TOKEN_ENDPOINT,
         end_session_endpoint: process.env.LOGOUT_ENDPOINT,
-        grant_type: 'authorization_code',
-        fetchUser() {
-          console.log('Fetching User');
-        }
+        grant_type: 'authorization_code'
       }
+    },
+    redirect: {
+      callback: '/callback'
     }
   },
   /*

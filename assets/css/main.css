@@ -132,3 +132,18 @@ div.sticky {
   box-shadow: 0rem 0rem;
   border-radius: 0rem;
 }
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+#loading-div {
+  top: 50%;
+  left: 50%;
+  width:30em;
+  height:18em;
+  margin-top: -9em; /*set to a negative number 1/2 of your height*/
+  margin-left: -15em; /*set to a negative number 1/2 of your width*/
+  position:fixed;
+}
+
