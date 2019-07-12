@@ -7,7 +7,7 @@
       <div class="navbar-brand">
         <nuxt-link
           class="navbar-item"
-          to="/">
+          :to="localePath('index')">
           <img
             :src="organisation.logo_url"
             alt="Dega"
@@ -26,20 +26,22 @@
         class="navbar-menu">
         <div class="navbar-start is-uppercase has-text-weight-semibold">
           <nuxt-link
-            to="/"
-            class="navbar-item">Home</nuxt-link>
+            :to="localePath('index')"
+            class="navbar-item">{{ $t('header.home') }}</nuxt-link>
           <nuxt-link
-            to="/post"
-            class="navbar-item">Stories</nuxt-link>
+            :to="localePath('post')"
+            class="navbar-item">{{ $t('header.stories') }}</nuxt-link>
           <nuxt-link
-            to="/category/fake-news"
-            class="navbar-item">Fake News</nuxt-link>
+            class="navbar-item"
+            :to="localePath({ name:'category-slug', params: { slug: 'fake-news' } })">
+            {{ $t('header.fake_news') }}
+          </nuxt-link>
           <nuxt-link
-            to="/category/video"
-            class="navbar-item">Videos</nuxt-link>
+            :to="localePath({ name:'category-slug', params: { slug: 'video' }})"
+            class="navbar-item">{{ $t('header.videos') }}</nuxt-link>
           <nuxt-link
-            to="/factcheck"
-            class="navbar-item">Fact Check</nuxt-link>
+            :to="localePath('factcheck')"
+            class="navbar-item">{{ $t('header.fact_check') }}</nuxt-link>
           <div class="navbar-item has-dropdown is-hoverable">
             <div
               class="navbar-link has-dropdown"
@@ -234,6 +236,12 @@
               </div>
             </div>
           </div>
+          <div class="navbar-item">
+            <nuxt-link
+              v-for="locale in availableLocales"
+              :key="locale.code"
+              :to="switchLocalePath(locale.code)">{{ locale.name }}</nuxt-link>
+          </div>
         </div>
       </div>
     </nav>
@@ -267,6 +275,11 @@ export default {
       userModule: (process.env.userModule === "true"),
       organisation: Object,
     };
+  },
+  computed: {
+    availableLocales () {
+      return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale)
+    }
   },
   methods: {
     logout(){

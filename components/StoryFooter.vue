@@ -13,13 +13,13 @@
           v-for="(t, index) in tags" 
           class="tag is-medium"
           :key="'tags'+index">
-          <nuxt-link :to="'/tag/' +t.slug" class="has-text-black-bis">{{t.name}}</nuxt-link>
+          <nuxt-link :to="localePath({ name: 'tag-slug', params: { slug: t.slug } })" class="has-text-black-bis">{{t.name}}</nuxt-link>
         </span>
       </div>
     </div>
     <div class="margin-horizontal-1">
       <div>
-        <p class="is-size-4 has-text-info">About authors</p>
+        <p class="is-size-4 has-text-info">{{ $t('story.about_author') }}</p>
       </div>
       <div class="margin-top-2">
         <AuthorDetailsCard

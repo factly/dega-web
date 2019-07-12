@@ -1,6 +1,6 @@
-// const pkg = require('./package');
 const SitemapRoutes = require('./utils/getSitemapRoutes.js');
 require('dotenv').config();
+const  { I18N } = require('./config');
 
 module.exports = {
   env: {
@@ -18,17 +18,12 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    // title: pkg.name,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      // { hid: 'description', name: 'description', content: pkg.description },
     ],
     link: [
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Mallanna&display=swap' },
-      // { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-
-      //  { rel:"stylesheet",href:"https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"}
     ],
     script: [
       { src: 'https://platform.twitter.com/widgets.js', async: true }
@@ -44,18 +39,12 @@ module.exports = {
   ** Global CSS
   */
   css: ['@/assets/css/main.css', '@/assets/css/custom.css'],
-
-  router: {
-    middleware: 'i18n'
-  },
-
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
     '~/plugins/components.js',
     '~/plugins/filters.js',
-    '~/plugins/i18n.js',
     '~/plugins/directives.js',
     { src: '~plugins/ga.js', ssr: false },
   ],
@@ -64,21 +53,18 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
-    // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
     '@nuxtjs/pwa',
     '@nuxtjs/dotenv',
-    // '@nuxtjs/google-analytics',
     '@nuxtjs/sitemap',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    ['nuxt-i18n', I18N],
   ],
   /*
   ** Axios module configuration
   */
   axios: {
-    // See https://github.com/nuxt-community/axios-module#options
     credentials: false
   },
 

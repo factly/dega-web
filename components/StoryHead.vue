@@ -8,7 +8,7 @@
         <article class="media">
           <div class="media-left">
             <figure class="image is-64x64">
-              <nuxt-link :to="'/author/' + story.authors[0].slug">
+              <nuxt-link :to="localePath({ name:'author-slug', params: { slug: story.authors[0].slug } })" >
                 <img
                   :src="story.authors[0].profile_picture"
                   class="is-rounded">
@@ -33,7 +33,7 @@
             class="control"
             style="margin-right:0.5rem;">
             <figure class="image is-64x64">
-              <nuxt-link :to="'/author/' + p.slug">
+              <nuxt-link :to="localePath({ name:'author-slug', params: { slug: p.slug } })">
                 <img
                   :src="p.profile_picture"
                   class="is-rounded">

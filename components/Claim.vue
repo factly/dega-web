@@ -16,7 +16,7 @@
             </div>
           </div>
           <div class="field is-horizontal">
-            <div class="field-label"><span class="has-text-weight-bold">Claim:&nbsp;</span></div>
+            <div class="field-label"><span class="has-text-weight-bold">{{ $t('factcheck.claim') }}:&nbsp;</span></div>
             <div class="field-body"><span class="is-size-6">{{ claim.claim }}</span></div>
           </div>
           <div class="is-hidden-tablet">
@@ -27,7 +27,7 @@
             </figure>
           </div>
           <div class="field is-horizontal">
-              <div class="field-label"><p class="has-text-weight-bold">Fact:&nbsp;</p></div>
+              <div class="field-label"><p class="has-text-weight-bold">{{ $t('factcheck.fact') }}:&nbsp;</p></div>
               <div class="field-body"><span v-html="claim.review"></span></div>
           </div>
         </div>

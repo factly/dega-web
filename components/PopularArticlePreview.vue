@@ -9,7 +9,7 @@
       </figure>
       <div class="media-content">
         <p class="is-size-5 has-text-weight-bold popular-title-font">
-          <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' +story.slug" class="has-text-black-bis">
+          <nuxt-link :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })" class="has-text-black-bis">
           {{ story.title }}
           </nuxt-link>
         </p>

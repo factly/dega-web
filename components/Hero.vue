@@ -3,7 +3,7 @@
     <div class="columns is-vcentered">
       <div class= "column is-6">
         <figure class ="image is-16by9">
-          <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' + story.slug">
+          <nuxt-link :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })" >
             <img
               :src="story.featured_media"
               :alt="story._class.split('.').pop()">
@@ -13,7 +13,7 @@
       <div class="column is-6">
         <div>
           <p class="is-size-4 has-text-weight-bold hero-title-font">
-            <nuxt-link :to="'/'+ story._class.split('.').pop().toLowerCase()+ '/' + story.slug" class="has-text-black-bis">
+            <nuxt-link :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })" class="has-text-black-bis">
             {{ story.title }}
             </nuxt-link>
           </p>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import Bookmark from '~/components/Bookmark.vue';
+import Bookmark from '@/components/Bookmark';
 import MetaData from '@/components/MetaData';
 
 export default {

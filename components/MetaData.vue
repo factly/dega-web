@@ -7,11 +7,11 @@
       >
         <p :class="size">
           <span v-if="index !== 0">,&nbsp;</span>
-          <nuxt-link :to="'/author/' + p.slug" class="has-text-link">{{ p.display_name }}</nuxt-link>
+          <nuxt-link :to="localePath({ name:'author-slug', params: { slug: p.slug } })" class="has-text-link">{{ p.display_name }}</nuxt-link>
         </p>
       </div>
       <div v-if="category">
-        <p :class="size">&nbsp;in&nbsp;<nuxt-link :to="'/category/' + category.slug" class="has-text-link">{{ category.name }}</nuxt-link></p>
+        <p :class="size">&nbsp;in&nbsp;<nuxt-link :to="localePath({ name:'category-slug', params: { slug: category.slug } })" class="has-text-link">{{ category.name }}</nuxt-link></p>
       </div>
     </div>
     <div class="has-text-grey" :class="size">{{ published | date }}</div>
