@@ -2,7 +2,7 @@
   <div>
     <article class="message is-primary">
       <div class="message-header">
-        <p>List of claims in the story</p>
+        <p>{{ $t('factcheck.list_of_claims')}}</p>
       </div>
       <div
         class="message-body"
