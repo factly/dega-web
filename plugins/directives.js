@@ -1,6 +1,20 @@
 import Vue from 'vue'
-
-const loadTwitter = (target) => process.browser && window.twttr && window.twttr.widgets.load(target)
+function loadTwitter(el) { 
+  var html = el
+  if(process.browser) {
+    let tweets = html.getElementsByClassName('tweet');
+    for( var i = 0; i < tweets.length; i += 1){
+      let tweetID = tweets[i].getAttribute('data-id')
+      window.twttr.widgets.createTweet(
+        tweetID,
+        tweets[i]
+      )
+      .then(
+        html.querySelector('#twitter-widget-4').style.display = "none"
+      )
+    }
+  }
+}
 
 Vue.directive('twitter-widgets', {
   bind: function(el){

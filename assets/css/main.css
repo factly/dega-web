@@ -20,7 +20,6 @@
 .navbar-item img {
   max-height: 2.5rem;
 }
-
 a.navbar-item>.icon:not(:last-child) {
   margin-left: -.25em;
   margin-right: .25em;
@@ -34,15 +33,13 @@ div.sticky {
 }
 /***************************************************/
 
-
+/* Page enter and leave animation */
 .page-enter-active{
   animation: bounce-in .8s;
 }
-
 .page-leave-active{
   animation: bounce-out .5s;
 }
-
 @keyframes bounce-in{
   0% { transform: scale(.9); opacity: 0;}
   100% {transform: scale(1); opacity: 1;}
@@ -52,6 +49,9 @@ div.sticky {
   0% {transform: scale(1); opacity: 1;}
   100% { transform: scale(.9); opacity: 0;}
 }
+/***************************************************/
+
+/* Claim rating color */
 .false-background {
   background-color: #e9b6b9;
 }
@@ -67,6 +67,8 @@ div.sticky {
 .true-background {
   background-color: #a2fcc7;
 }
+/***************************************************/
+
 .facebook-background {
   background-color: #3b5998;
 }
@@ -76,6 +78,8 @@ div.sticky {
 .whatsapp-background {
   background-color: #25D366;
 }
+
+/*Color related css*/
 .facebook-color {
   color: #3b5998;
 }
@@ -106,6 +110,9 @@ div.sticky {
 .white-color {
   color: #ffffff
 }
+/***************************************************/
+
+/* General padding and margin */
 .padding-none {
   padding: 0rem;
 }
@@ -128,6 +135,8 @@ div.sticky {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
+/***************************************************/
+
 .box-shadow-none {
   box-shadow: 0rem 0rem;
   border-radius: 0rem;
@@ -147,3 +156,35 @@ div.sticky {
   position:fixed;
 }
 
+/*Font related css*/
+.story-preview-title{
+  font-family: 'Raleway';
+}
+.story-preview-excerpt{
+  font-family: 'Raleway';
+}
+.post-title-font{
+  font-family: 'Raleway';
+}
+.post-content-font{
+  font-family: 'Raleway';
+}
+.factcheck-intro-font{
+  font-family: 'Raleway';
+}
+.factcheck-summary-font{
+  font-family: 'Raleway';
+}
+.popular-title-font{
+  font-family: 'Raleway';
+}
+.hero-title-font{
+  font-family: 'Raleway';
+}
+.hero-excerpt-font{
+  font-family: 'Raleway';
+}
+.claim-desc-font{
+  font-family: 'Raleway';
+}
+/***************************************************/
