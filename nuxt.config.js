@@ -23,10 +23,7 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     ],
     link: [
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Raleway|Mallanna&display=swap' },
-    ],
-    script: [
-      { src: 'https://platform.twitter.com/widgets.js', async: true }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Muli|Mallanna&display=swap' },
     ]
   },
 

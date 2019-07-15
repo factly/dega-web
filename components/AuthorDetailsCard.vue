@@ -2,8 +2,8 @@
   <article class="media">
     <figure class="media-left">
       <p class="image is-96x96">
-        <nuxt-link :to="localePath({ name:'author-slug', params: { slug: author.slug } })" class="has-text-link">
-          <img :src="author.profile_picture">
+        <nuxt-link :to="localePath({ name:'author-slug', params: { slug: author.slug } })">
+          <img :src="author.profile_picture" class="is-rounded">
         </nuxt-link>
       </p>
     </figure>

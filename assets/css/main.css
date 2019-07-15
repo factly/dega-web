@@ -155,36 +155,44 @@ div.sticky {
   margin-left: -15em; /*set to a negative number 1/2 of your width*/
   position:fixed;
 }
+.tw-align-center {
+  margin: auto;
+  width: 500px;
+  min-width: 220px;
+}
 
 /*Font related css*/
 .story-preview-title{
-  font-family: 'Raleway';
+  font-family: 'Muli';
 }
 .story-preview-excerpt{
-  font-family: 'Raleway';
+  font-family: 'Muli';
 }
 .post-title-font{
-  font-family: 'Raleway';
+  font-family: 'Muli';
 }
 .post-content-font{
-  font-family: 'Raleway';
+  font-family: 'Muli';
 }
 .factcheck-intro-font{
-  font-family: 'Raleway';
+  font-family: 'Muli';
 }
 .factcheck-summary-font{
-  font-family: 'Raleway';
+  font-family: 'Muli';
 }
 .popular-title-font{
-  font-family: 'Raleway';
+  font-family: 'Muli';
 }
 .hero-title-font{
-  font-family: 'Raleway';
+  font-family: 'Muli';
 }
 .hero-excerpt-font{
-  font-family: 'Raleway';
+  font-family: 'Muli';
 }
 .claim-desc-font{
-  font-family: 'Raleway';
+  font-family: 'Muli';
+}
+.meta-data-font{
+  font-family: 'Muli';
 }
 /***************************************************/

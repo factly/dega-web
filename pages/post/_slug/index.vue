@@ -72,9 +72,12 @@ export default {
         { hid: 'og:image', name: 'og:image', content: post[0].featured_media },
         { hid: 'og:description', name: 'og:description', content: post[0].excerpt ? post[0].excerpt : null}
       ]
+      metadata['script'] = [
+        { src: 'https://platform.twitter.com/widgets.js', async: true }
+      ]
     } else 
       metadata['title'] = this.$store.getters.getOrganisation.site_title
-
+    
     return metadata
   }
 };

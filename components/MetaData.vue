@@ -1,5 +1,5 @@
 <template>
-  <div class="margin-top-half">
+  <div class="margin-top-half meta-data-font">
     <div class="field is-grouped is-grouped-multiline">
       <div
         v-for="(p, index) in authors"
@@ -14,7 +14,7 @@
         <p :class="size">&nbsp;in&nbsp;<nuxt-link :to="localePath({ name:'category-slug', params: { slug: category.slug } })" class="has-text-link">{{ category.name }}</nuxt-link></p>
       </div>
     </div>
-    <div class="has-text-grey" :class="size">{{ published | date }}</div>
+    <p class="has-text-grey" :class="size">{{ published | date }}</p>
   </div>
 </template>
 
