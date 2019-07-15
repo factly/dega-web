@@ -3,25 +3,25 @@
     <div v-if="factcheck && factcheck.length > 0">
       <div class="columns">
         <div class="column is-8">
-          <StoryHead :story="factcheck[0]"/>
-          <div class="margin-top-half">
-            <article>
-              <div class="has-text-justify is-size-5 factcheck-intro-font" v-html="factcheck[0].introduction" />
-            </article>
+          <div>
+            <StoryHead :story="factcheck[0]"/>
+          </div>
+          <div class="margin-top-2">
+            <article class="has-text-justify factcheck-intro-font" v-html="factcheck[0].introduction" />
             <br>
             <div v-for="(claim,index) in factcheck[0].claims" :key="index" :id="'claim'+index">
               <a class="anchor" :id="'claim'+(index+1)"></a>
               <Claim :claim="claim" :index="index"/>
             </div>
-            <article>
-              <div class="has-text-justify is-size-5 factcheck-summary-font" v-html="factcheck[0].summary" />
-            </article>
+            <article class="has-text-justify factcheck-summary-font" v-html="factcheck[0].summary" />
           </div>
-          <StoryFooter 
-            :tags="factcheck[0].tags"
-            :authors="factcheck[0].authors"
-            :updates="factcheck[0].updates"
-          />
+          <div class="margin-top-2">
+            <StoryFooter 
+              :tags="factcheck[0].tags"
+              :authors="factcheck[0].authors"
+              :updates="factcheck[0].updates"
+             />
+          </div>
         </div>
         <div class="column is-4">
           <div>

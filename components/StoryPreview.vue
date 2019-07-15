@@ -11,11 +11,13 @@
             </p>
             <p class="is-size-6 has-text-grey has-text-justified story-preview-summary story-preview-excerpt">{{ story.excerpt }}</p>
           </div>
-          <MetaData
-            :authors="story.authors"
-            :category="story.categories[0]"
-            :published="story.published_date"
-          />
+          <div class="margin-top-half">
+            <MetaData
+              :authors="story.authors"
+              :category="story.categories[0]"
+              :published="story.published_date"
+            />
+          </div>
         </div>
       </div>
       <div class="column is-4">

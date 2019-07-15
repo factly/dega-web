@@ -13,11 +13,13 @@
           {{ story.title }}
           </nuxt-link>
         </p>
-        <MetaData
-          :authors="story.authors"
-          :category="story.categories[0]"
-          :published="story.published_date"
-        />
+        <div class="margin-top-half">
+          <MetaData
+            :authors="story.authors"
+            :category="story.categories[0]"
+            :published="story.published_date"
+          />
+        </div>
       </div>
     </div>
   </div>

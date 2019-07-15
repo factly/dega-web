@@ -3,17 +3,19 @@
     <div v-if="post && post.length">
       <div class="columns">
         <div class="column is-8">
-          <StoryHead :story="post[0]"/>
           <div>
-            <article>
-              <div class="has-text-justify is-size-5 post-content-font" v-html="post[0].content" v-twitter-widgets/>       
-            </article>
+            <StoryHead :story="post[0]"/>
           </div>
-          <StoryFooter 
-            :tags="post[0].tags"
-            :authors="post[0].authors"
-            :updates="post[0].updates"
-          />
+          <div class="margin-top-2">
+            <article class="has-text-justify post-content-font" v-html="post[0].content" v-twitter-widgets />
+          </div>
+          <div class="margin-top-2">
+            <StoryFooter 
+              :tags="post[0].tags"
+              :authors="post[0].authors"
+              :updates="post[0].updates"
+            />
+          </div>
         </div>
         <div class="column is-4">
           <div class="is-hidden-mobile">

@@ -40,9 +40,7 @@
         </div>
       </div>
     </div>
-    <article>
-      <div v-html="claim.description" class="has-text-justify is-size-5 claim-desc-font" />
-    </article>
+    <article v-html="claim.description" class="has-text-justify claim-desc-font" />
   </div>
 </template>
 <style>

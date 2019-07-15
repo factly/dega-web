@@ -1,5 +1,5 @@
 <template>
-  <div class="margin-top-half meta-data-font">
+  <div class="meta-data-font">
     <div class="field is-grouped is-grouped-multiline">
       <div
         v-for="(p, index) in authors"

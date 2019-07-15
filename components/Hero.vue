@@ -21,11 +21,13 @@
             <p class="is-size-6 has-text-grey has-text-justified hero-excerpt-font">{{ story.excerpt }}</p>
           </div>
         </div>
-        <MetaData
-          :authors="story.authors"
-          :category="story.categories[0]"
-          :published="story.published_date"
-        />
+        <div class="margin-top-half">
+          <MetaData
+            :authors="story.authors"
+            :category="story.categories[0]"
+            :published="story.published_date"
+          />
+        </div>
       </div>
     </div>
   </div>

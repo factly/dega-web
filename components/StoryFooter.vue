@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="updates margin-horizontal-1" v-if="updates">
+    <div class="updates" v-if="updates">
       <article class="message is-info">
         <div class="message-body">
           {{ updates }}

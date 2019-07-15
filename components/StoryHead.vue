@@ -3,11 +3,11 @@
     <div>
       <p class="is-size-4 has-text-black-bis has-text-weight-bold post-title-font">{{ story.title }}</p>
     </div>
-    <div class="margin-top-half">
+    <div class="margin-horizontal-1">
       <div v-if="story.authors.length == 1">
         <article class="media">
           <div class="media-left">
-            <figure class="image is-64x64">
+            <figure class="image is-48x48">
               <nuxt-link :to="localePath({ name:'author-slug', params: { slug: story.authors[0].slug } })" >
                 <img
                   :src="story.authors[0].profile_picture"
@@ -32,7 +32,7 @@
             :key="'author'+index"
             class="control"
             style="margin-right:0.5rem;">
-            <figure class="image is-64x64">
+            <figure class="image is-48x48">
               <nuxt-link :to="localePath({ name:'author-slug', params: { slug: p.slug } })">
                 <img
                   :src="p.profile_picture"
@@ -41,12 +41,14 @@
             </figure>
           </div>
         </div>
-        <MetaData
-          :authors="story.authors"
-          :category="story.categories ? story.categories[0] : underfined"
-          :published="story.published_date"
-          size="is-size-6"
-        />
+        <div class="margin-top-half">
+          <MetaData
+            :authors="story.authors"
+            :category="story.categories ? story.categories[0] : underfined"
+            :published="story.published_date"
+            size="is-size-6"
+          />
+        </div>
       </div>
     </div>
   </div>
