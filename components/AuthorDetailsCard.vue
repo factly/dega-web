@@ -9,10 +9,10 @@
     </figure>
     <div class="media-content">
       <div>
-        <p class="title is-6">
+        <p class="title is-6 story-author-name-font">
           <nuxt-link :to="localePath({ name:'author-slug', params: { slug: author.slug } })" class="has-text-link">{{author.display_name}}</nuxt-link>
         </p>
-        <p class="subtitle is-6 has-text-justified">{{author.description}}</p>
+        <p class="subtitle is-6 has-text-justified story-author-desc-font">{{author.description}}</p>
       </div>
       <div class="margin-horizontal-1">
         <p class="subtitle is-6">

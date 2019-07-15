@@ -167,37 +167,42 @@ div.sticky {
 }
 /*Font related css*/
 .story-preview-title{
-  font-family: 'Open Sans';
-  font-size: 1.3rem !important;
+  font-family: 'Lato';
 }
 .story-preview-excerpt{
-  font-family: 'Open Sans';
+  font-family: 'Lato';
 }
 .post-title-font{
-  font-family: 'Open Sans';
+  font-family: 'Lato';
 }
 .post-content-font{
-  font-family: 'Open Sans';
+  font-family: 'Lato';
 }
 .factcheck-intro-font{
-  font-family: 'Open Sans';
+  font-family: 'Lato';
 }
 .factcheck-summary-font{
-  font-family: 'Open Sans';
+  font-family: 'Lato';
 }
 .popular-title-font{
-  font-family: 'Open Sans';
+  font-family: 'Lato';
 }
 .hero-title-font{
-  font-family: 'Open Sans';
+  font-family: 'Lato';
 }
 .hero-excerpt-font{
-  font-family: 'Open Sans';
+  font-family: 'Lato';
 }
 .claim-desc-font{
-  font-family: 'Open Sans';
+  font-family: 'Lato';
 }
 .meta-data-font{
-  font-family: 'Open Sans';
+  font-family: 'Lato';
+}
+.story-author-name-font{
+  font-family: 'Lato';
+}
+.story-author-desc-font{
+  font-family: 'Lato';
 }
 /***************************************************/

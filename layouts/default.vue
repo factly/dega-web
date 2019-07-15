@@ -87,119 +87,10 @@
         </div>
         <div class="navbar-end">
           <div class="navbar-item is-hidden-touch is-hidden-desktop-only">
-            <div class="field is-grouped">
-              <p 
-                v-if="organisation.facebook_url" 
-                class="control">
-                <a
-                  :href="organisation.facebook_url"
-                  target="_blank"
-                >
-                  <span class="icon is-size-4 facebook-color">
-                    <i class="mdi mdi-facebook"></i>
-                  </span>
-                </a>
-              </p>
-              <p 
-                v-if="organisation.twitter_url" 
-                class="control">
-                <a
-                  :href="organisation.twitter_url"
-                  target="_blank"
-                >
-                  <span class="icon is-size-4 twitter-color">
-                    <i class="mdi mdi-twitter"></i>
-                  </span>
-                </a>
-              </p>
-              <p 
-                v-if="organisation.you_tube_url"
-                class="control">
-                <a
-                  :href="organisation.you_tube_url"
-                  target="_blank"
-                >
-                  <span class="icon is-size-4 youtube-color">
-                    <i class="mdi mdi-youtube"></i>
-                  </span>
-                </a>
-              </p>
-              <p 
-                v-if="organisation.github_url"
-                class="control">
-                <a
-                  :href="organisation.github_url"
-                  target="_blank"
-                >
-                  <span class="icon is-size-4 github-color">
-                    <i class="mdi mdi-github-circle"></i>
-                  </span>
-                </a>
-              </p>
-              <p
-                v-if="organisation.tumbler_url"  
-                class="control">
-                <a
-                  :href="organisation.tumbler_url"
-                  target="_blank"
-                >
-                  <span class="icon is-size-4 tunbler-color">
-                    <i class="mdi mdi-tumblr"></i>
-                  </span>
-                </a>
-              </p>
-              <p
-                v-if="organisation.pinterest_url"
-                class="control">
-                <a
-                  :href="organisation.pinterest_url"
-                  target="_blank"
-                >
-                  <span class="icon is-size-4 pinterest-color">
-                    <i class="mdi mdi-pinterest"></i>
-                  </span>
-                </a>
-              </p>
-              <p 
-                v-if="organisation.linkedin_url"
-                class="control">
-                <a
-                  :href="organisation.linkedin_url"
-                  target="_blank"
-                >
-                  <span class="icon is-size-4 linkedin-color">
-                    <i class="mdi mdi-linkedin"></i>
-                  </span>
-                </a>
-              </p>
-              <p
-                v-if="organisation.whatsapp_url"  
-                class="control">
-                <a
-                  :href="organisation.whatsapp_url"
-                  target="_blank"
-                >
-                  <span class="icon is-size-4 whatsapp-color">
-                    <i class="mdi mdi-whatsapp"></i>
-                  </span>
-                </a>
-              </p>
-              <p
-                v-if="organisation.instagram_url"  
-                class="control">
-                <a
-                  :href="organisation.instagram_url"
-                  target="_blank"
-                >
-                  <span class="icon is-size-4 instagram-color">
-                    <i class="mdi mdi-instagram"></i>
-                  </span>
-                </a>
-              </p>
-            </div>
+            <SocialLink :organisation="organisation"/>
           </div>
-          <div class="navbar-item">
-            <a class="navbar-item button" v-if="userModule && !loggedIn" v-on:click="login()">
+          <div class="navbar-item" v-if="userModule && !loggedIn">
+            <a class="navbar-item button" v-on:click="login()">
               <span class="icon">
                 <i class="mdi mdi-account"></i>
               </span>
@@ -265,8 +156,12 @@
 
 <script>
 import DefaultImage from '~/assets/images/dega-default-image.png';
+import SocialLink from '@/components/SocialLinks';
 
 export default {
+  components: {
+    SocialLink
+  },
   data() {
     return {
       toggleNavBar: false,
