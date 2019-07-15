@@ -4,14 +4,16 @@ function loadTwitter(el) {
   if(process.browser) {
     let tweets = html.getElementsByClassName('tweet');
     for( var i = 0; i < tweets.length; i += 1){
-      let tweetID = tweets[i].getAttribute('data-id')
-      window.twttr.widgets.createTweet(
-        tweetID,
-        tweets[i]
-      )
-      .then(
-        html.querySelector('#twitter-widget-4').style.display = "none"
-      )
+      if(tweets[i].hasAttribute('data-id')){
+        let tweetID = tweets[i].getAttribute('data-id')
+        window.twttr.widgets.createTweet(
+          tweetID,
+          tweets[i]
+        )
+        .then(
+          html.querySelector('#twitter-widget-4').style.display = "none"
+        )
+      }
     }
   }
 }
