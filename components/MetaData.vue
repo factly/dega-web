@@ -1,20 +1,20 @@
 <template>
-  <div class="meta-data-font">
+  <div>
     <div class="field is-grouped is-grouped-multiline">
       <div
         v-for="(p, index) in authors"
         :key="'author'+index"
       >
-        <p :class="size">
+        <p :class="size" class="meta-data-font">
           <span v-if="index !== 0">,&nbsp;</span>
           <nuxt-link :to="localePath({ name:'author-slug', params: { slug: p.slug } })" class="has-text-link">{{ p.display_name }}</nuxt-link>
         </p>
       </div>
       <div v-if="category">
-        <p :class="size">&nbsp;in&nbsp;<nuxt-link :to="localePath({ name:'category-slug', params: { slug: category.slug } })" class="has-text-link">{{ category.name }}</nuxt-link></p>
+        <p class="meta-data-font" :class="size">&nbsp;in&nbsp;<nuxt-link :to="localePath({ name:'category-slug', params: { slug: category.slug } })" class="has-text-link">{{ category.name }}</nuxt-link></p>
       </div>
     </div>
-    <p class="has-text-grey" :class="size">{{ published | date }}</p>
+    <p class="has-text-grey meta-data-font" :class="size">{{ published | date }}</p>
   </div>
 </template>
 

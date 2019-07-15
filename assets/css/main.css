@@ -160,10 +160,15 @@ div.sticky {
   width: 500px;
   min-width: 220px;
 }
-
+.story-preview-summary{
+  overflow: hidden !important;
+  max-height: 24px !important;
+  text-overflow: ellipsis !important;
+}
 /*Font related css*/
 .story-preview-title{
   font-family: 'Open Sans';
+  font-size: 1.3rem !important;
 }
 .story-preview-excerpt{
   font-family: 'Open Sans';

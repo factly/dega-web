@@ -19,9 +19,9 @@
     </div>
     <div class="margin-horizontal-1">
       <div>
-        <p class="is-size-4 has-text-info">{{ $t('story.about_author') }}</p>
+        <p class="is-size-5 has-text-info">{{ $t('story.about_author') }}</p>
       </div>
-      <div class="margin-top-2">
+      <div class="margin-top-half">
         <AuthorDetailsCard
           v-for="(a, index) in authors"
           :key="'author'+index"

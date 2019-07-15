@@ -1,7 +1,12 @@
 <template>
   <div>
     <div>
-      <p class="is-size-4 has-text-black-bis has-text-weight-bold post-title-font">{{ story.title }}</p>
+      <div>
+        <p class="is-size-4 has-text-black-bis has-text-weight-bold post-title-font">{{ story.title }}</p>
+      </div>
+      <div class="margin-top-half">
+        <p class="is-size-6 has-text-grey post-title-font">{{ story.excerpt }}</p>
+      </div>
     </div>
     <div class="margin-horizontal-1">
       <div v-if="story.authors.length == 1">

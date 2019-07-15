@@ -33,14 +33,6 @@
   </div>
 </template>
 
-<style>
-  .story-preview-summary{
-    overflow: hidden !important;
-    max-height: 20px !important;
-    text-overflow: ellipsis !important;
-  }
-</style>
-
 <script>
 import MetaData from '@/components/MetaData';
 export default {

@@ -5,7 +5,7 @@
       <a
         :href="'https://www.facebook.com/sharer/sharer.php?u='+ encodeURI(organisation.site_address + url) + '&quote='+quote"
         target="_blank" >
-        <span class="icon is-size-3 white-color">
+        <span class="icon is-size-4 white-color">
           <i class="mdi mdi-facebook white-color"></i>
         </span>
       </a>
@@ -14,7 +14,7 @@
       <a
         :href="'https://twitter.com/share?text=' + quote + '&url=' + encodeURI(organisation.site_address + url)"
         target="_blank">
-        <span class="icon is-size-3 white-color">
+        <span class="icon is-size-4 white-color">
           <i class="mdi mdi-twitter"></i>
         </span>
       </a>
@@ -23,7 +23,7 @@
       <a
         :href="'https://api.whatsapp.com/send?text='+ quote + ' ' + encodeURI(organisation.site_address + url)"
         target="_blank">
-        <span class="icon is-size-3 white-color">
+        <span class="icon is-size-4 white-color">
           <i class="mdi mdi-whatsapp"></i>
         </span>
       </a>
