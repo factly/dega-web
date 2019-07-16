@@ -13,37 +13,7 @@ const I18N = {
       iso: 'te-IN',
       name: 'Telugu'
     }
-  ],
-  routes: {
-    'post': {
-      en: '/post',
-      te: '/post'
-    },
-    'post/_slug': {
-      en: '/post/:slug',
-      te: '/post/:slug'
-    },
-    'factcheck': {
-      en: '/factcheck',
-      te: '/factcheck'
-    },
-    'factcheck/_slug': {
-      en: '/factcheck/:slug',
-      te: '/factcheck/:slug'
-    },
-    'category/_slug': {
-      en: '/category/:slug',
-      te: '/category/:slug',
-    },
-    'author/_slug': {
-      en: '/author/:slug',
-      te: '/author/:slug',
-    },
-    'tag/_slug': {
-      en: '/tag/:slug',
-      te: '/tag/:slug',
-    },
-  },
+  ],  
   defaultLocale: 'en',
   vueI18n: {
     fallbackLocale: 'en',

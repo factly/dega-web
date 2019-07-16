@@ -51,35 +51,35 @@
                 :class="{ 'is-hidden-mobile': toggleMore }"
                 class="navbar-dropdown has-text-weight-semibold">
                 <nuxt-link
-                  to="/page/about-us"
+                  :to="localePath('page-about-us')"
                   class="navbar-item">About us</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/corrections-policy"
+                  :to="localePath('page-corrections-policy')"
                   class="navbar-item">Corrections Policy</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/team"
+                  :to="localePath('page-team')"
                   class="navbar-item">Team</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/fact-check-methodology"
+                  :to="localePath('page-fact-check-methodology')"
                   class="navbar-item">Fact Check Methodology</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/submit-a-claim"
+                  :to="localePath('page-submit-a-claim')"
                   class="navbar-item">Submit a Claim</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/funding-details"
+                  :to="localePath('page-funding-details')"
                   class="navbar-item">Funding Details</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/contact-us"
+                  :to="localePath('page-contact-us')"
                   class="navbar-item">Contact Us</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/privacy-policy"
+                  :to="localePath('page-privacy-policy')"
                   class="navbar-item">Privacy Policy</nuxt-link>
               </div>
             </div>
