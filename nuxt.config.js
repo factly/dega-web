@@ -56,7 +56,7 @@ module.exports = {
     '@nuxtjs/dotenv',
     '@nuxtjs/sitemap',
     '@nuxtjs/auth',
-    ['nuxt-i18n', I18N],
+    'nuxt-i18n',
   ],
   /*
   ** Axios module configuration
@@ -64,7 +64,6 @@ module.exports = {
   axios: {
     credentials: false
   },
-
 
   auth: {
     strategies: {
@@ -85,6 +84,8 @@ module.exports = {
       callback: '/callback'
     }
   },
+
+  i18n: I18N,
   /*
   ** Build configuration
   */

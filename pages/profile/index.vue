@@ -10,24 +10,39 @@
             <div class="field">
               <label class="label">Name</label>
               <div class="control">
-                <input class="input" type="text" placeholder="Name" v-model="user.name">
+                <input
+                  v-model="user.name"
+                  class="input"
+                  type="text"
+                  placeholder="Name">
               </div>
             </div>
             <div class="field">
               <label class="label">Email</label>
               <div class="control">
-                <input class="input" type="text" :value="user.email" placeholder="Text input" readonly>
+                <input
+                  :value="user.email"
+                  class="input"
+                  type="text"
+                  placeholder="Text input"
+                  readonly>
               </div>
             </div>
             <div class="field">
               <label class="label">Gender</label>
               <div class="control">
                 <label class="radio">
-                  <input type="radio" value="male" v-model="user.gender" >
+                  <input
+                    v-model="user.gender"
+                    type="radio"
+                    value="male" >
                   Male
                 </label>
                 <label class="radio">
-                  <input type="radio" value="female" v-model="user.gender" >
+                  <input
+                    v-model="user.gender"
+                    type="radio"
+                    value="female" >
                   Female
                 </label>
               </div>
@@ -36,18 +51,19 @@
               <label class="label">Date of Birth</label>
               <div class="control">
                 <b-datepicker
+                  v-model="user.dob"
+                  :max-date="new Date()"
                   placeholder="Type or select a date..."
                   icon="calendar-today"
                   editable
-                  v-model="user.dob"
-                  :max-date="new Date()"
-                >
-                </b-datepicker>
+                />
               </div>
             </div>
             <div class="field">
               <div class="control">
-                <button class="button is-link" v-on:click="update">Submit</button>
+                <button
+                  class="button is-link"
+                  @click="update">Submit</button>
               </div>
             </div>
           </div>
@@ -60,33 +76,38 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from 'axios';
+
 export default {
   data() {
-    var userTemp = this.$auth.user
-    userTemp.dob = new Date(userTemp.dob) 
+    const userTemp = this.$auth.user;
+    userTemp.dob = new Date(userTemp.dob);
     return {
       userModule: process.env.userModule,
-      user: userTemp,
-    }
+      user: userTemp
+    };
   },
   methods: {
     update() {
-      let { name, gender, dob, sub} = this.user
+      const {
+        name, gender, dob, sub
+      } = this.user;
       const updateUserInfo = axios({
         method: 'POST',
-        url: process.env.userDataApiUri + '/user/update',
+        url: `${process.env.userDataApiUri}/user/update`,
         data: {
-          user: { name, gender, dob, sub}, 
+          user: {
+            name, gender, dob, sub
+          },
           accessToken: this.$auth.getToken('social')
         }
-      })
-      updateUserInfo.then(response => {
+      });
+      updateUserInfo.then((response) => {
         if (response.data.success) {
-          this.$auth.fetchUser()
+          this.$auth.fetchUser();
         }
-      })
+      });
     }
   }
-}
+};
 </script>

@@ -7,8 +7,8 @@
         <div class="column is-8">
           <div>
             <StoryPreview
-              :story="p"
               v-for="(p, index) in factchecks.slice(1)"
+              :story="p"
               :key="index"
             />
           </div>
@@ -28,9 +28,9 @@
 
 <script>
 import axios from 'axios';
+import _ from 'lodash';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '~/components/Hero';
-import _ from 'lodash';
 
 export default {
   components: {

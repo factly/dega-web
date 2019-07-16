@@ -9,8 +9,10 @@
       </figure>
       <div class="media-content">
         <p class="is-size-5 has-text-weight-bold popular-title-font">
-          <nuxt-link :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })" class="has-text-black-bis">
-          {{ story.title }}
+          <nuxt-link
+            :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })"
+            class="has-text-black-bis">
+            {{ story.title }}
           </nuxt-link>
         </p>
         <div class="margin-top-half">
@@ -27,6 +29,7 @@
 
 <script>
 import MetaData from '@/components/MetaData';
+
 export default {
   components: {
     MetaData

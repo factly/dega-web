@@ -29,8 +29,8 @@
 
 <script>
 import axios from 'axios';
-import StoryPreview from '@/components/StoryPreview';
 import _ from 'lodash';
+import StoryPreview from '@/components/StoryPreview';
 
 export default {
   components: {
@@ -60,19 +60,18 @@ export default {
     return { story: sortedStories };
   },
   head() {
-    var metadata = {}
-    const { story } = this
-    if(story && story.length > 0){
-      metadata['title'] = story[0].authors[0].display_name
-      metadata['meta'] = [
+    const metadata = {};
+    const { story } = this;
+    if (story && story.length > 0) {
+      metadata.title = story[0].authors[0].display_name;
+      metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: story[0].authors[0].display_name },
         { hid: 'og:image', name: 'og:image', content: story[0].authors[0].profile_picture ? story[0].authors[0].profile_picture : null },
-        { hid: 'og:description', name: 'og:description', content: story[0].authors[0].description ? story[0].authors[0].description : null}
-      ]
-    } else 
-      metadata['title'] = this.$store.getters.getOrganisation.site_title
+        { hid: 'og:description', name: 'og:description', content: story[0].authors[0].description ? story[0].authors[0].description : null },
+      ];
+    } else { metadata.title = this.$store.getters.getOrganisation.site_title; }
 
-    return metadata
+    return metadata;
   }
 };
 </script>

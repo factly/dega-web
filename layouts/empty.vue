@@ -6,7 +6,7 @@
 export default {
   data() {
     return {
-      organisation: Object,
+      organisation: Object
     };
   },
   created() {

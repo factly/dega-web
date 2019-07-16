@@ -13,8 +13,10 @@
       <div class="column is-6">
         <div>
           <p class="is-size-4 has-text-weight-bold hero-title-font">
-            <nuxt-link :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })" class="has-text-black-bis">
-            {{ story.title }}
+            <nuxt-link
+              :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })"
+              class="has-text-black-bis">
+              {{ story.title }}
             </nuxt-link>
           </p>
           <div>
@@ -48,6 +50,6 @@ export default {
       required: true,
       default: null
     }
-  },
+  }
 };
 </script>

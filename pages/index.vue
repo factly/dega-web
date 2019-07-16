@@ -30,10 +30,10 @@
 
 <script>
 import axios from 'axios';
+import _ from 'lodash';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
 
-import _ from 'lodash';
 
 export default {
   authenticated: true,

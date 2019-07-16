@@ -61,6 +61,7 @@
 
 <script>
 import MetaData from '@/components/MetaData';
+
 export default {
   components: {
     MetaData

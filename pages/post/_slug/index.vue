@@ -7,10 +7,13 @@
             <StoryHead :story="post[0]"/>
           </div>
           <div class="margin-top-2">
-            <article class="has-text-justify post-content-font" v-html="post[0].content" v-twitter-widgets />
+            <article
+              v-twitter-widgets
+              class="has-text-justify post-content-font"
+              v-html="post[0].content" />
           </div>
           <div class="margin-top-2">
-            <StoryFooter 
+            <StoryFooter
               :tags="post[0].tags"
               :authors="post[0].authors"
               :updates="post[0].updates"
@@ -49,7 +52,7 @@ export default {
   },
   data() {
     return {
-      post: null,
+      post: null
     };
   },
 
@@ -65,22 +68,21 @@ export default {
     return { post };
   },
   head() {
-    var metadata = {}
-    const { post } = this
-    if(post && post.length === 1){
-      metadata['title'] = post[0].title
-      metadata['meta'] = [
+    const metadata = {};
+    const { post } = this;
+    if (post && post.length === 1) {
+      metadata.title = post[0].title;
+      metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: post[0].title },
         { hid: 'og:image', name: 'og:image', content: post[0].featured_media },
-        { hid: 'og:description', name: 'og:description', content: post[0].excerpt ? post[0].excerpt : null}
-      ]
-      metadata['script'] = [
-        { src: 'https://platform.twitter.com/widgets.js', async: true }
-      ]
-    } else 
-      metadata['title'] = this.$store.getters.getOrganisation.site_title
-    
-    return metadata
+        { hid: 'og:description', name: 'og:description', content: post[0].excerpt ? post[0].excerpt : null },
+      ];
+      metadata.script = [
+        { src: 'https://platform.twitter.com/widgets.js', async: true },
+      ];
+    } else { metadata.title = this.$store.getters.getOrganisation.site_title; }
+
+    return metadata;
   }
 };
 </script>

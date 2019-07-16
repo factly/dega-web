@@ -6,8 +6,8 @@
       aria-label="main navigation">
       <div class="navbar-brand">
         <nuxt-link
-          class="navbar-item"
-          :to="localePath('index')">
+          :to="localePath('index')"
+          class="navbar-item">
           <img
             :src="organisation.logo_url"
             alt="Dega"
@@ -32,8 +32,8 @@
             :to="localePath('post')"
             class="navbar-item">{{ $t('header.stories') }}</nuxt-link>
           <nuxt-link
-            class="navbar-item"
-            :to="localePath({ name:'category-slug', params: { slug: 'fake-news' } })">
+            :to="localePath({ name:'category-slug', params: { slug: 'fake-news' } })"
+            class="navbar-item">
             {{ $t('header.fake_news') }}
           </nuxt-link>
           <nuxt-link
@@ -89,38 +89,50 @@
           <div class="navbar-item is-hidden-touch is-hidden-desktop-only">
             <SocialLink :organisation="organisation"/>
           </div>
-          <div class="navbar-item" v-if="userModule && !loggedIn">
-            <a class="navbar-item button" v-on:click="login()">
+          <div
+            v-if="userModule && !loggedIn"
+            class="navbar-item">
+            <a
+              class="navbar-item button"
+              @click="login()">
               <span class="icon">
-                <i class="mdi mdi-account"></i>
+                <i class="mdi mdi-account"/>
               </span>
               <span>Sign Up / Log In</span>
             </a>
           </div>
-          <div class="navbar-item has-dropdown is-hoverable" v-if="userModule && loggedIn">
+          <div
+            v-if="userModule && loggedIn"
+            class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link button has-dropdown">
               <span class="icon">
-                <i class="mdi mdi-account"></i>
+                <i class="mdi mdi-account"/>
               </span>
               <span>Account</span>
             </a>
             <div class="navbar-dropdown is-right">
               <div>
-                <nuxt-link to="/saved" class="navbar-item">
+                <nuxt-link
+                  to="/saved"
+                  class="navbar-item">
                   <span class="icon is-size-4">
-                    <i class="mdi mdi-bookmark"></i>
+                    <i class="mdi mdi-bookmark"/>
                   </span>
                   <span>Saved</span>
                 </nuxt-link>
-                <nuxt-link to="/profile" class="navbar-item">
+                <nuxt-link
+                  to="/profile"
+                  class="navbar-item">
                   <span class="icon is-size-4">
-                    <i class="mdi mdi-account-settings-variant"></i>
+                    <i class="mdi mdi-account-settings-variant"/>
                   </span>
                   <span>Profile</span>
                 </nuxt-link>
-                <a class="navbar-item has-text-danger" v-on:click="logout()">
+                <a
+                  class="navbar-item has-text-danger"
+                  @click="logout()">
                   <span class="icon is-size-4">
-                    <i class="mdi mdi-logout-variant"></i>
+                    <i class="mdi mdi-logout-variant"/>
                   </span>
                   <span>Logout</span>
                 </a>
@@ -167,29 +179,29 @@ export default {
       toggleNavBar: false,
       toggleMore: true,
       loggedIn: this.$auth.loggedIn,
-      userModule: (process.env.userModule === "true"),
-      organisation: Object,
+      userModule: (process.env.userModule === 'true'),
+      organisation: Object
     };
   },
   computed: {
-    availableLocales () {
-      return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale)
-    }
-  },
-  methods: {
-    logout(){
-      const url=process.env.logoutUri+"?redirect_uri="+(process.env.baseUrl);
-      const logout = this.$auth.logout();
-      logout.then(()=>{
-        window.location.replace(encodeURI(url))
-      })
-    },
-    async login(){
-      this.$auth.loginWith('social')
+    availableLocales() {
+      return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale);
     }
   },
   created() {
     this.organisation = this.$store.getters.getOrganisation;
+  },
+  methods: {
+    logout() {
+      const url = `${process.env.logoutUri}?redirect_uri=${process.env.baseUrl}`;
+      const logout = this.$auth.logout();
+      logout.then(() => {
+        window.location.replace(encodeURI(url));
+      });
+    },
+    async login() {
+      this.$auth.loginWith('social');
+    }
   },
   head() {
     return {

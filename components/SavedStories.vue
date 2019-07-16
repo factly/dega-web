@@ -6,7 +6,9 @@
       :story="p"
     />
   </div>
-  <div v-else class="subtitle is-6 is-uppercase has-text-centered">
+  <div
+    v-else
+    class="subtitle is-6 is-uppercase has-text-centered">
     You havent bookmarked any {{ type }} stories.<br>
   </div>
 </template>
@@ -16,12 +18,7 @@ import StoryPreview from '@/components/StoryPreview';
 
 export default {
   components: {
-    StoryPreview,
-  },
-  data() {
-    return {
-      stories: []
-    };
+    StoryPreview
   },
   props: {
     type: {
@@ -29,28 +26,33 @@ export default {
       required: true
     }
   },
-  methods: {
-    callSaved: function() {
-      axios.post(
-        process.env.userDataApiUri+'/saved/'+this.type,
-        {
-          "user": { 'sub' : this.$auth.user.sub },
-          "accessToken": this.$auth.getToken('social')
-        }
-      )
-      .then((response)=>{
-        this.stories = response.data
-      })
-      .catch(err => console.log(err)); 
-    }
+  data() {
+    return {
+      stories: []
+    };
   },
   watch: {
-    type: function(){
-      this.callSaved()
+    type() {
+      this.callSaved();
     }
   },
   mounted() {
-    this.callSaved()
+    this.callSaved();
+  },
+  methods: {
+    callSaved() {
+      axios.post(
+        `${process.env.userDataApiUri}/saved/${this.type}`,
+        {
+          user: { sub: this.$auth.user.sub },
+          accessToken: this.$auth.getToken('social')
+        }
+      )
+        .then((response) => {
+          this.stories = response.data;
+        })
+        .catch(err => console.log(err));
+    }
   }
 };
 </script>

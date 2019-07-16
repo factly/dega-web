@@ -1,12 +1,14 @@
 <template>
   <div class="sticky-horizontal-container share-box">
-    <Bookmark :story=story style="text-align:center;padding-bottom:5px"/>
+    <Bookmark
+      :story="story"
+      style="text-align:center;padding-bottom:5px"/>
     <div class="share-icon facebook-background is-vcentered">
       <a
         :href="'https://www.facebook.com/sharer/sharer.php?u='+ encodeURI(organisation.site_address + url) + '&quote='+quote"
         target="_blank" >
         <span class="icon is-size-4 white-color">
-          <i class="mdi mdi-facebook white-color"></i>
+          <i class="mdi mdi-facebook white-color"/>
         </span>
       </a>
     </div>
@@ -15,7 +17,7 @@
         :href="'https://twitter.com/share?text=' + quote + '&url=' + encodeURI(organisation.site_address + url)"
         target="_blank">
         <span class="icon is-size-4 white-color">
-          <i class="mdi mdi-twitter"></i>
+          <i class="mdi mdi-twitter"/>
         </span>
       </a>
     </div>
@@ -24,7 +26,7 @@
         :href="'https://api.whatsapp.com/send?text='+ quote + ' ' + encodeURI(organisation.site_address + url)"
         target="_blank">
         <span class="icon is-size-4 white-color">
-          <i class="mdi mdi-whatsapp"></i>
+          <i class="mdi mdi-whatsapp"/>
         </span>
       </a>
     </div>
@@ -52,8 +54,9 @@
 </style>
 <script>
 import Bookmark from '~/components/Bookmark.vue';
+
 export default {
-  components:{
+  components: {
     Bookmark
   },
   props: {

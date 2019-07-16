@@ -5,8 +5,10 @@
         <div>
           <div>
             <p class="is-size-4 has-text-weight-bold story-preview-title">
-              <nuxt-link :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })" class="has-text-black-bis">
-              {{ story.title }}
+              <nuxt-link
+                :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })"
+                class="has-text-black-bis">
+                {{ story.title }}
               </nuxt-link>
             </p>
             <p class="is-size-6 has-text-grey has-text-justified story-preview-summary story-preview-excerpt">{{ story.excerpt }}</p>
@@ -35,6 +37,7 @@
 
 <script>
 import MetaData from '@/components/MetaData';
+
 export default {
   components: {
     MetaData

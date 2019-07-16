@@ -1,19 +1,25 @@
 <template>
   <div>
-    <div class="updates" v-if="updates">
+    <div
+      v-if="updates"
+      class="updates">
       <article class="message is-info">
         <div class="message-body">
           {{ updates }}
         </div>
       </article>
     </div>
-    <div class="margin-horizontal-1" v-if="tags.length > 0">
+    <div
+      v-if="tags.length > 0"
+      class="margin-horizontal-1">
       <div class="tags">
-        <span 
-          v-for="(t, index) in tags" 
-          class="tag is-medium"
-          :key="'tags'+index">
-          <nuxt-link :to="localePath({ name: 'tag-slug', params: { slug: t.slug } })" class="has-text-black-bis">{{t.name}}</nuxt-link>
+        <span
+          v-for="(t, index) in tags"
+          :key="'tags'+index"
+          class="tag is-medium">
+          <nuxt-link
+            :to="localePath({ name: 'tag-slug', params: { slug: t.slug } })"
+            class="has-text-black-bis">{{ t.name }}</nuxt-link>
         </span>
       </div>
     </div>
@@ -34,6 +40,7 @@
 
 <script>
 import AuthorDetailsCard from '@/components/AuthorDetailsCard';
+
 export default {
   components: {
     AuthorDetailsCard
@@ -49,8 +56,8 @@ export default {
     },
     updates: {
       type: String,
-      default: ""
+      default: ''
     }
   }
-}
+};
 </script>
