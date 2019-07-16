@@ -53,9 +53,8 @@
                 <b-datepicker
                   v-model="user.dob"
                   :max-date="new Date()"
-                  placeholder="Type or select a date..."
+                  placeholder="Select a date..."
                   icon="calendar-today"
-                  editable
                 />
               </div>
             </div>
@@ -80,7 +79,7 @@ import axios from 'axios';
 
 export default {
   data() {
-    const userTemp = this.$auth.user;
+    const userTemp = { ...this.$auth.user };
     userTemp.dob = new Date(userTemp.dob);
     return {
       userModule: process.env.userModule,

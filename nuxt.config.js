@@ -56,6 +56,7 @@ module.exports = {
     '@nuxtjs/dotenv',
     '@nuxtjs/sitemap',
     '@nuxtjs/auth',
+    '@nuxtjs/robots',
     'nuxt-i18n',
   ],
   /*
@@ -83,6 +84,11 @@ module.exports = {
     redirect: {
       callback: '/callback'
     }
+  },
+
+  robots: {
+    UserAgent: '*',
+    Disallow: ['/profile', '/saved'],
   },
 
   i18n: I18N,
