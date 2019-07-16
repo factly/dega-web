@@ -1,202 +1,112 @@
 <template>
-  <div class="columns">
-    <div class="column is-12">
-      <div class="main-content">
-        <section class="hero-title has-text-centered container">
-          <div>
-            <p
-              class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop"
-            >Profile</p>
-            <br>
-          </div>
-          <div class="card">
-            <header class="card-header">
-              <p class="card-header-title">User Info</p>
-              <div v-if="!editing" v-on:click="edit" class="card-header-icon" aria-label="edit">
-                <span class="icon" style="color: #333;">
-                  <svg
-                    width="1792"
-                    height="1792"
-                    viewBox="0 0 1792 1792"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M888 1184l116-116-152-152-116 116v56h96v96h56zm440-720q-16-16-33 1l-350 350q-17 17-1 33t33-1l350-350q17-17 1-33zm80 594v190q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q63 0 117 25 15 7 18 23 3 17-9 29l-49 49q-14 14-32 8-23-6-45-6h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-126q0-13 9-22l64-64q15-15 35-7t20 29zm-96-738l288 288-672 672h-288v-288zm444 132l-92 92-288-288 92-92q28-28 68-28t68 28l152 152q28 28 28 68t-28 68z"
-                    ></path>
-                  </svg>
-                </span>
-              </div>
-              <div v-else v-on:click="cancelEditing" class="card-header-icon" aria-label="cancel">
-                <span class="icon" style="color: #333;">
-                  <svg
-                    width="1792"
-                    height="1792"
-                    viewBox="0 0 1792 1792"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1490 1322q0 40-28 68l-136 136q-28 28-68 28t-68-28l-294-294-294 294q-28 28-68 28t-68-28l-136-136q-28-28-28-68t28-68l294-294-294-294q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 294 294-294q28-28 68-28t68 28l136 136q28 28 28 68t-28 68l-294 294 294 294q28 28 28 68z"
-                    ></path>
-                  </svg>
-                </span>
-              </div>
-            </header>
-            <div class="card-content has-text-justified">
-              <div class="content columns is-multiline">
-                <div class="column is-half">Name</div>
-                <div v-if="editing" class="column is-half">
-                  <b-field>
-                    <b-input v-model="name"></b-input>
-                  </b-field>
-                </div>
-                <div v-else class="column is-half">{{ name }}</div>
-                <div class="column is-half">Email</div>
-                <div class="column is-half">{{ user.email }}</div>
-                <div class="column is-half">Gender</div>
-                <div class="column">
-                  <div v-if="!editing && user.gender!='Choose'">{{ user.gender }}</div>
-                  <div v-else class="select">
-                    <select v-model="gender">
-                      <option disabled>Choose</option>
-                      <option>Male</option>
-                      <option>Female</option>
-                    </select>
-                  </div>
-                </div>
-                <div v-if="editing || (user.gender=='Choose' && gender!='Choose')" class="column is-1">
-                  <span class="icon" style="color: #333;" v-on:click="clearGender">
-                    <svg
-                      width="1792"
-                      height="1792"
-                      viewBox="0 0 1792 1792"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M1490 1322q0 40-28 68l-136 136q-28 28-68 28t-68-28l-294-294-294 294q-28 28-68 28t-68-28l-136-136q-28-28-28-68t28-68l294-294-294-294q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 294 294-294q28-28 68-28t68 28l136 136q28 28 28 68t-28 68l-294 294 294 294q28 28 28 68z"
-                      ></path>
-                    </svg>
-                  </span>
-                </div>
-                <div class="column is-half">Date Of Birth</div>
-                <div class="column">
-                  <div
-                    v-if="!editing && user.dob"
-                  >{{user.dob.toLocaleString('en', {year: 'numeric', month: 'long', day: 'numeric' })}}</div>
-                  <div v-if="editing || !user.dob">
-                    <b-field>
-                      <b-datepicker
-                        placeholder="Type or select a date..."
-                        icon="calendar-today"
-                        editable
-                        v-model="dob"
-                        :max-date="today"
-                      ></b-datepicker>
-                    </b-field>
-                  </div>
-                </div>
-                <div v-if="editing || (!user.dob && dob)" class="column is-1">
-                  <span class="icon" style="color: #333;" v-on:click="clearDOB">
-                    <svg
-                      width="1792"
-                      height="1792"
-                      viewBox="0 0 1792 1792"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M1490 1322q0 40-28 68l-136 136q-28 28-68 28t-68-28l-294-294-294 294q-28 28-68 28t-68-28l-136-136q-28-28-28-68t28-68l294-294-294-294q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 294 294-294q28-28 68-28t68 28l136 136q28 28 28 68t-28 68l-294 294 294 294q28 28 28 68z"
-                      ></path>
-                    </svg>
-                  </span>
-                </div>
+  <div class="main-content">
+    <div v-if="userModule && this.$auth.loggedIn">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">User Info</p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            <div class="field">
+              <label class="label">Name</label>
+              <div class="control">
+                <input
+                  v-model="user.name"
+                  class="input"
+                  type="text"
+                  placeholder="Name">
               </div>
             </div>
-            <footer class="card-footer">
-              <a
-                v-if="dob!==(user.dob) || gender!=user.gender || user.name!=name"
-                href="#"
-                class="card-footer-item"
-                v-on:click="update"
-              >Update</a>
-            </footer>
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input
+                  :value="user.email"
+                  class="input"
+                  type="text"
+                  placeholder="Text input"
+                  readonly>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Gender</label>
+              <div class="control">
+                <label class="radio">
+                  <input
+                    v-model="user.gender"
+                    type="radio"
+                    value="male" >
+                  Male
+                </label>
+                <label class="radio">
+                  <input
+                    v-model="user.gender"
+                    type="radio"
+                    value="female" >
+                  Female
+                </label>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Date of Birth</label>
+              <div class="control">
+                <b-datepicker
+                  v-model="user.dob"
+                  :max-date="new Date()"
+                  placeholder="Select a date..."
+                  icon="calendar-today"
+                />
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button
+                  class="button is-link"
+                  @click="update">Submit</button>
+              </div>
+            </div>
           </div>
-          <br>
-        </section>
+        </div>
       </div>
+    </div>
+    <div v-else>
+      <LostBox />
     </div>
   </div>
 </template>
 <script>
-import axios from 'axios'
+import axios from 'axios';
+
 export default {
   data() {
-    if (process.env.userModule === 'true' && this.$auth.loggedIn) {
-      let { user } = this.$auth
-      if (user.dob) 
-        user.dob = new Date(user.dob)
-      if (!user.gender) {
-        user.gender = 'Choose'
-      }
-      return {
-        userModule: true,
-        user: user,
-        gender: user.gender,
-        dob: user.dob,
-        name: user.name,
-        editing: false,
-        today: new Date()
-      }
-    } else return { userModule: false }
+    const userTemp = { ...this.$auth.user };
+    userTemp.dob = new Date(userTemp.dob);
+    return {
+      userModule: process.env.userModule,
+      user: userTemp
+    };
   },
   methods: {
     update() {
-      let modifiedUser = Object.assign({}, this.user)
-      modifiedUser.gender = this.gender
-      modifiedUser.dob = this.dob
-      modifiedUser.name = this.name
-      if (modifiedUser['gender'] === 'Choose')
-        modifiedUser['gender'] = ''
-      if(!modifiedUser.dob)
-        modifiedUser.dob = ''
+      const {
+        name, gender, dob, sub
+      } = this.user;
       const updateUserInfo = axios({
         method: 'POST',
-        url: process.env.userDataApiUri + '/user/update',
+        url: `${process.env.userDataApiUri}/user/update`,
         data: {
-          user: modifiedUser,
+          user: {
+            name, gender, dob, sub
+          },
           accessToken: this.$auth.getToken('social')
         }
-      })
-      updateUserInfo.then(response => {
+      });
+      updateUserInfo.then((response) => {
         if (response.data.success) {
-          this.editing = false
-          this.$auth.fetchUser().then(() => {
-            this.user = this.$auth.user
-            if(!this.user.gender)
-              this.user.gender = 'Choose';
-            if(this.user.dob)
-              this.user.dob = new Date(this.user.dob)
-            this.gender = this.user.gender;
-            this.dob = this.user.dob;
-            this.name = this.user.name;
-          })
+          this.$auth.fetchUser();
         }
-      })
-    },
-    edit() {
-      this.editing = true
-    },
-    cancelEditing() {
-      this.editing = false
-      this.gender = this.user.gender
-      if (this.user.dob) this.user.dob = new Date(this.user.dob)
-      this.dob = this.user.dob
-      this.name = this.user.name
-    },
-    clearGender(){
-      this.gender = "Choose";
-    },
-    clearDOB(){
-      this.dob = null;
+      });
     }
   }
-}
+};
 </script>

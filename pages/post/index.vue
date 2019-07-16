@@ -30,7 +30,6 @@
 import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
-import _ from 'lodash';
 
 export default {
   components: {
@@ -42,18 +41,18 @@ export default {
       posts: null
     };
   },
-  // created(){
-  //   console.log("created");
-  //   this.posts = _.orderBy(this.$store.getters.getPosts, ['published_date'], ['desc']);
-  // },
   async asyncData() {
     const posts = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
-    const sortedPosts = _.orderBy(posts, ['published_date'], ['desc']);
+    posts.sort((a, b) => {
+      if (a.published_date > b.published_date) return -1;
+      if (b.published_date > a.published_date) return 1;
+      return 0;
+    });
     return {
-      posts: sortedPosts
+      posts
     };
   },
   head() {

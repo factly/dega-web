@@ -2,7 +2,7 @@
   <div>
     <article class="message is-primary">
       <div class="message-header">
-        <p>List of claims in the story</p>
+        <p>{{ $t('factcheck.list_of_claims') }}</p>
       </div>
       <div
         class="message-body"
@@ -33,12 +33,3 @@ export default {
   }
 };
 </script>
-
-<style>
-  .claims-text {
-    font-family: 'Mallanna', "sans-serif" !important;
-    font-size: 21px !important;
-    line-height: 24px !important;
-    font-weight: 300;
-  }
-</style>

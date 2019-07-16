@@ -1,72 +1,45 @@
 /* eslint-disable */
+import axios from 'axios';
 
-import Vuex from 'vuex'
-import axios from 'axios'
-const createStore = () => {
-  return new Vuex.Store({
-    state: {
-      organisation: Object,
-      popular: Array,
-      locales: ['en'],
-      locale: 'en',
-    },
-    mutations: {
-      setOrganisation(state, organisation){
-        state.organisation = organisation
-      },
-      setPopular(state, articles){
-        state.popular = articles
-      },
-      SET_LANG(state, locale) {
-        if (state.locales.indexOf(locale) !== -1) {
-          state.locale = locale;
-        }
-      }
-    },
-    actions: {
-      nuxtServerInit({ commit }, context){
-        const getOrg = () => {
-          return axios.get(encodeURI(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`))
-          .then(res => {
-            commit("setOrganisation", res.data[0])
-          })
-          .catch(e => context.error(e));
-        }
-        const getPopular = () => {
-          return axios.get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&category=video&sortBy=publishedDate&sortAsc=false`))
-          .then(res => {
-            commit("setPopular", res.data)
-          })
-          .catch(e => context.error(e));
-        } 
-        
-        return Promise.all([
-          getOrg(),
-          getPopular()
-        ])
-      }
-    },
-    getters: {
-      getOrganisation(state){
-        return state.organisation;
-      },
-      getPopular(state){
-        return state.popular;
-      }
+export const state = () => ({
+  organisation: Object,
+  popular: Array,
+});
+
+export const mutations = {
+  setOrganisation(state, organisation) {
+    state.organisation = organisation;
+  },
+  setPopular(state, articles) {
+    state.popular = articles;
   }
-})
-}
+};
 
-export default createStore
-// export const state = () => ({
-//   locales: ['en'],
-//   locale: 'en'
-// });
+export const actions = {
+  nuxtServerInit({ commit }, context) {
+    const getOrg = () => axios.get(encodeURI(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`))
+      .then((res) => {
+        commit('setOrganisation', res.data[0]);
+      })
+      .catch(e => context.error(e));
+    const getPopular = () => axios.get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&category=video&sortBy=publishedDate&sortAsc=false`))
+      .then((res) => {
+        commit('setPopular', res.data);
+      })
+      .catch(e => context.error(e));
 
-// export const mutations = {
-//   SET_LANG(state, locale) {
-//     if (state.locales.indexOf(locale) !== -1) {
-//       state.locale = locale;
-//     }
-//   }
-// };
+    return Promise.all([
+      getOrg(),
+      getPopular(),
+    ]);
+  }
+};
+
+export const getters = {
+  getOrganisation(state) {
+    return state.organisation;
+  },
+  getPopular(state) {
+    return state.popular;
+  }
+};

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="box" :class="widgetBackground">
+    <div
+      :class="widgetBackground"
+      class="box">
       <div class="media">
         <div class="media-content">
           <div class="field is-grouped is-grouped-multiline">
@@ -16,7 +18,7 @@
             </div>
           </div>
           <div class="field is-horizontal">
-            <div class="field-label"><span class="has-text-weight-bold">Claim:&nbsp;</span></div>
+            <div class="field-label"><span class="has-text-weight-bold">{{ $t('factcheck.claim') }}:&nbsp;</span></div>
             <div class="field-body"><span class="is-size-6">{{ claim.claim }}</span></div>
           </div>
           <div class="is-hidden-tablet">
@@ -27,8 +29,8 @@
             </figure>
           </div>
           <div class="field is-horizontal">
-              <div class="field-label"><p class="has-text-weight-bold">Fact:&nbsp;</p></div>
-              <div class="field-body"><span class="has-text-weight-bold" v-html="claim.review"></span></div>
+            <div class="field-label"><p class="has-text-weight-bold">{{ $t('factcheck.fact') }}:&nbsp;</p></div>
+            <div class="field-body"><span v-html="claim.review"/></div>
           </div>
         </div>
         <div class="media-left is-hidden-mobile">
@@ -40,9 +42,9 @@
         </div>
       </div>
     </div>
-    <article>
-      <div v-html="claim.description" class="has-text-justify is-size-5 mallanna-font" />
-    </article>
+    <article
+      class="has-text-justify claim-desc-font"
+      v-html="claim.description" />
   </div>
 </template>
 <style>
@@ -64,9 +66,9 @@ export default {
   },
   computed: {
     widgetBackground() {
-      const backgrounglist = ['false-background', 'misleading-background', 'unverified-background', 'partly-true-background', 'true-background']
-      return backgrounglist[parseInt(this.claim.rating.numeric_value, 10) - 1]
+      const backgrounglist = ['false-background', 'misleading-background', 'unverified-background', 'partly-true-background', 'true-background'];
+      return backgrounglist[parseInt(this.claim.rating.numeric_value, 10) - 1];
     }
-  },
+  }
 };
 </script>

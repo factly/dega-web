@@ -6,9 +6,8 @@
       aria-label="main navigation">
       <div class="navbar-brand">
         <nuxt-link
-          class="navbar-item"
-          to="/">
-          <!--<img src="~assets/images/logo.png" alt="Dega" height="110"/>-->
+          :to="localePath('index')"
+          class="navbar-item">
           <img
             :src="organisation.logo_url"
             alt="Dega"
@@ -27,21 +26,22 @@
         class="navbar-menu">
         <div class="navbar-start is-uppercase has-text-weight-semibold">
           <nuxt-link
-            to="/"
-            class="navbar-item">Home</nuxt-link>
+            :to="localePath('index')"
+            class="navbar-item">{{ $t('header.home') }}</nuxt-link>
           <nuxt-link
-            to="/post"
-            class="navbar-item">Stories</nuxt-link>
+            :to="localePath('post')"
+            class="navbar-item">{{ $t('header.stories') }}</nuxt-link>
           <nuxt-link
-            to="/category/fake-news"
-            class="navbar-item">Fake News</nuxt-link>
+            :to="localePath({ name:'category-slug', params: { slug: 'fake-news' } })"
+            class="navbar-item">
+            {{ $t('header.fake_news') }}
+          </nuxt-link>
           <nuxt-link
-            to="/category/video"
-            class="navbar-item">Videos</nuxt-link>
+            :to="localePath({ name:'category-slug', params: { slug: 'video' }})"
+            class="navbar-item">{{ $t('header.videos') }}</nuxt-link>
           <nuxt-link
-            to="/factcheck"
-            class="navbar-item">Fact Check</nuxt-link>
-          <!--<nuxt-link to="/category/fake-news" class="navbar-item">Fake News</nuxt-link>-->
+            :to="localePath('factcheck')"
+            class="navbar-item">{{ $t('header.fact_check') }}</nuxt-link>
           <div class="navbar-item has-dropdown is-hoverable">
             <div
               class="navbar-link has-dropdown"
@@ -51,174 +51,104 @@
                 :class="{ 'is-hidden-mobile': toggleMore }"
                 class="navbar-dropdown has-text-weight-semibold">
                 <nuxt-link
-                  to="/page/about-us"
+                  :to="localePath('page-about-us')"
                   class="navbar-item">About us</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/corrections-policy"
+                  :to="localePath('page-corrections-policy')"
                   class="navbar-item">Corrections Policy</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/team"
+                  :to="localePath('page-team')"
                   class="navbar-item">Team</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/fact-check-methodology"
+                  :to="localePath('page-fact-check-methodology')"
                   class="navbar-item">Fact Check Methodology</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/submit-a-claim"
+                  :to="localePath('page-submit-a-claim')"
                   class="navbar-item">Submit a Claim</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/funding-details"
+                  :to="localePath('page-funding-details')"
                   class="navbar-item">Funding Details</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/contact-us"
+                  :to="localePath('page-contact-us')"
                   class="navbar-item">Contact Us</nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link
-                  to="/page/privacy-policy"
+                  :to="localePath('page-privacy-policy')"
                   class="navbar-item">Privacy Policy</nuxt-link>
               </div>
             </div>
           </div>
         </div>
-        <div>
-          <div class="navbar-end">
-            <div v-if="userModule" class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                <span
-                  class="icon"
-                  style="color: #333;">
-                  <svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      fill="currentColor"
-                      d="M896 0q182 0 348 71t286 191 191 286 71 348q0 181-70.5 347t-190.5 286-286 191.5-349 71.5-349-71-285.5-191.5-190.5-286-71-347.5 71-348 191-286 286-191 348-71zm619 1351q149-205 149-455 0-156-61-298t-164-245-245-164-298-61-298 61-245 164-164 245-61 298q0 250 149 455 66-327 306-327 131 128 313 128t313-128q240 0 306 327zm-235-647q0-159-112.5-271.5t-271.5-112.5-271.5 112.5-112.5 271.5 112.5 271.5 271.5 112.5 271.5-112.5 112.5-271.5z"/>
-                  </svg>
-                </span>
-              </a>
-              <div class="navbar-dropdown">
-                <nuxt-link to="/saved/posts" v-if="loggedIn" class="navbar-item">
-                  Saved Posts
+        <div class="navbar-end">
+          <div class="navbar-item is-hidden-touch is-hidden-desktop-only">
+            <SocialLink :organisation="organisation"/>
+          </div>
+          <div
+            v-if="userModule && !loggedIn"
+            class="navbar-item">
+            <a
+              class="navbar-item button"
+              @click="login()">
+              <span class="icon">
+                <i class="mdi mdi-account"/>
+              </span>
+              <span>Sign Up / Log In</span>
+            </a>
+          </div>
+          <div
+            v-if="userModule && loggedIn"
+            class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link button has-dropdown">
+              <span class="icon">
+                <i class="mdi mdi-account"/>
+              </span>
+              <span>Account</span>
+            </a>
+            <div class="navbar-dropdown is-right">
+              <div>
+                <nuxt-link
+                  to="/saved"
+                  class="navbar-item">
+                  <span class="icon is-size-4">
+                    <i class="mdi mdi-bookmark"/>
+                  </span>
+                  <span>Saved</span>
                 </nuxt-link>
-                <nuxt-link to="/saved/factchecks" v-if="loggedIn" class="navbar-item">
-                  Saved Factchecks
+                <nuxt-link
+                  to="/profile"
+                  class="navbar-item">
+                  <span class="icon is-size-4">
+                    <i class="mdi mdi-account-settings-variant"/>
+                  </span>
+                  <span>Profile</span>
                 </nuxt-link>
-                <nuxt-link to="/profile" v-if="loggedIn" class="navbar-item">
-                  Profile
-                </nuxt-link>
-                <hr class="navbar-divider">
-                <a v-if="loggedIn" class="navbar-item" v-on:click="logout()">
-                  Logout
-                </a>
-                <a v-if="!loggedIn" class="navbar-item" v-on:click="login()">
-                  Login
+                <a
+                  class="navbar-item has-text-danger"
+                  @click="logout()">
+                  <span class="icon is-size-4">
+                    <i class="mdi mdi-logout-variant"/>
+                  </span>
+                  <span>Logout</span>
                 </a>
               </div>
             </div>
-            <!-- <ClientSocialButtons/> -->
-            <a
-              v-if="organisation.facebook_url"
-              :href="organisation.facebook_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 facebook-color">
-                <i class="mdi mdi-facebook"></i>
-              </span>
-            </a>
-            <!-- Sharingbutton Twitter -->
-            <a
-              v-if="organisation.twitter_url"
-              :href="organisation.twitter_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 twitter-color">
-                <i class="mdi mdi-twitter"></i>
-              </span>
-            </a>
-
-            <!-- Sharingbutton Youtube -->
-            <a
-              v-if="organisation.you_tube_url"
-              :href="organisation.you_tube_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 youtube-color">
-                <i class="mdi mdi-youtube"></i>
-              </span>
-            </a>
-
-            <!-- Sharingbutton Github -->
-            <a
-              v-if="organisation.github_url"
-              :href="organisation.github_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 github-color">
-                <i class="mdi mdi-github-circle"></i>
-              </span>
-            </a>
-
-            <!-- Sharingbutton Tumblr -->
-            <a
-              v-if="organisation.tumbler_url"
-              :href="organisation.tumbler_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 tunbler-color">
-                <i class="mdi mdi-tumblr"></i>
-              </span>
-            </a>
-
-            <!-- Sharingbutton Pinterest -->
-            <a
-              v-if="organisation.pinterest_url"
-              :href="organisation.pinterest_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 pinterest-color">
-                <i class="mdi mdi-pinterest"></i>
-              </span>
-            </a>
-
-            <!-- Sharingbutton LinkedIn -->
-            <a
-              v-if="organisation.linkedin_url"
-              :href="organisation.linkedin_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 linkedin-color">
-                <i class="mdi mdi-linkedin"></i>
-              </span>
-            </a>
-
-            <!-- Sharingbutton WhatsApp -->
-            <a
-              v-if="organisation.whatsapp_url"
-              :href="organisation.whatsapp_url"
-              class="navbar-item is-hidden-touch is-hidden-desktop-only"
-              target="_blank"
-            >
-              <span class="icon is-size-4 whatsapp-color">
-                <i class="mdi mdi-whatsapp"></i>
-              </span>
-            </a>
+          </div>
+          <div class="navbar-item">
+            <nuxt-link
+              v-for="locale in availableLocales"
+              :key="locale.code"
+              :to="switchLocalePath(locale.code)">{{ locale.name }}</nuxt-link>
           </div>
         </div>
       </div>
     </nav>
-    <br class="is-hidden-mobile">
-    <br class="is-hidden-mobile">
-    <main>
+    <main class="margin-top-6">
       <div class="container is-widescreen">
         <div class="padding-half">
           <nuxt/>
@@ -238,37 +168,40 @@
 
 <script>
 import DefaultImage from '~/assets/images/dega-default-image.png';
-import ClientSocialButtons from '~/components/ClientSocialButtons.vue';
+import SocialLink from '@/components/SocialLinks';
 
 export default {
   components: {
-    ClientSocialButtons
+    SocialLink
   },
   data() {
     return {
       toggleNavBar: false,
       toggleMore: true,
-      loggedIn:this.$auth.loggedIn,
-      userModule:(process.env.userModule === "true"),
-      organisation: Object,
+      loggedIn: this.$auth.loggedIn,
+      userModule: (process.env.userModule === 'true'),
+      organisation: Object
     };
   },
-  methods: {
-    logout(){
-      const url=process.env.logoutUri+"?redirect_uri="+(process.env.baseUrl);
-      const logout = this.$auth.logout();
-      logout.then(()=>{
-        window.location.replace(encodeURI(url))
-      })
-    },
-    async login(){
-      this.$auth.loginWith('social').then(()=>{
-            this.loggedIn = true;
-          })
+  computed: {
+    availableLocales() {
+      return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale);
     }
   },
   created() {
     this.organisation = this.$store.getters.getOrganisation;
+  },
+  methods: {
+    logout() {
+      const url = `${process.env.logoutUri}?redirect_uri=${process.env.baseUrl}`;
+      const logout = this.$auth.logout();
+      logout.then(() => {
+        window.location.replace(encodeURI(url));
+      });
+    },
+    async login() {
+      this.$auth.loginWith('social');
+    }
   },
   head() {
     return {
@@ -284,10 +217,7 @@ export default {
         { hid: 'og:url', name: 'og:url', content: this.organisation.site_address + this.$nuxt.$route.path },
         { hid: 'og:image', name: 'og:image', content: this.organisation.site_address + DefaultImage },
         { hid: 'og:description', name: 'og:description', content: this.organisation.description },
-      ],
-      htmlAttrs: {
-        class: 'has-navbar-fixed-top'
-      }
+      ]
     };
   }
 };

@@ -1,14 +1,19 @@
 <template>
   <div>
     <div>
-      <p class="is-size-4 has-text-black-bis has-text-weight-bold mallanna-font">{{ story.title }}</p>
+      <div>
+        <p class="is-size-4 has-text-black-bis has-text-weight-bold post-title-font">{{ story.title }}</p>
+      </div>
+      <div class="margin-top-half">
+        <p class="is-size-6 has-text-grey post-title-font">{{ story.excerpt }}</p>
+      </div>
     </div>
-    <div class="margin-top-half">
+    <div class="margin-horizontal-1">
       <div v-if="story.authors.length == 1">
         <article class="media">
           <div class="media-left">
-            <figure class="image is-64x64">
-              <nuxt-link :to="'/author/' + story.authors[0].slug">
+            <figure class="image is-48x48">
+              <nuxt-link :to="localePath({ name:'author-slug', params: { slug: story.authors[0].slug } })" >
                 <img
                   :src="story.authors[0].profile_picture"
                   class="is-rounded">
@@ -32,8 +37,8 @@
             :key="'author'+index"
             class="control"
             style="margin-right:0.5rem;">
-            <figure class="image is-64x64">
-              <nuxt-link :to="'/author/' + p.slug">
+            <figure class="image is-48x48">
+              <nuxt-link :to="localePath({ name:'author-slug', params: { slug: p.slug } })">
                 <img
                   :src="p.profile_picture"
                   class="is-rounded">
@@ -41,30 +46,22 @@
             </figure>
           </div>
         </div>
-        <MetaData
-          :authors="story.authors"
-          :category="story.categories ? story.categories[0] : underfined"
-          :published="story.published_date"
-          size="is-size-6"
-        />
+        <div class="margin-top-half">
+          <MetaData
+            :authors="story.authors"
+            :category="story.categories ? story.categories[0] : underfined"
+            :published="story.published_date"
+            size="is-size-6"
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-  .headline-meta {
-    margin-top: 1.5rem;
-  }
-  .headline-preview {
-    font-family: 'Mallanna', sans-serif;
-    font-size: 1.2rem;
-    line-height: 1.3rem;
-  }
-</style>
-
 <script>
 import MetaData from '@/components/MetaData';
+
 export default {
   components: {
     MetaData

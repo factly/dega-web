@@ -7,8 +7,8 @@
         <div class="column is-8">
           <div>
             <StoryPreview
-              :story="p"
               v-for="(p, index) in factchecks.slice(1)"
+              :story="p"
               :key="index"
             />
           </div>
@@ -30,7 +30,6 @@
 import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '~/components/Hero';
-import _ from 'lodash';
 
 export default {
   components: {
@@ -47,9 +46,13 @@ export default {
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(error => console.log(error));
-    const sortedFactchecks = _.orderBy(factchecks, ['published_date'], ['desc']);
+    factchecks.sort((a, b) => {
+      if (a.published_date > b.published_date) return -1;
+      if (b.published_date > a.published_date) return 1;
+      return 0;
+    });
     return {
-      factchecks: sortedFactchecks
+      factchecks
     };
   },
   head() {

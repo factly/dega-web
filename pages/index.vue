@@ -33,7 +33,6 @@ import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
 
-import _ from 'lodash';
 
 export default {
   authenticated: true,
@@ -56,17 +55,13 @@ export default {
       .then(response => response.data)
       .catch(err => console.log(err));
     const stories = (posts || []).concat(factchecks || []);
-    const sortedStories = _.orderBy(stories, ['published_date'], ['desc']);
+    stories.sort((a, b) => {
+      if (a.published_date > b.published_date) return -1;
+      if (b.published_date > a.published_date) return 1;
+      return 0;
+    });
     return {
-      story: sortedStories
-    };
-  },
-
-  head() {
-    return {
-      htmlAttrs: {
-        class: 'has-navbar-fixed-top'
-      }
+      story: stories
     };
   }
 };

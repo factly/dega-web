@@ -3,16 +3,22 @@
     <div v-if="post && post.length">
       <div class="columns">
         <div class="column is-8">
-          <StoryHead :story="post[0]"/>
           <div>
-            <article>
-              <div class="has-text-justify is-size-5 mallanna-font" v-html="post[0].content" />
-            </article>
+            <StoryHead :story="post[0]"/>
           </div>
-          <StoryFooter 
-            :tags="post[0].tags"
-            :authors="post[0].authors"
-          />
+          <div class="margin-top-2">
+            <article
+              v-twitter-widgets
+              class="has-text-justify post-content-font"
+              v-html="post[0].content" />
+          </div>
+          <div class="margin-top-2">
+            <StoryFooter
+              :tags="post[0].tags"
+              :authors="post[0].authors"
+              :updates="post[0].updates"
+            />
+          </div>
         </div>
         <div class="column is-4">
           <div class="is-hidden-mobile">
@@ -62,19 +68,21 @@ export default {
     return { post };
   },
   head() {
-    var metadata = {}
-    const { post } = this
-    if(post && post.length === 1){
-      metadata['title'] = post[0].title
-      metadata['meta'] = [
+    const metadata = {};
+    const { post } = this;
+    if (post && post.length === 1) {
+      metadata.title = post[0].title;
+      metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: post[0].title },
         { hid: 'og:image', name: 'og:image', content: post[0].featured_media },
-        { hid: 'og:description', name: 'og:description', content: post[0].excerpt ? post[0].excerpt : null}
-      ]
-    } else 
-      metadata['title'] = this.$store.getters.getOrganisation.site_title
+        { hid: 'og:description', name: 'og:description', content: post[0].excerpt ? post[0].excerpt : null },
+      ];
+      metadata.script = [
+        { src: 'https://platform.twitter.com/widgets.js', async: true },
+      ];
+    } else { metadata.title = this.$store.getters.getOrganisation.site_title; }
 
-    return metadata
+    return metadata;
   }
 };
 </script>

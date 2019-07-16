@@ -2,7 +2,7 @@
 <template>
   <div>
     <div class="box has-background-dark padding-half">
-      <p class="is-size-5 has-text-white-ter">Recent Videos</p>
+      <p class="is-size-5 has-text-white-ter">{{ $t('header.recent_videos') }}</p>
     </div>
     <PopularArticlePreview
       v-for="(p, index) in popular"
