@@ -29,7 +29,6 @@
 
 <script>
 import axios from 'axios';
-import _ from 'lodash';
 import StoryPreview from '@/components/StoryPreview';
 
 export default {
@@ -56,8 +55,12 @@ export default {
       .then(response => response.data)
       .catch(err => console.log(err));
     const stories = (posts || []).concat(factchecks || []);
-    const sortedStories = _.orderBy(stories, ['published_date'], ['desc']);
-    return { story: sortedStories };
+    stories.sort((a, b) => {
+      if (a.published_date > b.published_date) return -1;
+      if (b.published_date > a.published_date) return 1;
+      return 0;
+    });
+    return { story: stories };
   },
   head() {
     const metadata = {};

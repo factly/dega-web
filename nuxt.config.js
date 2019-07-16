@@ -53,7 +53,6 @@ module.exports = {
     '@nuxtjs/axios',
     'nuxt-buefy',
     '@nuxtjs/pwa',
-    '@nuxtjs/dotenv',
     '@nuxtjs/sitemap',
     '@nuxtjs/auth',
     '@nuxtjs/robots',
@@ -88,7 +87,7 @@ module.exports = {
 
   robots: {
     UserAgent: '*',
-    Disallow: ['/profile', '/saved'],
+    Disallow: ['/profile', '/saved', '/callback'],
   },
 
   i18n: I18N,

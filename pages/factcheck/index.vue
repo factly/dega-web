@@ -28,7 +28,6 @@
 
 <script>
 import axios from 'axios';
-import _ from 'lodash';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '~/components/Hero';
 
@@ -47,9 +46,13 @@ export default {
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(error => console.log(error));
-    const sortedFactchecks = _.orderBy(factchecks, ['published_date'], ['desc']);
+    factchecks.sort((a, b) => {
+      if (a.published_date > b.published_date) return -1;
+      if (b.published_date > a.published_date) return 1;
+      return 0;
+    });
     return {
-      factchecks: sortedFactchecks
+      factchecks
     };
   },
   head() {
