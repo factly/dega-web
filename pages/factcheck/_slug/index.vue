@@ -96,9 +96,7 @@ export default {
     return { factcheck };
   },
   head() {
-    const metadata = {
-      __dangerouslyDisableSanitizers: ['script']
-    };
+    const metadata = {};
     const { factcheck } = this;
     if (factcheck && factcheck.length === 1) {
       metadata.title = factcheck[0].title;
