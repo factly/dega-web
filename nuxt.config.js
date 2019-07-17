@@ -36,6 +36,7 @@ module.exports = {
   ** Global CSS
   */
   css: ['@/assets/css/main.css', '@/assets/css/custom.css'],
+
   /*
   ** Plugins to load before mounting the App
   */
@@ -55,9 +56,9 @@ module.exports = {
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
     '@nuxtjs/auth',
-    '@nuxtjs/robots',
     'nuxt-i18n',
   ],
+
   /*
   ** Axios module configuration
   */
@@ -65,6 +66,9 @@ module.exports = {
     credentials: false
   },
 
+  /*
+  ** Auth module configuration
+  */
   auth: {
     strategies: {
       social: {
@@ -85,12 +89,11 @@ module.exports = {
     }
   },
 
-  robots: {
-    UserAgent: '*',
-    Disallow: ['/profile', '/saved', '/callback'],
-  },
-
+  /*
+  ** i18n module configuration
+  */
   i18n: I18N,
+  
   /*
   ** Build configuration
   */
