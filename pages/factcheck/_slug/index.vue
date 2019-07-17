@@ -1,65 +1,57 @@
 <template>
   <div class="main-content">
-    <div v-if="factcheck && factcheck.length > 0">
-      <div class="columns">
-        <div class="column is-8">
-          <div>
-            <StoryHead :story="factcheck[0]"/>
-          </div>
-          <div class="margin-top-2">
-            <article
-              class="has-text-justify factcheck-intro-font"
-              v-html="factcheck[0].introduction" />
-            <br>
-            <div
-              v-for="(claim,index) in factcheck[0].claims"
-              :key="index"
-              :id="'claim'+index">
-              <a
-                :id="'claim'+(index+1)"
-                class="anchor"/>
-              <Claim
-                :claim="claim"
-                :index="index"/>
-            </div>
-            <article
-              class="has-text-justify factcheck-summary-font"
-              v-html="factcheck[0].summary" />
-          </div>
-          <div class="margin-top-2">
-            <StoryFooter
-              :tags="factcheck[0].tags"
-              :authors="factcheck[0].authors"
-              :updates="factcheck[0].updates"
-            />
-          </div>
+    <div class="columns">
+      <div class="column is-8">
+        <div>
+          <StoryHead :story="factcheck[0]"/>
         </div>
-        <div class="column is-4">
-          <div>
-            <div
-              v-if="factcheck[0].claims.length > 1"
-              class="is-hidden-mobile"
-              style="margin-bottom: 1rem;">
-              <ListClaims :factcheck="factcheck"/>
-            </div>
-            <div class="is-hidden-mobile">
-              <PopularArticles />
-            </div>
+        <div class="margin-top-2">
+          <article
+            class="has-text-justify factcheck-intro-font"
+            v-html="factcheck[0].introduction" />
+          <br>
+          <div
+            v-for="(claim,index) in factcheck[0].claims"
+            :key="index"
+            :id="'claim'+index">
+            <a
+              :id="'claim'+(index+1)"
+              class="anchor"/>
+            <Claim
+              :claim="claim"
+              :index="index"/>
+          </div>
+          <article
+            class="has-text-justify factcheck-summary-font"
+            v-html="factcheck[0].summary" />
+        </div>
+        <div class="margin-top-2">
+          <StoryFooter
+            :tags="factcheck[0].tags"
+            :authors="factcheck[0].authors"
+            :updates="factcheck[0].updates"
+          />
+        </div>
+      </div>
+      <div class="column is-4">
+        <div>
+          <div
+            v-if="factcheck[0].claims.length > 1"
+            class="is-hidden-mobile"
+            style="margin-bottom: 1rem;">
+            <ListClaims :factcheck="factcheck"/>
+          </div>
+          <div class="is-hidden-mobile">
+            <PopularArticles />
           </div>
         </div>
       </div>
-      <SocialSharingVertical
-        :url="$nuxt.$route.path"
-        :quote="factcheck[0].title"
-        :story="factcheck[0]"
-      />
     </div>
-    <div v-else-if="factcheck && factcheck.length === 0">
-      <LostBox />
-    </div>
-    <div v-else>
-      <ErrorBox />
-    </div>
+    <SocialSharingVertical
+      :url="$nuxt.$route.path"
+      :quote="factcheck[0].title"
+      :story="factcheck[0]"
+    />
   </div>
 </template>
 <style>
@@ -93,11 +85,14 @@ export default {
       return params.slug;
     }
   },
-  async asyncData(params) {
+  async asyncData({ params, error }) {
     const factcheck = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&slug=${params.params.slug}`))
+      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&slug=${params.slug}`))
       .then(response => response.data)
       .catch(err => console.log(err));
+    if (factcheck.length === 0) {
+      return error({ code: 404, message: 'You have been lost', homepage: true });
+    }
     return { factcheck };
   },
   head() {

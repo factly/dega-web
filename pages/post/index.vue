@@ -1,27 +1,22 @@
 <template>
   <div class="main-content">
-    <div v-if="posts && posts.length">
-      <Hero :story="posts[0]" />
-      <hr class="spacer is-1-5 is-hidden-mobile">
-      <div class="columns">
-        <div class="column is-8">
-          <div>
-            <StoryPreview
-              v-for="(p, index) in posts.slice(1)"
-              :key="index"
-              :story="p"
-            />
-          </div>
-        </div>
-        <div class="column is-4">
-          <div class="is-hidden-mobile">
-            <PopularArticles />
-          </div>
+    <Hero :story="posts[0]" />
+    <hr class="spacer is-1-5 is-hidden-mobile">
+    <div class="columns">
+      <div class="column is-8">
+        <div>
+          <StoryPreview
+            v-for="(p, index) in posts.slice(1)"
+            :key="index"
+            :story="p"
+          />
         </div>
       </div>
-    </div>
-    <div v-else>
-      <ErrorBox />
+      <div class="column is-4">
+        <div class="is-hidden-mobile">
+          <PopularArticles />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -41,16 +36,14 @@ export default {
       posts: null
     };
   },
-  async asyncData() {
+  async asyncData({ error }) {
     const posts = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
-    posts.sort((a, b) => {
-      if (a.published_date > b.published_date) return -1;
-      if (b.published_date > a.published_date) return 1;
-      return 0;
-    });
+    if (posts.length === 0) {
+      return error({ code: 404, message: 'You have been lost', homepage: true });
+    }
     return {
       posts
     };

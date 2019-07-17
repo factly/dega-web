@@ -1,27 +1,22 @@
 <template>
   <div class="main-content">
-    <div v-if="factchecks && factchecks.length">
-      <Hero :story="factchecks[0]"/>
-      <hr class="spacer is-1-5 is-hidden-mobile">
-      <div class="columns">
-        <div class="column is-8">
-          <div>
-            <StoryPreview
-              v-for="(p, index) in factchecks.slice(1)"
-              :story="p"
-              :key="index"
-            />
-          </div>
-        </div>
-        <div class="column is-4">
-          <div class="is-hidden-mobile">
-            <PopularArticles />
-          </div>
+    <Hero :story="factchecks[0]"/>
+    <hr class="spacer is-1-5 is-hidden-mobile">
+    <div class="columns">
+      <div class="column is-8">
+        <div>
+          <StoryPreview
+            v-for="(p, index) in factchecks.slice(1)"
+            :story="p"
+            :key="index"
+          />
         </div>
       </div>
-    </div>
-    <div v-else>
-      <ErrorBox />
+      <div class="column is-4">
+        <div class="is-hidden-mobile">
+          <PopularArticles />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -41,16 +36,14 @@ export default {
       factchecks: null
     };
   },
-  async asyncData() {
+  async asyncData({ error }) {
     const factchecks = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
-      .catch(error => console.log(error));
-    factchecks.sort((a, b) => {
-      if (a.published_date > b.published_date) return -1;
-      if (b.published_date > a.published_date) return 1;
-      return 0;
-    });
+      .catch(err => console.log(err));
+    if (factchecks.length === 0) {
+      return error({ code: 404, message: 'You have been lost', homepage: true });
+    }
     return {
       factchecks
     };

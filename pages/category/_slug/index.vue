@@ -1,28 +1,20 @@
 <template>
   <div class="main-content">
-    <div v-if="story && story.length">
-      <div class="columns">
-        <div class="column is-8">
-          <div>
-            <StoryPreview
-              v-for="(p, index) in story"
-              :key="index"
-              :story="p"
-            />
-          </div>
-        </div>
-        <div class="column is-4">
-          <div class="is-hidden-mobile">
-            <PopularArticles />
-          </div>
+    <div class="columns">
+      <div class="column is-8">
+        <div>
+          <StoryPreview
+            v-for="(p, index) in story"
+            :key="index"
+            :story="p"
+          />
         </div>
       </div>
-    </div>
-    <div v-else-if="story && story.length === 0">
-      <LostBox />
-    </div>
-    <div v-else>
-      <ErrorBox />
+      <div class="column is-4">
+        <div class="is-hidden-mobile">
+          <PopularArticles />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -45,13 +37,13 @@ export default {
       return params.slug;
     }
   },
-  async asyncData(params) {
+  async asyncData({ params, error }) {
     const posts = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&category=${params.params.slug}&sortBy=publishedDate&sortAsc=false`))
+      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&category=${params.slug}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
     const factchecks = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&category=${params.params.slug}&sortBy=publishedDate&sortAsc=false`))
+      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&category=${params.slug}&sortBy=publishedDate&sortAsc=false`))
       .then(response => response.data)
       .catch(err => console.log(err));
     const stories = (posts || []).concat(factchecks || []);
@@ -60,6 +52,9 @@ export default {
       if (b.published_date > a.published_date) return 1;
       return 0;
     });
+    if (stories.length === 0) {
+      return error({ code: 404, message: 'You have been lost', homepage: true });
+    }
     return { story: stories };
   },
   head() {

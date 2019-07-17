@@ -1,8 +1,6 @@
 <template>
   <div class="main-content">
-    <div
-      id="loading-div"
-      class="is-vcentered">
+    <div class="is-vcentered middle-div">
       <figure class="image container is-96x96">
         <img :src="organisation.mobile_icon_url">
       </figure>
