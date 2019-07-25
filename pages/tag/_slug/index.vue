@@ -39,11 +39,11 @@ export default {
   },
   async asyncData({ params, error }) {
     const posts = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&tag=${params.slug}&sortBy=publishedDate&sortAsc=false`))
+      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&tag=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
     const factchecks = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&tag=${params.slug}&sortBy=publishedDate&sortAsc=false`))
+      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&tag=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
     const stories = (posts.data || []).concat(factchecks.data || []);

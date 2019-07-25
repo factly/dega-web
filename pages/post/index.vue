@@ -57,7 +57,7 @@ export default {
     getPosts() {
       const next = this.pagination.next ? this.pagination.next : '';
       axios
-        .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&next=${next}`))
+        .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&next=${next}&limit=5`))
         .then((response) => {
           this.posts = (this.posts || []).concat(response.data.data || []);
           this.pagination = response.data.paging;
@@ -67,7 +67,7 @@ export default {
   },
   async asyncData({ error }) {
     const rawData = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
+      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
     if (rawData.data.length === 0) {

@@ -45,57 +45,67 @@ export default {
     this.scroll();
   },
   methods: {
-    validate({ params }) {
-      return params.slug;
-    },
     scroll() {
       window.onscroll = () => {
         const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
         if (bottomOfWindow && (this.pagination.posts.hasNext || this.pagination.factchecks.hasNext)) {
+          console.log('We are calling');
           this.getStories();
         }
       };
     },
-    getStories() {
-      let next = this.pagination.posts.hasNext ? this.pagination.posts.hasNext : '';
-      const posts = axios
-        .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&author=${this.$routes.params.slug}&sortBy=publishedDate&sortAsc=false&next=${next}`))
-        .then(response => response.data)
+    async getStories() {
+      let next = this.pagination.posts.hasNext ? this.pagination.posts.next : '';
+      let posts = [];
+      let factchecks = [];
+      await axios
+        .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&author=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${next}&limit=5`))
+        .then((response) => {
+          posts = response.data;
+        })
         .catch(err => console.log(err));
-      next = this.pagination.factchecks.hasNext ? this.pagination.factchecks.hasNext : '';
-      const factchecks = axios
-        .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&user=${this.$routes.params.slug}&sortBy=publishedDate&sortAsc=false&next=${next}`))
-        .then(response => response.data)
+      next = this.pagination.factchecks.hasNext ? this.pagination.factchecks.next : '';
+      await axios
+        .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&user=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${next}&limit=5`))
+        .then((response) => {
+          factchecks = response.data;
+        })
         .catch(err => console.log(err));
-      const stories = (posts.data || []).concat(factchecks.data || []);
-      this
-        .stories.sort((a, b) => {
-          if (a.published_date > b.published_date) return -1;
-          if (b.published_date > a.published_date) return 1;
-          return 0;
-        });
+      this.pagination = {
+        posts: posts.paging,
+        factchecks: factchecks.paging
+      };
+      const stories = (posts.data).concat(factchecks.data);
+      stories.sort((a, b) => {
+        if (a.published_date > b.published_date) return -1;
+        if (b.published_date > a.published_date) return 1;
+        return 0;
+      });
       this.story = (this.story).concat(stories);
     }
   },
   async asyncData({ params, error }) {
     const posts = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&author=${params.slug}&sortBy=publishedDate&sortAsc=false`))
+      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&author=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
     const factchecks = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&user=${params.slug}&sortBy=publishedDate&sortAsc=false`))
+      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&user=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
-    const stories = (posts.data || []).concat(factchecks.data || []);
-    stories.sort((a, b) => {
+    const pagination = {};
+    pagination.factchecks = factchecks.paging;
+    pagination.posts = posts.paging;
+    const story = (posts.data || []).concat(factchecks.data || []);
+    story.sort((a, b) => {
       if (a.published_date > b.published_date) return -1;
       if (b.published_date > a.published_date) return 1;
       return 0;
     });
-    if (stories.length === 0) {
+    if (story.length === 0) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
     }
-    return { story: stories };
+    return { story, pagination };
   },
   head() {
     const metadata = {};
