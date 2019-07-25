@@ -88,7 +88,7 @@ export default {
   async asyncData({ params, error }) {
     const factcheck = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&slug=${params.slug}`))
-      .then(response => response.data)
+      .then(response => response.data.data)
       .catch(err => console.log(err));
     if (factcheck.length === 0) {
       return error({ code: 404, message: 'You have been lost', homepage: true });

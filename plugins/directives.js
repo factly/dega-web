@@ -23,8 +23,5 @@ function loadTwitter(el) {
 Vue.directive('twitter-widgets', {
   bind(el) {
     loadTwitter(el);
-  },
-  update(el) {
-    loadTwitter(el);
   }
 });

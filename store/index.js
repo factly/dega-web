@@ -24,7 +24,7 @@ export const actions = {
       .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
     const getPopular = () => axios.get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&category=video&sortBy=publishedDate&sortAsc=false`))
       .then((res) => {
-        commit('setPopular', res.data);
+        commit('setPopular', res.data.data);
       })
       .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
 

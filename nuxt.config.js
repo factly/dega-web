@@ -1,4 +1,3 @@
-const SitemapRoutes = require('./utils/getSitemapRoutes.js');
 require('dotenv').config();
 const  { I18N } = require('./config');
 
@@ -116,15 +115,4 @@ module.exports = {
       }
     }
   },
-
-  sitemap: {
-    hostname: process.env.DOMAIN_HOSTNAME,
-    gzip: true,
-    generate: false,
-    exclude: [
-    ],
-    routes() {
-      return SitemapRoutes;
-    }
-  }
 };

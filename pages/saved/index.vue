@@ -47,10 +47,12 @@
 </template>
 <script>
 import SavedStories from '@/components/SavedStories';
+import LostBox from '@/components/LostBox';
 
 export default {
   components: {
-    SavedStories
+    SavedStories,
+    LostBox
   },
   data() {
     return {

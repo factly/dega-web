@@ -76,8 +76,12 @@
 </template>
 <script>
 import axios from 'axios';
+import LostBox from '@/components/LostBox';
 
 export default {
+  components: {
+    LostBox
+  },
   data() {
     const userTemp = { ...this.$auth.user };
     userTemp.dob = new Date(userTemp.dob);
