@@ -10,7 +10,7 @@
           />
         </div>
         <div
-          v-if="story.length > 0 && (!pagination.posts.hasNext || !pagination.factchecks.hasNext)"
+          v-if="story.length > 0 && (!pagination.posts.hasNext && !pagination.factchecks.hasNext)"
           class="margin-top-2">
           <h3 class="is-size-4 has-text-centered">No more stories</h3>
         </div>
@@ -31,6 +31,11 @@ import StoryPreview from '@/components/StoryPreview';
 export default {
   components: {
     StoryPreview
+  },
+  validate({ params, error }) {
+    const collectionList = ['category', 'author', 'tag'];
+    if (collectionList.includes(params.collection)) return true;
+    return error({ code: 404, message: 'You have been lost', homepage: true });
   },
   data() {
     return {
@@ -59,14 +64,14 @@ export default {
       let posts = [];
       let factchecks = [];
       await axios
-        .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&author=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${next}&limit=5`))
+        .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${next}&limit=5`))
         .then((response) => {
           posts = response.data;
         })
         .catch(err => console.log(err));
       next = this.pagination.factchecks.hasNext ? this.pagination.factchecks.next : '';
       await axios
-        .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&user=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${next}&limit=5`))
+        .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&${this.$route.params.collection === 'author' ? 'user' : this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${next}&limit=5`))
         .then((response) => {
           factchecks = response.data;
         })
@@ -86,16 +91,17 @@ export default {
   },
   async asyncData({ params, error }) {
     const posts = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&author=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
     const factchecks = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&user=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&${params.collection === 'author' ? 'user' : params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
-    const pagination = {};
-    pagination.factchecks = factchecks.paging;
-    pagination.posts = posts.paging;
+    const pagination = {
+      factchecks: factchecks.paging,
+      posts: posts.paging
+    };
     const story = (posts.data || []).concat(factchecks.data || []);
     story.sort((a, b) => {
       if (a.published_date > b.published_date) return -1;
