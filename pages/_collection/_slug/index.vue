@@ -39,7 +39,6 @@ export default {
   },
   data() {
     return {
-      collection: 'author',
       story: [],
       pagination: {
         posts: {},
@@ -114,23 +113,23 @@ export default {
     if (story.length === 0) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
     }
-    return { collection: params.collection, story, pagination };
+    return { story, pagination };
   },
   head() {
     const metadata = {};
-    const { story, collection } = this;
+    const { story } = this;
     if (story && story.length > 0) {
       const collectionPluralList = {
         author: 'authors',
         category: 'categories',
         tag: 'tags'
       };
-      const rawStoryData = story[0][collectionPluralList[collection]];
-      metadata.title = collection === 'author' ? rawStoryData[0].display_name : rawStoryData[0].name;
+      const rawStoryData = story[0][collectionPluralList[this.$route.params.collection]].find(a => a.slug === this.$route.params.slug);
+      metadata.title = this.$route.params.collection === 'author' ? rawStoryData.display_name : rawStoryData.name;
       metadata.meta = [
-        { hid: 'og:title', name: 'og:title', content: collection === 'author' ? rawStoryData[0].display_name : rawStoryData[0].name },
-        { hid: 'og:image', name: 'og:image', content: rawStoryData[0].profile_picture ? rawStoryData[0].profile_picture : null },
-        { hid: 'og:description', name: 'og:description', content: rawStoryData[0].description ? rawStoryData[0].description : null },
+        { hid: 'og:title', name: 'og:title', content: this.$route.params.collection === 'author' ? rawStoryData.display_name : rawStoryData.name },
+        { hid: 'og:image', name: 'og:image', content: rawStoryData.profile_picture ? rawStoryData.profile_picture : null },
+        { hid: 'og:description', name: 'og:description', content: rawStoryData.description ? rawStoryData.description : null },
       ];
     } else { metadata.title = this.$store.getters.getOrganisation.site_title; }
 
