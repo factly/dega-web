@@ -1,4 +1,3 @@
-const SitemapRoutes = require('./utils/getSitemapRoutes.js');
 require('dotenv').config();
 const  { I18N } = require('./config');
 
@@ -21,9 +20,6 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    ],
-    link: [
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Lato|Mallanna&display=swap' },
     ]
   },
 
@@ -36,6 +32,7 @@ module.exports = {
   ** Global CSS
   */
   css: ['@/assets/css/main.css', '@/assets/css/custom.css'],
+
   /*
   ** Plugins to load before mounting the App
   */
@@ -55,9 +52,9 @@ module.exports = {
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
     '@nuxtjs/auth',
-    '@nuxtjs/robots',
     'nuxt-i18n',
   ],
+
   /*
   ** Axios module configuration
   */
@@ -65,6 +62,9 @@ module.exports = {
     credentials: false
   },
 
+  /*
+  ** Auth module configuration
+  */
   auth: {
     strategies: {
       social: {
@@ -79,18 +79,14 @@ module.exports = {
         end_session_endpoint: process.env.LOGOUT_ENDPOINT,
         grant_type: 'authorization_code'
       }
-    },
-    redirect: {
-      callback: '/callback'
     }
   },
 
-  robots: {
-    UserAgent: '*',
-    Disallow: ['/profile', '/saved', '/callback'],
-  },
-
+  /*
+  ** i18n module configuration
+  */
   i18n: I18N,
+  
   /*
   ** Build configuration
   */
@@ -113,15 +109,4 @@ module.exports = {
       }
     }
   },
-
-  sitemap: {
-    hostname: process.env.DOMAIN_HOSTNAME,
-    gzip: true,
-    generate: false,
-    exclude: [
-    ],
-    routes() {
-      return SitemapRoutes;
-    }
-  }
 };

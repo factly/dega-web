@@ -1,45 +1,38 @@
 <template>
   <div class="main-content">
-    <div v-if="post && post.length">
-      <div class="columns">
-        <div class="column is-8">
-          <div>
-            <StoryHead :story="post[0]"/>
-          </div>
-          <div class="margin-top-2">
-            <article
-              v-twitter-widgets
-              class="has-text-justify post-content-font"
-              v-html="post[0].content" />
-          </div>
-          <div class="margin-top-2">
-            <StoryFooter
-              :tags="post[0].tags"
-              :authors="post[0].authors"
-              :updates="post[0].updates"
-            />
-          </div>
+    <div class="columns">
+      <div class="column is-8">
+        <div>
+          <StoryHead :story="post[0]"/>
         </div>
-        <div class="column is-4">
-          <div class="is-hidden-mobile">
-            <PopularArticles />
-          </div>
+        <div class="margin-top-2">
+          <article
+            v-twitter-widgets
+            class="has-text-justify post-content-font"
+            v-html="post[0].content" />
+        </div>
+        <div class="margin-top-2">
+          <StoryFooter
+            :tags="post[0].tags"
+            :authors="post[0].authors"
+            :updates="post[0].updates"
+          />
         </div>
       </div>
-      <SocialSharingVertical
-        :url="$nuxt.$route.path"
-        :quote="post[0].title"
-        :story="post[0]"
-      />
+      <div class="column is-4">
+        <div class="is-hidden-mobile">
+          <PopularArticles />
+        </div>
+      </div>
     </div>
-    <div v-else-if="post && post.length === 0">
-      <LostBox />
-    </div>
-    <div v-else>
-      <ErrorBox />
-    </div>
+    <SocialSharingVertical
+      :url="$nuxt.$route.path"
+      :quote="post[0].title"
+      :story="post[0]"
+    />
   </div>
 </template>
+
 <script>
 import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
@@ -60,11 +53,14 @@ export default {
     return params.slug;
   },
 
-  async asyncData(params) {
+  async asyncData({ params, error }) {
     const post = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&slug=${params.params.slug}`))
-      .then(response => response.data)
+      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&slug=${params.slug}`))
+      .then(response => response.data.data)
       .catch(err => console.log(err));
+    if (post.length === 0) {
+      return error({ code: 404, message: 'You have been lost', homepage: true });
+    }
     return { post };
   },
   head() {

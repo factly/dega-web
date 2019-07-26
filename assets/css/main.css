@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
 /* Quill JS related classes start here */
 .ql-align-center{
   text-align: center;
@@ -146,7 +148,7 @@ div.sticky {
   bottom: 8px;
   right: 16px;
 }
-#loading-div {
+.middle-div {
   top: 50%;
   left: 50%;
   width:30em;

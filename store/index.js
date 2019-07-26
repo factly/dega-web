@@ -16,17 +16,17 @@ export const mutations = {
 };
 
 export const actions = {
-  nuxtServerInit({ commit }, context) {
+  nuxtServerInit({ commit }) {
     const getOrg = () => axios.get(encodeURI(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`))
       .then((res) => {
         commit('setOrganisation', res.data[0]);
       })
-      .catch(e => context.error(e));
-    const getPopular = () => axios.get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&category=video&sortBy=publishedDate&sortAsc=false`))
+      .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
+    const getPopular = () => axios.get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&category=video&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then((res) => {
-        commit('setPopular', res.data);
+        commit('setPopular', res.data.data);
       })
-      .catch(e => context.error(e));
+      .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
 
     return Promise.all([
       getOrg(),

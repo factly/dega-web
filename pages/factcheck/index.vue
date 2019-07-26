@@ -1,27 +1,27 @@
 <template>
   <div class="main-content">
-    <div v-if="factchecks && factchecks.length">
-      <Hero :story="factchecks[0]"/>
-      <hr class="spacer is-1-5 is-hidden-mobile">
-      <div class="columns">
-        <div class="column is-8">
-          <div>
-            <StoryPreview
-              v-for="(p, index) in factchecks.slice(1)"
-              :story="p"
-              :key="index"
-            />
-          </div>
+    <Hero :story="factchecks[0]"/>
+    <hr class="spacer is-1-5 is-hidden-mobile">
+    <div class="columns">
+      <div class="column is-8">
+        <div>
+          <StoryPreview
+            v-for="(p, index) in factchecks.slice(1)"
+            :story="p"
+            :key="index"
+          />
         </div>
-        <div class="column is-4">
-          <div class="is-hidden-mobile">
-            <PopularArticles />
-          </div>
+        <div
+          v-if="factchecks.length > 0 && !pagination.hasNext"
+          class="margin-top-2">
+          <h3 class="is-size-4 has-text-centered">No more factchecks</h3>
         </div>
       </div>
-    </div>
-    <div v-else>
-      <ErrorBox />
+      <div class="column is-4">
+        <div class="is-hidden-mobile">
+          <PopularArticles />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -38,21 +38,44 @@ export default {
   },
   data() {
     return {
-      factchecks: null
+      factchecks: [],
+      pagination: {}
     };
   },
-  async asyncData() {
-    const factchecks = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false`))
+  mounted() {
+    this.scroll();
+  },
+  methods: {
+    scroll() {
+      window.onscroll = () => {
+        const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+        if (bottomOfWindow && this.pagination.hasNext) {
+          this.getPosts();
+        }
+      };
+    },
+    getPosts() {
+      const next = this.pagination.next ? this.pagination.next : '';
+      axios
+        .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&next=${next}&limit=5`))
+        .then((response) => {
+          this.factchecks = (this.factchecks || []).concat(response.data.data || []);
+          this.pagination = response.data.paging;
+        })
+        .catch(err => console.log(err));
+    }
+  },
+  async asyncData({ error }) {
+    const rawData = await axios
+      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
-      .catch(error => console.log(error));
-    factchecks.sort((a, b) => {
-      if (a.published_date > b.published_date) return -1;
-      if (b.published_date > a.published_date) return 1;
-      return 0;
-    });
+      .catch(err => console.log(err));
+    if (rawData.data.length === 0) {
+      return error({ code: 404, message: 'You have been lost', homepage: true });
+    }
     return {
-      factchecks
+      factchecks: rawData.data,
+      pagination: rawData.paging
     };
   },
   head() {

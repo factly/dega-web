@@ -2,7 +2,7 @@
   <article class="media">
     <figure class="media-left">
       <p class="image is-64x64">
-        <nuxt-link :to="localePath({ name:'author-slug', params: { slug: author.slug } })">
+        <nuxt-link :to="localePath({ name:'collection-slug', params: { collection: 'author', slug: author.slug } })">
           <img
             :src="author.profile_picture"
             class="is-rounded">
@@ -13,7 +13,7 @@
       <div>
         <p class="title is-6 story-author-name-font">
           <nuxt-link
-            :to="localePath({ name:'author-slug', params: { slug: author.slug } })"
+            :to="localePath({ name:'collection-slug', params: { collection: 'author', slug: author.slug } })"
             class="has-text-link">{{ author.display_name }}</nuxt-link>
         </p>
         <p class="subtitle is-6 has-text-justified story-author-desc-font">{{ author.description }}</p>

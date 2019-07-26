@@ -18,7 +18,7 @@
           :key="'tags'+index"
           class="tag is-medium">
           <nuxt-link
-            :to="localePath({ name: 'tag-slug', params: { slug: t.slug } })"
+            :to="localePath({ name: 'collection-slug', params: { collection: 'tag', slug: t.slug } })"
             class="has-text-black-bis">{{ t.name }}</nuxt-link>
         </span>
       </div>

@@ -10,7 +10,7 @@
           class="meta-data-font">
           <span v-if="index !== 0">,&nbsp;</span>
           <nuxt-link
-            :to="localePath({ name:'author-slug', params: { slug: p.slug } })"
+            :to="localePath({ name:'collection-slug', params: { collection: 'author', slug: p.slug } })"
             class="has-text-link">{{ p.display_name }}</nuxt-link>
         </p>
       </div>
@@ -18,7 +18,7 @@
         <p
           :class="size"
           class="meta-data-font">&nbsp;in&nbsp;<nuxt-link
-            :to="localePath({ name:'category-slug', params: { slug: category.slug } })"
+            :to="localePath({ name:'collection-slug', params: { collection: 'category', slug: category.slug } })"
             class="has-text-link">{{ category.name }}</nuxt-link></p>
       </div>
     </div>
