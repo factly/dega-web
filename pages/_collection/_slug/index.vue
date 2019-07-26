@@ -55,38 +55,40 @@ export default {
       window.onscroll = () => {
         const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
         if (bottomOfWindow && (this.pagination.posts.hasNext || this.pagination.factchecks.hasNext)) {
-          console.log('We are calling');
           this.getStories();
         }
       };
     },
     async getStories() {
-      let next = this.pagination.posts.hasNext ? this.pagination.posts.next : '';
       let posts = [];
       let factchecks = [];
-      await axios
-        .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${next}&limit=5`))
-        .then((response) => {
-          posts = response.data;
-        })
-        .catch(err => console.log(err));
-      next = this.pagination.factchecks.hasNext ? this.pagination.factchecks.next : '';
-      await axios
-        .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&${this.$route.params.collection === 'author' ? 'user' : this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${next}&limit=5`))
-        .then((response) => {
-          factchecks = response.data;
-        })
-        .catch(err => console.log(err));
-      this.pagination = {
-        posts: posts.paging,
-        factchecks: factchecks.paging
-      };
-      const stories = (posts.data).concat(factchecks.data);
+
+      if (this.pagination.posts.hasNext) {
+        await axios
+          .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.posts.next}&limit=5`))
+          .then((response) => {
+            posts = response.data.data;
+            this.pagination.posts = response.data.paging;
+          })
+          .catch(err => console.log(err));
+      }
+
+      if (this.pagination.factchecks.hasNext) {
+        await axios
+          .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&${this.$route.params.collection === 'author' ? 'user' : this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.factchecks.next}&limit=5`))
+          .then((response) => {
+            factchecks = response.data.data;
+            this.pagination.factchecks = response.data.paging;
+          })
+          .catch(err => console.log(err));
+      }
+      const stories = (posts).concat(factchecks);
       stories.sort((a, b) => {
         if (a.published_date > b.published_date) return -1;
         if (b.published_date > a.published_date) return 1;
         return 0;
       });
+
       this.story = (this.story).concat(stories);
     }
   },

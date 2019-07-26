@@ -22,9 +22,6 @@
         </div>
       </div>
     </div>
-    <div v-else>
-      <ErrorBox />
-    </div>
   </div>
 </template>
 
