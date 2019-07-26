@@ -39,6 +39,7 @@ export default {
   },
   data() {
     return {
+      collection: 'author',
       story: [],
       pagination: {
         posts: {},
@@ -111,17 +112,23 @@ export default {
     if (story.length === 0) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
     }
-    return { story, pagination };
+    return { collection: params.collection, story, pagination };
   },
   head() {
     const metadata = {};
-    const { story } = this;
+    const { story, collection } = this;
     if (story && story.length > 0) {
-      metadata.title = story[0].authors[0].display_name;
+      const collectionPluralList = {
+        author: 'authors',
+        category: 'categories',
+        tag: 'tags'
+      };
+      const rawStoryData = story[0][collectionPluralList[collection]];
+      metadata.title = collection === 'author' ? rawStoryData[0].display_name : rawStoryData[0].name;
       metadata.meta = [
-        { hid: 'og:title', name: 'og:title', content: story[0].authors[0].display_name },
-        { hid: 'og:image', name: 'og:image', content: story[0].authors[0].profile_picture ? story[0].authors[0].profile_picture : null },
-        { hid: 'og:description', name: 'og:description', content: story[0].authors[0].description ? story[0].authors[0].description : null },
+        { hid: 'og:title', name: 'og:title', content: collection === 'author' ? rawStoryData[0].display_name : rawStoryData[0].name },
+        { hid: 'og:image', name: 'og:image', content: rawStoryData[0].profile_picture ? rawStoryData[0].profile_picture : null },
+        { hid: 'og:description', name: 'og:description', content: rawStoryData[0].description ? rawStoryData[0].description : null },
       ];
     } else { metadata.title = this.$store.getters.getOrganisation.site_title; }
 
