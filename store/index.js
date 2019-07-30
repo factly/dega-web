@@ -16,7 +16,7 @@ export const mutations = {
 };
 
 export const actions = {
-  nuxtServerInit({ commit }) {
+  nuxtServerInit({ commit }, { error }) {
     const getOrg = () => axios.get(encodeURI(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`))
       .then((res) => {
         commit('setOrganisation', res.data[0]);

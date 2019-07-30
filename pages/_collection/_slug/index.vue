@@ -74,7 +74,7 @@ export default {
 
       if (this.pagination.factchecks.hasNext) {
         await axios
-          .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&${this.$route.params.collection === 'author' ? 'user' : this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.factchecks.next}&limit=5`))
+          .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.factchecks.next}&limit=5`))
           .then((response) => {
             factchecks = response.data.data;
             this.pagination.factchecks = response.data.paging;

@@ -80,10 +80,8 @@ export default {
       factcheck: null
     };
   },
-  methods: {
-    validate({ params }) {
-      return params.slug;
-    }
+  validate({ params }) {
+    return params.slug;
   },
   async asyncData({ params, error }) {
     const factcheck = await axios
