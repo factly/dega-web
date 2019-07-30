@@ -104,7 +104,7 @@ export default {
       factchecks: factchecks.paging,
       posts: posts.paging
     };
-    const story = (posts.data || []).concat(factchecks.data || []);
+    const story = (posts.data ? posts.data : []).concat(factchecks.data ? factchecks.data : []);
     story.sort((a, b) => {
       if (a.published_date > b.published_date) return -1;
       if (b.published_date > a.published_date) return 1;

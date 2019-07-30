@@ -1,13 +1,12 @@
 <template>
   <div class="main-content">
     <div
-
+      v-for="(p, i) in posts"
+      ref="posts"
+      :key="i"
       class="columns">
       <div class="column is-8">
-        <div
-          v-for="(p, i) in posts"
-          ref="posts"
-          :key="i">
+        <div>
           <div>
             <StoryHead :story="p"/>
           </div>
@@ -54,7 +53,8 @@ export default {
   data() {
     return {
       posts: [],
-      on: 0
+      on: 0,
+      pagination: {}
     };
   },
   validate({ params }) {
@@ -73,8 +73,10 @@ export default {
   methods: {
     scroll() {
       window.onscroll = () => {
-        const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-        if (bottomOfWindow && this.posts.length === 1) {
+        const scrolling = document.documentElement.scrollTop + window.innerHeight;
+        const bottomOfWindow = scrolling === document.documentElement.offsetHeight;
+
+        if (bottomOfWindow) {
           this.getLatestStories();
         }
 
@@ -82,23 +84,27 @@ export default {
         for (let i = 0; i < postList.length; i += 1) {
           const top = postList[i].offsetTop;
           const bottom = top + postList[i].clientHeight;
-          const scrolling = document.documentElement.scrollTop + window.innerHeight;
           if (scrolling >= top && bottom < scrolling) {
-            if (this.on !== i) this.on = i;
+            if (this.on !== i) {
+              this.on = i;
+            }
           }
         }
       };
     },
     async getLatestStories() {
+      const next = this.pagination && this.pagination.hasNext ? this.pagination.next : '';
       await axios
-        .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&limit=5`))
+        .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&limit=1&next=${next}`))
         .then((response) => {
-          const rawLatestPosts = response.data.data;
-          const latestPosts = rawLatestPosts.filter(value =>
-            // eslint-disable-next-line no-underscore-dangle
-            value._id !== this.posts[0]._id
-          );
-          this.posts = this.posts.concat(latestPosts);
+          const latestPost = response.data.data;
+          this.pagination = response.data.paging;
+          console.log(latestPost);
+          console.log(this.posts);
+          if (this.posts.find(value => value.slug === latestPost[0].slug)) {
+            console.log('Already there');
+            // this.getLatestStories();
+          } else this.posts = this.posts.concat(latestPost);
         })
         .catch(err => console.log(err));
     }

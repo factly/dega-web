@@ -121,6 +121,9 @@ div.sticky {
 .padding-half {
   padding: 0.5rem;
 }
+.padding-1 {
+  padding: 1rem;
+}
 .margin-top-half {
   margin-top: 0.5rem;
 }
@@ -159,8 +162,8 @@ div.sticky {
 }
 .tw-align-center {
   margin: auto;
-  width: 500px;
-  min-width: 220px;
+  max-width: 500px;
+  width: 100%;
 }
 .story-preview-summary{
   overflow: hidden !important;

@@ -25,7 +25,7 @@
     </div>
     <div class="margin-horizontal-1">
       <div>
-        <p class="is-size-5 has-text-info">{{ $t('story.about_author') }}</p>
+        <p class="is-size-5">{{ $t('story.about_author') }}</p>
       </div>
       <div class="margin-top-half">
         <AuthorDetailsCard

@@ -44,13 +44,13 @@ export default {
   async asyncData() {
     const posts = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&limit=10`))
-      .then(response => response.data)
+      .then(response => response.data.data)
       .catch(err => console.log(err));
     const factchecks = await axios
       .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&limit=10`))
-      .then(response => response.data)
+      .then(response => response.data.data)
       .catch(err => console.log(err));
-    const stories = (posts.data || []).concat(factchecks.data || []);
+    const stories = (posts || []).concat(factchecks || []);
     stories.sort((a, b) => {
       if (a.published_date > b.published_date) return -1;
       if (b.published_date > a.published_date) return 1;
