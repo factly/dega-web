@@ -23,28 +23,11 @@
         </span>
       </div>
     </div>
-    <div class="margin-horizontal-1">
-      <div>
-        <p class="is-size-5">{{ $t('story.about_author') }}</p>
-      </div>
-      <div class="margin-top-half">
-        <AuthorDetailsCard
-          v-for="(a, index) in authors"
-          :key="'author'+index"
-          :author="a"
-        />
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
-import AuthorDetailsCard from '@/components/AuthorDetailsCard';
-
 export default {
-  components: {
-    AuthorDetailsCard
-  },
   props: {
     tags: {
       type: Array,

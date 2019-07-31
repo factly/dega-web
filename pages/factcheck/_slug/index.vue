@@ -112,12 +112,12 @@ export default {
     const metadata = {};
     const { factcheck } = this;
     if (factcheck && factcheck.length === 1) {
-      metadata.title = factcheck[0].title;
+      metadata.title = `${factcheck[0].title} - ${this.$store.getters.getOrganisation.site_title}`;
       metadata.script = [
         { innerHTML: JSON.stringify(factcheck[0].schemas), type: 'application/ld+json' },
       ];
       metadata.meta = [
-        { hid: 'og:title', name: 'og:title', content: factcheck[0].title },
+        { hid: 'og:title', name: 'og:title', content: `${factcheck[0].title} - ${this.$store.getters.getOrganisation.site_title}` },
         { hid: 'og:image', name: 'og:image', content: factcheck[0].featured_media },
         { hid: 'og:description', name: 'og:description', content: factcheck[0].excerpt ? factcheck[0].excerpt : null },
       ];

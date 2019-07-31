@@ -145,9 +145,9 @@ export default {
     const metadata = {};
     const { posts } = this;
     if (posts.length > 0) {
-      metadata.title = posts[0].title;
+      metadata.title = `${posts[0].title} - ${this.$store.getters.getOrganisation.site_title}`;
       metadata.meta = [
-        { hid: 'og:title', name: 'og:title', content: posts[0].title },
+        { hid: 'og:title', name: 'og:title', content: `${posts[0].title} - ${this.$store.getters.getOrganisation.site_title}` },
         { hid: 'og:image', name: 'og:image', content: posts[0].featured_media },
         { hid: 'og:description', name: 'og:description', content: posts[0].excerpt ? posts[0].excerpt : null },
       ];

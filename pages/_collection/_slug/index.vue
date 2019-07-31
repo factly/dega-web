@@ -131,9 +131,10 @@ export default {
         tag: 'tags'
       };
       const rawStoryData = story[0][collectionPluralList[this.$route.params.collection]].find(a => a.slug === this.$route.params.slug);
-      metadata.title = this.$route.params.collection === 'author' ? rawStoryData.display_name : rawStoryData.name;
+      const title = `${this.$route.params.collection === 'author' ? rawStoryData.display_name : rawStoryData.name} - ${this.$route.params.collection.charAt(0).toUpperCase() + this.$route.params.collection.slice(1)} - ${this.$store.getters.getOrganisation.site_title}`;
+      metadata.title = title;
       metadata.meta = [
-        { hid: 'og:title', name: 'og:title', content: this.$route.params.collection === 'author' ? rawStoryData.display_name : rawStoryData.name },
+        { hid: 'og:title', name: 'og:title', content: title },
         { hid: 'og:image', name: 'og:image', content: rawStoryData.profile_picture ? rawStoryData.profile_picture : null },
         { hid: 'og:description', name: 'og:description', content: rawStoryData.description ? rawStoryData.description : null },
       ];
