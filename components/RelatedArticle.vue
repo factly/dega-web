@@ -16,9 +16,11 @@
           <div class="media">
             <div class="media-left">
               <figure class="image figure-width-5">
-                <img
-                  :src="p.featured_media"
-                  alt="Related Image">
+                <nuxt-link :to="localePath({ name: p._class.split('.').pop().toLowerCase()+'-slug', params: { slug: p.slug } })">
+                  <img
+                    :src="p.featured_media"
+                    alt="Related Image">
+                </nuxt-link>
               </figure>
             </div>
             <div class="media-content">

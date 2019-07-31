@@ -77,7 +77,10 @@ export default {
     return {
       posts: [],
       on: 0,
-      pagination: {}
+      pagination: {
+        hasNext: true,
+        next: ''
+      }
     };
   },
   validate({ params }) {
@@ -85,7 +88,7 @@ export default {
   },
   watch: {
     on() {
-      document.title = this.posts[this.on].title;
+      document.title = `${this.posts[this.on].title} - ${this.$store.getters.getOrganisation.site_title}`;
       // eslint-disable-next-line no-restricted-globals
       history.pushState({}, null, `/post/${this.posts[this.on].slug}`);
     }
@@ -100,7 +103,7 @@ export default {
         const bottomOfWindow = scrolling === document.documentElement.offsetHeight;
 
         if (bottomOfWindow) {
-          this.getLatestStories();
+          if (this.pagination.hasNext) this.getLatestStories();
         }
 
         const postList = this.$refs.posts;
@@ -116,9 +119,8 @@ export default {
       };
     },
     async getLatestStories() {
-      const next = this.pagination && this.pagination.hasNext ? this.pagination.next : '';
       await axios
-        .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&limit=1&next=${next}`))
+        .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
         .then((response) => {
           const latestPost = response.data.data;
           this.pagination = response.data.paging;
