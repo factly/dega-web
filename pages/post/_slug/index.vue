@@ -28,20 +28,24 @@
       </div>
       <div class="column is-4">
         <div>
-          <div>
+          <div v-if="p.authors.length > 0">
             <RelatedArticle
-              v-if="p.authors.length > 0"
-              :slug="p.authors[0].slug"
-              :header="'More from '+p.authors[0].display_name"
+              v-for="(author, index) in p.authors"
+              :key="'author-related'+index"
+              :slug="author.slug"
+              :header="`More from ${author.display_name}`"
               :id="p._id"
               collection="author"
             />
           </div>
-          <div class="margin-top-2">
+          <div
+            v-if="p.categories.length > 0"
+            class="margin-top-2">
             <RelatedArticle
-              v-if="p.categories.length > 0"
-              :slug="p.categories[0].slug"
-              :header="'More in '+p.categories[0].name"
+              v-for="(category, index) in p.categories"
+              :key="'category-related'+index"
+              :slug="category.slug"
+              :header="`More in ${category.name}`"
               :id="p._id"
               collection="category"
             />

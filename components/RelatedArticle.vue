@@ -56,7 +56,7 @@ export default {
     },
     id: {
       type: String,
-      required: true
+      default: null
     }
   },
   data() {
@@ -84,10 +84,10 @@ export default {
         if (b.published_date > a.published_date) return 1;
         return 0;
       });
-      this.stories = stories.filter(value =>
+      this.stories = this.id ? stories.filter(value =>
         // eslint-disable-next-line no-underscore-dangle
         value._id !== this.id
-      );
+      ) : stories;
     }
   }
 };

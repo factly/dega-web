@@ -17,7 +17,11 @@
         </div>
         <div class="column is-4">
           <div class="is-hidden-mobile">
-            <PopularArticles />
+            <RelatedArticle
+              slug="video"
+              header="Recent Videos"
+              collection="category"
+            />
           </div>
         </div>
       </div>
@@ -29,12 +33,14 @@
 import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
+import RelatedArticle from '@/components/RelatedArticle';
 
 export default {
   authenticated: true,
   components: {
     Hero,
-    StoryPreview
+    StoryPreview,
+    RelatedArticle
   },
   data() {
     return {

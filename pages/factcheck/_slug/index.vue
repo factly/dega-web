@@ -35,20 +35,24 @@
       </div>
       <div class="column is-4">
         <div>
-          <div>
+          <div v-if="factcheck[0].authors.length > 0">
             <RelatedArticle
-              v-if="factcheck[0].authors.length > 0"
-              :slug="factcheck[0].authors[0].slug"
-              :header="'More from '+factcheck[0].authors[0].display_name"
+              v-for="(author, index) in factcheck[0].authors"
+              :key="'author-related'+index"
+              :slug="author.slug"
+              :header="'More from '+author.display_name"
               :id="factcheck[0]._id"
               collection="author"
             />
           </div>
-          <div class="margin-top-2">
+          <div
+            v-if="factcheck[0].categories.length > 0"
+            class="margin-top-2">
             <RelatedArticle
-              v-if="factcheck[0].categories.length > 0"
-              :slug="factcheck[0].categories[0].slug"
-              :header="'More in '+factcheck[0].categories[0].name"
+              v-for="(category, index) in factcheck[0].categories"
+              :key="'author-related'+index"
+              :slug="category.slug"
+              :header="'More in '+category.name"
               :id="factcheck[0]._id"
               collection="category"
             />
