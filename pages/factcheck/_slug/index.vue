@@ -35,14 +35,23 @@
       </div>
       <div class="column is-4">
         <div>
-          <div
-            v-if="factcheck[0].claims.length > 1"
-            class="is-hidden-mobile"
-            style="margin-bottom: 1rem;">
-            <ListClaims :factcheck="factcheck"/>
+          <div>
+            <RelatedArticle
+              v-if="factcheck[0].authors.length > 0"
+              :slug="factcheck[0].authors[0].slug"
+              :header="'More from '+factcheck[0].authors[0].display_name"
+              :id="factcheck[0]._id"
+              collection="author"
+            />
           </div>
-          <div class="is-hidden-mobile">
-            <PopularArticles />
+          <div class="margin-top-2">
+            <RelatedArticle
+              v-if="factcheck[0].categories.length > 0"
+              :slug="factcheck[0].categories[0].slug"
+              :header="'More in '+factcheck[0].categories[0].name"
+              :id="factcheck[0]._id"
+              collection="category"
+            />
           </div>
         </div>
       </div>
@@ -67,13 +76,15 @@ import StoryHead from '@/components/StoryHead';
 import StoryFooter from '@/components/StoryFooter';
 import Claim from '~/components/Claim';
 import ListClaims from '~/components/ListClaims.vue';
+import RelatedArticle from '@/components/RelatedArticle';
 
 export default {
   components: {
     StoryHead,
     StoryFooter,
     Claim,
-    ListClaims
+    ListClaims,
+    RelatedArticle
   },
   data() {
     return {

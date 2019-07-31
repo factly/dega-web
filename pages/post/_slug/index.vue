@@ -27,8 +27,25 @@
         </div>
       </div>
       <div class="column is-4">
-        <div class="is-hidden-mobile">
-          <PopularArticles />
+        <div>
+          <div>
+            <RelatedArticle
+              v-if="p.authors.length > 0"
+              :slug="p.authors[0].slug"
+              :header="'More from '+p.authors[0].display_name"
+              :id="p._id"
+              collection="author"
+            />
+          </div>
+          <div class="margin-top-2">
+            <RelatedArticle
+              v-if="p.categories.length > 0"
+              :slug="p.categories[0].slug"
+              :header="'More in '+p.categories[0].name"
+              :id="p._id"
+              collection="category"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -44,11 +61,13 @@
 import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
 import StoryFooter from '@/components/StoryFooter';
+import RelatedArticle from '@/components/RelatedArticle';
 
 export default {
   components: {
     StoryHead,
-    StoryFooter
+    StoryFooter,
+    RelatedArticle
   },
   data() {
     return {
@@ -99,9 +118,8 @@ export default {
         .then((response) => {
           const latestPost = response.data.data;
           this.pagination = response.data.paging;
-          console.log(latestPost);
-          console.log(this.posts);
-          if (this.posts.find(value => value.slug === latestPost[0].slug)) {
+          // eslint-disable-next-line no-underscore-dangle
+          if (this.posts.find(value => value._id === latestPost[0]._id)) {
             console.log('Already there');
             // this.getLatestStories();
           } else this.posts = this.posts.concat(latestPost);

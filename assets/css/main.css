@@ -170,6 +170,11 @@ div.sticky {
   max-height: 24px !important;
   text-overflow: ellipsis !important;
 }
+.figure-width-5{
+  width: 5rem;
+  margin-left: 0rem !important;
+  margin-right: 0rem !important;
+}
 /*Font related css*/
 .story-preview-title{
   font-family: 'Lato';
