@@ -9,7 +9,7 @@ module.exports = {
     userDataApiUri: process.env.USER_DATA_API_URI || 'http://localhost:8081/api/v1',
     logoutUri: process.env.LOGOUT_ENDPOINT,
     baseUrl: process.env.BASE_URL || 'http://127.0.0.1:3000',
-    userModule: process.env.userModule || 'true'
+    userModule: process.env.userModule || false
   },
   mode: 'universal',
 

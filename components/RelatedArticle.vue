@@ -5,7 +5,11 @@
       class="card">
       <header class="card-header">
         <p class="card-header-title">
-          {{ header }}
+          <nuxt-link
+            :to="localePath({ name:'collection-slug', params: { collection, slug } })"
+            class="has-text-black-bis">
+            {{ header }}
+          </nuxt-link>
         </p>
       </header>
       <div class="card-content">
