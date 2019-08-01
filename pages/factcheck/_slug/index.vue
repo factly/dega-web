@@ -42,18 +42,18 @@
               :slug="author.slug"
               :header="'More from '+author.display_name"
               :id="factcheck[0]._id"
+              class="margin-horizontal-1"
               collection="author"
             />
           </div>
-          <div
-            v-if="factcheck[0].categories.length > 0"
-            class="margin-top-2">
+          <div v-if="factcheck[0].categories.length > 0">
             <RelatedArticle
               v-for="(category, index) in factcheck[0].categories"
               :key="'author-related'+index"
               :slug="category.slug"
               :header="'More in '+category.name"
               :id="factcheck[0]._id"
+              class="margin-horizontal-1"
               collection="category"
             />
           </div>

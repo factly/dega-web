@@ -35,18 +35,18 @@
               :slug="author.slug"
               :header="`More from ${author.display_name}`"
               :id="p._id"
+              class="margin-horizontal-1"
               collection="author"
             />
           </div>
-          <div
-            v-if="p.categories.length > 0"
-            class="margin-top-2">
+          <div v-if="p.categories.length > 0">
             <RelatedArticle
               v-for="(category, index) in p.categories"
               :key="'category-related'+index"
               :slug="category.slug"
               :header="`More in ${category.name}`"
               :id="p._id"
+              class="margin-horizontal-1"
               collection="category"
             />
           </div>

@@ -56,11 +56,11 @@ export default {
       window.onscroll = () => {
         const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
         if (bottomOfWindow && this.pagination.hasNext) {
-          this.getPosts();
+          this.getFactchecks();
         }
       };
     },
-    getPosts() {
+    getFactchecks() {
       const next = this.pagination.next ? this.pagination.next : '';
       axios
         .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&next=${next}&limit=5`))
