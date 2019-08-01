@@ -28,17 +28,6 @@
       </div>
       <div class="column is-4">
         <div>
-          <div v-if="p.authors.length > 0">
-            <RelatedArticle
-              v-for="(author, index) in p.authors"
-              :key="'author-related'+index"
-              :slug="author.slug"
-              :header="`More from ${author.display_name}`"
-              :id="p._id"
-              class="margin-horizontal-1"
-              collection="author"
-            />
-          </div>
           <div v-if="p.categories.length > 0">
             <RelatedArticle
               v-for="(category, index) in p.categories"
@@ -48,6 +37,17 @@
               :id="p._id"
               class="margin-horizontal-1"
               collection="category"
+            />
+          </div>
+          <div v-if="p.authors.length > 0">
+            <RelatedArticle
+              v-for="(author, index) in p.authors"
+              :key="'author-related'+index"
+              :slug="author.slug"
+              :header="`More from ${author.display_name}`"
+              :id="p._id"
+              class="margin-horizontal-1"
+              collection="author"
             />
           </div>
         </div>
@@ -100,8 +100,7 @@ export default {
     scroll() {
       window.onscroll = () => {
         const scrolling = document.documentElement.scrollTop + window.innerHeight;
-        const bottomOfWindow = scrolling === document.documentElement.offsetHeight;
-
+        const bottomOfWindow = scrolling + 50 >= document.documentElement.offsetHeight;
         if (bottomOfWindow) {
           if (this.pagination.hasNext) this.getLatestStories();
         }
@@ -110,7 +109,7 @@ export default {
         for (let i = 0; i < postList.length; i += 1) {
           const top = postList[i].offsetTop;
           const bottom = top + postList[i].clientHeight;
-          if (scrolling >= top && bottom < scrolling) {
+          if (scrolling >= top && scrolling < bottom) {
             if (this.on !== i) {
               this.on = i;
             }

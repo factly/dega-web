@@ -1,17 +1,21 @@
 <template>
   <div class="main-content">
-    <div class="columns">
+    <div
+      v-for="(f, i) in factchecks"
+      ref="factchecks"
+      :key="i"
+      class="columns">
       <div class="column is-8">
         <div>
-          <StoryHead :story="factcheck[0]"/>
+          <StoryHead :story="f"/>
         </div>
         <div class="margin-top-2">
           <article
             class="has-text-justify factcheck-intro-font"
-            v-html="factcheck[0].introduction" />
+            v-html="f.introduction" />
           <br>
           <div
-            v-for="(claim,index) in factcheck[0].claims"
+            v-for="(claim,index) in f.claims"
             :key="index"
             :id="'claim'+index">
             <a
@@ -23,47 +27,47 @@
           </div>
           <article
             class="has-text-justify factcheck-summary-font"
-            v-html="factcheck[0].summary" />
+            v-html="f.summary" />
         </div>
         <div class="margin-top-2">
           <StoryFooter
-            :tags="factcheck[0].tags"
-            :authors="factcheck[0].authors"
-            :updates="factcheck[0].updates"
+            :tags="f.tags"
+            :authors="f.authors"
+            :updates="f.updates"
           />
         </div>
       </div>
       <div class="column is-4">
         <div>
-          <div v-if="factcheck[0].authors.length > 0">
+          <div v-if="f.categories.length > 0">
             <RelatedArticle
-              v-for="(author, index) in factcheck[0].authors"
-              :key="'author-related'+index"
-              :slug="author.slug"
-              :header="'More from '+author.display_name"
-              :id="factcheck[0]._id"
-              class="margin-horizontal-1"
-              collection="author"
-            />
-          </div>
-          <div v-if="factcheck[0].categories.length > 0">
-            <RelatedArticle
-              v-for="(category, index) in factcheck[0].categories"
+              v-for="(category, index) in f.categories"
               :key="'author-related'+index"
               :slug="category.slug"
-              :header="'More in '+category.name"
-              :id="factcheck[0]._id"
+              :header="`More in ${category.name}`"
+              :id="f._id"
               class="margin-horizontal-1"
               collection="category"
+            />
+          </div>
+          <div v-if="f.authors.length > 0">
+            <RelatedArticle
+              v-for="(author, index) in f.authors"
+              :key="'author-related'+index"
+              :slug="author.slug"
+              :header="`More from ${author.display_name}`"
+              :id="f._id"
+              class="margin-horizontal-1"
+              collection="author"
             />
           </div>
         </div>
       </div>
     </div>
     <SocialSharingVertical
-      :url="$nuxt.$route.path"
-      :quote="factcheck[0].title"
-      :story="factcheck[0]"
+      :url="'/factcheck/'+factchecks[on].slug"
+      :quote="factchecks[on].title"
+      :story="factchecks[on]"
     />
   </div>
 </template>
@@ -92,11 +96,65 @@ export default {
   },
   data() {
     return {
-      factcheck: null
+      factchecks: [],
+      on: 0,
+      pagination: {
+        hasNext: true,
+        next: ''
+      }
     };
   },
   validate({ params }) {
     return params.slug;
+  },
+  watch: {
+    on() {
+      document.title = `${this.factchecks[this.on].title} - ${this.$store.getters.getOrganisation.site_title}`;
+      // eslint-disable-next-line no-restricted-globals
+      history.pushState({}, null, `/factcheck/${this.factchecks[this.on].slug}`);
+    }
+  },
+  mounted() {
+    this.scroll();
+  },
+  methods: {
+    scroll() {
+      window.onscroll = () => {
+        const scrolling = document.documentElement.scrollTop + window.innerHeight;
+        const bottomOfWindow = scrolling + 50 >= document.documentElement.offsetHeight;
+
+        if (bottomOfWindow) {
+          if (this.pagination.hasNext) this.getLatestFactchecks();
+        }
+
+        const factchecksList = this.$refs.factchecks;
+        for (let i = 0; i < factchecksList.length; i += 1) {
+          const top = factchecksList[i].offsetTop;
+          const bottom = top + factchecksList[i].clientHeight;
+          console.log(bottom - top);
+          console.log(scrolling);
+          if (scrolling >= top && scrolling < bottom) {
+            if (this.on !== i) {
+              this.on = i;
+            }
+          }
+        }
+      };
+    },
+    async getLatestFactchecks() {
+      await axios
+        .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
+        .then((response) => {
+          const latestFactcheck = response.data.data;
+          this.pagination = response.data.paging;
+          // eslint-disable-next-line no-underscore-dangle
+          if (this.factchecks.find(value => value._id === latestFactcheck[0]._id)) {
+            console.log('Already there');
+            // this.getLatestStories();
+          } else this.factchecks = this.factchecks.concat(latestFactcheck);
+        })
+        .catch(err => console.log(err));
+    }
   },
   async asyncData({ params, error }) {
     const factcheck = await axios
@@ -106,20 +164,20 @@ export default {
     if (factcheck.length === 0) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
     }
-    return { factcheck };
+    return { factchecks: factcheck };
   },
   head() {
     const metadata = {};
-    const { factcheck } = this;
-    if (factcheck && factcheck.length === 1) {
-      metadata.title = `${factcheck[0].title} - ${this.$store.getters.getOrganisation.site_title}`;
+    const { factchecks } = this;
+    if (factchecks.length > 0) {
+      metadata.title = `${factchecks[0].title} - ${this.$store.getters.getOrganisation.site_title}`;
       metadata.script = [
-        { innerHTML: JSON.stringify(factcheck[0].schemas), type: 'application/ld+json' },
+        { innerHTML: JSON.stringify(factchecks[0].schemas), type: 'application/ld+json' },
       ];
       metadata.meta = [
-        { hid: 'og:title', name: 'og:title', content: `${factcheck[0].title} - ${this.$store.getters.getOrganisation.site_title}` },
-        { hid: 'og:image', name: 'og:image', content: factcheck[0].featured_media },
-        { hid: 'og:description', name: 'og:description', content: factcheck[0].excerpt ? factcheck[0].excerpt : null },
+        { hid: 'og:title', name: 'og:title', content: `${factchecks[0].title} - ${this.$store.getters.getOrganisation.site_title}` },
+        { hid: 'og:image', name: 'og:image', content: factchecks[0].featured_media },
+        { hid: 'og:description', name: 'og:description', content: factchecks[0].excerpt ? factchecks[0].excerpt : null },
       ];
       metadata.script = [
         { src: 'https://platform.twitter.com/widgets.js', async: true },
