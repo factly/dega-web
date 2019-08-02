@@ -67,7 +67,8 @@
     <SocialSharingVertical
       :url="'/factcheck/'+factchecks[on].slug"
       :quote="factchecks[on].title"
-      :story="factchecks[on]"
+      :id="factchecks[on]._id"
+      type="factcheck"
     />
   </div>
 </template>

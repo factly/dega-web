@@ -56,7 +56,8 @@
     <SocialSharingVertical
       :url="'/post/'+posts[on].slug"
       :quote="posts[on].title"
-      :story="posts[on]"
+      :id="posts[on]._id"
+      type="post"
     />
   </div>
 </template>
