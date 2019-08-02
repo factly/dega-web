@@ -70,7 +70,7 @@ export default {
 
       if (this.pagination.posts.hasNext) {
         await axios
-          .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.posts.next}&limit=5`))
+          .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.posts.next}&limit=5`))
           .then((response) => {
             posts = response.data.data;
             this.pagination.posts = response.data.paging;
@@ -80,7 +80,7 @@ export default {
 
       if (this.pagination.factchecks.hasNext) {
         await axios
-          .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.factchecks.next}&limit=5`))
+          .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.factchecks.next}&limit=5`))
           .then((response) => {
             factchecks = response.data.data;
             this.pagination.factchecks = response.data.paging;
@@ -99,11 +99,11 @@ export default {
   },
   async asyncData({ params, error }) {
     const posts = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
     const factchecks = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&${params.collection === 'author' ? 'user' : params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${params.collection === 'author' ? 'user' : params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
     const pagination = {

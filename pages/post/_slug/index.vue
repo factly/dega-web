@@ -120,7 +120,7 @@ export default {
     },
     async getLatestStories() {
       await axios
-        .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
+        .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
         .then((response) => {
           const latestPost = response.data.data;
           this.pagination = response.data.paging;
@@ -135,7 +135,7 @@ export default {
   },
   async asyncData({ params, error }) {
     const post = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&slug=${params.slug}`))
+      .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&slug=${params.slug}`))
       .then(response => response.data.data)
       .catch(err => console.log(err));
     if (post.length === 0) {

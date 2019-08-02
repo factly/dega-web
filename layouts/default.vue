@@ -51,7 +51,7 @@
             />
           </div>
           <div
-            v-if="userModule && !loggedIn"
+            v-if="userModule == 'true' && !loggedIn"
             class="navbar-item">
             <a
               class="navbar-item button"
@@ -63,7 +63,7 @@
             </a>
           </div>
           <div
-            v-if="userModule && loggedIn"
+            v-if="userModule == 'true' && loggedIn"
             class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link button has-dropdown">
               <span class="icon">
@@ -217,7 +217,7 @@ export default {
       toggleNavBar: false,
       toggleMore: true,
       loggedIn: this.$auth.loggedIn,
-      userModule: process.env.userModule,
+      userModule: process.env.USER_MODULE,
       organisation: Object
     };
   },
@@ -231,7 +231,7 @@ export default {
   },
   methods: {
     logout() {
-      const url = `${process.env.logoutUri}?redirect_uri=${process.env.baseUrl}`;
+      const url = `${process.env.LOGOUT_ENDPOINT}?redirect_uri=${process.env.BASE_URL}`;
       const logout = this.$auth.logout();
       logout.then(() => {
         window.location.replace(encodeURI(url));

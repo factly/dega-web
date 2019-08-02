@@ -41,7 +41,7 @@ export default {
 
       axios({
         method: 'POST',
-        url: `${process.env.userDataApiUri}/story/save`,
+        url: `${process.env.USER_DATA_API_URI}/story/save`,
         data: {
           type: this.type,
           id: this.id,
@@ -59,7 +59,7 @@ export default {
       /* eslint no-underscore-dangle: 0 */
       axios({
         method: 'POST',
-        url: `${process.env.userDataApiUri}/story/unsave`,
+        url: `${process.env.USER_DATA_API_URI}/story/unsave`,
         data: {
           type: this.type,
           id: this.id,

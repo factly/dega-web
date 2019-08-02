@@ -83,7 +83,7 @@ export default {
     };
   },
   async asyncData({ error }) {
-    if (!process.env.userModule) error({ code: 404, message: 'You have been lost', homepage: true });
+    if (process.env.USER_MODULE !== 'true') error({ code: 404, message: 'You have been lost', homepage: true });
   },
   methods: {
     update() {
@@ -92,7 +92,7 @@ export default {
       } = this.user;
       const updateUserInfo = axios({
         method: 'POST',
-        url: `${process.env.userDataApiUri}/user/update`,
+        url: `${process.env.USER_DATA_API_URI}/user/update`,
         data: {
           user: {
             name, gender, dob, sub

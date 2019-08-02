@@ -76,11 +76,11 @@ export default {
   methods: {
     async getCollectionStories(collection, slug) {
       const posts = await axios
-        .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
+        .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
         .then(response => response.data.data)
         .catch(err => console.log(err));
       const factchecks = await axios
-        .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&${collection === 'author' ? 'user' : collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
+        .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${collection === 'author' ? 'user' : collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
         .then(response => response.data.data)
         .catch(err => console.log(err));
 

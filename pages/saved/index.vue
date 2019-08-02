@@ -51,12 +51,11 @@ export default {
   },
   data() {
     return {
-      userModule: process.env.userModule,
       active: 0
     };
   },
   async asyncData({ error }) {
-    if (!process.env.userModule) error({ code: 404, message: 'You have been lost', homepage: true });
+    if (process.env.USER_MODULE !== 'true') error({ code: 404, message: 'You have been lost', homepage: true });
   }
 };
 </script>

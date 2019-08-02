@@ -132,8 +132,6 @@ export default {
         for (let i = 0; i < factchecksList.length; i += 1) {
           const top = factchecksList[i].offsetTop;
           const bottom = top + factchecksList[i].clientHeight;
-          console.log(bottom - top);
-          console.log(scrolling);
           if (scrolling >= top && scrolling < bottom) {
             if (this.on !== i) {
               this.on = i;
@@ -144,7 +142,7 @@ export default {
     },
     async getLatestFactchecks() {
       await axios
-        .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
+        .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
         .then((response) => {
           const latestFactcheck = response.data.data;
           this.pagination = response.data.paging;
@@ -159,7 +157,7 @@ export default {
   },
   async asyncData({ params, error }) {
     const factcheck = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&slug=${params.slug}`))
+      .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&slug=${params.slug}`))
       .then(response => response.data.data)
       .catch(err => console.log(err));
     if (factcheck.length === 0) {

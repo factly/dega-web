@@ -2,7 +2,7 @@
   <div class="sticky-horizontal-container">
     <div>
       <Bookmark
-        v-if="userModule"
+        v-if="userModule == 'true'"
         :type="type"
         :id="id"
       />
@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       organisation: this.$store.getters.getOrganisation,
-      userModule: process.env.userModule
+      userModule: process.env.USER_MODULE
     };
   }
 };
