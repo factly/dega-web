@@ -39,15 +39,7 @@
     </div>
   </div>
 </template>
-<style scoped>
-  .sticky-horizontal-container {
-    position: fixed;
-    top: 40%;
-    left: 1rem;
-    height: 13rem;
-    z-index: 9999;
-  }
-</style>
+
 <script>
 import Bookmark from '~/components/Bookmark.vue';
 
