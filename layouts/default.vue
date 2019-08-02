@@ -29,7 +29,7 @@
             :to="localePath('index')"
             class="navbar-item">{{ $t('header.home') }}</nuxt-link>
           <nuxt-link
-            :to="localePath('post')"
+            :to="localePath({ name:'collection', params: { collection: 'posts'} })"
             class="navbar-item">{{ $t('header.stories') }}</nuxt-link>
           <nuxt-link
             :to="localePath({ name:'collection-slug', params: { collection: 'category', slug: 'fake-news' } })"
@@ -40,7 +40,7 @@
             :to="localePath({ name:'collection-slug', params: { collection: 'category', slug: 'video' }})"
             class="navbar-item">{{ $t('header.videos') }}</nuxt-link>
           <nuxt-link
-            :to="localePath('factcheck')"
+            :to="localePath({ name:'collection', params: { collection: 'factchecks'} })"
             class="navbar-item">{{ $t('header.fact_check') }}</nuxt-link>
           <div class="navbar-item has-dropdown is-hoverable">
             <div
@@ -179,7 +179,7 @@ export default {
       toggleNavBar: false,
       toggleMore: true,
       loggedIn: this.$auth.loggedIn,
-      userModule: (process.env.userModule === 'true'),
+      userModule: process.env.userModule,
       organisation: Object
     };
   },

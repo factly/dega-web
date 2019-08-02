@@ -55,7 +55,7 @@ export default {
     }
   },
   data() {
-    if (process.env.userModule === 'true') {
+    if (process.env.userModule === true) {
       const type = this.story._class
         .split('.')
         .pop()

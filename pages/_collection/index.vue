@@ -1,20 +1,20 @@
 <template>
   <div class="main-content">
-    <Hero :story="posts[0]" />
+    <Hero :story="stories[0]" />
     <hr class="spacer is-1-5 is-hidden-mobile">
     <div class="columns">
       <div class="column is-8">
         <div>
           <StoryPreview
-            v-for="(p, index) in posts.slice(1)"
+            v-for="(p, index) in stories.slice(1)"
             :key="index"
             :story="p"
           />
         </div>
         <div
-          v-if="posts.length > 0 && !pagination.hasNext"
+          v-if="stories.length > 0 && !pagination.hasNext"
           class="margin-top-2">
-          <h3 class="is-size-4 has-text-centered">No more posts</h3>
+          <h3 class="is-size-4 has-text-centered">No more stories</h3>
         </div>
       </div>
       <div class="column is-4">
@@ -44,7 +44,7 @@ export default {
   },
   data() {
     return {
-      posts: [],
+      stories: [],
       pagination: {}
     };
   },
@@ -56,39 +56,40 @@ export default {
       window.onscroll = () => {
         const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
         if (bottomOfWindow && this.pagination.hasNext) {
-          this.getPosts();
+          this.getStories();
         }
       };
     },
-    getPosts() {
+    getStories() {
       const next = this.pagination.next ? this.pagination.next : '';
       axios
-        .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&next=${next}&limit=5`))
+        .get(encodeURI(`${process.env.apiUri}/api/v1/${this.$route.params.collection}/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&next=${next}&limit=5`))
         .then((response) => {
-          this.posts = (this.posts || []).concat(response.data.data || []);
+          this.stories = (this.stories || []).concat(response.data.data || []);
           this.pagination = response.data.paging;
         })
         .catch(err => console.log(err));
     }
   },
-  async asyncData({ error }) {
+  async asyncData({ params, error }) {
     const rawData = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      .get(encodeURI(`${process.env.apiUri}/api/v1/${params.collection}/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
     if (rawData.data.length === 0) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
     }
     return {
-      posts: rawData.data,
+      stories: rawData.data,
       pagination: rawData.paging
     };
   },
   head() {
+    const title = `${this.$route.params.collection === 'posts' ? 'Stories' : 'Factchecks'} - ${this.$store.getters.getOrganisation.site_title}`;
     return {
-      title: 'Stories',
+      title,
       meta: [
-        { hid: 'og:title', name: 'og:title', content: 'Stories' },
+        { hid: 'og:title', name: 'og:title', content: title },
       ]
     };
   }
