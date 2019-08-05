@@ -17,9 +17,9 @@
           <div
             v-for="(claim,index) in f.claims"
             :key="index"
-            :id="'claim'+index">
+            :id="'claim-div-'+index">
             <a
-              :id="'claim'+(index+1)"
+              :id="'claim'+(index)"
               class="anchor"/>
             <Claim
               :claim="claim"
@@ -39,6 +39,9 @@
       </div>
       <div class="column is-4">
         <div>
+          <div v-if="f.claims.length > 0">
+            <ListClaims :claims="f.claims" />
+          </div>
           <div v-if="f.categories.length > 0">
             <RelatedArticle
               v-for="(category, index) in f.categories"
@@ -83,8 +86,8 @@ a.anchor {
 import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
 import StoryFooter from '@/components/StoryFooter';
-import Claim from '~/components/Claim';
-import ListClaims from '~/components/ListClaims.vue';
+import Claim from '@/components/Claim';
+import ListClaims from '@/components/ListClaims';
 import RelatedArticle from '@/components/RelatedArticle';
 
 export default {
@@ -149,7 +152,6 @@ export default {
           // eslint-disable-next-line no-underscore-dangle
           if (this.factchecks.find(value => value._id === latestFactcheck[0]._id)) {
             console.log('Already there');
-            // this.getLatestStories();
           } else this.factchecks = this.factchecks.concat(latestFactcheck);
         })
         .catch(err => console.log(err));

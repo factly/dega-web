@@ -1,34 +1,44 @@
 <template>
   <div>
-    <article class="message is-primary">
-      <div class="message-header">
-        <p>{{ $t('factcheck.list_of_claims') }}</p>
-      </div>
-      <div
-        class="message-body"
-        style="padding: 0rem;">
-        <div class="panel">
-          <a
-            v-for="(claim, index) in factcheck[0].claims"
-            :key="index"
-            :href="'#claim'+(index+1)"
-            class="panel-block"
-            style="text-decoration: none">
-            <h2 class="claims-text">#{{ index+1 }}. {{ claim.claim }}</h2>
-          </a>
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">{{ $t('factcheck.list_of_claims') }}</p>
+      </header>
+      <div class="card-content">
+        <div
+          v-for="(c, index) in claims"
+          :key="'claim-a-'+index"
+          class="content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image figure-width-5 is-64x64">
+                <a :href="'#claim'+(index)">
+                  <img
+                    :src="c.rating.icon_url"
+                    alt="Claim Image">
+                </a>
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="subtitle is-6">
+                <a
+                  :href="'#claim'+(index)"
+                  class="has-text-black-bis">{{ c.claim }}</a>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </article>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    factcheck: {
+    claims: {
       type: Array,
-      required: true,
-      default: null
+      required: true
     }
   }
 };
