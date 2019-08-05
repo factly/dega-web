@@ -19,7 +19,7 @@ export default ({ app }) => {
     ** Set the current page
     */
   const GAC = axios
-  .get(`${process.env.apiUri}/api/v1/organizations/?client=${process.env.clientId}`)
+  .get(`${process.env.API_URI}/api/v1/organizations/?client=${process.env.CLIENT_ID}`)
   .then(response => {
     ga('create', response.data[0].ga_tracking_code, 'auto')
     ga('send', 'pageview')

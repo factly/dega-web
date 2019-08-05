@@ -42,7 +42,7 @@ export default {
   methods: {
     callSaved() {
       axios.post(
-        `${process.env.userDataApiUri}/saved/${this.type}`,
+        `${process.env.USER_DATA_API_URI}/saved/${this.type}`,
         {
           user: { sub: this.$auth.user.sub },
           accessToken: this.$auth.getToken('social')

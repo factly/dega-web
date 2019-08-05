@@ -4,9 +4,7 @@
       <div>
         <p class="is-size-4 has-text-black-bis has-text-weight-bold post-title-font">{{ story.title }}</p>
       </div>
-      <div class="margin-top-half">
-        <p class="is-size-6 has-text-grey post-title-font">{{ story.excerpt }}</p>
-      </div>
+      <div class="margin-top-half"/>
     </div>
     <div class="margin-horizontal-1">
       <div v-if="story.authors.length == 1">
@@ -53,6 +51,22 @@
             :published="story.published_date"
             size="is-size-6"
           />
+        </div>
+      </div>
+    </div>
+    <div class="margin-top-2">
+      <div class="padding-1">
+        <div class="columns has-background-light">
+          <div class="column is-6 padding-none">
+            <figure class="image is-16by9">
+              <img :src="story.featured_media">
+            </figure>
+          </div>
+          <div class="column is-6">
+            <p class="is-size-5 has-text-black-bis">Excerpt</p>
+            <hr class="has-background-black-bis margin-horizontal-1">
+            <p class="is-size-6 has-text-black-bis">{{ story.excerpt }}</p>
+          </div>
         </div>
       </div>
     </div>

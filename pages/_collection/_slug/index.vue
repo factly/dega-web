@@ -17,7 +17,11 @@
       </div>
       <div class="column is-4">
         <div class="is-hidden-mobile">
-          <PopularArticles />
+          <RelatedArticle
+            slug="video"
+            header="Recent Videos"
+            collection="category"
+          />
         </div>
       </div>
     </div>
@@ -27,10 +31,12 @@
 <script>
 import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
+import RelatedArticle from '@/components/RelatedArticle';
 
 export default {
   components: {
-    StoryPreview
+    StoryPreview,
+    RelatedArticle
   },
   validate({ params, error }) {
     const collectionList = ['category', 'author', 'tag'];
@@ -64,7 +70,7 @@ export default {
 
       if (this.pagination.posts.hasNext) {
         await axios
-          .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.posts.next}&limit=5`))
+          .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.posts.next}&limit=5`))
           .then((response) => {
             posts = response.data.data;
             this.pagination.posts = response.data.paging;
@@ -74,7 +80,7 @@ export default {
 
       if (this.pagination.factchecks.hasNext) {
         await axios
-          .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&${this.$route.params.collection === 'author' ? 'user' : this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.factchecks.next}&limit=5`))
+          .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.factchecks.next}&limit=5`))
           .then((response) => {
             factchecks = response.data.data;
             this.pagination.factchecks = response.data.paging;
@@ -93,18 +99,18 @@ export default {
   },
   async asyncData({ params, error }) {
     const posts = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
     const factchecks = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&${params.collection === 'author' ? 'user' : params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${params.collection === 'author' ? 'user' : params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
     const pagination = {
       factchecks: factchecks.paging,
       posts: posts.paging
     };
-    const story = (posts.data || []).concat(factchecks.data || []);
+    const story = (posts.data ? posts.data : []).concat(factchecks.data ? factchecks.data : []);
     story.sort((a, b) => {
       if (a.published_date > b.published_date) return -1;
       if (b.published_date > a.published_date) return 1;
@@ -125,9 +131,10 @@ export default {
         tag: 'tags'
       };
       const rawStoryData = story[0][collectionPluralList[this.$route.params.collection]].find(a => a.slug === this.$route.params.slug);
-      metadata.title = this.$route.params.collection === 'author' ? rawStoryData.display_name : rawStoryData.name;
+      const title = `${this.$route.params.collection === 'author' ? rawStoryData.display_name : rawStoryData.name} - ${this.$route.params.collection.charAt(0).toUpperCase() + this.$route.params.collection.slice(1)} - ${this.$store.getters.getOrganisation.site_title}`;
+      metadata.title = title;
       metadata.meta = [
-        { hid: 'og:title', name: 'og:title', content: this.$route.params.collection === 'author' ? rawStoryData.display_name : rawStoryData.name },
+        { hid: 'og:title', name: 'og:title', content: title },
         { hid: 'og:image', name: 'og:image', content: rawStoryData.profile_picture ? rawStoryData.profile_picture : null },
         { hid: 'og:description', name: 'og:description', content: rawStoryData.description ? rawStoryData.description : null },
       ];

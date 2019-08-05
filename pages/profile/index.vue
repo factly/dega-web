@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <div v-if="userModule && this.$auth.loggedIn">
+    <div v-if="this.$auth.loggedIn">
       <div class="card">
         <header class="card-header">
           <p class="card-header-title">User Info</p>
@@ -69,26 +69,21 @@
         </div>
       </div>
     </div>
-    <div v-else>
-      <LostBox />
-    </div>
   </div>
 </template>
 <script>
 import axios from 'axios';
-import LostBox from '@/components/LostBox';
 
 export default {
-  components: {
-    LostBox
-  },
   data() {
     const userTemp = { ...this.$auth.user };
     userTemp.dob = new Date(userTemp.dob);
     return {
-      userModule: process.env.userModule,
       user: userTemp
     };
+  },
+  async asyncData({ error }) {
+    if (process.env.USER_MODULE !== 'true') error({ code: 404, message: 'You have been lost', homepage: true });
   },
   methods: {
     update() {
@@ -97,7 +92,7 @@ export default {
       } = this.user;
       const updateUserInfo = axios({
         method: 'POST',
-        url: `${process.env.userDataApiUri}/user/update`,
+        url: `${process.env.USER_DATA_API_URI}/user/update`,
         data: {
           user: {
             name, gender, dob, sub

@@ -121,6 +121,9 @@ div.sticky {
 .padding-half {
   padding: 0.5rem;
 }
+.padding-1 {
+  padding: 1rem;
+}
 .margin-top-half {
   margin-top: 0.5rem;
 }
@@ -138,7 +141,13 @@ div.sticky {
   margin-bottom: 1rem;
 }
 /***************************************************/
-
+.sticky-horizontal-container {
+  position: fixed;
+  top: 40%;
+  left: 1rem;
+  height: 13rem;
+  z-index: 9999;
+}
 .box-shadow-none {
   box-shadow: 0rem 0rem;
   border-radius: 0rem;
@@ -159,13 +168,18 @@ div.sticky {
 }
 .tw-align-center {
   margin: auto;
-  width: 500px;
-  min-width: 220px;
+  max-width: 500px;
+  width: 100%;
 }
 .story-preview-summary{
   overflow: hidden !important;
   max-height: 24px !important;
   text-overflow: ellipsis !important;
+}
+.figure-width-5{
+  width: 5rem;
+  margin-left: 0rem !important;
+  margin-right: 0rem !important;
 }
 /*Font related css*/
 .story-preview-title{
@@ -184,9 +198,6 @@ div.sticky {
   font-family: 'Lato';
 }
 .factcheck-summary-font{
-  font-family: 'Lato';
-}
-.popular-title-font{
   font-family: 'Lato';
 }
 .hero-title-font{

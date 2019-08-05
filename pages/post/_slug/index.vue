@@ -1,34 +1,63 @@
 <template>
   <div class="main-content">
-    <div class="columns">
+    <div
+      v-for="(p, i) in posts"
+      ref="posts"
+      :key="i"
+      class="columns">
       <div class="column is-8">
         <div>
-          <StoryHead :story="post[0]"/>
-        </div>
-        <div class="margin-top-2">
-          <article
-            v-twitter-widgets
-            class="has-text-justify post-content-font"
-            v-html="post[0].content" />
-        </div>
-        <div class="margin-top-2">
-          <StoryFooter
-            :tags="post[0].tags"
-            :authors="post[0].authors"
-            :updates="post[0].updates"
-          />
+          <div>
+            <StoryHead :story="p"/>
+          </div>
+          <div class="margin-top-2">
+            <article
+              v-twitter-widgets
+              class="has-text-justify post-content-font"
+              v-html="p.content" />
+          </div>
+          <div class="margin-top-2">
+            <StoryFooter
+              :tags="p.tags"
+              :authors="p.authors"
+              :updates="p.updates"
+            />
+          </div>
+          <hr >
         </div>
       </div>
       <div class="column is-4">
-        <div class="is-hidden-mobile">
-          <PopularArticles />
+        <div>
+          <div v-if="p.categories.length > 0">
+            <RelatedArticle
+              v-for="(category, index) in p.categories"
+              :key="'category-related'+index"
+              :slug="category.slug"
+              :header="`More in ${category.name}`"
+              :id="p._id"
+              class="margin-horizontal-1"
+              collection="category"
+            />
+          </div>
+          <div v-if="p.authors.length > 0">
+            <RelatedArticle
+              v-for="(author, index) in p.authors"
+              :key="'author-related'+index"
+              :slug="author.slug"
+              :header="`More from ${author.display_name}`"
+              :id="p._id"
+              class="margin-horizontal-1"
+              collection="author"
+            />
+          </div>
         </div>
       </div>
     </div>
     <SocialSharingVertical
-      :url="$nuxt.$route.path"
-      :quote="post[0].title"
-      :story="post[0]"
+      :url="'/post/'+posts[on].slug"
+      :quote="posts[on].title"
+      :id="posts[on]._id"
+      type="post"
     />
   </div>
 </template>
@@ -37,41 +66,92 @@
 import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
 import StoryFooter from '@/components/StoryFooter';
+import RelatedArticle from '@/components/RelatedArticle';
 
 export default {
   components: {
     StoryHead,
-    StoryFooter
+    StoryFooter,
+    RelatedArticle
   },
   data() {
     return {
-      post: null
+      posts: [],
+      on: 0,
+      pagination: {
+        hasNext: true,
+        next: ''
+      }
     };
   },
-
   validate({ params }) {
     return params.slug;
   },
+  watch: {
+    on() {
+      document.title = `${this.posts[this.on].title} - ${this.$store.getters.getOrganisation.site_title}`;
+      // eslint-disable-next-line no-restricted-globals
+      history.pushState({}, null, `/post/${this.posts[this.on].slug}`);
+    }
+  },
+  mounted() {
+    this.scroll();
+  },
+  methods: {
+    scroll() {
+      window.onscroll = () => {
+        const scrolling = document.documentElement.scrollTop + window.innerHeight;
+        const bottomOfWindow = scrolling + 50 >= document.documentElement.offsetHeight;
+        if (bottomOfWindow) {
+          if (this.pagination.hasNext) this.getLatestStories();
+        }
 
+        const postList = this.$refs.posts;
+        for (let i = 0; i < postList.length; i += 1) {
+          const top = postList[i].offsetTop;
+          const bottom = top + postList[i].clientHeight;
+          if (scrolling >= top && scrolling < bottom) {
+            if (this.on !== i) {
+              this.on = i;
+            }
+          }
+        }
+      };
+    },
+    async getLatestStories() {
+      await axios
+        .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
+        .then((response) => {
+          const latestPost = response.data.data;
+          this.pagination = response.data.paging;
+          // eslint-disable-next-line no-underscore-dangle
+          if (this.posts.find(value => value._id === latestPost[0]._id)) {
+            console.log('Already there');
+            // this.getLatestStories();
+          } else this.posts = this.posts.concat(latestPost);
+        })
+        .catch(err => console.log(err));
+    }
+  },
   async asyncData({ params, error }) {
     const post = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&slug=${params.slug}`))
+      .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&slug=${params.slug}`))
       .then(response => response.data.data)
       .catch(err => console.log(err));
     if (post.length === 0) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
     }
-    return { post };
+    return { posts: post };
   },
   head() {
     const metadata = {};
-    const { post } = this;
-    if (post && post.length === 1) {
-      metadata.title = post[0].title;
+    const { posts } = this;
+    if (posts.length > 0) {
+      metadata.title = `${posts[0].title} - ${this.$store.getters.getOrganisation.site_title}`;
       metadata.meta = [
-        { hid: 'og:title', name: 'og:title', content: post[0].title },
-        { hid: 'og:image', name: 'og:image', content: post[0].featured_media },
-        { hid: 'og:description', name: 'og:description', content: post[0].excerpt ? post[0].excerpt : null },
+        { hid: 'og:title', name: 'og:title', content: `${posts[0].title} - ${this.$store.getters.getOrganisation.site_title}` },
+        { hid: 'og:image', name: 'og:image', content: posts[0].featured_media },
+        { hid: 'og:description', name: 'og:description', content: posts[0].excerpt ? posts[0].excerpt : null },
       ];
       metadata.script = [
         { src: 'https://platform.twitter.com/widgets.js', async: true },

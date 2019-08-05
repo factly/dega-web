@@ -1,46 +1,13 @@
 <template>
-  <div v-if="userModule">
-    <Button
-      v-if="!saved"
-      class="button is-icon"
-      style="border-radius: 9999px;"
-      @click.stop="save()">
-      <span
-        class="icon"
-        style="color: #55acee;">
-        <svg
-          width="1792"
-          height="1792"
-          viewBox="0 0 1792 1792"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M1408 256h-1024v1242l423-406 89-85 89 85 423 406v-1242zm12-128q23 0 44 9 33 13 52.5 41t19.5 62v1289q0 34-19.5 62t-52.5 41q-19 8-44 8-48 0-83-32l-441-424-441 424q-36 33-83 33-23 0-44-9-33-13-52.5-41t-19.5-62v-1289q0-34 19.5-62t52.5-41q21-9 44-9h1048z"
-          />
-        </svg>
-      </span>
-    </Button>
-    <Button
-      v-if="saved"
-      class="button"
-      style="border-radius: 9999px;"
-      @click.stop="undoSave()">
-      <span
-        class="icon"
-        style="color: #55acee;">
-        <svg
-          width="1792"
-          height="1792"
-          viewBox="0 0 1792 1792"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M1420 128q23 0 44 9 33 13 52.5 41t19.5 62v1289q0 34-19.5 62t-52.5 41q-19 8-44 8-48 0-83-32l-441-424-441 424q-36 33-83 33-23 0-44-9-33-13-52.5-41t-19.5-62v-1289q0-34 19.5-62t52.5-41q21-9 44-9h1048z"
-          />
-        </svg>
-      </span>
-    </Button>
-  </div>
+  <a class="button is-white">
+    <span
+      class="icon is-size-4"
+      @click="saved ? undoSave() : save()">
+      <i
+        :class="saved ? 'mdi-bookmark-remove' : 'mdi-bookmark-outline'"
+        class="mdi"/>
+    </span>
+  </a>
 </template>
 
 <script>
@@ -48,79 +15,58 @@ import axios from 'axios';
 
 export default {
   props: {
-    story: {
-      type: Object,
-      required: true,
-      default: null
+    type: {
+      type: String,
+      required: true
+    },
+    id: {
+      type: String,
+      required: true
     }
   },
   data() {
-    if (process.env.userModule === 'true') {
-      const type = this.story._class
-        .split('.')
-        .pop()
-        .toLowerCase();
-      if (
-        this.$auth.loggedIn
-        && this.$auth.user.prefs
-        && this.$auth.user.prefs[type]
-      ) {
-        return {
-          saved: this.$auth.user.prefs[type].includes(this.story._id),
-          type,
-          userModule: true
-        };
-      } return { saved: false, type, userModule: true };
+    const { type } = this;
+    let saved = false;
+
+    if (this.$auth.loggedIn && this.$auth.user.prefs && this.$auth.user.prefs[this.type] && this.$auth.user.prefs[type].includes(this.id)) {
+      saved = true;
     }
-    return { userModule: false };
+    return {
+      saved
+    };
   },
   methods: {
     save() {
-      const id = this.story._id;
-      if (this.$auth.loggedIn) {
-        const save = axios({
-          method: 'POST',
-          url: `${process.env.userDataApiUri}/story/save`,
-          data: {
-            type: this.story._class
-              .split('.')
-              .pop()
-              .toLowerCase(),
-            id,
-            user: this.$auth.user,
-            accessToken: this.$auth.getToken('social')
-            // accessToken: '1242342341324'
-          }
-        });
-        save.then((response) => {
-          // debugger;
-          if (response.data.success) {
-            this.saved = true;
-            this.$auth.fetchUser();
-          }
-        });
-      } else {
-        this.$auth.loginWith('social').then(() => {
-        });
-      }
-    },
-    undoSave() {
-      /* eslint no-underscore-dangle: 0 */
-      const id = this.story._id;
-      const save = axios({
+      if (this.$auth.loggedIn) this.$auth.loginWith('social');
+
+      axios({
         method: 'POST',
-        url: `${process.env.userDataApiUri}/story/unsave`,
+        url: `${process.env.USER_DATA_API_URI}/story/save`,
         data: {
-          type: this.story._class
-            .split('.')
-            .pop()
-            .toLowerCase(),
-          id,
+          type: this.type,
+          id: this.id,
           user: this.$auth.user,
           accessToken: this.$auth.getToken('social')
         }
+      }).then((response) => {
+        if (response.data.success) {
+          this.saved = true;
+          this.$auth.fetchUser();
+        }
       });
-      save.then((response) => {
+    },
+    undoSave() {
+      /* eslint no-underscore-dangle: 0 */
+      axios({
+        method: 'POST',
+        url: `${process.env.USER_DATA_API_URI}/story/unsave`,
+        data: {
+          type: this.type,
+          id: this.id,
+          user: this.$auth.user,
+          accessToken: this.$auth.getToken('social')
+        }
+      }).then((response) => {
         if (response.data.success) {
           this.saved = false;
           this.$auth.fetchUser();

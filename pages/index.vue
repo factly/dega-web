@@ -17,7 +17,11 @@
         </div>
         <div class="column is-4">
           <div class="is-hidden-mobile">
-            <PopularArticles />
+            <RelatedArticle
+              slug="video"
+              header="Recent Videos"
+              collection="category"
+            />
           </div>
         </div>
       </div>
@@ -29,12 +33,14 @@
 import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
+import RelatedArticle from '@/components/RelatedArticle';
 
 export default {
   authenticated: true,
   components: {
     Hero,
-    StoryPreview
+    StoryPreview,
+    RelatedArticle
   },
   data() {
     return {
@@ -43,14 +49,14 @@ export default {
   },
   async asyncData() {
     const posts = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/posts/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&limit=10`))
-      .then(response => response.data)
+      .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=10`))
+      .then(response => response.data.data)
       .catch(err => console.log(err));
     const factchecks = await axios
-      .get(encodeURI(`${process.env.apiUri}/api/v1/factchecks/?client=${process.env.clientId}&sortBy=publishedDate&sortAsc=false&limit=10`))
-      .then(response => response.data)
+      .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=10`))
+      .then(response => response.data.data)
       .catch(err => console.log(err));
-    const stories = (posts.data || []).concat(factchecks.data || []);
+    const stories = (posts || []).concat(factchecks || []);
     stories.sort((a, b) => {
       if (a.published_date > b.published_date) return -1;
       if (b.published_date > a.published_date) return 1;

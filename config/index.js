@@ -1,5 +1,6 @@
 const en = require('../locales/en-US.js')
 const te = require('../locales/te-IN.js')
+require('dotenv').config();
 
 const I18N = {
   locales: [
@@ -14,9 +15,9 @@ const I18N = {
       name: 'Telugu'
     }
   ],  
-  defaultLocale: 'en',
+  defaultLocale: process.env.DEFAULT_LANG,
   vueI18n: {
-    fallbackLocale: 'en',
+    fallbackLocale: process.env.DEFAULT_LANG,
     messages: { en, te }
   }
 }

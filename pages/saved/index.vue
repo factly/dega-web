@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <div v-if="userModule && this.$auth.loggedIn">
+    <div v-if="this.$auth.loggedIn">
       <div class="tabs">
         <ul>
           <li
@@ -40,25 +40,22 @@
         />
       </div>
     </div>
-    <div v-else>
-      <LostBox />
-    </div>
   </div>
 </template>
 <script>
 import SavedStories from '@/components/SavedStories';
-import LostBox from '@/components/LostBox';
 
 export default {
   components: {
-    SavedStories,
-    LostBox
+    SavedStories
   },
   data() {
     return {
-      userModule: process.env.userModule,
       active: 0
     };
+  },
+  async asyncData({ error }) {
+    if (process.env.USER_MODULE !== 'true') error({ code: 404, message: 'You have been lost', homepage: true });
   }
 };
 </script>
