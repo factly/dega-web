@@ -40,7 +40,9 @@
       <div class="column is-4">
         <div>
           <div v-if="f.claims.length > 0">
-            <ListClaims :claims="f.claims" />
+            <ListClaims
+              v-if="f.claims.length > 1"
+              :claims="f.claims" />
           </div>
           <div v-if="f.categories.length > 0">
             <RelatedArticle

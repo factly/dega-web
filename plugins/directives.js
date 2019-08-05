@@ -17,7 +17,7 @@ function loadTwitter(el) {
           );
       }
     }
-  } loadTwitter(el);
+  }
 }
 
 Vue.directive('twitter-widgets', {
