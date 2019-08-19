@@ -10,7 +10,7 @@
           class="navbar-item">
           <img
             :src="organisation.logo_url"
-            alt="Dega"
+            :alt="organisation.name"
             height="110">
         </nuxt-link>
         <div

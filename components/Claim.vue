@@ -9,8 +9,8 @@
             <div class="control">
               <figure class="image is-24x24">
                 <img
-                  :src="claim.claimant.image_url"
-                  alt="Placeholder image">
+                  :src="claim.claimant.image_url+'?resize:fill:50:50:0/gravity:sm'"
+                  :alt="claim.claimant.name">
               </figure>
             </div>
             <div class="control">
@@ -24,8 +24,8 @@
           <div class="is-hidden-tablet">
             <figure class="image is-128x128">
               <img
-                :src="claim.rating.icon_url"
-                alt="Placeholder image">
+                :src="claim.rating.icon_url+'?resize:fill:80:80:0/gravity:sm'"
+                :alt="claim.rating.name">
             </figure>
           </div>
           <div class="field is-horizontal">
@@ -36,8 +36,8 @@
         <div class="media-left is-hidden-mobile">
           <figure class="image is-96x96">
             <img
-              :src="claim.rating.icon_url"
-              alt="Placeholder image">
+              :src="claim.rating.icon_url+'?resize:fill:100:100:0/gravity:sm'"
+              :alt="claim.rating.name">
           </figure>
         </div>
       </div>

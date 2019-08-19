@@ -14,8 +14,8 @@
               <figure class="image figure-width-5 is-64x64">
                 <a :href="'#claim'+(index)">
                   <img
-                    :src="c.rating.icon_url"
-                    alt="Claim Image">
+                    :src="c.rating.icon_url+'?resize:fill:100:100:0/gravity:sm'"
+                    :alt="c.rating.name">
                 </a>
               </figure>
             </div>

@@ -13,7 +13,8 @@
             <figure class="image is-48x48">
               <nuxt-link :to="localePath({ name:'collection-slug', params: {collection: 'author', slug: story.authors[0].slug } })" >
                 <img
-                  :src="story.authors[0].profile_picture"
+                  :src="story.authors[0].profile_picture+'?resize:fill:50:50:0/quality:60/ravity:sm'"
+                  :alt="story.authors[0].display_name"
                   class="is-rounded">
               </nuxt-link>
             </figure>
@@ -38,7 +39,8 @@
             <figure class="image is-48x48">
               <nuxt-link :to="localePath({ name:'collection-slug', params: { collection: 'author', slug: p.slug } })">
                 <img
-                  :src="p.profile_picture"
+                  :src="p.profile_picture+'?resize:fill:50:50:0/gravity:sm'"
+                  :alt="p.display_name"
                   class="is-rounded">
               </nuxt-link>
             </figure>
@@ -59,7 +61,10 @@
         <div class="columns has-background-light">
           <div class="column is-6 padding-none">
             <figure class="image is-16by9">
-              <img :src="story.featured_media">
+              <img
+                :src="story.featured_media+'?resize:fill:200:112:0/gravity:sm'"
+                alt="Story featured media"
+              >
             </figure>
           </div>
           <div class="column is-6">

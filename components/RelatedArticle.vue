@@ -22,8 +22,8 @@
               <figure class="image figure-width-5">
                 <nuxt-link :to="localePath({ name: p._class.split('.').pop().toLowerCase()+'-slug', params: { slug: p.slug } })">
                   <img
-                    :src="p.featured_media"
-                    alt="Related Image">
+                    :src="p.featured_media+'?resize:fill:80:45:0/gravity:sm'"
+                    :alt="p.title">
                 </nuxt-link>
               </figure>
             </div>

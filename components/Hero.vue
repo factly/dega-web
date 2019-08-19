@@ -5,8 +5,8 @@
         <figure class ="image is-16by9">
           <nuxt-link :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })" >
             <img
-              :src="story.featured_media"
-              :alt="story._class.split('.').pop()">
+              :src="story.featured_media+'?resize:fill:800:450:0/gravity:sm'"
+              :alt="story.title">
           </nuxt-link>
         </figure>
       </div>
