@@ -19,7 +19,6 @@
           <div class="margin-top-2">
             <StoryFooter
               :tags="p.tags"
-              :authors="p.authors"
               :updates="p.updates"
             />
           </div>
@@ -39,15 +38,15 @@
               collection="category"
             />
           </div>
-          <div v-if="p.authors.length > 0">
+          <div v-if="p.users.length > 0">
             <RelatedArticle
-              v-for="(author, index) in p.authors"
-              :key="'author-related'+index"
-              :slug="author.slug"
-              :header="`More from ${author.display_name}`"
+              v-for="(user, index) in p.users"
+              :key="'user-related'+index"
+              :slug="user.slug"
+              :header="`More from ${user.displayName}`"
               :id="p._id"
               class="margin-horizontal-1"
-              collection="author"
+              collection="user"
             />
           </div>
         </div>
@@ -89,7 +88,7 @@ export default {
   },
   watch: {
     on() {
-      document.title = `${this.posts[this.on].title} - ${this.$store.getters.getOrganisation.site_title}`;
+      document.title = `${this.posts[this.on].title} - ${this.$store.getters.getOrganisation.siteTitle}`;
       // eslint-disable-next-line no-restricted-globals
       history.pushState({}, null, `/post/${this.posts[this.on].slug}`);
     }
@@ -147,16 +146,16 @@ export default {
     const metadata = {};
     const { posts } = this;
     if (posts.length > 0) {
-      metadata.title = `${posts[0].title} - ${this.$store.getters.getOrganisation.site_title}`;
+      metadata.title = `${posts[0].title} - ${this.$store.getters.getOrganisation.siteTitle}`;
       metadata.meta = [
-        { hid: 'og:title', name: 'og:title', content: `${posts[0].title} - ${this.$store.getters.getOrganisation.site_title}` },
-        { hid: 'og:image', name: 'og:image', content: posts[0].featured_media },
+        { hid: 'og:title', name: 'og:title', content: `${posts[0].title} - ${this.$store.getters.getOrganisation.siteTitle}` },
+        { hid: 'og:image', name: 'og:image', content: posts[0].media ? posts[0].media.sourceURL : null },
         { hid: 'og:description', name: 'og:description', content: posts[0].excerpt ? posts[0].excerpt : null },
       ];
       metadata.script = [
         { src: 'https://platform.twitter.com/widgets.js', async: true },
       ];
-    } else { metadata.title = this.$store.getters.getOrganisation.site_title; }
+    } else { metadata.title = this.$store.getters.getOrganisation.siteTitle; }
 
     return metadata;
   }

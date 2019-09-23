@@ -1,17 +1,17 @@
 <template>
   <div class="main-content">
-    <div v-if="story && story.length">
+    <div v-if="stories && stories.length">
       <div>
-        <Hero :story="story[0]" />
+        <Hero :story="stories[0]" />
       </div>
       <hr class="spacer is-1-5">
       <div class="columns">
         <div class="column is-8">
           <div>
             <StoryPreview
-              v-for="(p, index) in story.slice(1)"
+              v-for="(story, index) in stories.slice(1)"
               :key="index"
-              :story="p"
+              :story="story"
             />
           </div>
         </div>
@@ -44,7 +44,7 @@ export default {
   },
   data() {
     return {
-      story: null
+      stories: null
     };
   },
   async asyncData() {
@@ -58,12 +58,12 @@ export default {
       .catch(err => console.log(err));
     const stories = (posts || []).concat(factchecks || []);
     stories.sort((a, b) => {
-      if (a.published_date > b.published_date) return -1;
-      if (b.published_date > a.published_date) return 1;
+      if (a.publishedDate > b.publishedDate) return -1;
+      if (b.publishedDate > a.publishedDate) return 1;
       return 0;
     });
     return {
-      story: stories
+      stories
     };
   }
 };

@@ -6,7 +6,7 @@
           <div>
             <p class="is-size-4 has-text-weight-bold story-preview-title">
               <nuxt-link
-                :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })"
+                :to="localePath({ name: story.class.split('.').pop().toLowerCase() + '-slug', params: { slug: story.slug } })"
                 class="has-text-black-bis">
                 {{ story.title }}
               </nuxt-link>
@@ -15,19 +15,21 @@
           </div>
           <div class="margin-top-half">
             <MetaData
-              :authors="story.authors"
-              :category="story.categories[0]"
-              :published="story.published_date"
+              :users="story.users"
+              :categories="story.categories"
+              :published="story.publishedDate"
             />
           </div>
         </div>
       </div>
       <div class="column is-4">
-        <nuxt-link :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })">
-          <figure class="images is-16by9">
+        <nuxt-link :to="localePath({ name: story.class.split('.').pop().toLowerCase() + '-slug', params: { slug: story.slug } })">
+          <figure
+            v-if="story.media"
+            class="images is-16by9">
             <img
-              :src="story.featured_media+'?resize:fill:200:112:0/gravity:sm'"
-              :alt="story.title" >
+              :src="story.media.sourceURL+'?resize:fill:200:112:0/gravity:sm'"
+              :alt="story.media.altText">
           </figure>
         </nuxt-link>
       </div>
@@ -45,8 +47,7 @@ export default {
   props: {
     story: {
       type: Object,
-      required: true,
-      default: null
+      required: true
     }
   }
 };

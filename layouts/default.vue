@@ -9,7 +9,7 @@
           :to="localePath('index')"
           class="navbar-item">
           <img
-            :src="organisation.logo_url"
+            :src="organisation.mediaLogo.sourceURL"
             :alt="organisation.name"
             height="110">
         </nuxt-link>
@@ -218,16 +218,13 @@ export default {
       toggleMore: true,
       loggedIn: this.$auth.loggedIn,
       userModule: process.env.USER_MODULE,
-      organisation: Object
+      organisation: this.$store.getters.getOrganisation
     };
   },
   computed: {
     availableLocales() {
       return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale);
     }
-  },
-  created() {
-    this.organisation = this.$store.getters.getOrganisation;
   },
   methods: {
     logout() {
@@ -245,15 +242,15 @@ export default {
     return {
       title: this.organisation.name,
       link: [
-        { rel: 'shortcut icon', type: 'image/png', href: this.organisation.logo_url },
-        { rel: 'icon', type: 'image/x-icon', href: this.organisation.fav_icon_url },
+        { rel: 'shortcut icon', type: 'image/png', href: this.organisation.mediaLogo ? this.organisation.mediaLogo.sourceURL : null },
+        { rel: 'icon', type: 'image/x-icon', href: this.organisation.mediaFavicon ? this.organisation.mediaFavicon.sourceURL : null },
       ],
       meta: [
-        { name: 'google-site-verification', content: this.organisation.google_verification_code },
+        { name: 'google-site-verification', content: this.organisation.googleVerificationCode },
         { hid: 'og:site_name', name: 'og:site_name', content: this.organisation.name },
         { hid: 'og:title', name: 'og:title', content: this.$nuxt.$route.path.split('/').pop() },
-        { hid: 'og:url', name: 'og:url', content: this.organisation.site_address + this.$nuxt.$route.path },
-        { hid: 'og:image', name: 'og:image', content: this.organisation.site_address + DefaultImage },
+        { hid: 'og:url', name: 'og:url', content: this.organisation.siteAddress + this.$nuxt.$route.path },
+        { hid: 'og:image', name: 'og:image', content: this.organisation.siteAddress + DefaultImage },
         { hid: 'og:description', name: 'og:description', content: this.organisation.description },
       ]
     };

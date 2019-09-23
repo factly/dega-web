@@ -35,24 +35,6 @@ div.sticky {
 }
 /***************************************************/
 
-/* Page enter and leave animation */
-.page-enter-active{
-  animation: bounce-in .8s;
-}
-.page-leave-active{
-  animation: bounce-out .5s;
-}
-@keyframes bounce-in{
-  0% { transform: scale(.9); opacity: 0;}
-  100% {transform: scale(1); opacity: 1;}
-}
-
-@keyframes bounce-out{
-  0% {transform: scale(1); opacity: 1;}
-  100% { transform: scale(.9); opacity: 0;}
-}
-/***************************************************/
-
 /* Claim rating color */
 .false-background {
   background-color: #e9b6b9;

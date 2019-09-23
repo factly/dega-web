@@ -33,10 +33,6 @@ export default {
       type: Array,
       required: true
     },
-    authors: {
-      type: Array,
-      required: true
-    },
     updates: {
       type: String,
       default: ''

@@ -4,13 +4,13 @@
       <div class="column is-8">
         <div>
           <StoryPreview
-            v-for="(p, index) in story"
+            v-for="(p, index) in stories"
             :key="index"
             :story="p"
           />
         </div>
         <div
-          v-if="story.length > 0 && (!pagination.posts.hasNext && !pagination.factchecks.hasNext)"
+          v-if="stories.length > 0 && (!pagination.posts.hasNext && !pagination.factchecks.hasNext)"
           class="margin-top-2">
           <h3 class="is-size-4 has-text-centered">No more stories</h3>
         </div>
@@ -39,13 +39,14 @@ export default {
     RelatedArticle
   },
   validate({ params, error }) {
-    const collectionList = ['category', 'author', 'tag'];
+    const collectionList = ['category', 'user', 'tag'];
     if (collectionList.includes(params.collection)) return true;
     return error({ code: 404, message: 'You have been lost', homepage: true });
   },
   data() {
     return {
-      story: [],
+      stories: [],
+      collection: null,
       pagination: {
         posts: {},
         factchecks: {}
@@ -89,56 +90,65 @@ export default {
       }
       const stories = (posts).concat(factchecks);
       stories.sort((a, b) => {
-        if (a.published_date > b.published_date) return -1;
-        if (b.published_date > a.published_date) return 1;
+        if (a.publishedDate > b.publishedDate) return -1;
+        if (b.publishedDate > a.publishedDate) return 1;
         return 0;
       });
 
-      this.story = (this.story).concat(stories);
+      this.stories = (this.stories).concat(stories);
     }
   },
   async asyncData({ params, error }) {
+    /* stories fetching */
     const posts = await axios
       .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
     const factchecks = await axios
-      .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${params.collection === 'author' ? 'user' : params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
     const pagination = {
       factchecks: factchecks.paging,
       posts: posts.paging
     };
-    const story = (posts.data ? posts.data : []).concat(factchecks.data ? factchecks.data : []);
-    story.sort((a, b) => {
-      if (a.published_date > b.published_date) return -1;
-      if (b.published_date > a.published_date) return 1;
+    const stories = (posts.data ? posts.data : []).concat(factchecks.data ? factchecks.data : []);
+    stories.sort((a, b) => {
+      if (a.publishedDate > b.publishedDate) return -1;
+      if (b.publishedDate > a.publishedDate) return 1;
       return 0;
     });
-    if (story.length === 0) {
+
+    /* collection fetchinh */
+    const collectionPluralList = {
+      user: 'users',
+      category: 'categories',
+      tag: 'tags'
+    };
+
+    const collection = await axios
+      .get(encodeURI(`${process.env.API_URI}/api/v1/${collectionPluralList[params.collection]}/${params.slug}/?client=${process.env.CLIENT_ID}`))
+      .then(response => response.data.data)
+      .catch(err => console.log(err));
+
+    if (!collection) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
     }
-    return { story, pagination };
+
+    return { stories, pagination, collection };
   },
   head() {
     const metadata = {};
-    const { story } = this;
-    if (story && story.length > 0) {
-      const collectionPluralList = {
-        author: 'authors',
-        category: 'categories',
-        tag: 'tags'
-      };
-      const rawStoryData = story[0][collectionPluralList[this.$route.params.collection]].find(a => a.slug === this.$route.params.slug);
-      const title = `${this.$route.params.collection === 'author' ? rawStoryData.display_name : rawStoryData.name} - ${this.$route.params.collection.charAt(0).toUpperCase() + this.$route.params.collection.slice(1)} - ${this.$store.getters.getOrganisation.site_title}`;
+    const { collection } = this;
+    if (collection) {
+      const title = `${collection.name ? collection.name : collection.displayName} - ${this.$route.params.collection.charAt(0).toUpperCase() + this.$route.params.collection.slice(1)} - ${this.$store.getters.getOrganisation.siteTitle}`;
       metadata.title = title;
       metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: title },
-        { hid: 'og:image', name: 'og:image', content: rawStoryData.profile_picture ? rawStoryData.profile_picture : null },
-        { hid: 'og:description', name: 'og:description', content: rawStoryData.description ? rawStoryData.description : null },
+        { hid: 'og:image', name: 'og:image', content: collection.media ? collection.media.sourceURL : null },
+        { hid: 'og:description', name: 'og:description', content: collection.description ? collection.description : null },
       ];
-    } else { metadata.title = this.$store.getters.getOrganisation.site_title; }
+    } else { metadata.title = this.$store.getters.getOrganisation.siteTitle; }
 
     return metadata;
   }
