@@ -11,11 +11,13 @@
           class="content">
           <div class="media">
             <div class="media-left">
-              <figure class="image figure-width-5 is-64x64">
+              <figure
+                v-if="c.rating.media"
+                class="image figure-width-5 is-64x64">
                 <a :href="'#claim'+(index)">
                   <img
-                    :src="c.rating.icon_url"
-                    alt="Claim Image">
+                    :src="c.rating.media.sourceURL+'?resize:fill:100:100:0/gravity:sm'"
+                    :alt="c.rating.media.altText">
                 </a>
               </figure>
             </div>

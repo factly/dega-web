@@ -16,8 +16,8 @@ export default {
     return {
       title: this.organisation.name,
       link: [
-        { rel: 'shortcut icon', type: 'image/png', href: this.organisation.logo_url },
-        { rel: 'icon', type: 'image/x-icon', href: this.organisation.fav_icon_url },
+        { rel: 'shortcut icon', type: 'image/png', href: this.organisation.mediaLogo ? this.organisation.mediaLogo.sourceURL : null },
+        { rel: 'icon', type: 'image/x-icon', href: this.organisation.mediaFavicon ? this.organisation.mediaFavicon.sourceURL : null },
       ]
     };
   }

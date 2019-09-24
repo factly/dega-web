@@ -14,25 +14,27 @@
       </header>
       <div class="card-content">
         <div
-          v-for="(p,index) in stories"
+          v-for="(story,index) in stories"
           :key="'category'+index"
           class="content">
           <div class="media">
             <div class="media-left">
-              <figure class="image figure-width-5">
-                <nuxt-link :to="localePath({ name: p._class.split('.').pop().toLowerCase()+'-slug', params: { slug: p.slug } })">
+              <figure
+                v-if="story.media"
+                class="image figure-width-5">
+                <nuxt-link :to="localePath({ name: story.class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })">
                   <img
-                    :src="p.featured_media"
-                    alt="Related Image">
+                    :src="story.media.sourceURL+'?resize:fill:80:45:0/gravity:sm'"
+                    :alt="story.media.altText" >
                 </nuxt-link>
               </figure>
             </div>
             <div class="media-content">
               <p class="subtitle is-6">
                 <nuxt-link
-                  :to="localePath({ name: p._class.split('.').pop().toLowerCase()+'-slug', params: { slug: p.slug } })"
+                  :to="localePath({ name: story.class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })"
                   class="has-text-black-bis">
-                  {{ p.title }}
+                  {{ story.title }}
                 </nuxt-link>
               </p>
             </div>
@@ -80,19 +82,19 @@ export default {
         .then(response => response.data.data)
         .catch(err => console.log(err));
       const factchecks = await axios
-        .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${collection === 'author' ? 'user' : collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
+        .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
         .then(response => response.data.data)
         .catch(err => console.log(err));
 
       const stories = (posts || []).concat(factchecks || []);
       stories.sort((a, b) => {
-        if (a.published_date > b.published_date) return -1;
-        if (b.published_date > a.published_date) return 1;
+        if (a.publishedDate > b.publishedDate) return -1;
+        if (b.publishedDate > a.publishedDate) return 1;
         return 0;
       });
       this.stories = this.id ? stories.filter(value =>
         // eslint-disable-next-line no-underscore-dangle
-        value._id !== this.id
+        value.id !== this.id
       ) : stories;
     }
   }

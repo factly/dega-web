@@ -32,7 +32,6 @@
         <div class="margin-top-2">
           <StoryFooter
             :tags="f.tags"
-            :authors="f.authors"
             :updates="f.updates"
           />
         </div>
@@ -47,23 +46,23 @@
           <div v-if="f.categories.length > 0">
             <RelatedArticle
               v-for="(category, index) in f.categories"
-              :key="'author-related'+index"
+              :key="'user-related'+index"
               :slug="category.slug"
               :header="`More in ${category.name}`"
-              :id="f._id"
+              :id="f.id"
               class="margin-horizontal-1"
               collection="category"
             />
           </div>
-          <div v-if="f.authors.length > 0">
+          <div v-if="f.users.length > 0">
             <RelatedArticle
-              v-for="(author, index) in f.authors"
-              :key="'author-related'+index"
-              :slug="author.slug"
-              :header="`More from ${author.display_name}`"
-              :id="f._id"
+              v-for="(user, index) in f.users"
+              :key="'user-related'+index"
+              :slug="user.slug"
+              :header="`More from ${user.displayName}`"
+              :id="f.id"
               class="margin-horizontal-1"
-              collection="author"
+              collection="user"
             />
           </div>
         </div>
@@ -72,7 +71,7 @@
     <SocialSharingVertical
       :url="'/factcheck/'+factchecks[on].slug"
       :quote="factchecks[on].title"
-      :id="factchecks[on]._id"
+      :id="factchecks[on].id"
       type="factcheck"
     />
   </div>
@@ -115,7 +114,7 @@ export default {
   },
   watch: {
     on() {
-      document.title = `${this.factchecks[this.on].title} - ${this.$store.getters.getOrganisation.site_title}`;
+      document.title = `${this.factchecks[this.on].title} - ${this.$store.getters.getOrganisation.siteTitle}`;
       // eslint-disable-next-line no-restricted-globals
       history.pushState({}, null, `/factcheck/${this.factchecks[this.on].slug}`);
     }
@@ -152,7 +151,7 @@ export default {
           const latestFactcheck = response.data.data;
           this.pagination = response.data.paging;
           // eslint-disable-next-line no-underscore-dangle
-          if (this.factchecks.find(value => value._id === latestFactcheck[0]._id)) {
+          if (this.factchecks.find(value => value.id === latestFactcheck[0].id)) {
             console.log('Already there');
           } else this.factchecks = this.factchecks.concat(latestFactcheck);
         })
@@ -173,19 +172,19 @@ export default {
     const metadata = {};
     const { factchecks } = this;
     if (factchecks.length > 0) {
-      metadata.title = `${factchecks[0].title} - ${this.$store.getters.getOrganisation.site_title}`;
+      metadata.title = `${factchecks[0].title} - ${this.$store.getters.getOrganisation.siteTitle}`;
       metadata.script = [
         { innerHTML: JSON.stringify(factchecks[0].schemas), type: 'application/ld+json' },
       ];
       metadata.meta = [
-        { hid: 'og:title', name: 'og:title', content: `${factchecks[0].title} - ${this.$store.getters.getOrganisation.site_title}` },
-        { hid: 'og:image', name: 'og:image', content: factchecks[0].featured_media },
+        { hid: 'og:title', name: 'og:title', content: `${factchecks[0].title} - ${this.$store.getters.getOrganisation.siteTitle}` },
+        { hid: 'og:image', name: 'og:image', content: factchecks[0].media ? factchecks[0].media.sourceURL : null },
         { hid: 'og:description', name: 'og:description', content: factchecks[0].excerpt ? factchecks[0].excerpt : null },
       ];
       metadata.script = [
         { src: 'https://platform.twitter.com/widgets.js', async: true },
       ];
-    } else { metadata.title = this.$store.getters.getOrganisation.site_title; }
+    } else { metadata.title = this.$store.getters.getOrganisation.siteTitle; }
 
     return metadata;
   }

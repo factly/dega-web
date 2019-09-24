@@ -89,7 +89,7 @@ export default {
     };
   },
   head() {
-    const title = `${this.$route.params.collection === 'posts' ? 'Stories' : 'Factchecks'} - ${this.$store.getters.getOrganisation.site_title}`;
+    const title = `${this.$route.params.collection === 'posts' ? 'Stories' : 'Factchecks'} - ${this.$store.getters.getOrganisation.siteTitle}`;
     return {
       title,
       meta: [

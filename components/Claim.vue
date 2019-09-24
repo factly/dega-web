@@ -7,10 +7,12 @@
         <div class="media-content">
           <div class="field is-grouped is-grouped-multiline">
             <div class="control">
-              <figure class="image is-24x24">
+              <figure
+                v-if="claim.claimant.media"
+                class="image is-24x24">
                 <img
-                  :src="claim.claimant.image_url"
-                  alt="Placeholder image">
+                  :src="claim.claimant.media.sourceURL+'?resize:fill:50:50:0/gravity:sm'"
+                  :alt="claim.claimant.media.altText">
               </figure>
             </div>
             <div class="control">
@@ -22,10 +24,12 @@
             <div class="field-body"><span class="is-size-6">{{ claim.claim }}</span></div>
           </div>
           <div class="is-hidden-tablet">
-            <figure class="image is-128x128">
+            <figure
+              v-if="claim.rating.media"
+              class="image is-128x128">
               <img
-                :src="claim.rating.icon_url"
-                alt="Placeholder image">
+                :src="claim.rating.media.sourceURL+'?resize:fill:80:80:0/gravity:sm'"
+                :alt="claim.rating.media.altText">
             </figure>
           </div>
           <div class="field is-horizontal">
@@ -34,10 +38,12 @@
           </div>
         </div>
         <div class="media-left is-hidden-mobile">
-          <figure class="image is-96x96">
+          <figure
+            v-if="claim.rating.media"
+            class="image is-96x96">
             <img
-              :src="claim.rating.icon_url"
-              alt="Placeholder image">
+              :src="claim.rating.media.sourceURL+'?resize:fill:100:100:0/gravity:sm'"
+              :alt="claim.rating.media.altText">
           </figure>
         </div>
       </div>
@@ -67,7 +73,7 @@ export default {
   computed: {
     widgetBackground() {
       const backgrounglist = ['false-background', 'misleading-background', 'unverified-background', 'partly-true-background', 'true-background'];
-      return backgrounglist[parseInt(this.claim.rating.numeric_value, 10) - 1];
+      return backgrounglist[parseInt(this.claim.rating.numericValue, 10) - 1];
     }
   }
 };
