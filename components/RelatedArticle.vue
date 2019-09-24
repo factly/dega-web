@@ -94,7 +94,7 @@ export default {
       });
       this.stories = this.id ? stories.filter(value =>
         // eslint-disable-next-line no-underscore-dangle
-        value._id !== this.id
+        value.id !== this.id
       ) : stories;
     }
   }

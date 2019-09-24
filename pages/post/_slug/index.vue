@@ -33,7 +33,7 @@
               :key="'category-related'+index"
               :slug="category.slug"
               :header="`More in ${category.name}`"
-              :id="p._id"
+              :id="p.id"
               class="margin-horizontal-1"
               collection="category"
             />
@@ -44,7 +44,7 @@
               :key="'user-related'+index"
               :slug="user.slug"
               :header="`More from ${user.displayName}`"
-              :id="p._id"
+              :id="p.id"
               class="margin-horizontal-1"
               collection="user"
             />
@@ -55,7 +55,7 @@
     <SocialSharingVertical
       :url="'/post/'+posts[on].slug"
       :quote="posts[on].title"
-      :id="posts[on]._id"
+      :id="posts[on].id"
       type="post"
     />
   </div>
@@ -124,7 +124,7 @@ export default {
           const latestPost = response.data.data;
           this.pagination = response.data.paging;
           // eslint-disable-next-line no-underscore-dangle
-          if (this.posts.find(value => value._id === latestPost[0]._id)) {
+          if (this.posts.find(value => value.id === latestPost[0].id)) {
             console.log('Already there');
             // this.getLatestStories();
           } else this.posts = this.posts.concat(latestPost);

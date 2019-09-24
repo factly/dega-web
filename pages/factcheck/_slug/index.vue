@@ -49,7 +49,7 @@
               :key="'user-related'+index"
               :slug="category.slug"
               :header="`More in ${category.name}`"
-              :id="f._id"
+              :id="f.id"
               class="margin-horizontal-1"
               collection="category"
             />
@@ -60,7 +60,7 @@
               :key="'user-related'+index"
               :slug="user.slug"
               :header="`More from ${user.displayName}`"
-              :id="f._id"
+              :id="f.id"
               class="margin-horizontal-1"
               collection="user"
             />
@@ -71,7 +71,7 @@
     <SocialSharingVertical
       :url="'/factcheck/'+factchecks[on].slug"
       :quote="factchecks[on].title"
-      :id="factchecks[on]._id"
+      :id="factchecks[on].id"
       type="factcheck"
     />
   </div>
@@ -151,7 +151,7 @@ export default {
           const latestFactcheck = response.data.data;
           this.pagination = response.data.paging;
           // eslint-disable-next-line no-underscore-dangle
-          if (this.factchecks.find(value => value._id === latestFactcheck[0]._id)) {
+          if (this.factchecks.find(value => value.id === latestFactcheck[0].id)) {
             console.log('Already there');
           } else this.factchecks = this.factchecks.concat(latestFactcheck);
         })

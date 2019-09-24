@@ -119,7 +119,7 @@ export default {
       return 0;
     });
 
-    /* collection fetchinh */
+    /* collection fetching */
     const collectionPluralList = {
       user: 'users',
       category: 'categories',
@@ -129,7 +129,7 @@ export default {
     const collection = await axios
       .get(encodeURI(`${process.env.API_URI}/api/v1/${collectionPluralList[params.collection]}/${params.slug}/?client=${process.env.CLIENT_ID}`))
       .then(response => response.data.data)
-      .catch(err => console.log(err));
+      .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));
 
     if (!collection) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
