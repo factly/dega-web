@@ -6,8 +6,8 @@
           <CollectionHeader
             :collection = "this.$route.params.collection"
             :slug = "this.$route.params.slug"
+            :meta = "this.$route.params.meta"
             :heading = "this.$route.params.collection === 'user' ? collection.displayName : collection.name"
-            meta = "all"
           />
         </div>
         <div class="margin-top-2">
@@ -16,6 +16,16 @@
             :key="index"
             :story="p"
           />
+        </div>
+        <div
+          v-if="stories.length > 0 && !pagination.hasNext"
+          class="margin-top-2">
+          <h3 class="is-size-4 has-text-centered">No more stories</h3>
+        </div>
+        <div
+          v-if="stories.length === 0 && collection"
+          class="margin-top-2">
+          <h3 class="is-size-4 has-text-centered">No stories</h3>
         </div>
       </div>
       <div class="column is-4">
@@ -45,32 +55,48 @@ export default {
   },
   validate({ params, error }) {
     const collectionList = ['category', 'user', 'tag'];
+    const metaList = ['factchecks', 'posts'];
     if (collectionList.includes(params.collection)) return true;
+    if (metaList.includes(params.meta)) return true;
     return error({ code: 404, message: 'You have been lost', homepage: true });
   },
   data() {
     return {
       stories: [],
-      collection: null
+      collection: null,
+      pagination: {}
     };
+  },
+  mounted() {
+    this.scroll();
+  },
+  methods: {
+    scroll() {
+      window.onscroll = () => {
+        const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+        if (bottomOfWindow && (this.pagination.hasNext)) {
+          this.getStories();
+        }
+      };
+    },
+    async getStories() {
+      if (this.pagination.hasNext) {
+        await axios
+          .get(encodeURI(`${process.env.API_URI}/api/v1/${this.$route.params.meta}/?client=${process.env.CLIENT_ID}&${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
+          .then((response) => {
+            this.stories = response.data.data;
+            this.pagination = response.data.paging;
+          })
+          .catch(err => console.log(err));
+      }
+    }
   },
   async asyncData({ params, error }) {
     /* stories fetching */
-    const posts = await axios
-      .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
-      .then(response => response.data.data)
+    const stories = await axios
+      .get(encodeURI(`${process.env.API_URI}/api/v1/${params.meta}/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      .then(response => response.data)
       .catch(err => console.log(err));
-    const factchecks = await axios
-      .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
-      .then(response => response.data.data)
-      .catch(err => console.log(err));
-
-    const stories = (posts || []).concat(factchecks || []);
-    stories.sort((a, b) => {
-      if (a.publishedDate > b.publishedDate) return -1;
-      if (b.publishedDate > a.publishedDate) return 1;
-      return 0;
-    });
 
     /* collection fetching */
     const collectionPluralList = {
@@ -88,7 +114,7 @@ export default {
       return error({ code: 404, message: 'You have been lost', homepage: true });
     }
 
-    return { stories, collection };
+    return { stories: stories.data, pagination: stories.paging, collection };
   },
   head() {
     const metadata = {};

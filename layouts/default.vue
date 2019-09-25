@@ -6,6 +6,7 @@
       aria-label="main navigation">
       <div class="navbar-brand">
         <nuxt-link
+          v-if="organisation.mediaLogo"
           :to="localePath('index')"
           class="navbar-item">
           <img
@@ -200,7 +201,8 @@
             />
           </div>
         </div>
-    </div></footer>
+      </div>
+    </footer>
   </div>
 </template>
 

@@ -1,4 +1,4 @@
-const  { I18N } = require('./config');
+const { I18N } = require('./config');
 
 module.exports = {
   env: {
@@ -85,7 +85,7 @@ module.exports = {
   ** i18n module configuration
   */
   i18n: I18N,
-  
+
   /*
   ** Build configuration
   */
@@ -107,5 +107,5 @@ module.exports = {
         });
       }
     }
-  },
+  }
 };

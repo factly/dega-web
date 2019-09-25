@@ -17,6 +17,10 @@
   top: 0px;
   bottom: 0px;
 }
+
+ol {
+  padding-left: 2rem;  
+}
 /* Quill JS related classes end here */
 
 .navbar-item img {
