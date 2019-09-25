@@ -8,7 +8,7 @@
       </li>
       <li :class="meta === 'posts' ? 'is-active': null">
         <nuxt-link :to="localePath({ name:'collection-slug-meta', params: { collection, slug, meta: 'posts' } })">
-          Posts
+          Stories
         </nuxt-link>
       </li>
       <li :class="meta === 'factchecks' ? 'is-active': null">

@@ -11,6 +11,7 @@
         </div>
         <div class="media-content">
           <p class="title is-4">{{ collection.displayName }}</p>
+          <p class="subtitle is-6"><a :href="'mailto:'+collection.email">{{ collection.email }}</a></p>
         </div>
       </div>
 
