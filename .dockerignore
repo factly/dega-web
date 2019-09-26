@@ -23,7 +23,7 @@ report.html
 ######################
 /node/git add
 node_tmp/
-#node_modules/
+node_modules
 npm-debug.log.*
 /.awcache/*
 /.cache-loader/*
