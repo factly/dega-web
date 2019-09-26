@@ -30,7 +30,7 @@
             :to="localePath('index')"
             class="navbar-item">{{ $t('header.home') }}</nuxt-link>
           <nuxt-link
-            :to="localePath({ name:'collection', params: { collection: 'posts'} })"
+            :to="localePath('post')"
             class="navbar-item">{{ $t('header.stories') }}</nuxt-link>
           <nuxt-link
             :to="localePath({ name:'collection-slug', params: { collection: 'category', slug: 'fake-news' } })"
@@ -41,7 +41,7 @@
             :to="localePath({ name:'collection-slug', params: { collection: 'category', slug: 'video' }})"
             class="navbar-item">{{ $t('header.videos') }}</nuxt-link>
           <nuxt-link
-            :to="localePath({ name:'collection', params: { collection: 'factchecks'} })"
+            :to="localePath('factcheck')"
             class="navbar-item">{{ $t('header.fact_check') }}</nuxt-link>
 
         </div>

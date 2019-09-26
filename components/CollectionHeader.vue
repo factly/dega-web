@@ -7,12 +7,12 @@
         </nuxt-link>
       </li>
       <li :class="meta === 'posts' ? 'is-active': null">
-        <nuxt-link :to="localePath({ name:'collection-slug-meta', params: { collection, slug, meta: 'posts' } })">
+        <nuxt-link :to="localePath({ name:'collection-slug-posts', params: { collection, slug } })">
           Stories
         </nuxt-link>
       </li>
       <li :class="meta === 'factchecks' ? 'is-active': null">
-        <nuxt-link :to="localePath({ name:'collection-slug-meta', params: { collection, slug, meta: 'factchecks' } })">
+        <nuxt-link :to="localePath({ name:'collection-slug-factchecks', params: { collection, slug } })">
           Factchecks
         </nuxt-link>
       </li>

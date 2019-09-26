@@ -48,10 +48,6 @@ export default {
       pagination: {}
     };
   },
-  validate({ params, error }) {
-    if (params.collection === 'posts' || params.collection === 'factchecks') return true;
-    return error({ code: 404, message: 'You have been lost', homepage: true });
-  },
   mounted() {
     this.scroll();
   },
@@ -65,19 +61,21 @@ export default {
       };
     },
     getStories() {
-      const next = this.pagination.next ? this.pagination.next : '';
-      axios
-        .get(encodeURI(`${process.env.API_URI}/api/v1/${this.$route.params.collection}/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&next=${next}&limit=5`))
-        .then((response) => {
-          this.stories = (this.stories || []).concat(response.data.data || []);
-          this.pagination = response.data.paging;
-        })
-        .catch(err => console.log(err));
+      if (this.pagination.hasNext) {
+        console.log(this.$route);
+        axios
+          .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
+          .then((response) => {
+            this.stories = (this.stories || []).concat(response.data.data || []);
+            this.pagination = response.data.paging;
+          })
+          .catch(err => console.log(err));
+      }
     }
   },
-  async asyncData({ params, error }) {
+  async asyncData({ error }) {
     const rawData = await axios
-      .get(encodeURI(`${process.env.API_URI}/api/v1/${params.collection}/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
     if (rawData.data.length === 0) {
@@ -89,7 +87,7 @@ export default {
     };
   },
   head() {
-    const title = `${this.$route.params.collection === 'posts' ? 'Stories' : 'Factchecks'} - ${this.$store.getters.getOrganisation.siteTitle}`;
+    const title = `Stories - ${this.$store.getters.getOrganisation.siteTitle}`;
     return {
       title,
       meta: [

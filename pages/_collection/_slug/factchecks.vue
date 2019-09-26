@@ -6,8 +6,8 @@
           <CollectionHeader
             :collection = "this.$route.params.collection"
             :slug = "this.$route.params.slug"
-            :meta = "this.$route.params.meta"
             :heading = "this.$route.params.collection === 'user' ? collection.displayName : collection.name"
+            meta = "factchecks"
           />
         </div>
         <div class="margin-top-2">
@@ -55,9 +55,7 @@ export default {
   },
   validate({ params, error }) {
     const collectionList = ['category', 'user', 'tag'];
-    const metaList = ['factchecks', 'posts'];
     if (collectionList.includes(params.collection)) return true;
-    if (metaList.includes(params.meta)) return true;
     return error({ code: 404, message: 'You have been lost', homepage: true });
   },
   data() {
@@ -82,7 +80,7 @@ export default {
     async getStories() {
       if (this.pagination.hasNext) {
         await axios
-          .get(encodeURI(`${process.env.API_URI}/api/v1/${this.$route.params.meta}/?client=${process.env.CLIENT_ID}&${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
+          .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
           .then((response) => {
             this.stories = response.data.data;
             this.pagination = response.data.paging;
@@ -92,9 +90,10 @@ export default {
     }
   },
   async asyncData({ params, error }) {
+    console.log(params);
     /* stories fetching */
     const stories = await axios
-      .get(encodeURI(`${process.env.API_URI}/api/v1/${params.meta}/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
 

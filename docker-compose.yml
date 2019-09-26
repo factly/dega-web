@@ -9,7 +9,6 @@ services:
     container_name: dega-web
     restart: always
     environment:
-      - NODE_ENV=development
       - BASE_URL=http://127.0.0.1:3000
       - API_URI=https://api.degacms.com 
       - CLIENT_ID=factly
@@ -28,14 +27,3 @@ services:
     - "3000:3000"
     command:
       "npm run start"
-
-#  nginx:
-#    image: nginx:1.15.7-alpine
-#    container_name: nginx
-#    restart: always
-#    ports:
-#    - "8081:80"
-#    volumes:
-#    - ./nginx:/etc/nginx/conf.d
-#    depends_on:
-#    - nuxt
