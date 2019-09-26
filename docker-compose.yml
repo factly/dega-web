@@ -10,9 +10,9 @@ services:
     restart: always
     environment:
       - BASE_URL=http://127.0.0.1:3000
-      - API_URI=https://api.degacms.com 
+      - API_URI=https://api.degacms.com
       - CLIENT_ID=factly
-      - DOMAIN_HOSTNAME=https://telugu.factly.in
+      - DOMAIN_HOSTNAME=http://127.0.0.1:3000
       - DEFAULT_LANG=en
       - USER_MODULE=false
       - OAUTH_CLIENT_ID=dega-web
