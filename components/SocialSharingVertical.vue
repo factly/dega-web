@@ -41,12 +41,8 @@
 </template>
 
 <script>
-import Bookmark from '~/components/Bookmark.vue';
 
 export default {
-  components: {
-    Bookmark
-  },
   props: {
     url: {
       type: String,
@@ -67,8 +63,7 @@ export default {
   },
   data() {
     return {
-      organisation: this.$store.getters.getOrganisation,
-      userModule: process.env.USER_MODULE
+      organisation: this.$store.getters.getOrganisation
     };
   }
 };
