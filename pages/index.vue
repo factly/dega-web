@@ -30,13 +30,11 @@
 </template>
 
 <script>
-import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
 import RelatedArticle from '@/components/RelatedArticle';
 
 export default {
-  authenticated: true,
   components: {
     Hero,
     StoryPreview,
@@ -47,12 +45,12 @@ export default {
       stories: null
     };
   },
-  async asyncData() {
-    const posts = await axios
+  async asyncData({ $axios }) {
+    const posts = await $axios
       .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=10`))
       .then(response => response.data.data)
       .catch(err => console.log(err));
-    const factchecks = await axios
+    const factchecks = await $axios
       .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=10`))
       .then(response => response.data.data)
       .catch(err => console.log(err));

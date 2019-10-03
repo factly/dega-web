@@ -84,7 +84,6 @@ a.anchor {
 }
 </style>
 <script>
-import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
 import StoryFooter from '@/components/StoryFooter';
 import Claim from '@/components/Claim';
@@ -145,7 +144,7 @@ export default {
       };
     },
     async getLatestFactchecks() {
-      await axios
+      await this.$axios
         .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
         .then((response) => {
           const latestFactcheck = response.data.data;
@@ -158,8 +157,8 @@ export default {
         .catch(err => console.log(err));
     }
   },
-  async asyncData({ params, error }) {
-    const factcheck = await axios
+  async asyncData({ params, error, $axios }) {
+    const factcheck = await $axios
       .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&slug=${params.slug}`))
       .then(response => response.data.data)
       .catch(err => console.log(err));

@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
 import RelatedArticle from '@/components/RelatedArticle';
 import CollectionHeader from '@/components/CollectionHeader';
@@ -79,7 +78,7 @@ export default {
     },
     async getStories() {
       if (this.pagination.hasNext) {
-        await axios
+        await this.$axios
           .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
           .then((response) => {
             this.stories = response.data.data;
@@ -89,10 +88,10 @@ export default {
       }
     }
   },
-  async asyncData({ params, error }) {
+  async asyncData({ params, error, $axios }) {
     console.log(params);
     /* stories fetching */
-    const stories = await axios
+    const stories = await $axios
       .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));
@@ -104,7 +103,7 @@ export default {
       tag: 'tags'
     };
 
-    const collection = await axios
+    const collection = await $axios
       .get(encodeURI(`${process.env.API_URI}/api/v1/${collectionPluralList[params.collection]}/${params.slug}/?client=${process.env.CLIENT_ID}`))
       .then(response => response.data.data)
       .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));

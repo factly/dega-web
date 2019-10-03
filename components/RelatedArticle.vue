@@ -46,8 +46,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   props: {
     collection: {
@@ -77,11 +75,11 @@ export default {
   },
   methods: {
     async getCollectionStories(collection, slug) {
-      const posts = await axios
+      const posts = await this.$axios
         .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
         .then(response => response.data.data)
         .catch(err => console.log(err));
-      const factchecks = await axios
+      const factchecks = await this.$axios
         .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
         .then(response => response.data.data)
         .catch(err => console.log(err));

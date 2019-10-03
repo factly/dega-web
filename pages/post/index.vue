@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
 import RelatedArticle from '@/components/RelatedArticle';
@@ -63,7 +62,7 @@ export default {
     getStories() {
       if (this.pagination.hasNext) {
         console.log(this.$route);
-        axios
+        this.$axios
           .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
           .then((response) => {
             this.stories = (this.stories || []).concat(response.data.data || []);
@@ -73,8 +72,8 @@ export default {
       }
     }
   },
-  async asyncData({ error }) {
-    const rawData = await axios
+  async asyncData({ error, $axios }) {
+    const rawData = await $axios
       .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response.data)
       .catch(err => console.log(err));

@@ -1,6 +1,4 @@
 /* eslint-disable */
-import axios from 'axios';
-
 export const state = () => ({
   organisation: Object,
 });
@@ -13,7 +11,7 @@ export const mutations = {
 
 export const actions = {
   async nuxtServerInit({ commit }, { error }) {
-    return axios.get(encodeURI(`${process.env.API_URI}/api/v1/organizations/?client=${process.env.CLIENT_ID}`))
+    return this.$axios.get(encodeURI(`${process.env.API_URI}/api/v1/organizations/?client=${process.env.CLIENT_ID}`))
       .then((res) => {
         commit('setOrganisation', res.data[0]);
       })
