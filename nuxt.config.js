@@ -36,6 +36,7 @@ module.exports = {
     '~/plugins/filters.js',
     '~/plugins/directives.js',
     { src: '~plugins/ga.js', ssr: false },
+    '~/plugins/axios.js',
   ],
 
   /*
@@ -52,9 +53,7 @@ module.exports = {
   /*
   ** Axios module configuration
   */
-  axios: {
-    credentials: false
-  },
+  axios: {},
 
   /*
   ** i18n module configuration

@@ -63,19 +63,19 @@ export default {
       if (this.pagination.hasNext) {
         console.log(this.$route);
         this.$axios
-          .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
+          .$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
           .then((response) => {
-            this.stories = (this.stories || []).concat(response.data.data || []);
-            this.pagination = response.data.paging;
+            this.stories = (this.stories || []).concat(response.data || []);
+            this.pagination = response.paging;
           })
           .catch(err => console.log(err));
       }
     }
   },
-  async asyncData({ error, $axios }) {
-    const rawData = await $axios
-      .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=5`))
-      .then(response => response.data)
+  async asyncData({ error, app }) {
+    const rawData = await app.$axios
+      .$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      .then(response => response)
       .catch(err => console.log(err));
     if (rawData.data.length === 0) {
       return error({ code: 404, message: 'You have been lost', homepage: true });

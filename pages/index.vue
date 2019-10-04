@@ -47,12 +47,12 @@ export default {
   },
   async asyncData({ $axios }) {
     const posts = await $axios
-      .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=10`))
-      .then(response => response.data.data)
+      .$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=10`))
+      .then(response => response.data)
       .catch(err => console.log(err));
     const factchecks = await $axios
-      .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=10`))
-      .then(response => response.data.data)
+      .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=10`))
+      .then(response => response.data)
       .catch(err => console.log(err));
     const stories = (posts || []).concat(factchecks || []);
     stories.sort((a, b) => {

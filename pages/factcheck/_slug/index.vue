@@ -145,10 +145,10 @@ export default {
     },
     async getLatestFactchecks() {
       await this.$axios
-        .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
+        .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
         .then((response) => {
-          const latestFactcheck = response.data.data;
-          this.pagination = response.data.paging;
+          const latestFactcheck = response.data;
+          this.pagination = response.paging;
           // eslint-disable-next-line no-underscore-dangle
           if (this.factchecks.find(value => value.id === latestFactcheck[0].id)) {
             console.log('Already there');
@@ -157,10 +157,10 @@ export default {
         .catch(err => console.log(err));
     }
   },
-  async asyncData({ params, error, $axios }) {
-    const factcheck = await $axios
-      .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&slug=${params.slug}`))
-      .then(response => response.data.data)
+  async asyncData({ params, error, app }) {
+    const factcheck = await app.$axios
+      .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&slug=${params.slug}`))
+      .then(response => response.data)
       .catch(err => console.log(err));
     if (factcheck.length === 0) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
