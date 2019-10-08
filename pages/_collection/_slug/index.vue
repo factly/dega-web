@@ -53,18 +53,14 @@ export default {
       collection: null
     };
   },
-  async asyncData({ params, error, app }) {
+  async asyncData({ params, error, $axios }) {
     /* stories fetching */
-    const posts = await app.$axios
-      .$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
-      .then(response => response.data)
-      .catch(err => console.log(err));
-    const factchecks = await app.$axios
-      .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
-      .then(response => response.data)
-      .catch(err => console.log(err));
+    const posts = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      
+    const factchecks = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      
 
-    const stories = (posts || []).concat(factchecks || []);
+    const stories = (posts.data || []).concat(factchecks.data || []);
     stories.sort((a, b) => {
       if (a.publishedDate > b.publishedDate) return -1;
       if (b.publishedDate > a.publishedDate) return 1;
@@ -78,7 +74,7 @@ export default {
       tag: 'tags'
     };
 
-    const collection = app.$axios
+    const collection = await $axios
       .$get(encodeURI(`${process.env.API_URI}/api/v1/${collectionPluralList[params.collection]}/${params.slug}/?client=${process.env.CLIENT_ID}`))
       .then(response => response.data)
       .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));

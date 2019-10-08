@@ -72,8 +72,8 @@ export default {
       }
     }
   },
-  async asyncData({ error, app }) {
-    const rawData = await app.$axios
+  async asyncData({ error, $axios }) {
+    const rawData = await $axios
       .$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response)
       .catch(err => console.log(err));

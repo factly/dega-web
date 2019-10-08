@@ -157,8 +157,8 @@ export default {
         .catch(err => console.log(err));
     }
   },
-  async asyncData({ params, error, app }) {
-    const factcheck = await app.$axios
+  async asyncData({ params, error, $axios }) {
+    const factcheck = await $axios
       .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&slug=${params.slug}`))
       .then(response => response.data)
       .catch(err => console.log(err));

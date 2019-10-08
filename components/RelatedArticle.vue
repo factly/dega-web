@@ -75,16 +75,11 @@ export default {
   },
   methods: {
     async getCollectionStories(collection, slug) {
-      const posts = await this.$axios
-        .$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
-        .then(response => response.data)
-        .catch(err => console.log(err));
-      const factchecks = await this.$axios
-        .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
-        .then(response => response.data)
-        .catch(err => console.log(err));
+      const posts = await this.$axios.$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
 
-      const stories = (posts || []).concat(factchecks || []);
+      const factchecks = await this.$axios.$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
+
+      const stories = (posts.data || []).concat(factchecks.data || []);
       stories.sort((a, b) => {
         if (a.publishedDate > b.publishedDate) return -1;
         if (b.publishedDate > a.publishedDate) return 1;

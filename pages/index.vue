@@ -46,15 +46,9 @@ export default {
     };
   },
   async asyncData({ $axios }) {
-    const posts = await $axios
-      .$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=10`))
-      .then(response => response.data)
-      .catch(err => console.log(err));
-    const factchecks = await $axios
-      .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=10`))
-      .then(response => response.data)
-      .catch(err => console.log(err));
-    const stories = (posts || []).concat(factchecks || []);
+    const posts = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=10`));
+    const factchecks = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=10`));
+    const stories = (posts.data || []).concat(factchecks.data || []);
     stories.sort((a, b) => {
       if (a.publishedDate > b.publishedDate) return -1;
       if (b.publishedDate > a.publishedDate) return 1;

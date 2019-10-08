@@ -88,10 +88,10 @@ export default {
       }
     }
   },
-  async asyncData({ params, error, app }) {
+  async asyncData({ params, error, $axios }) {
     console.log(params);
     /* stories fetching */
-    const stories = await app.$axios
+    const stories = await $axios
       .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response)
       .catch(err => console.log(err));
@@ -103,7 +103,7 @@ export default {
       tag: 'tags'
     };
 
-    const collection = await app.$axios
+    const collection = await $axios
       .$get(encodeURI(`${process.env.API_URI}/api/v1/${collectionPluralList[params.collection]}/${params.slug}/?client=${process.env.CLIENT_ID}`))
       .then(response => response.data)
       .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));

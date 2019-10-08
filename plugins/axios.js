@@ -1,5 +1,7 @@
 export default function ({ $axios }) {
   $axios.onRequest((config) => {
-    config.headers.common['x-client'] = 'factly';
+    $axios.setHeader('client', 'check');
+    console.log(config.url);
+    console.log(config.headers.common.client);
   });
 }
