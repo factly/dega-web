@@ -8,34 +8,7 @@ services:
       context: .
     container_name: dega-web
     restart: always
-    environment:
-      - NODE_ENV=development
-      - BASE_URL=http://127.0.0.1:3000
-      - API_URI=https://api.degacms.com
-      - CLIENT_ID=factly
-      - DOMAIN_HOSTNAME=http://127.0.0.1:3000
-      - DEFAULT_LANG=en
-      - USER_MODULE=false
-      - OAUTH_CLIENT_ID=dega-web
-      - OAUTH_CLIENT_SECRET=nuxt-test
-      - OAUTH_HOST=https://login.factly.in/auth/realms/Test/protocol/openid-connect/
-      - AUTHORIZATION_ENDPOINT=https://login.factly.in/auth/realms/Test/protocol/openid-connect/auth
-      - LOGOUT_ENDPOINT=https://login.factly.in/auth/realms/Test/protocol/openid-connect/logout
-      - ACCESS_TOKEN_ENDPOINT=https://login.factly.in/auth/realms/Test/protocol/openid-connect/token
-      - USER_DATA_API_URI=http://localhost:8081/api/v1
-      - USERINFO_ENDPOINT=http://localhost:8081/api/v1/user/info
     ports:
     - "3000:3000"
     command:
       "npm run start"
-
-#  nginx:
-#    image: nginx:1.15.7-alpine
-#    container_name: nginx
-#    restart: always
-#    ports:
-#    - "8081:80"
-#    volumes:
-#    - ./nginx:/etc/nginx/conf.d
-#    depends_on:
-#    - nuxt

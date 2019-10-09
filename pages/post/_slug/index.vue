@@ -62,7 +62,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
 import StoryFooter from '@/components/StoryFooter';
 import RelatedArticle from '@/components/RelatedArticle';
@@ -118,29 +117,28 @@ export default {
       };
     },
     async getLatestStories() {
-      await axios
-        .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
+      await this.$axios
+        .$get(encodeURI(`${this.$env.API_URI}/api/v1/posts/?sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
         .then((response) => {
-          const latestPost = response.data.data;
-          this.pagination = response.data.paging;
+          const latestPost = response.data;
+          this.pagination = response.paging;
           // eslint-disable-next-line no-underscore-dangle
           if (this.posts.find(value => value.id === latestPost[0].id)) {
             console.log('Already there');
             // this.getLatestStories();
           } else this.posts = this.posts.concat(latestPost);
-        })
-        .catch(err => console.log(err));
+        });
     }
   },
-  async asyncData({ params, error }) {
-    const post = await axios
-      .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&slug=${params.slug}`))
-      .then(response => response.data.data)
-      .catch(err => console.log(err));
-    if (post.length === 0) {
+  async asyncData({
+    params, error, $axios, app
+  }) {
+    const post = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/posts/${params.slug}`));
+
+    if (!post.data) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
     }
-    return { posts: post };
+    return { posts: [post.data] };
   },
   head() {
     const metadata = {};

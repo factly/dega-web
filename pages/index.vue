@@ -30,13 +30,11 @@
 </template>
 
 <script>
-import axios from 'axios';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
 import RelatedArticle from '@/components/RelatedArticle';
 
 export default {
-  authenticated: true,
   components: {
     Hero,
     StoryPreview,
@@ -47,16 +45,10 @@ export default {
       stories: null
     };
   },
-  async asyncData() {
-    const posts = await axios
-      .get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=10`))
-      .then(response => response.data.data)
-      .catch(err => console.log(err));
-    const factchecks = await axios
-      .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=10`))
-      .then(response => response.data.data)
-      .catch(err => console.log(err));
-    const stories = (posts || []).concat(factchecks || []);
+  async asyncData({ $axios, app }) {
+    const posts = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/posts/?sortBy=publishedDate&sortAsc=false&limit=10`));
+    const factchecks = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=10`));
+    const stories = (posts.data || []).concat(factchecks.data || []);
     stories.sort((a, b) => {
       if (a.publishedDate > b.publishedDate) return -1;
       if (b.publishedDate > a.publishedDate) return 1;

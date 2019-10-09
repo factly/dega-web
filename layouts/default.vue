@@ -30,7 +30,7 @@
             :to="localePath('index')"
             class="navbar-item">{{ $t('header.home') }}</nuxt-link>
           <nuxt-link
-            :to="localePath({ name:'collection', params: { collection: 'posts'} })"
+            :to="localePath('post')"
             class="navbar-item">{{ $t('header.stories') }}</nuxt-link>
           <nuxt-link
             :to="localePath({ name:'collection-slug', params: { collection: 'category', slug: 'fake-news' } })"
@@ -41,7 +41,7 @@
             :to="localePath({ name:'collection-slug', params: { collection: 'category', slug: 'video' }})"
             class="navbar-item">{{ $t('header.videos') }}</nuxt-link>
           <nuxt-link
-            :to="localePath({ name:'collection', params: { collection: 'factchecks'} })"
+            :to="localePath('factcheck')"
             class="navbar-item">{{ $t('header.fact_check') }}</nuxt-link>
 
         </div>
@@ -50,56 +50,6 @@
             <SocialLink
               :organisation="organisation"
             />
-          </div>
-          <div
-            v-if="userModule == 'true' && !loggedIn"
-            class="navbar-item">
-            <a
-              class="navbar-item button"
-              @click="login()">
-              <span class="icon">
-                <i class="mdi mdi-account"/>
-              </span>
-              <span>Sign Up / Log In</span>
-            </a>
-          </div>
-          <div
-            v-if="userModule == 'true' && loggedIn"
-            class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link button has-dropdown">
-              <span class="icon">
-                <i class="mdi mdi-account"/>
-              </span>
-              <span>Account</span>
-            </a>
-            <div class="navbar-dropdown is-right">
-              <div>
-                <nuxt-link
-                  to="/saved"
-                  class="navbar-item">
-                  <span class="icon is-size-4">
-                    <i class="mdi mdi-bookmark"/>
-                  </span>
-                  <span>Saved</span>
-                </nuxt-link>
-                <nuxt-link
-                  to="/profile"
-                  class="navbar-item">
-                  <span class="icon is-size-4">
-                    <i class="mdi mdi-account-settings-variant"/>
-                  </span>
-                  <span>Profile</span>
-                </nuxt-link>
-                <a
-                  class="navbar-item has-text-danger"
-                  @click="logout()">
-                  <span class="icon is-size-4">
-                    <i class="mdi mdi-logout-variant"/>
-                  </span>
-                  <span>Logout</span>
-                </a>
-              </div>
-            </div>
           </div>
           <div class="navbar-item">
             <nuxt-link
@@ -218,26 +168,12 @@ export default {
     return {
       toggleNavBar: false,
       toggleMore: true,
-      loggedIn: this.$auth.loggedIn,
-      userModule: process.env.USER_MODULE,
       organisation: this.$store.getters.getOrganisation
     };
   },
   computed: {
     availableLocales() {
       return this.$i18n.locales.filter(i => i.code !== this.$i18n.locale);
-    }
-  },
-  methods: {
-    logout() {
-      const url = `${process.env.LOGOUT_ENDPOINT}?redirect_uri=${process.env.BASE_URL}`;
-      const logout = this.$auth.logout();
-      logout.then(() => {
-        window.location.replace(encodeURI(url));
-      });
-    },
-    async login() {
-      this.$auth.loginWith('social');
     }
   },
   head() {

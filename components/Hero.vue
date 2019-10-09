@@ -38,12 +38,10 @@
 </template>
 
 <script>
-import Bookmark from '@/components/Bookmark';
 import MetaData from '@/components/MetaData';
 
 export default {
   components: {
-    Bookmark,
     MetaData
   },
   props: {

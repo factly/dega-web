@@ -3,7 +3,9 @@
     <div class="card-content">
       <div class="media">
         <div class="media-left">
-          <figure class="image is-96x96">
+          <figure
+            v-if="collection.media"
+            class="image is-96x96">
             <img
               :src="collection.media.sourceURL"
               alt="Placeholder image">

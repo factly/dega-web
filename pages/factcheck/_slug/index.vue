@@ -84,7 +84,6 @@ a.anchor {
 }
 </style>
 <script>
-import axios from 'axios';
 import StoryHead from '@/components/StoryHead';
 import StoryFooter from '@/components/StoryFooter';
 import Claim from '@/components/Claim';
@@ -145,28 +144,27 @@ export default {
       };
     },
     async getLatestFactchecks() {
-      await axios
-        .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
+      await this.$axios
+        .$get(encodeURI(`${this.$env.API_URI}/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
         .then((response) => {
-          const latestFactcheck = response.data.data;
-          this.pagination = response.data.paging;
+          const latestFactcheck = response.data;
+          this.pagination = response.paging;
           // eslint-disable-next-line no-underscore-dangle
           if (this.factchecks.find(value => value.id === latestFactcheck[0].id)) {
             console.log('Already there');
           } else this.factchecks = this.factchecks.concat(latestFactcheck);
-        })
-        .catch(err => console.log(err));
+        });
     }
   },
-  async asyncData({ params, error }) {
-    const factcheck = await axios
-      .get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&slug=${params.slug}`))
-      .then(response => response.data.data)
-      .catch(err => console.log(err));
-    if (factcheck.length === 0) {
+  async asyncData({
+    params, error, $axios, app
+  }) {
+    const factcheck = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/factchecks/${params.slug}`));
+
+    if (!factcheck.data) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
     }
-    return { factchecks: factcheck };
+    return { factchecks: [factcheck.data] };
   },
   head() {
     const metadata = {};

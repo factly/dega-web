@@ -7,7 +7,7 @@
             :collection = "this.$route.params.collection"
             :slug = "this.$route.params.slug"
             :heading = "this.$route.params.collection === 'user' ? collection.displayName : collection.name"
-            meta = "all"
+            meta = "posts"
           />
         </div>
         <div class="margin-top-2">
@@ -16,6 +16,16 @@
             :key="index"
             :story="p"
           />
+        </div>
+        <div
+          v-if="stories.length > 0 && !pagination.hasNext"
+          class="margin-top-2">
+          <h3 class="is-size-4 has-text-centered">No more stories</h3>
+        </div>
+        <div
+          v-if="stories.length === 0 && collection"
+          class="margin-top-2">
+          <h3 class="is-size-4 has-text-centered">No stories</h3>
         </div>
       </div>
       <div class="column is-4">
@@ -50,23 +60,38 @@ export default {
   data() {
     return {
       stories: [],
-      collection: null
+      collection: null,
+      pagination: {}
     };
+  },
+  mounted() {
+    this.scroll();
+  },
+  methods: {
+    scroll() {
+      window.onscroll = () => {
+        const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+        if (bottomOfWindow && (this.pagination.hasNext)) {
+          this.getStories();
+        }
+      };
+    },
+    async getStories() {
+      if (this.pagination.hasNext) {
+        await this.$axios
+          .$get(encodeURI(`${this.$env.API_URI}/api/v1/posts/?${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
+          .then((response) => {
+            this.stories = (this.stories || []).concat(response.data || []);
+            this.pagination = response.paging;
+          });
+      }
+    }
   },
   async asyncData({
     params, error, $axios, app
   }) {
     /* stories fetching */
-    const posts = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/posts/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
-
-    const factchecks = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/factchecks/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
-
-    const stories = (posts.data || []).concat(factchecks.data || []);
-    stories.sort((a, b) => {
-      if (a.publishedDate > b.publishedDate) return -1;
-      if (b.publishedDate > a.publishedDate) return 1;
-      return 0;
-    });
+    const stories = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/posts/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
 
     /* collection fetching */
     const collectionPluralList = {
@@ -81,7 +106,7 @@ export default {
       return error({ code: 404, message: 'You have been lost', homepage: true });
     }
 
-    return { stories, collection: collection.data };
+    return { stories: stories.data, pagination: stories.paging, collection: collection.data };
   },
   head() {
     const metadata = {};
