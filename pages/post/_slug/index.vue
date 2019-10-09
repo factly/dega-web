@@ -130,7 +130,9 @@ export default {
         });
     }
   },
-  async asyncData({ params, error, $axios, app }) {
+  async asyncData({
+    params, error, $axios, app
+  }) {
     const post = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/posts/${params.slug}`));
 
     if (!post.data) {

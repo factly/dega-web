@@ -39,7 +39,7 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/axios',
-    'nuxt-buefy',
+    '@nuxtjs/bulma',
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
     'nuxt-i18n',
@@ -65,9 +65,13 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    /*
-    ** You can extend webpack config here
-    */
+    postcss: {
+      preset: {
+        features: {
+          customProperties: false
+        }
+      }
+    },
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

@@ -156,7 +156,9 @@ export default {
         });
     }
   },
-  async asyncData({ params, error, $axios, app }) {
+  async asyncData({
+    params, error, $axios, app
+  }) {
     const factcheck = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/factchecks/${params.slug}`));
 
     if (!factcheck.data) {

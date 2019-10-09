@@ -53,7 +53,9 @@ export default {
       collection: null
     };
   },
-  async asyncData({ params, error, $axios, app }) {
+  async asyncData({
+    params, error, $axios, app
+  }) {
     /* stories fetching */
     const posts = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/posts/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
 
