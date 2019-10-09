@@ -62,7 +62,7 @@ export default {
     getStories() {
       if (this.pagination.hasNext) {
         this.$axios
-          .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
+          .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
           .then((response) => {
             this.stories = (this.stories || []).concat(response.data || []);
             this.pagination = response.paging;
@@ -73,7 +73,7 @@ export default {
   },
   async asyncData({ error, $axios }) {
     const rawData = await $axios
-      .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response)
       .catch(err => console.log(err));
     if (rawData.data.length === 0) {

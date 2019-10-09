@@ -75,9 +75,9 @@ export default {
   },
   methods: {
     async getCollectionStories(collection, slug) {
-      const posts = await this.$axios.$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
+      const posts = await this.$axios.$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
 
-      const factchecks = await this.$axios.$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
+      const factchecks = await this.$axios.$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
 
       const stories = (posts.data || []).concat(factchecks.data || []);
       stories.sort((a, b) => {

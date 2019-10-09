@@ -1,13 +1,6 @@
 <template>
   <div class="sticky-horizontal-container">
     <div>
-      <Bookmark
-        v-if="userModule == 'true'"
-        :type="type"
-        :id="id"
-      />
-    </div>
-    <div>
       <a
         :href="'https://www.facebook.com/sharer/sharer.php?u='+ encodeURI(organisation.siteAddress + url) + '&quote='+quote"
         class="button is-white"

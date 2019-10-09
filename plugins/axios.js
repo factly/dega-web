@@ -1,7 +1,13 @@
-export default function ({ $axios }) {
+export default function ({ $axios, error }) {
   $axios.onRequest((config) => {
-    $axios.setHeader('client', 'check');
-    console.log(config.url);
-    console.log(config.headers.common.client);
+    // eslint-disable-next-line
+    config.headers.common['client'] = process.env.CLIENT_ID;
+  });
+  $axios.onResponse((response) => {
+    if (response.status !== 200) error({ code: 404, message: 'Something went wrong', homepage: true });
+  });
+  $axios.onError((err) => {
+    console.log(err);
+    error({ code: 404, message: 'Something went wrong', homepage: true });
   });
 }

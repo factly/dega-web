@@ -63,7 +63,7 @@ export default {
       if (this.pagination.hasNext) {
         console.log(this.$route);
         this.$axios
-          .$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
+          .$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
           .then((response) => {
             this.stories = (this.stories || []).concat(response.data || []);
             this.pagination = response.paging;
@@ -74,7 +74,7 @@ export default {
   },
   async asyncData({ error, $axios }) {
     const rawData = await $axios
-      .$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=5`))
+      .$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?sortBy=publishedDate&sortAsc=false&limit=5`))
       .then(response => response)
       .catch(err => console.log(err));
     if (rawData.data.length === 0) {

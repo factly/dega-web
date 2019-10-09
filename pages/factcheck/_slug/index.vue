@@ -145,7 +145,7 @@ export default {
     },
     async getLatestFactchecks() {
       await this.$axios
-        .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
+        .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
         .then((response) => {
           const latestFactcheck = response.data;
           this.pagination = response.paging;
@@ -159,7 +159,7 @@ export default {
   },
   async asyncData({ params, error, $axios }) {
     const factcheck = await $axios
-      .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&slug=${params.slug}`))
+      .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?slug=${params.slug}`))
       .then(response => response.data)
       .catch(err => console.log(err));
     if (factcheck.length === 0) {

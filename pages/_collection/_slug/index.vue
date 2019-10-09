@@ -55,10 +55,10 @@ export default {
   },
   async asyncData({ params, error, $axios }) {
     /* stories fetching */
-    const posts = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
-      
-    const factchecks = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?client=${process.env.CLIENT_ID}&${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
-      
+    const posts = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
+
+    const factchecks = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
+
 
     const stories = (posts.data || []).concat(factchecks.data || []);
     stories.sort((a, b) => {
@@ -75,7 +75,7 @@ export default {
     };
 
     const collection = await $axios
-      .$get(encodeURI(`${process.env.API_URI}/api/v1/${collectionPluralList[params.collection]}/${params.slug}/?client=${process.env.CLIENT_ID}`))
+      .$get(encodeURI(`${process.env.API_URI}/api/v1/${collectionPluralList[params.collection]}/${params.slug}`))
       .then(response => response.data)
       .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));
 
