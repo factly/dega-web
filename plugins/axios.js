@@ -6,8 +6,7 @@ export default function ({ $axios, error }) {
   $axios.onResponse((response) => {
     if (response.status !== 200) error({ code: 404, message: 'Something went wrong', homepage: true });
   });
-  $axios.onError((err) => {
-    console.log(err);
+  $axios.onError(() => {
     error({ code: 404, message: 'Something went wrong', homepage: true });
   });
 }

@@ -127,19 +127,16 @@ export default {
             console.log('Already there');
             // this.getLatestStories();
           } else this.posts = this.posts.concat(latestPost);
-        })
-        .catch(err => console.log(err));
+        });
     }
   },
   async asyncData({ params, error, $axios }) {
-    const post = await $axios
-      .$get(encodeURI(`${process.env.API_URI}/api/v1/posts/?slug=${params.slug}`))
-      .then(response => response.data)
-      .catch(err => console.log(err));
-    if (post.length === 0) {
+    const post = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/posts/${params.slug}`));
+
+    if (!post.data) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
     }
-    return { posts: post };
+    return { posts: [post.data] };
   },
   head() {
     const metadata = {};

@@ -153,19 +153,16 @@ export default {
           if (this.factchecks.find(value => value.id === latestFactcheck[0].id)) {
             console.log('Already there');
           } else this.factchecks = this.factchecks.concat(latestFactcheck);
-        })
-        .catch(err => console.log(err));
+        });
     }
   },
   async asyncData({ params, error, $axios }) {
-    const factcheck = await $axios
-      .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?slug=${params.slug}`))
-      .then(response => response.data)
-      .catch(err => console.log(err));
-    if (factcheck.length === 0) {
+    const factcheck = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/${params.slug}`));
+
+    if (!factcheck.data) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
     }
-    return { factchecks: factcheck };
+    return { factchecks: [factcheck.data] };
   },
   head() {
     const metadata = {};

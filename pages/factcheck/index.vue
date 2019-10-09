@@ -66,19 +66,15 @@ export default {
           .then((response) => {
             this.stories = (this.stories || []).concat(response.data || []);
             this.pagination = response.paging;
-          })
-          .catch(err => console.log(err));
+          });
       }
     }
   },
   async asyncData({ error, $axios }) {
-    const rawData = await $axios
-      .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=5`))
-      .then(response => response)
-      .catch(err => console.log(err));
-    if (rawData.data.length === 0) {
-      return error({ code: 404, message: 'You have been lost', homepage: true });
-    }
+    const rawData = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=5`));
+
+    if (rawData.data.length === 0) { return error({ code: 404, message: 'You have been lost', homepage: true }); }
+
     return {
       stories: rawData.data,
       pagination: rawData.paging

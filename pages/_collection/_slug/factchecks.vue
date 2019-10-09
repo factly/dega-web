@@ -76,24 +76,20 @@ export default {
         }
       };
     },
-    async getStories() {
+    getStories() {
       if (this.pagination.hasNext) {
-        await this.$axios
+        this.$axios
           .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
           .then((response) => {
-            this.stories = response.data;
+            this.stories = (this.stories || []).concat(response.data || []);
             this.pagination = response.paging;
-          })
-          .catch(err => console.log(err));
+          });
       }
     }
   },
   async asyncData({ params, error, $axios }) {
     /* stories fetching */
-    const stories = await $axios
-      .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`))
-      .then(response => response)
-      .catch(err => console.log(err));
+    const stories = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
 
     /* collection fetching */
     const collectionPluralList = {
@@ -102,16 +98,13 @@ export default {
       tag: 'tags'
     };
 
-    const collection = await $axios
-      .$get(encodeURI(`${process.env.API_URI}/api/v1/${collectionPluralList[params.collection]}/${params.slug}`))
-      .then(response => response.data)
-      .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));
+    const collection = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/${collectionPluralList[params.collection]}/${params.slug}`));
 
     if (!collection) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
     }
 
-    return { stories: stories.data, pagination: stories.paging, collection };
+    return { stories: stories.data, pagination: stories.paging, collection: collection.data };
   },
   head() {
     const metadata = {};

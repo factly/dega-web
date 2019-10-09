@@ -59,7 +59,6 @@ export default {
 
     const factchecks = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
 
-
     const stories = (posts.data || []).concat(factchecks.data || []);
     stories.sort((a, b) => {
       if (a.publishedDate > b.publishedDate) return -1;
@@ -74,16 +73,13 @@ export default {
       tag: 'tags'
     };
 
-    const collection = await $axios
-      .$get(encodeURI(`${process.env.API_URI}/api/v1/${collectionPluralList[params.collection]}/${params.slug}`))
-      .then(response => response.data)
-      .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));
+    const collection = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/${collectionPluralList[params.collection]}/${params.slug}`));
 
     if (!collection) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
     }
 
-    return { stories, collection };
+    return { stories, collection: collection.data };
   },
   head() {
     const metadata = {};
