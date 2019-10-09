@@ -11,7 +11,7 @@ export const mutations = {
 
 export const actions = {
   async nuxtServerInit({ commit }) {
-    const org = await this.$axios.$get(encodeURI(`${process.env.API_URI}/api/v1/organizations`))
+    const org = await this.$axios.$get(encodeURI(`${this.$env.API_URI}/api/v1/organizations`))
     commit('setOrganisation', org.data)
   }
 };

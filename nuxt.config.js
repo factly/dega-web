@@ -1,11 +1,6 @@
 const { I18N } = require('./config');
 
 module.exports = {
-  env: {
-    API_URI: process.env.API_URI,
-    CLIENT_ID: process.env.CLIENT_ID,
-    DOMAIN_HOSTNAME: process.env.DOMAIN_HOSTNAME,
-  },
   mode: 'universal',
 
   /*
@@ -48,6 +43,12 @@ module.exports = {
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
     'nuxt-i18n',
+    ['nuxt-env', {
+      keys: [
+        { key: 'CLIENT_ID', default: 'default' },
+        { key: 'API_URI', default: 'https://api.degacms.com' }
+      ]
+    }]
   ],
 
   /*

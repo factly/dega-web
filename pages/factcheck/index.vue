@@ -62,7 +62,7 @@ export default {
     getStories() {
       if (this.pagination.hasNext) {
         this.$axios
-          .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
+          .$get(encodeURI(`${this.$env.API_URI}/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
           .then((response) => {
             this.stories = (this.stories || []).concat(response.data || []);
             this.pagination = response.paging;
@@ -70,8 +70,8 @@ export default {
       }
     }
   },
-  async asyncData({ error, $axios }) {
-    const rawData = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=5`));
+  async asyncData({ error, $axios, app }) {
+    const rawData = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=5`));
 
     if (rawData.data.length === 0) { return error({ code: 404, message: 'You have been lost', homepage: true }); }
 

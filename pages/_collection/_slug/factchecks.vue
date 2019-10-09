@@ -79,7 +79,7 @@ export default {
     getStories() {
       if (this.pagination.hasNext) {
         this.$axios
-          .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
+          .$get(encodeURI(`${this.$env.API_URI}/api/v1/factchecks/?${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`))
           .then((response) => {
             this.stories = (this.stories || []).concat(response.data || []);
             this.pagination = response.paging;
@@ -87,9 +87,9 @@ export default {
       }
     }
   },
-  async asyncData({ params, error, $axios }) {
+  async asyncData({ params, error, $axios, app }) {
     /* stories fetching */
-    const stories = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
+    const stories = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/factchecks/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
 
     /* collection fetching */
     const collectionPluralList = {
@@ -98,7 +98,7 @@ export default {
       tag: 'tags'
     };
 
-    const collection = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/${collectionPluralList[params.collection]}/${params.slug}`));
+    const collection = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/${collectionPluralList[params.collection]}/${params.slug}`));
 
     if (!collection) {
       return error({ code: 404, message: 'You have been lost', homepage: true });

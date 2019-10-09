@@ -145,7 +145,7 @@ export default {
     },
     async getLatestFactchecks() {
       await this.$axios
-        .$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
+        .$get(encodeURI(`${this.$env.API_URI}/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`))
         .then((response) => {
           const latestFactcheck = response.data;
           this.pagination = response.paging;
@@ -156,8 +156,8 @@ export default {
         });
     }
   },
-  async asyncData({ params, error, $axios }) {
-    const factcheck = await $axios.$get(encodeURI(`${process.env.API_URI}/api/v1/factchecks/${params.slug}`));
+  async asyncData({ params, error, $axios, app }) {
+    const factcheck = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/factchecks/${params.slug}`));
 
     if (!factcheck.data) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
