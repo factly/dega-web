@@ -1,8 +1,12 @@
 const { I18N } = require('./config');
+const SitemapRoutes = require('./utils/getSitemapRoutes.js');
 
 module.exports = {
+  env: {
+    API_URI: process.env.API_URI,
+    CLIENT_ID: process.env.CLIENT_ID,
+  },
   mode: 'universal',
-
   /*
   ** Headers of the page
   */
@@ -43,23 +47,25 @@ module.exports = {
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
     'nuxt-i18n',
-    ['nuxt-env', {
-      keys: [
-        { key: 'CLIENT_ID', default: 'default' },
-        { key: 'API_URI', default: 'https://api.degacms.com' }
-      ]
-    }]
   ],
 
   /*
   ** Axios module configuration
   */
-  axios: {},
+  axios: {
+    baseURL: process.env.API_URI
+  },
 
   /*
   ** i18n module configuration
   */
   i18n: I18N,
+  
+  sitemap: {
+    routes() {
+      return SitemapRoutes;
+    }
+  },
 
   /*
   ** Build configuration
