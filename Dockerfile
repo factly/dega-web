@@ -8,6 +8,11 @@
 FROM node:10.14.2-alpine
 ENV APP_ROOT /app
 
+ARG API_URI=https://api.degacms.com
+ARG CLIENT_ID=factly
+ARG DOMAIN_HOSTNAME=https://telugu.factly.in
+ARG DEFAULT_LANG=en
+
 # create and setup working directory
 RUN mkdir ${APP_ROOT}
 WORKDIR ${APP_ROOT}
