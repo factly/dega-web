@@ -8,6 +8,12 @@
 FROM node:10.14.2-alpine
 ENV APP_ROOT /app
 
+
+ENV API_URI=https://api.degacms.com 
+ENV CLIENT_ID=factly
+ENV DOMAIN_HOSTNAME=https://telugu.factly.in
+ENV DEFAULT_LANG=en
+
 # create and setup working directory
 RUN mkdir ${APP_ROOT}
 WORKDIR ${APP_ROOT}
@@ -22,6 +28,8 @@ RUN npm run build
 
 # give full external access to the app container
 ENV HOST 0.0.0.0
+
+EXPOSE 3000
 
 # Primary command to run when the container starts
 CMD ["npm", "start"]

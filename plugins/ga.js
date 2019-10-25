@@ -18,10 +18,15 @@ export default ({ app }) => {
     /*
     ** Set the current page
     */
+  let config = {
+    headers: {
+      client: process.env.CLIENT_ID,
+    }
+  }
   const GAC = axios
-  .get(`${process.env.API_URI}/api/v1/organizations/?client=${process.env.CLIENT_ID}`)
+  .get(`${process.env.API_URI}/api/v1/organizations`, config)
   .then(response => {
-    ga('create', response.data[0].ga_tracking_code, 'auto')
+    ga('create', response.data.gaTrackingCode, 'auto')
     ga('send', 'pageview')
     app.router.afterEach((to, from) => {
       /*
