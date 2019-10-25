@@ -1,7 +1,7 @@
 <template>
   <div class="box padding-none box-shadow-none">
     <div class="columns is-mobile">
-      <div class="column is-8">
+      <div class="column is-9">
         <div>
           <div>
             <p class="is-size-4 has-text-weight-bold story-preview-title">
@@ -22,7 +22,7 @@
           </div>
         </div>
       </div>
-      <div class="column is-4">
+      <div class="column is-3">
         <nuxt-link :to="localePath({ name: story.class.split('.').pop().toLowerCase() + '-slug', params: { slug: story.slug } })">
           <figure
             v-if="story.media"

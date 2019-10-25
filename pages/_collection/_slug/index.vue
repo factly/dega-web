@@ -54,12 +54,12 @@ export default {
     };
   },
   async asyncData({
-    params, error, $axios, app
+    params, error, $axios
   }) {
     /* stories fetching */
-    const posts = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/posts/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
+    const posts = await $axios.$get(`/api/v1/posts/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`);
 
-    const factchecks = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/factchecks/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`));
+    const factchecks = await $axios.$get(`/api/v1/factchecks/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`);
 
     const stories = (posts.data || []).concat(factchecks.data || []);
     stories.sort((a, b) => {
@@ -75,7 +75,7 @@ export default {
       tag: 'tags'
     };
 
-    const collection = await $axios.$get(encodeURI(`${app.$env.API_URI}/api/v1/${collectionPluralList[params.collection]}/${params.slug}`));
+    const collection = await $axios.$get(`/api/v1/${collectionPluralList[params.collection]}/${params.slug}`);
 
     if (!collection) {
       return error({ code: 404, message: 'You have been lost', homepage: true });
