@@ -136,7 +136,7 @@ export default {
     const post = await $axios.$get(`/api/v1/posts/${params.slug}`);
 
     if (!post.data) {
-      return error({ code: 404, message: 'You have been lost', homepage: true });
+      error({ code: 404, message: 'You have been lost', homepage: true });
     }
     return { posts: [post.data] };
   },
