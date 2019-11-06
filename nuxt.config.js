@@ -4,7 +4,7 @@ const SitemapRoutes = require('./utils/getSitemapRoutes.js');
 module.exports = {
   env: {
     API_URI: process.env.API_URI,
-    CLIENT_ID: process.env.CLIENT_ID,
+    CLIENT_ID: process.env.CLIENT_ID
   },
   mode: 'universal',
   /*
@@ -60,7 +60,7 @@ module.exports = {
   ** i18n module configuration
   */
   i18n: I18N,
-  
+
   sitemap: {
     routes() {
       return SitemapRoutes;

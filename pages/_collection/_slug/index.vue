@@ -78,7 +78,7 @@ export default {
     const collection = await $axios.$get(`/api/v1/${collectionPluralList[params.collection]}/${params.slug}`);
 
     if (!collection) {
-      return error({ code: 404, message: 'You have been lost', homepage: true });
+      error({ code: 404, message: 'You have been lost', homepage: true });
     }
 
     return { stories, collection: collection.data };

@@ -149,7 +149,6 @@ export default {
         .then((response) => {
           const latestFactcheck = response.data;
           this.pagination = response.paging;
-          // eslint-disable-next-line no-underscore-dangle
           if (this.factchecks.find(value => value.id === latestFactcheck[0].id)) {
             console.log('Already there');
           } else this.factchecks = this.factchecks.concat(latestFactcheck);
@@ -162,7 +161,7 @@ export default {
     const factcheck = await $axios.$get(`/api/v1/factchecks/${params.slug}`);
 
     if (!factcheck.data) {
-      return error({ code: 404, message: 'You have been lost', homepage: true });
+      error({ code: 404, message: 'You have been lost', homepage: true });
     }
     return { factchecks: [factcheck.data] };
   },

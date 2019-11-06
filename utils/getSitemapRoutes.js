@@ -1,49 +1,49 @@
 const axios = require('axios');
 
 async function getSitemapRoutes() {
-  let config = {
+  const config = {
     headers: {
-      client: process.env.CLIENT_ID,
+      client: process.env.CLIENT_ID
     }
-  }
+  };
 
   const sitemap = await axios
     .get(`${process.env.API_URI}/api/v1/sitemap`, config)
     .then(response => response.data.data)
     .catch(err => console.log(err));
 
-  let  routes = []
+  const routes = [];
 
-  sitemap.categories.forEach( category => {
+  sitemap.categories.forEach((category) => {
     routes.push({
-      url: 'category/' + category.slug,
-    })
-  })
+      url: `category/${category.slug}`
+    });
+  });
 
-  sitemap.users.forEach( user => {
+  sitemap.users.forEach((user) => {
     routes.push({
-      url: 'user/' + user.slug,
-    })
-  })
+      url: `user/${user.slug}`
+    });
+  });
 
-  sitemap.tags.forEach( tag => {
+  sitemap.tags.forEach((tag) => {
     routes.push({
-      url: 'tag/' + tag.slug,
-    })
-  })
+      url: `tag/${tag.slug}`
+    });
+  });
 
-  sitemap.posts.forEach( post => {
+  sitemap.posts.forEach((post) => {
     routes.push({
-      url: 'post/' + post.slug,
-    })
-  })
+      url: `post/${post.slug}`
+    });
+  });
 
-  sitemap.factchecks.forEach( factcheck => {
+  sitemap.factchecks.forEach((factcheck) => {
     routes.push({
-      url: 'factcheck/' + factcheck.slug,
-    })
-  })
-  
+      url: `factcheck/${factcheck.slug}`
+    });
+  });
+
   return routes;
 }
 

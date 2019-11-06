@@ -74,7 +74,7 @@ export default {
     const rawData = await $axios.$get('/api/v1/posts/?sortBy=publishedDate&sortAsc=false&limit=5');
 
     if (rawData.data.length === 0) {
-      return error({ code: 404, message: 'You have been lost', homepage: true });
+      error({ code: 404, message: 'You have been lost', homepage: true });
     }
     return {
       stories: rawData.data,
