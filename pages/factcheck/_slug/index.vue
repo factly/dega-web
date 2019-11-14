@@ -158,12 +158,9 @@ export default {
   async asyncData({
     params, error, $axios
   }) {
-    const factcheck = await $axios.$get(`/api/v1/factchecks/${params.slug}`);
-
-    if (!factcheck.data) {
-      error({ code: 404, message: 'You have been lost', homepage: true });
-    }
-    return { factchecks: [factcheck.data] };
+    return $axios.$get(`/api/v1/factchecks/${params.slug}`)
+      .then(factcheck => ({ factchecks: factcheck.data ? [factcheck.data] : [] }))
+      .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));
   },
   head() {
     const metadata = {};
@@ -172,14 +169,12 @@ export default {
       metadata.title = `${factchecks[0].title} - ${this.$store.getters.getOrganisation.siteTitle}`;
       metadata.script = [
         { innerHTML: JSON.stringify(factchecks[0].schemas), type: 'application/ld+json' },
+        { src: 'https://platform.twitter.com/widgets.js', async: true },
       ];
       metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: `${factchecks[0].title} - ${this.$store.getters.getOrganisation.siteTitle}` },
         { hid: 'og:image', name: 'og:image', content: factchecks[0].media ? factchecks[0].media.sourceURL : null },
         { hid: 'og:description', name: 'og:description', content: factchecks[0].excerpt ? factchecks[0].excerpt : null },
-      ];
-      metadata.script = [
-        { src: 'https://platform.twitter.com/widgets.js', async: true },
       ];
     } else { metadata.title = this.$store.getters.getOrganisation.siteTitle; }
 
