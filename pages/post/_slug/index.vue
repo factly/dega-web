@@ -134,7 +134,7 @@ export default {
     params, error, $axios
   }) {
     return $axios.$get(`/api/v1/posts/${params.slug}`)
-      .then(post => ({ posts: post.data ? [post.data] : [] }))
+      .then(post => ({ posts: [post.data] || [] }))
       .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));
   },
   head() {
