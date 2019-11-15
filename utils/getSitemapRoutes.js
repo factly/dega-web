@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-async function getSitemapRoutes() {
+export default async function getSitemapRoutes() {
   const config = {
     headers: {
       client: process.env.CLIENT_ID
@@ -46,5 +46,3 @@ async function getSitemapRoutes() {
 
   return routes;
 }
-
-module.exports = getSitemapRoutes();

@@ -1,7 +1,7 @@
-const { I18N } = require('./config');
-const SitemapRoutes = require('./utils/getSitemapRoutes.js');
+import I18N from './config';
+import SitemapRoutes from './utils/getSitemapRoutes.js';
 
-module.exports = {
+export default {
   env: {
     API_URI: process.env.API_URI,
     CLIENT_ID: process.env.CLIENT_ID
