@@ -63,7 +63,7 @@ export default {
 
   sitemap: {
     routes() {
-      return SitemapRoutes;
+      return SitemapRoutes();
     }
   },
 

@@ -1,6 +1,8 @@
 import en from '../locales/en-US.js';
 import te from '../locales/te-IN.js';
-require('dotenv').config();
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 export default {
   locales: [
@@ -20,4 +22,4 @@ export default {
     fallbackLocale: process.env.DEFAULT_LANG,
     messages: { en, te }
   }
-}
+};
