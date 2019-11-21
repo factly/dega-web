@@ -25,7 +25,7 @@ export default {
   /*
   ** Global CSS
   */
-  css: ['@/assets/css/main.css', '@/assets/css/custom.css'],
+  css: ['bulma/css/bulma.css', '@/assets/css/main.css', '@/assets/css/custom.css'],
 
   /*
   ** Plugins to load before mounting the App
@@ -43,7 +43,6 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/bulma',
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
     'nuxt-i18n',
@@ -71,13 +70,6 @@ export default {
   ** Build configuration
   */
   build: {
-    postcss: {
-      preset: {
-        features: {
-          customProperties: false
-        }
-      }
-    },
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
