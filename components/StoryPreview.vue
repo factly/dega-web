@@ -1,5 +1,5 @@
 <template>
-  <div class="box padding-none box-shadow-none">
+  <div class="box">
     <div class="columns is-mobile">
       <div class="column is-9">
         <div>
