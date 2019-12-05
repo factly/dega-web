@@ -1,6 +1,6 @@
 /* eslint-disable */
 // const getGATracking = require('../utils/getGATracking.js');
-const axios = require('axios');
+import axios from 'axios';
 
 
 export default ({ app }) => {

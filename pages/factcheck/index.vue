@@ -71,14 +71,17 @@ export default {
     }
   },
   async asyncData({ error, $axios }) {
-    const rawData = await $axios.$get('/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=5');
+    return $axios.$get('/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=5')
+      .then(({ data, paging }) => {
+        if (data.length === 0) {
+          error({ code: 404, message: 'You have been lost', homepage: true });
+        }
 
-    if (rawData.data.length === 0) { error({ code: 404, message: 'You have been lost', homepage: true }); }
-
-    return {
-      stories: rawData.data,
-      pagination: rawData.paging
-    };
+        return {
+          stories: data,
+          pagination: paging
+        };
+      });
   },
   head() {
     const title = `Factchecks - ${this.$store.getters.getOrganisation.siteTitle}`;

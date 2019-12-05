@@ -1,7 +1,7 @@
-const { I18N } = require('./config');
-const SitemapRoutes = require('./utils/getSitemapRoutes.js');
+import I18N from './config';
+import SitemapRoutes from './utils/getSitemapRoutes.js';
 
-module.exports = {
+export default {
   env: {
     API_URI: process.env.API_URI,
     CLIENT_ID: process.env.CLIENT_ID
@@ -25,7 +25,7 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ['@/assets/css/main.css', '@/assets/css/custom.css'],
+  css: ['bulma/css/bulma.css', '@/assets/css/main.css', '@/assets/css/custom.css'],
 
   /*
   ** Plugins to load before mounting the App
@@ -43,7 +43,6 @@ module.exports = {
   */
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/bulma',
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
     'nuxt-i18n',
@@ -63,7 +62,7 @@ module.exports = {
 
   sitemap: {
     routes() {
-      return SitemapRoutes;
+      return SitemapRoutes();
     }
   },
 
@@ -71,13 +70,6 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    postcss: {
-      preset: {
-        features: {
-          customProperties: false
-        }
-      }
-    },
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

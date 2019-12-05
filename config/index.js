@@ -1,8 +1,8 @@
-const en = require('../locales/en-US.js');
-const te = require('../locales/te-IN.js');
-require('dotenv').config();
+import 'dotenv/config';
+import en from '../locales/en-US.js';
+import te from '../locales/te-IN.js';
 
-const I18N = {
+export default {
   locales: [
     {
       code: 'en',
@@ -20,8 +20,4 @@ const I18N = {
     fallbackLocale: process.env.DEFAULT_LANG,
     messages: { en, te }
   }
-};
-
-module.exports = {
-  I18N
 };

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   header: {
     home: 'Home',
     stories: 'Stories',

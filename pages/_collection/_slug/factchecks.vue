@@ -91,7 +91,8 @@ export default {
     params, error, $axios
   }) {
     /* stories fetching */
-    const stories = await $axios.$get(`/api/v1/factchecks/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`);
+    const stories = await $axios.$get(`/api/v1/factchecks/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`)
+      .catch(() => error({ code: 500, message: 'Something went wrong' }));
 
     /* collection fetching */
     const collectionPluralList = {
@@ -100,13 +101,11 @@ export default {
       tag: 'tags'
     };
 
-    const collection = await $axios.$get(`/api/v1/${collectionPluralList[params.collection]}/${params.slug}`);
+    const collection = await $axios.$get(`/api/v1/${collectionPluralList[params.collection]}/${params.slug}`)
+      .then(c => c.data)
+      .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));
 
-    if (!collection) {
-      error({ code: 404, message: 'You have been lost', homepage: true });
-    }
-
-    return { stories: stories.data, pagination: stories.paging, collection: collection.data };
+    return { stories: stories.data, pagination: stories.paging, collection };
   },
   head() {
     const metadata = {};
