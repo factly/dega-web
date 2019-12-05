@@ -1,8 +1,6 @@
+import 'dotenv/config';
 import en from '../locales/en-US.js';
 import te from '../locales/te-IN.js';
-import dotenv from 'dotenv'
-
-dotenv.config()
 
 export default {
   locales: [
