@@ -133,12 +133,9 @@ export default {
   async asyncData({
     params, error, $axios
   }) {
-    const post = await $axios.$get(`/api/v1/posts/${params.slug}`);
-
-    if (!post.data) {
-      error({ code: 404, message: 'You have been lost', homepage: true });
-    }
-    return { posts: [post.data] };
+    return $axios.$get(`/api/v1/posts/${params.slug}`)
+      .then(post => ({ posts: post.data ? [post.data] : [] }))
+      .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));
   },
   head() {
     const metadata = {};
