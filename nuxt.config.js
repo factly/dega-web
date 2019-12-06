@@ -11,6 +11,9 @@ export default {
   ** Headers of the page
   */
   head: {
+    script: [
+      { src: 'https://platform.twitter.com/widgets.js' }
+    ],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

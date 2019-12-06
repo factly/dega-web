@@ -147,9 +147,6 @@ export default {
         { hid: 'og:image', name: 'og:image', content: posts[0].media ? posts[0].media.sourceURL : null },
         { hid: 'og:description', name: 'og:description', content: posts[0].excerpt ? posts[0].excerpt : null },
       ];
-      metadata.script = [
-        { src: 'https://platform.twitter.com/widgets.js', async: true },
-      ];
     } else { metadata.title = this.$store.getters.getOrganisation.siteTitle; }
 
     return metadata;

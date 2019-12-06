@@ -11,6 +11,7 @@
         </div>
         <div class="margin-top-2">
           <article
+            v-twitter-widgets
             class="has-text-justify factcheck-intro-font"
             v-html="f.introduction" />
           <br>
@@ -26,6 +27,7 @@
               :index="index"/>
           </div>
           <article
+            v-twitter-widgets
             class="has-text-justify factcheck-summary-font"
             v-html="f.summary" />
         </div>
@@ -169,7 +171,6 @@ export default {
       metadata.title = `${factchecks[0].title} - ${this.$store.getters.getOrganisation.siteTitle}`;
       metadata.script = [
         { innerHTML: JSON.stringify(factchecks[0].schemas), type: 'application/ld+json' },
-        { src: 'https://platform.twitter.com/widgets.js', async: true },
       ];
       metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: `${factchecks[0].title} - ${this.$store.getters.getOrganisation.siteTitle}` },
