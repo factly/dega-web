@@ -4,14 +4,14 @@
       <div class="column is-9">
         <div>
           <div>
-            <p class="is-size-4 has-text-weight-bold story-preview-title">
+            <p class="is-size-4 is-size-6-mobile has-text-weight-bold story-preview-title">
               <nuxt-link
                 :to="localePath({ name: story.class.split('.').pop().toLowerCase() + '-slug', params: { slug: story.slug } })"
                 class="has-text-black-bis">
                 {{ story.title }}
               </nuxt-link>
             </p>
-            <p class="is-size-6 has-text-grey has-text-justified story-preview-summary story-preview-excerpt">{{ story.excerpt }}</p>
+            <p class="is-hidden-mobile is-size-6 is-size-7-mobile has-text-grey has-text-justified story-preview-summary story-preview-excerpt">{{ story.excerpt }}</p>
           </div>
           <div class="margin-top-half">
             <MetaData
