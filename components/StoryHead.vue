@@ -65,9 +65,13 @@
         <div class="columns has-background-light">
           <div class="column is-6 padding-none">
             <figure
-              v-if="story.media"
               class="image is-16by9">
               <img
+                v-if="story.claims"
+                alt="factcheck-image"
+                src="https://images.degacms.com/dega-content/factly/2019/12/1575707993291-rape-cases-in-india---thumbnail.jpg?resize:fill:200:112:0/gravity:sm">
+              <img
+                v-else
                 :src="story.media.sourceURL+'?resize:fill:200:112:0/gravity:sm'"
                 :alt="story.media.altText"
               >

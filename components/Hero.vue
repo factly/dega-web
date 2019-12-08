@@ -3,10 +3,14 @@
     <div class="columns is-vcentered">
       <div class= "column is-6">
         <figure
-          v-if="story.media"
           class="image is-16by9">
           <nuxt-link :to="localePath({ name: story.class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })" >
             <img
+              v-if="story.claims"
+              alt="factcheck-image"
+              src="https://images.degacms.com/dega-content/factly/2019/12/1575707993291-rape-cases-in-india---thumbnail.jpg?resize:fill:800:450:0/gravity:sm">
+            <img
+              v-else
               :src="story.media.sourceURL+'?resize:fill:800:450:0/gravity:sm'"
               :alt="story.media.altText">
           </nuxt-link>

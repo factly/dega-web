@@ -174,7 +174,7 @@ export default {
       ];
       metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: `${factchecks[0].title} - ${this.$store.getters.getOrganisation.siteTitle}` },
-        { hid: 'og:image', name: 'og:image', content: factchecks[0].media ? factchecks[0].media.sourceURL : null },
+        { hid: 'og:image', name: 'og:image', content: 'https://images.degacms.com/dega-content/factly/2019/12/1575707993291-rape-cases-in-india---thumbnail.jpg' },
         { hid: 'og:description', name: 'og:description', content: factchecks[0].excerpt ? factchecks[0].excerpt : null },
       ];
     } else { metadata.title = this.$store.getters.getOrganisation.siteTitle; }
