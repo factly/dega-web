@@ -11,7 +11,7 @@
                 v-if="claim.claimant.media"
                 class="image is-24x24">
                 <img
-                  :src="claim.claimant.media.sourceURL+'?resize:fill:50:50:0/gravity:sm'"
+                  :src="claim.claimant.media.url+'?resize:fill:50:50:0/gravity:sm'"
                   :alt="claim.claimant.media.altText">
               </figure>
             </div>
@@ -27,7 +27,7 @@
               v-if="claim.rating.media"
               class="image is-128x128">
               <img
-                :src="claim.rating.media.sourceURL+'?resize:fill:80:80:0/gravity:sm'"
+                :src="claim.rating.media.url+'?resize:fill:80:80:0/gravity:sm'"
                 :alt="claim.rating.media.altText">
             </figure>
           </div>
@@ -40,7 +40,7 @@
             v-if="claim.rating.media"
             class="image is-96x96">
             <img
-              :src="claim.rating.media.sourceURL+'?resize:fill:100:100:0/gravity:sm'"
+              :src="claim.rating.media.url+'?resize:fill:100:100:0/gravity:sm'"
               :alt="claim.rating.media.altText">
           </figure>
         </div>

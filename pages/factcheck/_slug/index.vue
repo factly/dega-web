@@ -1,5 +1,7 @@
+
 <template>
-  <div class="main-content">
+  <div
+    class="main-content">
     <div
       v-for="(f, i) in factchecks"
       ref="factchecks"
@@ -54,12 +56,12 @@
               collection="category"
             />
           </div>
-          <div v-if="f.users.length > 0">
+          <div v-if="f.degaUsers.length > 0">
             <RelatedArticle
-              v-for="(user, index) in f.users"
+              v-for="(user, index) in f.degaUsers"
               :key="'user-related'+index"
               :slug="user.slug"
-              :header="`More from ${user.displayName}`"
+              :header="`More from ${user.display_name}`"
               :id="f.id"
               class="margin-horizontal-1"
               collection="user"
@@ -84,11 +86,14 @@ a.anchor {
 }
 </style>
 <script>
+/* eslint-disable no-underscore-dangle */
 import StoryHead from '@/components/StoryHead';
 import StoryFooter from '@/components/StoryFooter';
 import Claim from '@/components/Claim';
 import ListClaims from '@/components/ListClaims';
 import RelatedArticle from '@/components/RelatedArticle';
+import factcheckByIdQuery from '../../../graphql/query/factcheckById.gql';
+import factcheckQuery from '../../../graphql/query/factcheck.gql';
 
 export default {
   components: {
@@ -102,9 +107,9 @@ export default {
     return {
       factchecks: [],
       on: 0,
+      total: 0,
       pagination: {
-        hasNext: true,
-        next: ''
+        pageNext: 2
       }
     };
   },
@@ -115,7 +120,7 @@ export default {
     on() {
       document.title = `${this.factchecks[this.on].title} - ${this.$store.getters.getOrganisation.siteTitle}`;
       // eslint-disable-next-line no-restricted-globals
-      history.pushState({}, null, `/factcheck/${this.factchecks[this.on].slug}`);
+      history.pushState({}, null, `/factcheck/${this.factchecks[this.on]._id}`);
     }
   },
   mounted() {
@@ -128,7 +133,7 @@ export default {
         const bottomOfWindow = scrolling + 50 >= document.documentElement.offsetHeight;
 
         if (bottomOfWindow) {
-          if (this.pagination.hasNext) this.getLatestFactchecks();
+          if (this.factchecks.length <= this.total) this.getLatestFactchecks();
         }
 
         const factchecksList = this.$refs.factchecks;
@@ -144,23 +149,39 @@ export default {
       };
     },
     async getLatestFactchecks() {
-      await this.$axios
-        .$get(`/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`)
-        .then((response) => {
-          const latestFactcheck = response.data;
-          this.pagination = response.paging;
-          if (this.factchecks.find(value => value.id === latestFactcheck[0].id)) {
-            console.log('Already there');
-          } else this.factchecks = this.factchecks.concat(latestFactcheck);
-        });
+      const latestFactcheck = await this.$apollo.query({
+        query: factcheckQuery,
+        variables: {
+          limit: 1,
+          page: this.pagination.pageNext,
+          sortBy: 'published_date',
+          sort: 'DES'
+        }
+      });
+      this.pagination.pageNext = this.pagination.pageNext + 1;
+      this.total = latestFactcheck.data.factchecks.total;
+      console.log(latestFactcheck.data.factchecks.nodes);
+      if (this.factchecks.find(value => value.id === latestFactcheck.data.factchecks.nodes[0]._id)) {
+        console.log('Already there');
+      } else {
+        this.factchecks = this.factchecks.concat(latestFactcheck.data.factchecks.nodes);
+      }
+      console.log(this.factchecks.length, this.total);
     }
   },
   async asyncData({
-    params, error, $axios
+    params, app
   }) {
-    return $axios.$get(`/api/v1/factchecks/${params.slug}`)
-      .then(factcheck => ({ factchecks: factcheck.data ? [factcheck.data] : [] }))
-      .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));
+    const result = await app.apolloProvider.defaultClient.query({
+      query: factcheckByIdQuery,
+      variables: {
+        id: params.slug
+      }
+    });
+    return {
+      factchecks: [result.data.factcheck],
+      total: 1
+    };
   },
   head() {
     const metadata = {};
@@ -173,7 +194,7 @@ export default {
       ];
       metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: `${factchecks[0].title} - ${this.$store.getters.getOrganisation.siteTitle}` },
-        { hid: 'og:image', name: 'og:image', content: factchecks[0].media ? factchecks[0].media.sourceURL : null },
+        { hid: 'og:image', name: 'og:image', content: factchecks[0].media ? factchecks[0].media.url : null },
         { hid: 'og:description', name: 'og:description', content: factchecks[0].excerpt ? factchecks[0].excerpt : null },
       ];
     } else { metadata.title = this.$store.getters.getOrganisation.siteTitle; }

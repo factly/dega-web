@@ -16,7 +16,7 @@
                 class="image figure-width-5 is-64x64">
                 <a :href="'#claim'+(index)">
                   <img
-                    :src="c.rating.media.sourceURL+'?resize:fill:100:100:0/gravity:sm'"
+                    :src="c.rating.media.url+'?resize:fill:100:100:0/gravity:sm'"
                     :alt="c.rating.media.altText">
                 </a>
               </figure>

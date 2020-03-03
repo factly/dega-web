@@ -1,0 +1,35 @@
+query postById($id: String!) {
+  post(id: $id) {
+    _id
+    title
+    content
+    excerpt
+    published_date
+    updates
+    slug
+    media {
+      url
+      alt_text
+    }
+    categories {
+      name
+      slug
+    }
+    tags {
+      name
+      slug
+    }
+    degaUsers {
+      _id
+      display_name
+      slug
+      media {
+        url
+        alt_text
+      }
+      email
+      _class
+    }
+    _class
+  }
+}

@@ -5,10 +5,10 @@
         <figure
           v-if="story.media"
           class="image is-16by9">
-          <nuxt-link :to="localePath({ name: story.class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })" >
+          <nuxt-link :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story._id } })" >
             <img
-              :src="story.media.sourceURL+'?resize:fill:800:450:0/gravity:sm'"
-              :alt="story.media.altText">
+              :src="story.media.url+'?resize:fill:800:450:0/gravity:sm'"
+              :alt="story.media.alt_text">
           </nuxt-link>
         </figure>
       </div>
@@ -16,7 +16,7 @@
         <div>
           <p class="is-size-4 has-text-weight-bold hero-title-font">
             <nuxt-link
-              :to="localePath({ name: story.class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })"
+              :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story._id } })"
               class="has-text-black-bis">
               {{ story.title }}
             </nuxt-link>
@@ -29,7 +29,7 @@
           <MetaData
             :users="story.users"
             :categories="story.categories"
-            :published="story.publishedDate"
+            :published="story.published_date"
           />
         </div>
       </div>

@@ -1,0 +1,34 @@
+query posts($limit: Int, $page: Int) {
+  posts(limit: $limit, page: $page) {
+    nodes {
+      _id
+      title
+      content
+      excerpt
+      published_date
+      updates
+      slug
+      media {
+        url
+        alt_text
+      }
+      categories {
+        name
+        slug
+      }
+      tags {
+        name
+        slug
+      }
+      degaUsers {
+        _id
+        display_name
+        slug
+        email
+        _class
+      }
+      _class
+    }
+    total
+  }
+}

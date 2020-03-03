@@ -11,7 +11,7 @@
           <span v-if="index !== 0">,&nbsp;</span>
           <nuxt-link
             :to="localePath({ name:'collection-slug', params: { collection: 'user', slug: user.slug } })"
-            class="has-text-link">{{ user.displayName }}</nuxt-link>
+            class="has-text-link">{{ user.display_name }}</nuxt-link>
         </p>
       </div>
       <p

@@ -10,7 +10,7 @@
           :to="localePath('index')"
           class="navbar-item">
           <img
-            :src="organisation.mediaLogo.sourceURL"
+            :src="organisation.mediaLogo.url"
             :alt="organisation.name"
             height="110">
         </nuxt-link>
@@ -157,8 +157,8 @@
 </template>
 
 <script>
-import DefaultImage from '~/assets/images/dega-default-image.png';
 import SocialLink from '@/components/SocialLinks';
+import DefaultImage from '~/assets/images/dega-default-image.png';
 
 export default {
   components: {
@@ -180,8 +180,8 @@ export default {
     return {
       title: this.organisation.name,
       link: [
-        { rel: 'shortcut icon', type: 'image/png', href: this.organisation.mediaLogo ? this.organisation.mediaLogo.sourceURL : null },
-        { rel: 'icon', type: 'image/x-icon', href: this.organisation.mediaFavicon ? this.organisation.mediaFavicon.sourceURL : null },
+        { rel: 'shortcut icon', type: 'image/png', href: this.organisation.mediaLogo ? this.organisation.mediaLogo.url : null },
+        { rel: 'icon', type: 'image/x-icon', href: this.organisation.mediaFavicon ? this.organisation.mediaFavicon.url : null },
       ],
       meta: [
         { name: 'google-site-verification', content: this.organisation.googleVerificationCode },

@@ -22,9 +22,9 @@
               <figure
                 v-if="story.media"
                 class="image figure-width-5">
-                <nuxt-link :to="localePath({ name: story.class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })">
+                <nuxt-link :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })">
                   <img
-                    :src="story.media.sourceURL+'?resize:fill:80:45:0/gravity:sm'"
+                    :src="story.media.url+'?resize:fill:80:45:0/gravity:sm'"
                     :alt="story.media.altText" >
                 </nuxt-link>
               </figure>
@@ -32,7 +32,7 @@
             <div class="media-content">
               <p class="subtitle is-6">
                 <nuxt-link
-                  :to="localePath({ name: story.class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })"
+                  :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })"
                   class="has-text-black-bis">
                   {{ story.title }}
                 </nuxt-link>
@@ -46,6 +46,9 @@
 </template>
 
 <script>
+import factCheckQuery from '../graphql/query/factcheck.gql';
+import postQuery from '../graphql/query/post.gql';
+
 export default {
   props: {
     collection: {
@@ -75,19 +78,38 @@ export default {
   },
   methods: {
     async getCollectionStories(collection, slug) {
-      const posts = await this.$axios.$get(`/api/v1/posts/?${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`);
+      // const posts = await this.$axios.$get(`/api/v1/posts/?${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`);
 
-      const factchecks = await this.$axios.$get(`/api/v1/factchecks/?${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`);
+      // const factchecks = await this.$axios.$get(`/api/v1/factchecks/?${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`);
 
-      const stories = (posts.data || []).concat(factchecks.data || []);
+      const variables = {
+        limit: 5,
+        sortBy: 'published_date',
+        sort: 'DES'
+      };
+
+      if (collection && slug) variables[collection] = slug;
+
+      const factchecks = await this.$apollo.query({
+        query: factCheckQuery,
+        variables
+      });
+
+      const posts = await this.$apollo.query({
+        query: postQuery,
+        variables
+      });
+
+      const stories = (posts.data.posts.nodes || []).concat(factchecks.data.factchecks.nodes || []);
       stories.sort((a, b) => {
         if (a.publishedDate > b.publishedDate) return -1;
         if (b.publishedDate > a.publishedDate) return 1;
         return 0;
       });
+      // change id to _id
       this.stories = this.id ? stories.filter(value =>
         // eslint-disable-next-line no-underscore-dangle
-        value.id !== this.id
+        value._id !== this.id
       ) : stories;
     }
   }

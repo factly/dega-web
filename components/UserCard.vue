@@ -7,7 +7,7 @@
             v-if="collection.media"
             class="image is-96x96">
             <img
-              :src="collection.media.sourceURL"
+              :src="collection.media.url"
               alt="Placeholder image">
           </figure>
         </div>

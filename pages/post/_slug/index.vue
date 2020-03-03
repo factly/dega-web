@@ -38,12 +38,12 @@
               collection="category"
             />
           </div>
-          <div v-if="p.users.length > 0">
+          <div v-if="p.degaUsers.length > 0">
             <RelatedArticle
               v-for="(user, index) in p.users"
               :key="'user-related'+index"
               :slug="user.slug"
-              :header="`More from ${user.displayName}`"
+              :header="`More from ${user.display_name}`"
               :id="p.id"
               class="margin-horizontal-1"
               collection="user"
@@ -62,9 +62,12 @@
 </template>
 
 <script>
+/* eslint-disable no-underscore-dangle */
 import StoryHead from '@/components/StoryHead';
 import StoryFooter from '@/components/StoryFooter';
 import RelatedArticle from '@/components/RelatedArticle';
+import postByIdQuery from '../../../graphql/query/postById.gql';
+import postQuery from '../../../graphql/query/post.gql';
 
 export default {
   components: {
@@ -76,9 +79,9 @@ export default {
     return {
       posts: [],
       on: 0,
+      total: 0,
       pagination: {
-        hasNext: true,
-        next: ''
+        pageNext: 2
       }
     };
   },
@@ -89,7 +92,7 @@ export default {
     on() {
       document.title = `${this.posts[this.on].title} - ${this.$store.getters.getOrganisation.siteTitle}`;
       // eslint-disable-next-line no-restricted-globals
-      history.pushState({}, null, `/post/${this.posts[this.on].slug}`);
+      history.pushState({}, null, `/post/${this.posts[this.on]._id}`);
     }
   },
   mounted() {
@@ -101,7 +104,9 @@ export default {
         const scrolling = document.documentElement.scrollTop + window.innerHeight;
         const bottomOfWindow = scrolling + 50 >= document.documentElement.offsetHeight;
         if (bottomOfWindow) {
-          if (this.pagination.hasNext) this.getLatestStories();
+          if (this.posts.length <= this.total) {
+            this.getLatestStories();
+          }
         }
 
         const postList = this.$refs.posts;
@@ -117,25 +122,38 @@ export default {
       };
     },
     async getLatestStories() {
-      await this.$axios
-        .$get(`api/v1/posts/?sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`)
-        .then((response) => {
-          const latestPost = response.data;
-          this.pagination = response.paging;
-          // eslint-disable-next-line no-underscore-dangle
-          if (this.posts.find(value => value.id === latestPost[0].id)) {
-            console.log('Already there');
-            // this.getLatestStories();
-          } else this.posts = this.posts.concat(latestPost);
-        });
+      const latestPost = await this.$apollo.query({
+        query: postQuery,
+        variables: {
+          limit: 1,
+          page: this.pagination.pageNext,
+          sortBy: 'published_date',
+          sort: 'DES'
+        }
+      });
+      this.pagination.pageNext = this.pagination.pageNext + 1;
+      this.total = latestPost.data.posts.total;
+      if (this.posts.find(value => value.id === latestPost.data.posts.nodes[0]._id)) {
+        console.log('Already there');
+      } else {
+        this.posts = this.posts.concat(latestPost.data.posts.nodes);
+      }
     }
   },
   async asyncData({
-    params, error, $axios
+    app, params
   }) {
-    return $axios.$get(`/api/v1/posts/${params.slug}`)
-      .then(post => ({ posts: [post.data] || [] }))
-      .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));
+    // add error
+    const result = await app.apolloProvider.defaultClient.query({
+      query: postByIdQuery,
+      variables: {
+        id: params.slug
+      }
+    });
+    return {
+      posts: [result.data.post],
+      total: 1
+    };
   },
   head() {
     const metadata = {};
@@ -144,7 +162,7 @@ export default {
       metadata.title = `${posts[0].title} - ${this.$store.getters.getOrganisation.siteTitle}`;
       metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: `${posts[0].title} - ${this.$store.getters.getOrganisation.siteTitle}` },
-        { hid: 'og:image', name: 'og:image', content: posts[0].media ? posts[0].media.sourceURL : null },
+        { hid: 'og:image', name: 'og:image', content: posts[0].media ? posts[0].media.url : null },
         { hid: 'og:description', name: 'og:description', content: posts[0].excerpt ? posts[0].excerpt : null },
       ];
       metadata.script = [

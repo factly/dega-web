@@ -12,7 +12,7 @@
           />
         </div>
         <div
-          v-if="stories.length > 0 && !pagination.hasNext"
+          v-if="stories.length > 0 && stories.length >= total"
           class="margin-top-2">
           <h3 class="is-size-4 has-text-centered">No more stories</h3>
         </div>
@@ -34,6 +34,7 @@
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
 import RelatedArticle from '@/components/RelatedArticle';
+import postQuery from '../../graphql/query/post.gql';
 
 export default {
   components: {
@@ -44,7 +45,10 @@ export default {
   data() {
     return {
       stories: [],
-      pagination: {}
+      total: 0,
+      pagination: {
+        pageNext: 2
+      }
     };
   },
   mounted() {
@@ -54,43 +58,36 @@ export default {
     scroll() {
       window.onscroll = () => {
         const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-        if (bottomOfWindow && this.pagination.hasNext) {
+        if (bottomOfWindow && this.stories.length < this.total) {
           this.getStories();
         }
       };
     },
-    getStories() {
-      if (this.pagination.hasNext) {
-        this.$axios
-          .$get(`api/v1/posts/?sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`)
-          .then((response) => {
-            this.stories = (this.stories || []).concat(response.data || []);
-            this.pagination = response.paging;
-          });
-      }
+    async getStories() {
+      const result = await this.$apollo.query({
+        query: postQuery,
+        variables: {
+          limit: 5,
+          page: this.pagination.pageNext
+        }
+      });
+      this.pagination.pageNext += 1;
+      this.stories = this.stories.concat(result.data.posts.nodes);
     }
   },
-  async asyncData({ error, $axios }) {
-    return $axios.$get('/api/v1/posts/?sortBy=publishedDate&sortAsc=false&limit=5')
-      .then(({ data, paging }) => {
-        if (data.length === 0) {
-          error({ code: 404, message: 'You have been lost', homepage: true });
-        }
-
-        return {
-          stories: data,
-          pagination: paging
-        };
-      });
-  },
-  head() {
-    const title = `Stories - ${this.$store.getters.getOrganisation.siteTitle}`;
+  async asyncData({ app }) {
+    // add error
+    const result = await app.apolloProvider.defaultClient.query({
+      query: postQuery,
+      variables: {
+        limit: 5,
+        page: 1
+      }
+    });
     return {
-      title,
-      meta: [
-        { hid: 'og:title', name: 'og:title', content: title },
-      ]
+      stories: result.data.posts.nodes,
+      total: result.data.posts.total
     };
   }
 };
-</script>
+</script>-->

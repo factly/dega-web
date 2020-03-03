@@ -46,6 +46,7 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
     'nuxt-i18n',
+    '@nuxtjs/apollo',
   ],
 
   /*
@@ -53,6 +54,23 @@ export default {
   */
   axios: {
     baseURL: process.env.API_URI
+  },
+
+  /*
+  ** Apollo module configuration
+  */
+
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://localhost:8080/query',
+        httpLinkOptions: {
+          headers: {
+            client: process.env.CLIENT_ID
+          }
+        }
+      }
+    }
   },
 
   /*

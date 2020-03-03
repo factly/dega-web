@@ -1,0 +1,55 @@
+query factchecks($limit: Int, $page: Int) {
+  factchecks(limit: $limit, page: $page) {
+    nodes {
+      _id
+      title
+      excerpt
+      introduction
+      published_date
+      updates
+      media {
+        url
+        alt_text
+      }
+      categories {
+        name
+        slug
+      }
+      tags {
+        name
+        slug
+      }
+      degaUsers {
+        _id
+        display_name
+        slug
+        email
+        _class
+      }
+      claims {
+        claim
+        description
+        review
+        claimant {
+          name
+          media {
+            url
+            alt_text
+          }
+          _class
+        }
+        rating {
+          numeric_value
+          slug
+          media {
+            url
+            alt_text
+          }
+          _class
+        }
+      }
+      _class
+    }
+    total
+  }
+}
