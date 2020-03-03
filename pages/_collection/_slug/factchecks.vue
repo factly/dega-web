@@ -6,7 +6,7 @@
           <CollectionHeader
             :collection = "this.$route.params.collection"
             :slug = "this.$route.params.slug"
-            :heading = "this.$route.params.collection === 'user' ? collection.displayName : collection.name"
+            :heading = "this.$route.params.collection === 'user' ? collection.display_name : collection.name"
             meta = "factchecks"
           />
         </div>
@@ -18,7 +18,7 @@
           />
         </div>
         <div
-          v-if="stories.length > 0 && !pagination.hasNext"
+          v-if="stories.length > 0 && stories.length == total"
           class="margin-top-2">
           <h3 class="is-size-4 has-text-centered">No more stories</h3>
         </div>
@@ -40,10 +40,12 @@
 </template>
 
 <script>
+/* eslint-disable import/no-dynamic-require */
 import StoryPreview from '@/components/StoryPreview';
 import RelatedArticle from '@/components/RelatedArticle';
 import CollectionHeader from '@/components/CollectionHeader';
 import UserCard from '@/components/UserCard';
+import factCheckQuery from '../../../graphql/query/factcheck.gql';
 
 export default {
   components: {
@@ -61,7 +63,10 @@ export default {
     return {
       stories: [],
       collection: null,
-      pagination: {}
+      total: 0,
+      pagination: {
+        pageNext: 1
+      }
     };
   },
   mounted() {
@@ -71,47 +76,68 @@ export default {
     scroll() {
       window.onscroll = () => {
         const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-        if (bottomOfWindow && (this.pagination.hasNext)) {
+        if (bottomOfWindow && this.stories.length < this.total) {
           this.getStories();
         }
       };
     },
-    getStories() {
-      if (this.pagination.hasNext) {
-        this.$axios
-          .$get(`/api/v1/factchecks/?${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`)
-          .then((response) => {
-            this.stories = (this.stories || []).concat(response.data || []);
-            this.pagination = response.paging;
-          });
-      }
+    async getStories() {
+      const result = await this.$apollo.query({
+        query: factCheckQuery,
+        variables: {
+          limit: 5,
+          page: this.pagination.pageNext,
+          sortBy: 'published_date',
+          sort: 'DES'
+        }
+      });
+      this.pagination.pageNext += 1;
+      this.stories = this.stories.concat(result.data.factchecks.nodes);
     }
   },
   async asyncData({
-    params, error, $axios
+    params, app
   }) {
     /* stories fetching */
-    const stories = await $axios.$get(`/api/v1/factchecks/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`)
-      .catch(() => error({ code: 500, message: 'Something went wrong' }));
-
-    /* collection fetching */
-    const collectionPluralList = {
-      user: 'users',
-      category: 'categories',
-      tag: 'tags'
+    const variables = {
+      limit: 5,
+      page: 1,
+      sortBy: 'published_date',
+      sort: 'DES'
     };
 
-    const collection = await $axios.$get(`/api/v1/${collectionPluralList[params.collection]}/${params.slug}`)
-      .then(c => c.data)
-      .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));
+    if (params.collection && params.slug) variables[params.collection] = [params.slug];
 
-    return { stories: stories.data, pagination: stories.paging, collection };
+    const factchecks = await app.apolloProvider.defaultClient.query({
+      query: factCheckQuery,
+      variables
+    });
+    /* collection fetching */
+    const collectionPluralList = {
+      user: 'userById',
+      category: 'categoryById',
+      tag: 'tagById'
+    };
+
+    /* query fetching */
+    // eslint-disable-next-line global-require
+    const query = require(`../../../graphql/query/${collectionPluralList[params.collection]}`);
+
+    const collection = await app.apolloProvider.defaultClient.query({
+      query,
+      variables: {
+        id: params.slug
+      }
+    });
+    return {
+      stories: factchecks.data.factchecks.nodes, pagination: { pageNext: 2 }, collection: collection.data[params.collection], total: factchecks.data.factchecks.total
+    };
   },
   head() {
     const metadata = {};
     const { collection } = this;
     if (collection) {
-      const title = `${collection.name ? collection.name : collection.displayName} - ${this.$route.params.collection.charAt(0).toUpperCase() + this.$route.params.collection.slice(1)} - ${this.$store.getters.getOrganisation.siteTitle}`;
+      const title = `${collection.name ? collection.name : collection.display_name} - ${this.$route.params.collection.charAt(0).toUpperCase() + this.$route.params.collection.slice(1)} - ${this.$store.getters.getOrganisation.siteTitle}`;
       metadata.title = title;
       metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: title },

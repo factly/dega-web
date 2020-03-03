@@ -22,7 +22,7 @@
               <figure
                 v-if="story.media"
                 class="image figure-width-5">
-                <nuxt-link :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })">
+                <nuxt-link :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story._id } })">
                   <img
                     :src="story.media.url+'?resize:fill:80:45:0/gravity:sm'"
                     :alt="story.media.altText" >
@@ -32,7 +32,7 @@
             <div class="media-content">
               <p class="subtitle is-6">
                 <nuxt-link
-                  :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug } })"
+                  :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story._id } })"
                   class="has-text-black-bis">
                   {{ story.title }}
                 </nuxt-link>
@@ -78,10 +78,6 @@ export default {
   },
   methods: {
     async getCollectionStories(collection, slug) {
-      // const posts = await this.$axios.$get(`/api/v1/posts/?${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`);
-
-      // const factchecks = await this.$axios.$get(`/api/v1/factchecks/?${collection}=${slug}&sortBy=publishedDate&sortAsc=false&limit=5`);
-
       const variables = {
         limit: 5,
         sortBy: 'published_date',
@@ -106,7 +102,7 @@ export default {
         if (b.publishedDate > a.publishedDate) return 1;
         return 0;
       });
-      // change id to _id
+
       this.stories = this.id ? stories.filter(value =>
         // eslint-disable-next-line no-underscore-dangle
         value._id !== this.id

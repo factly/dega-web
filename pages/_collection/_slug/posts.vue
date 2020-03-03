@@ -6,7 +6,7 @@
           <CollectionHeader
             :collection = "this.$route.params.collection"
             :slug = "this.$route.params.slug"
-            :heading = "this.$route.params.collection === 'user' ? collection.displayName : collection.name"
+            :heading = "this.$route.params.collection === 'user' ? collection.display_name : collection.name"
             meta = "posts"
           />
         </div>
@@ -18,7 +18,7 @@
           />
         </div>
         <div
-          v-if="stories.length > 0 && !pagination.hasNext"
+          v-if="stories.length > 0 && stories.length == total"
           class="margin-top-2">
           <h3 class="is-size-4 has-text-centered">No more stories</h3>
         </div>
@@ -40,10 +40,12 @@
 </template>
 
 <script>
+/* eslint-disable import/no-dynamic-require */
 import StoryPreview from '@/components/StoryPreview';
 import RelatedArticle from '@/components/RelatedArticle';
 import CollectionHeader from '@/components/CollectionHeader';
 import UserCard from '@/components/UserCard';
+import postQuery from '../../../graphql/query/post.gql';
 
 export default {
   components: {
@@ -61,7 +63,10 @@ export default {
     return {
       stories: [],
       collection: null,
-      pagination: {}
+      total: 0,
+      pagination: {
+        pageNext: 1
+      }
     };
   },
   mounted() {
@@ -71,47 +76,68 @@ export default {
     scroll() {
       window.onscroll = () => {
         const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-        if (bottomOfWindow && (this.pagination.hasNext)) {
+        if (bottomOfWindow && this.stories.length < this.total) {
           this.getStories();
         }
       };
     },
     async getStories() {
-      if (this.pagination.hasNext) {
-        await this.$axios
-          .$get(`/api/v1/posts/?${this.$route.params.collection}=${this.$route.params.slug}&sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`)
-          .then((response) => {
-            this.stories = (this.stories || []).concat(response.data || []);
-            this.pagination = response.paging;
-          });
-      }
+      const result = await this.$apollo.query({
+        query: postQuery,
+        variables: {
+          limit: 5,
+          page: this.pagination.pageNext
+        }
+      });
+      this.pagination.pageNext += 1;
+      this.stories = this.stories.concat(result.data.posts.nodes);
     }
   },
   async asyncData({
-    params, error, $axios
+    params, error, app
   }) {
+    const variables = {
+      page: 1,
+      limit: 5,
+      sortBy: 'published_date',
+      sort: 'DES'
+    };
+
+    if (params.collection && params.slug) variables[params.collection] = [params.slug];
     /* stories fetching */
-    const stories = await $axios.$get(`/api/v1/posts/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`)
-      .catch(() => error({ code: 500, message: 'Something went wrong' }));
+    const posts = await app.apolloProvider.defaultClient.query({
+      query: postQuery,
+      variables
+    });
 
     /* collection fetching */
     const collectionPluralList = {
-      user: 'users',
-      category: 'categories',
-      tag: 'tags'
+      user: 'userById',
+      category: 'categoryById',
+      tag: 'tagById'
     };
 
-    const collection = await $axios.$get(`/api/v1/${collectionPluralList[params.collection]}/${params.slug}`)
-      .then(c => c.data)
-      .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));
+    /* query fetching */
+    // eslint-disable-next-line global-require
+    const query = require(`../../../graphql/query/${collectionPluralList[params.collection]}`);
 
-    return { stories: stories.data, pagination: stories.paging, collection };
+    const collection = await app.apolloProvider.defaultClient.query({
+      query,
+      variables: {
+        id: params.slug
+      }
+    }).then(c => c.data)
+      .catch(() => error({ code: 500, message: 'Something went wrong' }));
+
+    return {
+      stories: posts.data.posts.nodes, pagination: { pageNext: 2 }, collection: collection[params.collection], total: posts.data.posts.total
+    };
   },
   head() {
     const metadata = {};
     const { collection } = this;
     if (collection) {
-      const title = `${collection.name ? collection.name : collection.displayName} - ${this.$route.params.collection.charAt(0).toUpperCase() + this.$route.params.collection.slice(1)} - ${this.$store.getters.getOrganisation.siteTitle}`;
+      const title = `${collection.name ? collection.name : collection.display_name} - ${this.$route.params.collection.charAt(0).toUpperCase() + this.$route.params.collection.slice(1)} - ${this.$store.getters.getOrganisation.siteTitle}`;
       metadata.title = title;
       metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: title },

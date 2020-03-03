@@ -33,6 +33,8 @@
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
 import RelatedArticle from '@/components/RelatedArticle';
+import factCheckQuery from '../graphql/query/factcheck.gql';
+import postQuery from '../graphql/query/post.gql';
 
 export default {
   components: {
@@ -45,15 +47,26 @@ export default {
       stories: null
     };
   },
-  async asyncData({ $axios, error }) {
-    const posts = await $axios.$get('/api/v1/posts/?sortBy=publishedDate&sortAsc=false&limit=10')
-      .then(p => p.data || [])
-      .catch(() => error({ code: 500, message: 'Something went wrong' }));
-    const factchecks = await $axios.$get('/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=10')
-      .then(f => f.data || [])
-      .catch(() => error({ code: 500, message: 'Something went wrong' }));
+  async asyncData({ app }) {
+    const factchecks = await app.apolloProvider.defaultClient.query({
+      query: factCheckQuery,
+      variables: {
+        limit: 5,
+        sortBy: 'published_date',
+        sort: 'DES'
+      }
+    });
 
-    const stories = (posts).concat(factchecks);
+    const posts = await app.apolloProvider.defaultClient.query({
+      query: postQuery,
+      variables: {
+        limit: 5,
+        sortBy: 'published_date',
+        sort: 'DES'
+      }
+    });
+
+    const stories = (posts.data.posts.nodes || []).concat(factchecks.data.factchecks.nodes || []);
     stories.sort((a, b) => {
       if (a.publishedDate > b.publishedDate) return -1;
       if (b.publishedDate > a.publishedDate) return 1;

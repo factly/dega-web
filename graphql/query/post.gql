@@ -1,5 +1,21 @@
-query posts($limit: Int, $page: Int) {
-  posts(limit: $limit, page: $page) {
+query posts(
+  $page: Int
+  $limit: Int
+  $category: [String!]
+  $tag: [String!]
+  $user: [String!]
+  $sortBy: String
+	$sortOrder: String 
+) {
+  posts(
+    limit: $limit
+    page: $page
+    categories: $category
+    tags: $tag
+    users: $user
+    sortBy: $sortBy
+    sortOrder: $sortOrder
+  ) {
     nodes {
       _id
       title
@@ -13,10 +29,12 @@ query posts($limit: Int, $page: Int) {
         alt_text
       }
       categories {
+        _id
         name
         slug
       }
       tags {
+        _id
         name
         slug
       }
@@ -32,3 +50,4 @@ query posts($limit: Int, $page: Int) {
     total
   }
 }
+

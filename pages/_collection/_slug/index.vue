@@ -6,7 +6,7 @@
           <CollectionHeader
             :collection = "this.$route.params.collection"
             :slug = "this.$route.params.slug"
-            :heading = "this.$route.params.collection === 'user' ? collection.displayName : collection.name"
+            :heading = "this.$route.params.collection === 'user' ? collection.display_name : collection.name"
             meta = "all"
           />
         </div>
@@ -30,10 +30,13 @@
 </template>
 
 <script>
+/* eslint-disable import/no-dynamic-require */
 import StoryPreview from '@/components/StoryPreview';
 import RelatedArticle from '@/components/RelatedArticle';
 import CollectionHeader from '@/components/CollectionHeader';
 import UserCard from '@/components/UserCard';
+import factCheckQuery from '../../../graphql/query/factcheck.gql';
+import postQuery from '../../../graphql/query/post.gql';
 
 export default {
   components: {
@@ -54,18 +57,28 @@ export default {
     };
   },
   async asyncData({
-    params, error, $axios
+    params, app, error
   }) {
     /* stories fetching */
-    const posts = await $axios.$get(`/api/v1/posts/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`)
-      .then(p => p.data || [])
-      .catch(() => error({ code: 500, message: 'Something went wrong' }));
+    const variables = {
+      limit: 5,
+      sortBy: 'published_date',
+      sort: 'DES'
+    };
 
-    const factchecks = await $axios.$get(`/api/v1/factchecks/?${params.collection}=${params.slug}&sortBy=publishedDate&sortAsc=false&limit=5`)
-      .then(f => f.data || [])
-      .catch(() => error({ code: 500, message: 'Something went wrong' }));
+    if (params.collection && params.slug) variables[params.collection] = [params.slug];
 
-    const stories = posts.concat(factchecks);
+    const factchecks = await app.apolloProvider.defaultClient.query({
+      query: factCheckQuery,
+      variables
+    });
+
+    const posts = await app.apolloProvider.defaultClient.query({
+      query: postQuery,
+      variables
+    });
+
+    const stories = (posts.data.posts.nodes || []).concat(factchecks.data.factchecks.nodes || []);
     stories.sort((a, b) => {
       if (a.publishedDate > b.publishedDate) return -1;
       if (b.publishedDate > a.publishedDate) return 1;
@@ -74,22 +87,30 @@ export default {
 
     /* collection fetching */
     const collectionPluralList = {
-      user: 'users',
-      category: 'categories',
-      tag: 'tags'
+      user: 'userById',
+      category: 'categoryById',
+      tag: 'tagById'
     };
 
-    const collection = await $axios.$get(`/api/v1/${collectionPluralList[params.collection]}/${params.slug}`)
-      .then(c => c.data)
-      .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));
+    /* query fetching */
+    // eslint-disable-next-line global-require
+    const query = require(`../../../graphql/query/${collectionPluralList[params.collection]}`);
 
-    return { stories, collection };
+    const collection = await app.apolloProvider.defaultClient.query({
+      query,
+      variables: {
+        id: params.slug
+      }
+    }).then(c => c.data)
+      .catch(() => error({ code: 500, message: 'Something went wrong' }));
+
+    return { stories, collection: collection[params.collection] };
   },
   head() {
     const metadata = {};
     const { collection } = this;
     if (collection) {
-      const title = `${collection.name ? collection.name : collection.displayName} - ${this.$route.params.collection.charAt(0).toUpperCase() + this.$route.params.collection.slice(1)} - ${this.$store.getters.getOrganisation.siteTitle}`;
+      const title = `${collection.name ? collection.name : collection.display_name} - ${this.$route.params.collection.charAt(0).toUpperCase() + this.$route.params.collection.slice(1)} - ${this.$store.getters.getOrganisation.siteTitle}`;
       metadata.title = title;
       metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: title },

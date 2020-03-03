@@ -31,9 +31,9 @@
             <RelatedArticle
               v-for="(category, index) in p.categories"
               :key="'category-related'+index"
-              :slug="category.slug"
+              :slug="category._id"
               :header="`More in ${category.name}`"
-              :id="p.id"
+              :id="p._id"
               class="margin-horizontal-1"
               collection="category"
             />
@@ -42,7 +42,7 @@
             <RelatedArticle
               v-for="(user, index) in p.users"
               :key="'user-related'+index"
-              :slug="user.slug"
+              :slug="user._id"
               :header="`More from ${user.display_name}`"
               :id="p.id"
               class="margin-horizontal-1"
@@ -53,7 +53,7 @@
       </div>
     </div>
     <SocialSharingVertical
-      :url="'/post/'+posts[on].slug"
+      :url="'/post/'+posts[on]._id"
       :quote="posts[on].title"
       :id="posts[on].id"
       type="post"

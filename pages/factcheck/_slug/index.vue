@@ -49,7 +49,7 @@
             <RelatedArticle
               v-for="(category, index) in f.categories"
               :key="'user-related'+index"
-              :slug="category.slug"
+              :slug="category._id"
               :header="`More in ${category.name}`"
               :id="f.id"
               class="margin-horizontal-1"
@@ -60,7 +60,7 @@
             <RelatedArticle
               v-for="(user, index) in f.degaUsers"
               :key="'user-related'+index"
-              :slug="user.slug"
+              :slug="user._id"
               :header="`More from ${user.display_name}`"
               :id="f.id"
               class="margin-horizontal-1"
@@ -71,7 +71,7 @@
       </div>
     </div>
     <SocialSharingVertical
-      :url="'/factcheck/'+factchecks[on].slug"
+      :url="'/factcheck/'+factchecks[on]._id"
       :quote="factchecks[on].title"
       :id="factchecks[on].id"
       type="factcheck"

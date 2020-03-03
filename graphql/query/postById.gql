@@ -12,10 +12,12 @@ query postById($id: String!) {
       alt_text
     }
     categories {
+      _id
       name
       slug
     }
     tags {
+      _id
       name
       slug
     }
