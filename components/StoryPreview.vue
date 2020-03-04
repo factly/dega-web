@@ -25,7 +25,7 @@
       </div>
       <div class="column is-3">
         <nuxt-link
-          :to="localePath({ name: story._class.split('.').pop().toLowerCase() + '-sug', params: { slug: story._id
+          :to="localePath({ name: story._class.split('.').pop().toLowerCase() + '-slug', params: { slug: story._id
         } })">
           <figure
             v-if="story.media"

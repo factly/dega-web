@@ -44,7 +44,7 @@
               :key="'user-related'+index"
               :slug="user._id"
               :header="`More from ${user.display_name}`"
-              :id="p.id"
+              :id="p._id"
               class="margin-horizontal-1"
               collection="user"
             />

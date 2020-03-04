@@ -43,6 +43,10 @@ query posts(
         display_name
         slug
         email
+        media {
+          url
+          alt_text
+        }
         _class
       }
       _class

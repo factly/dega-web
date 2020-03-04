@@ -18,8 +18,8 @@
         <div class="column is-4">
           <div class="is-hidden-mobile">
             <RelatedArticle
-              slug="video"
-              header="Recent Videos"
+              slug="5c38f470569ed47e00c7002c"
+              header="Recent Bussiness"
               collection="category"
             />
           </div>

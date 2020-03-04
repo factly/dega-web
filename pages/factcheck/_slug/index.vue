@@ -51,7 +51,7 @@
               :key="'user-related'+index"
               :slug="category._id"
               :header="`More in ${category.name}`"
-              :id="f.id"
+              :id="f._id"
               class="margin-horizontal-1"
               collection="category"
             />
@@ -62,7 +62,7 @@
               :key="'user-related'+index"
               :slug="user._id"
               :header="`More from ${user.display_name}`"
-              :id="f.id"
+              :id="f._id"
               class="margin-horizontal-1"
               collection="user"
             />
@@ -160,13 +160,12 @@ export default {
       });
       this.pagination.pageNext = this.pagination.pageNext + 1;
       this.total = latestFactcheck.data.factchecks.total;
-      console.log(latestFactcheck.data.factchecks.nodes);
+
       if (this.factchecks.find(value => value.id === latestFactcheck.data.factchecks.nodes[0]._id)) {
         console.log('Already there');
       } else {
         this.factchecks = this.factchecks.concat(latestFactcheck.data.factchecks.nodes);
       }
-      console.log(this.factchecks.length, this.total);
     }
   },
   async asyncData({

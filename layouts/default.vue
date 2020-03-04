@@ -33,12 +33,12 @@
             :to="localePath('post')"
             class="navbar-item">{{ $t('header.stories') }}</nuxt-link>
           <nuxt-link
-            :to="localePath({ name:'collection-slug', params: { collection: 'category', slug: 'fake-news' } })"
+            :to="localePath({ name:'collection-slug', params: { collection: 'category', slug: '5da707da6ae80e607432d6b8' } })"
             class="navbar-item">
             {{ $t('header.fake_news') }}
           </nuxt-link>
           <nuxt-link
-            :to="localePath({ name:'collection-slug', params: { collection: 'category', slug: 'video' }})"
+            :to="localePath({ name:'collection-slug', params: { collection: 'category', slug: '5da707da6ae80e607432d6b7' }})"
             class="navbar-item">{{ $t('header.videos') }}</nuxt-link>
           <nuxt-link
             :to="localePath('factcheck')"

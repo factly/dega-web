@@ -27,7 +27,7 @@
         </div>
         <div class="margin-top-half">
           <MetaData
-            :users="story.users"
+            :users="story.degaUsers"
             :categories="story.categories"
             :published="story.published_date"
           />

@@ -42,6 +42,10 @@ query factchecks(
         display_name
         slug
         email
+        media {
+          url
+          alt_text
+        }
         _class
       }
       claims {

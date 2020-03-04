@@ -84,7 +84,7 @@ export default {
         sort: 'DES'
       };
 
-      if (collection && slug) variables[collection] = slug;
+      if (collection && slug) variables[collection] = [slug];
 
       const factchecks = await this.$apollo.query({
         query: factCheckQuery,
