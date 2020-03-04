@@ -90,7 +90,7 @@ export default {
   },
   watch: {
     on() {
-      document.title = `${this.posts[this.on].title} - ${this.$store.getters.getOrganisation.siteTitle}`;
+      document.title = `${this.posts[this.on].title} - ${this.$store.getters.getOrganization.site_title}`;
       // eslint-disable-next-line no-restricted-globals
       history.pushState({}, null, `/post/${this.posts[this.on]._id}`);
     }
@@ -171,16 +171,16 @@ export default {
     const metadata = {};
     const { posts } = this;
     if (posts.length > 0) {
-      metadata.title = `${posts[0].title} - ${this.$store.getters.getOrganisation.siteTitle}`;
+      metadata.title = `${posts[0].title} - ${this.$store.getters.getOrganization.site_title}`;
       metadata.meta = [
-        { hid: 'og:title', name: 'og:title', content: `${posts[0].title} - ${this.$store.getters.getOrganisation.siteTitle}` },
+        { hid: 'og:title', name: 'og:title', content: `${posts[0].title} - ${this.$store.getters.getOrganization.site_title}` },
         { hid: 'og:image', name: 'og:image', content: posts[0].media ? posts[0].media.url : null },
         { hid: 'og:description', name: 'og:description', content: posts[0].excerpt ? posts[0].excerpt : null },
       ];
       metadata.script = [
         { src: 'https://platform.twitter.com/widgets.js', async: true },
       ];
-    } else { metadata.title = this.$store.getters.getOrganisation.siteTitle; }
+    } else { metadata.title = this.$store.getters.getOrganization.site_title; }
 
     return metadata;
   }

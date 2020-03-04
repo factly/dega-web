@@ -6,12 +6,12 @@
       aria-label="main navigation">
       <div class="navbar-brand">
         <nuxt-link
-          v-if="organisation.mediaLogo"
+          v-if="organization.mediaLogo"
           :to="localePath('index')"
           class="navbar-item">
           <img
-            :src="organisation.mediaLogo.url"
-            :alt="organisation.name"
+            :src="organization.mediaLogo.url"
+            :alt="organization.name"
             height="110">
         </nuxt-link>
         <div
@@ -48,7 +48,7 @@
         <div class="navbar-end">
           <div class="navbar-item is-hidden-touch is-hidden-desktop-only">
             <SocialLink
-              :organisation="organisation"
+              :organization="organization"
             />
           </div>
           <div class="navbar-item">
@@ -144,7 +144,7 @@
           <div class="column is-3">
             <p class="is-size-6">Connect with us</p>
             <SocialLink
-              :organisation="organisation"
+              :organization="organization"
               name
               way="horizontal"
               icon_size="is-size-6"
@@ -168,7 +168,7 @@ export default {
     return {
       toggleNavBar: false,
       toggleMore: true,
-      organisation: this.$store.getters.getOrganisation
+      organization: this.$store.getters.getOrganization
     };
   },
   computed: {
@@ -178,18 +178,18 @@ export default {
   },
   head() {
     return {
-      title: this.organisation.name,
+      title: this.organization.name,
       link: [
-        { rel: 'shortcut icon', type: 'image/png', href: this.organisation.mediaLogo ? this.organisation.mediaLogo.url : null },
-        { rel: 'icon', type: 'image/x-icon', href: this.organisation.mediaFavicon ? this.organisation.mediaFavicon.url : null },
+        { rel: 'shortcut icon', type: 'image/png', href: this.organization.mediaLogo ? this.organization.mediaLogo.url : null },
+        { rel: 'icon', type: 'image/x-icon', href: this.organization.mediaFavicon ? this.organization.mediaFavicon.url : null },
       ],
       meta: [
-        { name: 'google-site-verification', content: this.organisation.googleVerificationCode },
-        { hid: 'og:site_name', name: 'og:site_name', content: this.organisation.name },
+        { name: 'google-site-verification', content: this.organization.googleVerificationCode },
+        { hid: 'og:site_name', name: 'og:site_name', content: this.organization.name },
         { hid: 'og:title', name: 'og:title', content: this.$nuxt.$route.path.split('/').pop() },
-        { hid: 'og:url', name: 'og:url', content: this.organisation.siteAddress + this.$nuxt.$route.path },
-        { hid: 'og:image', name: 'og:image', content: this.organisation.siteAddress + DefaultImage },
-        { hid: 'og:description', name: 'og:description', content: this.organisation.description },
+        { hid: 'og:url', name: 'og:url', content: this.organization.site_address + this.$nuxt.$route.path },
+        { hid: 'og:image', name: 'og:image', content: this.organization.site_address + DefaultImage },
+        { hid: 'og:description', name: 'og:description', content: this.organization.description },
       ]
     };
   }

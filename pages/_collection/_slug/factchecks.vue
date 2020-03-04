@@ -142,14 +142,14 @@ export default {
     const metadata = {};
     const { collection } = this;
     if (collection) {
-      const title = `${collection.name ? collection.name : collection.display_name} - ${this.$route.params.collection.charAt(0).toUpperCase() + this.$route.params.collection.slice(1)} - ${this.$store.getters.getOrganisation.siteTitle}`;
+      const title = `${collection.name ? collection.name : collection.display_name} - ${this.$route.params.collection.charAt(0).toUpperCase() + this.$route.params.collection.slice(1)} - ${this.$store.getters.getOrganization.site_title}`;
       metadata.title = title;
       metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: title },
         { hid: 'og:image', name: 'og:image', content: collection.media ? collection.media.url : null },
         { hid: 'og:description', name: 'og:description', content: collection.description ? collection.description : null },
       ];
-    } else { metadata.title = this.$store.getters.getOrganisation.siteTitle; }
+    } else { metadata.title = this.$store.getters.getOrganization.site_title; }
 
     return metadata;
   }

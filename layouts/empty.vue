@@ -6,18 +6,18 @@
 export default {
   data() {
     return {
-      organisation: Object
+      organization: Object
     };
   },
   created() {
-    this.organisation = this.$store.getters.getOrganisation;
+    this.organization = this.$store.getters.getOrganization;
   },
   head() {
     return {
-      title: this.organisation.name,
+      title: this.organization.name,
       link: [
-        { rel: 'shortcut icon', type: 'image/png', href: this.organisation.mediaLogo ? this.organisation.mediaLogo.url : null },
-        { rel: 'icon', type: 'image/x-icon', href: this.organisation.mediaFavicon ? this.organisation.mediaFavicon.url : null },
+        { rel: 'shortcut icon', type: 'image/png', href: this.organization.mediaLogo ? this.organization.mediaLogo.url : null },
+        { rel: 'icon', type: 'image/x-icon', href: this.organization.mediaFavicon ? this.organization.mediaFavicon.url : null },
       ]
     };
   }

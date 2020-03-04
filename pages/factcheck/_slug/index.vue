@@ -118,7 +118,7 @@ export default {
   },
   watch: {
     on() {
-      document.title = `${this.factchecks[this.on].title} - ${this.$store.getters.getOrganisation.siteTitle}`;
+      document.title = `${this.factchecks[this.on].title} - ${this.$store.getters.getOrganization.site_title}`;
       // eslint-disable-next-line no-restricted-globals
       history.pushState({}, null, `/factcheck/${this.factchecks[this.on]._id}`);
     }
@@ -195,17 +195,17 @@ export default {
     const metadata = {};
     const { factchecks } = this;
     if (factchecks.length > 0) {
-      metadata.title = `${factchecks[0].title} - ${this.$store.getters.getOrganisation.siteTitle}`;
+      metadata.title = `${factchecks[0].title} - ${this.$store.getters.getOrganization.site_title}`;
       metadata.script = [
         { innerHTML: JSON.stringify(factchecks[0].schemas), type: 'application/ld+json' },
         { src: 'https://platform.twitter.com/widgets.js', async: true },
       ];
       metadata.meta = [
-        { hid: 'og:title', name: 'og:title', content: `${factchecks[0].title} - ${this.$store.getters.getOrganisation.siteTitle}` },
+        { hid: 'og:title', name: 'og:title', content: `${factchecks[0].title} - ${this.$store.getters.getOrganization.site_title}` },
         { hid: 'og:image', name: 'og:image', content: factchecks[0].media ? factchecks[0].media.url : null },
         { hid: 'og:description', name: 'og:description', content: factchecks[0].excerpt ? factchecks[0].excerpt : null },
       ];
-    } else { metadata.title = this.$store.getters.getOrganisation.siteTitle; }
+    } else { metadata.title = this.$store.getters.getOrganization.site_title; }
 
     return metadata;
   }

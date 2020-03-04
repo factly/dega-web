@@ -95,7 +95,7 @@ export default {
     };
   },
   head() {
-    const title = `Factchecks - ${this.$store.getters.getOrganisation.siteTitle}`;
+    const title = `Factchecks - ${this.$store.getters.getOrganization.site_title}`;
     return {
       title,
       meta: [
