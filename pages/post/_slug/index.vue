@@ -130,28 +130,40 @@ export default {
           sortBy: 'published_date',
           sort: 'DES'
         }
-      });
+      })
+        .then(p => p.data.posts)
+        .catch(() => {
+          this.error({ code: 500, message: 'Something went wrong', homepage: true });
+        });
       this.pagination.pageNext = this.pagination.pageNext + 1;
-      this.total = latestPost.data.posts.total;
-      if (this.posts.find(value => value.id === latestPost.data.posts.nodes[0]._id)) {
+      this.total = latestPost.total;
+      if (this.posts.find(value => value.id === latestPost.nodes[0]._id)) {
         console.log('Already there');
       } else {
-        this.posts = this.posts.concat(latestPost.data.posts.nodes);
+        this.posts = this.posts.concat(latestPost.nodes);
       }
     }
   },
   async asyncData({
-    app, params
+    app, params, error
   }) {
-    // add error
-    const result = await app.apolloProvider.defaultClient.query({
+    const post = await app.apolloProvider.defaultClient.query({
       query: postByIdQuery,
       variables: {
         id: params.slug
       }
-    });
+    })
+      .then(p => p.data.post)
+      .catch(() => {
+        error({ code: 500, message: 'Something went wrong', homepage: true });
+      });
+
+    if (!post) {
+      error({ code: 404, message: 'page not found', homepage: true });
+    }
+
     return {
-      posts: [result.data.post],
+      posts: [post],
       total: 1
     };
   },

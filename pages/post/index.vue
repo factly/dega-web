@@ -64,29 +64,38 @@ export default {
       };
     },
     async getStories() {
-      const result = await this.$apollo.query({
+      const posts = await this.$apollo.query({
         query: postQuery,
         variables: {
           limit: 5,
           page: this.pagination.pageNext
         }
-      });
+      })
+        .then(p => p.data.posts.nodes)
+        .catch(() => {
+          this.error({ code: 500, message: 'Something went wrong', homepage: true });
+        });
       this.pagination.pageNext += 1;
-      this.stories = this.stories.concat(result.data.posts.nodes);
+      this.stories = this.stories.concat(posts);
     }
   },
-  async asyncData({ app }) {
+  async asyncData({ app, error }) {
     // add error
-    const result = await app.apolloProvider.defaultClient.query({
+    const posts = await app.apolloProvider.defaultClient.query({
       query: postQuery,
       variables: {
         limit: 5,
         page: 1
       }
-    });
+    })
+      .then(p => p.data.posts)
+      .catch(() => {
+        error({ code: 500, message: 'Something went wrong', homepage: true });
+      });
+
     return {
-      stories: result.data.posts.nodes,
-      total: result.data.posts.total
+      stories: posts.nodes,
+      total: posts.total
     };
   }
 };

@@ -47,7 +47,7 @@ export default {
       stories: null
     };
   },
-  async asyncData({ app }) {
+  async asyncData({ app, error }) {
     const factchecks = await app.apolloProvider.defaultClient.query({
       query: factCheckQuery,
       variables: {
@@ -55,7 +55,9 @@ export default {
         sortBy: 'published_date',
         sort: 'DES'
       }
-    });
+    })
+      .then(f => f.data.factchecks.nodes)
+      .catch(() => error({ code: 500, message: 'Something went wrong' }));
 
     const posts = await app.apolloProvider.defaultClient.query({
       query: postQuery,
@@ -64,9 +66,11 @@ export default {
         sortBy: 'published_date',
         sort: 'DES'
       }
-    });
+    })
+      .then(p => p.data.posts.nodes)
+      .catch(() => error({ code: 500, message: 'Something went wrong' }));
 
-    const stories = (posts.data.posts.nodes || []).concat(factchecks.data.factchecks.nodes || []);
+    const stories = (posts || []).concat(factchecks || []);
     stories.sort((a, b) => {
       if (a.publishedDate > b.publishedDate) return -1;
       if (b.publishedDate > a.publishedDate) return 1;

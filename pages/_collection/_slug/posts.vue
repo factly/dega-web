@@ -108,7 +108,11 @@ export default {
     const posts = await app.apolloProvider.defaultClient.query({
       query: postQuery,
       variables
-    });
+    })
+      .then(p => p.data.posts)
+      .catch(() => {
+        error({ code: 500, message: 'Something went wrong', homepage: true });
+      });
 
     /* collection fetching */
     const collectionPluralList = {
@@ -126,11 +130,12 @@ export default {
       variables: {
         id: params.slug
       }
-    }).then(c => c.data)
-      .catch(() => error({ code: 500, message: 'Something went wrong' }));
+    })
+      .then(c => c.data)
+      .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
 
     return {
-      stories: posts.data.posts.nodes, pagination: { pageNext: 2 }, collection: collection[params.collection], total: posts.data.posts.total
+      stories: posts.nodes, pagination: { pageNext: 2 }, collection: collection[params.collection], total: posts.total
     };
   },
   head() {

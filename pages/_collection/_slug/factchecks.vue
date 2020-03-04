@@ -96,7 +96,7 @@ export default {
     }
   },
   async asyncData({
-    params, app
+    params, app, error
   }) {
     /* stories fetching */
     const variables = {
@@ -111,7 +111,9 @@ export default {
     const factchecks = await app.apolloProvider.defaultClient.query({
       query: factCheckQuery,
       variables
-    });
+    })
+      .then(f => f.data.factchecks)
+      .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
     /* collection fetching */
     const collectionPluralList = {
       user: 'userById',
@@ -128,9 +130,12 @@ export default {
       variables: {
         id: params.slug
       }
-    });
+    })
+      .then(c => c.data)
+      .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
+
     return {
-      stories: factchecks.data.factchecks.nodes, pagination: { pageNext: 2 }, collection: collection.data[params.collection], total: factchecks.data.factchecks.total
+      stories: factchecks.nodes, pagination: { pageNext: 2 }, collection: collection[params.collection], total: factchecks.total
     };
   },
   head() {

@@ -64,29 +64,34 @@ export default {
       };
     },
     async getStories() {
-      const result = await this.$apollo.query({
+      const factchecks = await this.$apollo.query({
         query: factCheckQuery,
         variables: {
           limit: 5,
           page: this.pagination.pageNext
         }
-      });
+      })
+        .then(f => f.data.factchecks.nodes)
+        .catch(() => this.error({ code: 500, message: 'Something went wrong', homepage: true }));
       this.pagination.pageNext += 1;
-      this.stories = this.stories.concat(result.data.factchecks.nodes);
+      this.stories = this.stories.concat(factchecks);
     }
   },
-  async asyncData({ app }) {
+  async asyncData({ app, error }) {
     // add error
-    const result = await app.apolloProvider.defaultClient.query({
+    const factchecks = await app.apolloProvider.defaultClient.query({
       query: factCheckQuery,
       variables: {
         limit: 5,
         page: 1
       }
-    });
+    })
+      .then(f => f.data.factchecks)
+      .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
+
     return {
-      stories: result.data.factchecks.nodes,
-      total: result.data.factchecks.total
+      stories: factchecks.nodes,
+      total: factchecks.total
     };
   },
   head() {

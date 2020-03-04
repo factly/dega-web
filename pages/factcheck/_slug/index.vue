@@ -157,28 +157,37 @@ export default {
           sortBy: 'published_date',
           sort: 'DES'
         }
-      });
-      this.pagination.pageNext = this.pagination.pageNext + 1;
-      this.total = latestFactcheck.data.factchecks.total;
+      })
+        .then(f => f.data.factchecks)
+        .catch(() => this.error({ code: 500, message: 'Something went wrong', homepage: true }));
 
-      if (this.factchecks.find(value => value.id === latestFactcheck.data.factchecks.nodes[0]._id)) {
+      this.pagination.pageNext = this.pagination.pageNext + 1;
+      this.total = latestFactcheck.total;
+
+      if (this.factchecks.find(value => value.id === latestFactcheck.nodes[0]._id)) {
         console.log('Already there');
       } else {
-        this.factchecks = this.factchecks.concat(latestFactcheck.data.factchecks.nodes);
+        this.factchecks = this.factchecks.concat(latestFactcheck.nodes);
       }
     }
   },
   async asyncData({
-    params, app
+    params, app, error
   }) {
-    const result = await app.apolloProvider.defaultClient.query({
+    const factcheck = await app.apolloProvider.defaultClient.query({
       query: factcheckByIdQuery,
       variables: {
         id: params.slug
       }
-    });
+    })
+      .then(f => f.data.factcheck)
+      .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
+    if (!factcheck) {
+      error({ code: 404, message: 'page not found', homepage: true });
+    }
+
     return {
-      factchecks: [result.data.factcheck],
+      factchecks: [factcheck],
       total: 1
     };
   },
