@@ -92,8 +92,8 @@ import StoryFooter from '@/components/StoryFooter';
 import Claim from '@/components/Claim';
 import ListClaims from '@/components/ListClaims';
 import RelatedArticle from '@/components/RelatedArticle';
-import factcheckByIdQuery from '../../../graphql/query/factcheckById.gql';
-import factcheckQuery from '../../../graphql/query/factcheck.gql';
+import factcheckByIdQuery from '../../../graphql/query/factcheck.gql';
+import factcheckQuery from '../../../graphql/query/factchecks.gql';
 
 export default {
   components: {

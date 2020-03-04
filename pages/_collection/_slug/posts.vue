@@ -45,7 +45,7 @@ import StoryPreview from '@/components/StoryPreview';
 import RelatedArticle from '@/components/RelatedArticle';
 import CollectionHeader from '@/components/CollectionHeader';
 import UserCard from '@/components/UserCard';
-import postQuery from '../../../graphql/query/post.gql';
+import postQuery from '../../../graphql/query/posts.gql';
 
 export default {
   components: {
@@ -82,15 +82,20 @@ export default {
       };
     },
     async getStories() {
-      const result = await this.$apollo.query({
+      const posts = await this.$apollo.query({
         query: postQuery,
         variables: {
           limit: 5,
           page: this.pagination.pageNext
         }
-      });
+      })
+        .then(p => p.data.posts.nodes)
+        .catch(() => {
+          this.error({ code: 500, message: 'Something went wrong', homepage: true });
+        });
+
       this.pagination.pageNext += 1;
-      this.stories = this.stories.concat(result.data.posts.nodes);
+      this.stories = this.stories.concat(posts);
     }
   },
   async asyncData({
@@ -116,9 +121,9 @@ export default {
 
     /* collection fetching */
     const collectionPluralList = {
-      user: 'userById',
-      category: 'categoryById',
-      tag: 'tagById'
+      user: 'user',
+      category: 'category',
+      tag: 'tag'
     };
 
     /* query fetching */

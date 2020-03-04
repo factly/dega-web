@@ -34,7 +34,7 @@
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
 import RelatedArticle from '@/components/RelatedArticle';
-import postQuery from '../../graphql/query/post.gql';
+import postQuery from '../../graphql/query/posts.gql';
 
 export default {
   components: {

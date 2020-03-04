@@ -1,0 +1,57 @@
+query posts(
+  $page: Int
+  $limit: Int
+  $category: [String!]
+  $tag: [String!]
+  $user: [String!]
+  $sortBy: String
+	$sortOrder: String 
+) {
+  posts(
+    limit: $limit
+    page: $page
+    categories: $category
+    tags: $tag
+    users: $user
+    sortBy: $sortBy
+    sortOrder: $sortOrder
+  ) {
+    nodes {
+      _id
+      title
+      content
+      excerpt
+      published_date
+      updates
+      slug
+      media {
+        url
+        alt_text
+      }
+      categories {
+        _id
+        name
+        slug
+      }
+      tags {
+        _id
+        name
+        slug
+      }
+      degaUsers {
+        _id
+        display_name
+        slug
+        email
+        media {
+          url
+          alt_text
+        }
+        _class
+      }
+      _class
+    }
+    total
+  }
+}
+

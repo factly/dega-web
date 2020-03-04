@@ -33,8 +33,8 @@
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
 import RelatedArticle from '@/components/RelatedArticle';
-import factCheckQuery from '../graphql/query/factcheck.gql';
-import postQuery from '../graphql/query/post.gql';
+import factCheckQuery from '../graphql/query/factchecks.gql';
+import postQuery from '../graphql/query/posts.gql';
 
 export default {
   components: {

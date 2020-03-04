@@ -35,8 +35,8 @@ import StoryPreview from '@/components/StoryPreview';
 import RelatedArticle from '@/components/RelatedArticle';
 import CollectionHeader from '@/components/CollectionHeader';
 import UserCard from '@/components/UserCard';
-import factCheckQuery from '../../../graphql/query/factcheck.gql';
-import postQuery from '../../../graphql/query/post.gql';
+import factCheckQuery from '../../../graphql/query/factchecks.gql';
+import postQuery from '../../../graphql/query/posts.gql';
 
 export default {
   components: {
@@ -93,9 +93,9 @@ export default {
 
     /* collection fetching */
     const collectionPluralList = {
-      user: 'userById',
-      category: 'categoryById',
-      tag: 'tagById'
+      user: 'user',
+      category: 'category',
+      tag: 'tag'
     };
 
     /* query fetching */
@@ -107,7 +107,8 @@ export default {
       variables: {
         id: params.slug
       }
-    }).then(c => c.data)
+    })
+      .then(c => c.data)
       .catch(() => error({ code: 500, message: 'Something went wrong' }));
 
     return { stories, collection: collection[params.collection] };

@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import factCheckQuery from '../graphql/query/factcheck.gql';
-import postQuery from '../graphql/query/post.gql';
+import factCheckQuery from '../graphql/query/factchecks.gql';
+import postQuery from '../graphql/query/posts.gql';
 
 export default {
   props: {
