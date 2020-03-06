@@ -55,7 +55,7 @@
     <SocialSharingVertical
       :url="'/post/'+posts[on]._id"
       :quote="posts[on].title"
-      :id="posts[on].id"
+      :id="posts[on]._id"
       type="post"
     />
   </div>
@@ -153,7 +153,7 @@ export default {
       this.pagination.pageNext = this.pagination.pageNext + 1;
       this.total = latestPost.total;
 
-      if (this.posts.find(value => value.id === latestPost.nodes[0]._id)) {
+      if (this.posts.find(value => value._id === latestPost.nodes[0]._id)) {
         console.log('Already there');
       } else {
         this.posts = this.posts.concat(latestPost.nodes);

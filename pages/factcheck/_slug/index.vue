@@ -73,7 +73,7 @@
     <SocialSharingVertical
       :url="'/factcheck/'+factchecks[on]._id"
       :quote="factchecks[on].title"
-      :id="factchecks[on].id"
+      :id="factchecks[on]._id"
       type="factcheck"
     />
   </div>
@@ -177,7 +177,7 @@ export default {
       this.pagination.pageNext = this.pagination.pageNext + 1;
       this.total = latestFactcheck.total;
 
-      if (this.factchecks.find(value => value.id === latestFactcheck.nodes[0]._id)) {
+      if (this.factchecks.find(value => value._id === latestFactcheck.nodes[0]._id)) {
         console.log('Already there');
       } else {
         this.factchecks = this.factchecks.concat(latestFactcheck.nodes);
