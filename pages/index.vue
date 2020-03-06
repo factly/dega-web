@@ -30,11 +30,12 @@
 </template>
 
 <script>
+import gql from 'graphql-tag';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
 import RelatedArticle from '@/components/RelatedArticle';
-import factCheckQuery from '../graphql/query/factchecks.gql';
-import postQuery from '../graphql/query/posts.gql';
+import { postsQuery } from '../graphql/query/post';
+import { factchecksQuery } from '../graphql/query/factcheck';
 
 export default {
   components: {
@@ -48,29 +49,33 @@ export default {
     };
   },
   async asyncData({ app, error }) {
-    const factchecks = await app.apolloProvider.defaultClient.query({
-      query: factCheckQuery,
+    /* fectching posts & factchecks */
+    const result = await app.apolloProvider.defaultClient.query({
+      query: gql(String.raw`
+        query (
+          $limit: Int
+          $page: Int
+          $category: [String!]
+          $tag: [String!]
+          $user: [String!]
+          $sortBy: String
+          $sortOrder: String 
+        ) {
+            ${factchecksQuery}
+            ${postsQuery}
+          }
+        `),
       variables: {
         limit: 5,
         sortBy: 'published_date',
         sort: 'DES'
       }
     })
-      .then(f => f.data.factchecks.nodes)
+      .then(f => f.data)
       .catch(() => error({ code: 500, message: 'Something went wrong' }));
 
-    const posts = await app.apolloProvider.defaultClient.query({
-      query: postQuery,
-      variables: {
-        limit: 5,
-        sortBy: 'published_date',
-        sort: 'DES'
-      }
-    })
-      .then(p => p.data.posts.nodes)
-      .catch(() => error({ code: 500, message: 'Something went wrong' }));
+    const stories = (result.posts.nodes || []).concat(result.factchecks.nodes || []);
 
-    const stories = (posts || []).concat(factchecks || []);
     stories.sort((a, b) => {
       if (a.publishedDate > b.publishedDate) return -1;
       if (b.publishedDate > a.publishedDate) return 1;

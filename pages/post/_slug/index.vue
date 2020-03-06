@@ -63,11 +63,11 @@
 
 <script>
 /* eslint-disable no-underscore-dangle */
+import gql from 'graphql-tag';
 import StoryHead from '@/components/StoryHead';
 import StoryFooter from '@/components/StoryFooter';
 import RelatedArticle from '@/components/RelatedArticle';
-import postByIdQuery from '../../../graphql/query/post.gql';
-import postQuery from '../../../graphql/query/posts.gql';
+import { postQuery, postsQuery } from '../../../graphql/query/post';
 
 export default {
   components: {
@@ -122,8 +122,22 @@ export default {
       };
     },
     async getLatestStories() {
+      /* fectching posts */
       const latestPost = await this.$apollo.query({
-        query: postQuery,
+        query: gql(
+          String.raw`
+            query (
+              $limit: Int
+              $page: Int
+              $category: [String!]
+              $tag: [String!]
+              $user: [String!]
+              $sortBy: String
+              $sortOrder: String 
+            ) {
+                ${postsQuery}
+              }
+          `),
         variables: {
           limit: 1,
           page: this.pagination.pageNext,
@@ -135,8 +149,10 @@ export default {
         .catch(() => {
           this.error({ code: 500, message: 'Something went wrong', homepage: true });
         });
+
       this.pagination.pageNext = this.pagination.pageNext + 1;
       this.total = latestPost.total;
+
       if (this.posts.find(value => value.id === latestPost.nodes[0]._id)) {
         console.log('Already there');
       } else {
@@ -147,8 +163,9 @@ export default {
   async asyncData({
     app, params, error
   }) {
+    /* fectching post by id */
     const post = await app.apolloProvider.defaultClient.query({
-      query: postByIdQuery,
+      query: gql(String.raw`${postQuery}`),
       variables: {
         id: params.slug
       }

@@ -1,7 +1,0 @@
-query categoryById($id: String!) {
-  category(id: $id) {
-    _id
-    name
-    slug
-  }
-}

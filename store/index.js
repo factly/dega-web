@@ -1,5 +1,6 @@
 /* eslint-disable */
-import organizationQuery from '../graphql/query/organization.gql';
+import { organizationQuery } from '../graphql/query/organization';
+import gql from 'graphql-tag';
 
 export const state = () => ({
   organization: Object,
@@ -14,7 +15,9 @@ export const mutations = {
 export const actions = {
   async nuxtServerInit({ commit }) {
     const org = await this.app.apolloProvider.defaultClient.query({
-      query: organizationQuery
+      query: gql(String.raw`
+          ${organizationQuery}
+      `)
     });
     commit('setOrganization', org.data.organization)
   }

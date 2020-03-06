@@ -87,13 +87,13 @@ a.anchor {
 </style>
 <script>
 /* eslint-disable no-underscore-dangle */
+import gql from 'graphql-tag';
 import StoryHead from '@/components/StoryHead';
 import StoryFooter from '@/components/StoryFooter';
 import Claim from '@/components/Claim';
 import ListClaims from '@/components/ListClaims';
 import RelatedArticle from '@/components/RelatedArticle';
-import factcheckByIdQuery from '../../../graphql/query/factcheck.gql';
-import factcheckQuery from '../../../graphql/query/factchecks.gql';
+import { factchecksQuery, factcheckQuery } from '../../../graphql/query/factcheck';
 
 export default {
   components: {
@@ -149,8 +149,21 @@ export default {
       };
     },
     async getLatestFactchecks() {
+      /* fectching factchecks */
       const latestFactcheck = await this.$apollo.query({
-        query: factcheckQuery,
+        query: gql(String.raw`
+          query (
+            $limit: Int
+            $page: Int
+            $category: [String!]
+            $tag: [String!]
+            $user: [String!]
+            $sortBy: String
+            $sortOrder: String 
+          ) {
+              ${factchecksQuery}
+            }
+          `),
         variables: {
           limit: 1,
           page: this.pagination.pageNext,
@@ -174,8 +187,9 @@ export default {
   async asyncData({
     params, app, error
   }) {
+    /* fectching factcheck by id */
     const factcheck = await app.apolloProvider.defaultClient.query({
-      query: factcheckByIdQuery,
+      query: gql(String.raw`${factcheckQuery}`),
       variables: {
         id: params.slug
       }

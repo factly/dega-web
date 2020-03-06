@@ -46,8 +46,9 @@
 </template>
 
 <script>
-import factCheckQuery from '../graphql/query/factchecks.gql';
-import postQuery from '../graphql/query/posts.gql';
+import gql from 'graphql-tag';
+import { factchecksQuery } from '../graphql/query/factcheck';
+import { postsQuery } from '../graphql/query/post';
 
 export default {
   props: {
@@ -86,17 +87,28 @@ export default {
 
       if (collection && slug) variables[collection] = [slug];
 
-      const factchecks = await this.$apollo.query({
-        query: factCheckQuery,
+      const result = await this.$apollo.query({
+        query: gql(String.raw`
+          query (
+            $limit: Int
+            $page: Int
+            $category: [String!]
+            $tag: [String!]
+            $user: [String!]
+            $sortBy: String
+            $sortOrder: String 
+          ) {
+              ${factchecksQuery}
+              ${postsQuery}
+            }
+          `),
         variables
-      });
+      })
+        .then(f => f.data)
+        .catch(() => this.error({ code: 500, message: 'Something went wrong' }));
 
-      const posts = await this.$apollo.query({
-        query: postQuery,
-        variables
-      });
+      const stories = (result.posts.nodes || []).concat(result.factchecks.nodes || []);
 
-      const stories = (posts.data.posts.nodes || []).concat(factchecks.data.factchecks.nodes || []);
       stories.sort((a, b) => {
         if (a.publishedDate > b.publishedDate) return -1;
         if (b.publishedDate > a.publishedDate) return 1;

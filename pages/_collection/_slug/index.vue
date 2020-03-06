@@ -31,12 +31,13 @@
 
 <script>
 /* eslint-disable import/no-dynamic-require */
+import gql from 'graphql-tag';
 import StoryPreview from '@/components/StoryPreview';
 import RelatedArticle from '@/components/RelatedArticle';
 import CollectionHeader from '@/components/CollectionHeader';
 import UserCard from '@/components/UserCard';
-import factCheckQuery from '../../../graphql/query/factchecks.gql';
-import postQuery from '../../../graphql/query/posts.gql';
+import { postsQuery } from '../../../graphql/query/post';
+import { factchecksQuery } from '../../../graphql/query/factcheck';
 
 export default {
   components: {
@@ -59,59 +60,51 @@ export default {
   async asyncData({
     params, app, error
   }) {
+    /* query fetching */
+    // eslint-disable-next-line global-require
+    const collectionQuery = require(`../../../graphql/query/${params.collection}`);
+
     /* stories fetching */
     const variables = {
       limit: 5,
       sortBy: 'published_date',
-      sort: 'DES'
+      sort: 'DES',
+      id: params.slug
     };
 
     if (params.collection && params.slug) variables[params.collection] = [params.slug];
 
-    const factchecks = await app.apolloProvider.defaultClient.query({
-      query: factCheckQuery,
+    const result = await app.apolloProvider.defaultClient.query({
+      query: gql(String.raw`
+        query (
+          $limit: Int
+          $page: Int
+          $category: [String!]
+          $tag: [String!]
+          $user: [String!]
+          $sortBy: String
+          $sortOrder: String
+          $id: String!
+        ) {
+            ${factchecksQuery}
+            ${postsQuery}
+            ${collectionQuery[params.collection]}
+          }
+        `),
       variables
     })
-      .then(f => f.data.factchecks.nodes)
-      .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
+      .then(f => f.data)
+      .catch(() => error({ code: 500, message: 'Something went wrong' }));
 
-    const posts = await app.apolloProvider.defaultClient.query({
-      query: postQuery,
-      variables
-    })
-      .then(p => p.data.posts.nodes)
-      .catch(() => {
-        error({ code: 500, message: 'Something went wrong', homepage: true });
-      });
+    const stories = (result.posts.nodes || []).concat(result.factchecks.nodes || []);
 
-    const stories = (posts || []).concat(factchecks || []);
     stories.sort((a, b) => {
       if (a.publishedDate > b.publishedDate) return -1;
       if (b.publishedDate > a.publishedDate) return 1;
       return 0;
     });
 
-    /* collection fetching */
-    const collectionPluralList = {
-      user: 'user',
-      category: 'category',
-      tag: 'tag'
-    };
-
-    /* query fetching */
-    // eslint-disable-next-line global-require
-    const query = require(`../../../graphql/query/${collectionPluralList[params.collection]}`);
-
-    const collection = await app.apolloProvider.defaultClient.query({
-      query,
-      variables: {
-        id: params.slug
-      }
-    })
-      .then(c => c.data)
-      .catch(() => error({ code: 500, message: 'Something went wrong' }));
-
-    return { stories, collection: collection[params.collection] };
+    return { stories, collection: result[params.collection] };
   },
   head() {
     const metadata = {};

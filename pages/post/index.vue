@@ -31,10 +31,11 @@
 </template>
 
 <script>
+import gql from 'graphql-tag';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
 import RelatedArticle from '@/components/RelatedArticle';
-import postQuery from '../../graphql/query/posts.gql';
+import { postsQuery } from '../../graphql/query/post';
 
 export default {
   components: {
@@ -64,8 +65,22 @@ export default {
       };
     },
     async getStories() {
+      /* fectching posts */
       const posts = await this.$apollo.query({
-        query: postQuery,
+        query: gql(
+          String.raw`
+            query (
+              $limit: Int
+              $page: Int
+              $category: [String!]
+              $tag: [String!]
+              $user: [String!]
+              $sortBy: String
+              $sortOrder: String 
+            ) {
+                ${postsQuery}
+              }
+            `),
         variables: {
           limit: 5,
           page: this.pagination.pageNext
@@ -80,9 +95,22 @@ export default {
     }
   },
   async asyncData({ app, error }) {
-    // add error
+    /* fectching posts */
     const posts = await app.apolloProvider.defaultClient.query({
-      query: postQuery,
+      query: gql(
+        String.raw`
+          query (
+            $limit: Int
+            $page: Int
+            $category: [String!]
+            $tag: [String!]
+            $user: [String!]
+            $sortBy: String
+            $sortOrder: String 
+          ) {
+              ${postsQuery}
+            }
+        `),
       variables: {
         limit: 5,
         page: 1

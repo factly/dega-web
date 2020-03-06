@@ -31,10 +31,11 @@
 </template>
 
 <script>
+import gql from 'graphql-tag';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
 import RelatedArticle from '@/components/RelatedArticle';
-import factCheckQuery from '../../graphql/query/factchecks.gql';
+import { factchecksQuery } from '../../graphql/query/factcheck';
 
 export default {
   components: {
@@ -64,8 +65,21 @@ export default {
       };
     },
     async getStories() {
+      /* fectching factchecks */
       const factchecks = await this.$apollo.query({
-        query: factCheckQuery,
+        query: gql(String.raw`
+          query (
+            $limit: Int
+            $page: Int
+            $category: [String!]
+            $tag: [String!]
+            $user: [String!]
+            $sortBy: String
+            $sortOrder: String 
+          ) {
+              ${factchecksQuery}
+            }
+          `),
         variables: {
           limit: 5,
           page: this.pagination.pageNext
@@ -78,9 +92,21 @@ export default {
     }
   },
   async asyncData({ app, error }) {
-    // add error
+    /* fectching factchecks */
     const factchecks = await app.apolloProvider.defaultClient.query({
-      query: factCheckQuery,
+      query: gql(String.raw`
+        query (
+          $limit: Int
+          $page: Int
+          $category: [String!]
+          $tag: [String!]
+          $user: [String!]
+          $sortBy: String
+          $sortOrder: String 
+        ) {
+            ${factchecksQuery}
+          }
+        `),
       variables: {
         limit: 5,
         page: 1

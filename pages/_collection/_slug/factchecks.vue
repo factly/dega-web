@@ -41,11 +41,12 @@
 
 <script>
 /* eslint-disable import/no-dynamic-require */
+import gql from 'graphql-tag';
 import StoryPreview from '@/components/StoryPreview';
 import RelatedArticle from '@/components/RelatedArticle';
 import CollectionHeader from '@/components/CollectionHeader';
 import UserCard from '@/components/UserCard';
-import factCheckQuery from '../../../graphql/query/factchecks.gql';
+import { factchecksQuery } from '../../../graphql/query/factcheck';
 
 export default {
   components: {
@@ -83,7 +84,19 @@ export default {
     },
     async getStories() {
       const factchecks = await this.$apollo.query({
-        query: factCheckQuery,
+        query: gql(String.raw`
+          query (
+            $limit: Int
+            $page: Int
+            $category: [String!]
+            $tag: [String!]
+            $user: [String!]
+            $sortBy: String
+            $sortOrder: String 
+          ) {
+              ${factchecksQuery}
+            }
+          `),
         variables: {
           limit: 5,
           page: this.pagination.pageNext,
@@ -100,44 +113,44 @@ export default {
   async asyncData({
     params, app, error
   }) {
+    /* query fetching */
+    // eslint-disable-next-line global-require
+    const collectionQuery = require(`../../../graphql/query/${params.collection}`);
+
     /* stories fetching */
     const variables = {
       limit: 5,
       page: 1,
       sortBy: 'published_date',
-      sort: 'DES'
+      sort: 'DES',
+      id: params.slug
     };
 
     if (params.collection && params.slug) variables[params.collection] = [params.slug];
 
-    const factchecks = await app.apolloProvider.defaultClient.query({
-      query: factCheckQuery,
+    const result = await app.apolloProvider.defaultClient.query({
+      query: gql(String.raw`
+          query (
+            $limit: Int
+            $page: Int
+            $category: [String!]
+            $tag: [String!]
+            $user: [String!]
+            $sortBy: String
+            $sortOrder: String
+            $id: String! 
+          ) {
+              ${factchecksQuery}
+              ${collectionQuery[params.collection]}
+            }
+          `),
       variables
     })
-      .then(f => f.data.factchecks)
-      .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
-    /* collection fetching */
-    const collectionPluralList = {
-      user: 'user',
-      category: 'category',
-      tag: 'tag'
-    };
-
-    /* query fetching */
-    // eslint-disable-next-line global-require
-    const query = require(`../../../graphql/query/${collectionPluralList[params.collection]}`);
-
-    const collection = await app.apolloProvider.defaultClient.query({
-      query,
-      variables: {
-        id: params.slug
-      }
-    })
-      .then(c => c.data)
+      .then(f => f.data)
       .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
 
     return {
-      stories: factchecks.nodes, pagination: { pageNext: 2 }, collection: collection[params.collection], total: factchecks.total
+      stories: result.factchecks.nodes, pagination: { pageNext: 2 }, collection: result[params.collection], total: result.factchecks.total
     };
   },
   head() {

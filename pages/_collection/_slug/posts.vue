@@ -41,11 +41,12 @@
 
 <script>
 /* eslint-disable import/no-dynamic-require */
+import gql from 'graphql-tag';
 import StoryPreview from '@/components/StoryPreview';
 import RelatedArticle from '@/components/RelatedArticle';
 import CollectionHeader from '@/components/CollectionHeader';
 import UserCard from '@/components/UserCard';
-import postQuery from '../../../graphql/query/posts.gql';
+import { postsQuery } from '../../../graphql/query/post';
 
 export default {
   components: {
@@ -83,7 +84,20 @@ export default {
     },
     async getStories() {
       const posts = await this.$apollo.query({
-        query: postQuery,
+        query: gql(
+          String.raw`
+          query (
+            $limit: Int
+            $page: Int
+            $category: [String!]
+            $tag: [String!]
+            $user: [String!]
+            $sortBy: String
+            $sortOrder: String 
+          ) {
+              ${postsQuery}
+            }
+        `),
         variables: {
           limit: 5,
           page: this.pagination.pageNext
@@ -101,46 +115,46 @@ export default {
   async asyncData({
     params, error, app
   }) {
+    /* query fetching */
+    // eslint-disable-next-line global-require
+    const collectionQuery = require(`../../../graphql/query/${params.collection}`);
+
     const variables = {
       page: 1,
       limit: 5,
       sortBy: 'published_date',
-      sort: 'DES'
+      sort: 'DES',
+      id: params.slug
     };
 
     if (params.collection && params.slug) variables[params.collection] = [params.slug];
     /* stories fetching */
-    const posts = await app.apolloProvider.defaultClient.query({
-      query: postQuery,
+    const result = await app.apolloProvider.defaultClient.query({
+      query: gql(
+        String.raw`
+          query (
+            $limit: Int
+            $page: Int
+            $category: [String!]
+            $tag: [String!]
+            $user: [String!]
+            $sortBy: String
+            $sortOrder: String
+            $id: String! 
+          ) {
+              ${postsQuery}
+              ${collectionQuery[params.collection]}
+            }
+        `),
       variables
     })
-      .then(p => p.data.posts)
+      .then(p => p.data)
       .catch(() => {
         error({ code: 500, message: 'Something went wrong', homepage: true });
       });
 
-    /* collection fetching */
-    const collectionPluralList = {
-      user: 'user',
-      category: 'category',
-      tag: 'tag'
-    };
-
-    /* query fetching */
-    // eslint-disable-next-line global-require
-    const query = require(`../../../graphql/query/${collectionPluralList[params.collection]}`);
-
-    const collection = await app.apolloProvider.defaultClient.query({
-      query,
-      variables: {
-        id: params.slug
-      }
-    })
-      .then(c => c.data)
-      .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
-
     return {
-      stories: posts.nodes, pagination: { pageNext: 2 }, collection: collection[params.collection], total: posts.total
+      stories: result.posts.nodes, pagination: { pageNext: 2 }, collection: result[params.collection], total: result.posts.total
     };
   },
   head() {
