@@ -34,8 +34,8 @@ import gql from 'graphql-tag';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
 import RelatedArticle from '@/components/RelatedArticle';
-import { postsQuery } from '../graphql/query/post';
-import { factchecksQuery } from '../graphql/query/factcheck';
+import { postsQuery } from '../graphql/query/posts';
+import { factchecksQuery } from '../graphql/query/factchecks';
 
 export default {
   components: {

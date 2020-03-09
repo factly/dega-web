@@ -67,7 +67,7 @@ import gql from 'graphql-tag';
 import StoryHead from '@/components/StoryHead';
 import StoryFooter from '@/components/StoryFooter';
 import RelatedArticle from '@/components/RelatedArticle';
-import { postQuery, postsQuery } from '../../../graphql/query/post';
+import { postQuery, postsQuery } from '../../../graphql/query/posts';
 
 export default {
   components: {

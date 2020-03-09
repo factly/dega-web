@@ -7,7 +7,7 @@
             :collection = "this.$route.params.collection"
             :slug = "this.$route.params.slug"
             :heading = "this.$route.params.collection === 'user' ? collection.display_name : collection.name"
-            meta = "factchecks"
+            :meta = "this.$route.params.type ? this.$route.params.type : 'all' "
           />
         </div>
         <div class="margin-top-2">
@@ -41,12 +41,14 @@
 
 <script>
 /* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
 import gql from 'graphql-tag';
 import StoryPreview from '@/components/StoryPreview';
 import RelatedArticle from '@/components/RelatedArticle';
 import CollectionHeader from '@/components/CollectionHeader';
 import UserCard from '@/components/UserCard';
-import { factchecksQuery } from '../../../graphql/query/factcheck';
+import { postsQuery } from '../../../../graphql/query/posts';
+import { factchecksQuery } from '../../../../graphql/query/factchecks';
 
 export default {
   components: {
@@ -57,7 +59,10 @@ export default {
   },
   validate({ params, error }) {
     const collectionList = ['category', 'user', 'tag'];
-    if (collectionList.includes(params.collection)) return true;
+    const typeList = ['factchecks', 'posts'];
+    if (collectionList.includes(params.collection) && (!params.type || typeList.includes(params.type))) {
+      return true;
+    }
     return error({ code: 404, message: 'You have been lost', homepage: true });
   },
   data() {
@@ -83,8 +88,15 @@ export default {
       };
     },
     async getStories() {
-      const factchecks = await this.$apollo.query({
-        query: gql(String.raw`
+      const variables = {
+        limit: 5,
+        page: 1,
+        sortBy: 'published_date',
+        sort: 'DES'
+      };
+      if (this.params.type) {
+        const factchecks = await this.$apollo.query({
+          query: gql(String.raw`
           query (
             $limit: Int
             $page: Int
@@ -94,28 +106,49 @@ export default {
             $sortBy: String
             $sortOrder: String 
           ) {
+              ${`${this.params.type}Query`}
+            }
+          `),
+          variables
+        })
+          .then(f => f.data[this.params.type].nodes)
+          .catch(() => this.error({ code: 500, message: 'Something went wrong', homepage: true }));
+        this.pagination.pageNext += 1;
+        this.stories = this.stories.concat(factchecks);
+      } else {
+        const result = await this.$apollo.query({
+          query: gql(String.raw`
+          query (
+            $limit: Int
+            $page: Int
+            $category: [String!]
+            $tag: [String!]
+            $user: [String!]
+            $sortBy: String
+            $sortOrder: String
+            $id: String! 
+          ) {
+              ${postsQuery}
               ${factchecksQuery}
             }
           `),
-        variables: {
-          limit: 5,
-          page: this.pagination.pageNext,
-          sortBy: 'published_date',
-          sort: 'DES'
-        }
-      })
-        .then(f => f.data.factchecks.nodes)
-        .catch(() => this.error({ code: 500, message: 'Something went wrong', homepage: true }));
-      this.pagination.pageNext += 1;
-      this.stories = this.stories.concat(factchecks);
+          variables
+        })
+          .then(f => f.data)
+          .catch(() => this.error({ code: 500, message: 'Something went wrong', homepage: true }));
+
+        const stories = (result.posts.nodes || []).concat(result.factchecks.nodes || []);
+        this.pagination.pageNext += 1;
+        this.stories = this.stories.concat(stories);
+      }
     }
   },
   async asyncData({
     params, app, error
   }) {
     /* query fetching */
-    // eslint-disable-next-line global-require
-    const collectionQuery = require(`../../../graphql/query/${params.collection}`);
+    const collectionQuery = require(`../../../../graphql/query/${params.collection}`);
+    let storiesQuery;
 
     /* stories fetching */
     const variables = {
@@ -127,6 +160,38 @@ export default {
     };
 
     if (params.collection && params.slug) variables[params.collection] = [params.slug];
+
+    if (params.type) {
+      if (params.type === 'factchecks') {
+        storiesQuery = factchecksQuery;
+      } else {
+        storiesQuery = postsQuery;
+      }
+      const result = await app.apolloProvider.defaultClient.query({
+        query: gql(String.raw`
+          query (
+            $limit: Int
+            $page: Int
+            $category: [String!]
+            $tag: [String!]
+            $user: [String!]
+            $sortBy: String
+            $sortOrder: String
+            $id: String! 
+          ) {
+              ${storiesQuery}
+              ${collectionQuery[params.collection]}
+            }
+          `),
+        variables
+      })
+        .then(f => f.data)
+        .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
+
+      return {
+        stories: result[params.type].nodes, pagination: { pageNext: 2 }, collection: result[params.collection], total: result[params.type].total
+      };
+    }
 
     const result = await app.apolloProvider.defaultClient.query({
       query: gql(String.raw`
@@ -140,6 +205,7 @@ export default {
             $sortOrder: String
             $id: String! 
           ) {
+              ${postsQuery}
               ${factchecksQuery}
               ${collectionQuery[params.collection]}
             }
@@ -149,8 +215,11 @@ export default {
       .then(f => f.data)
       .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
 
+    const stories = (result.posts.nodes || []).concat(result.factchecks.nodes || []);
+    const total = result.posts.total + result.factchecks.total;
+
     return {
-      stories: result.factchecks.nodes, pagination: { pageNext: 2 }, collection: result[params.collection], total: result.factchecks.total
+      stories, pagination: { pageNext: 2 }, collection: result[params.collection], total
     };
   },
   head() {
@@ -165,7 +234,6 @@ export default {
         { hid: 'og:description', name: 'og:description', content: collection.description ? collection.description : null },
       ];
     } else { metadata.title = this.$store.getters.getOrganization.site_title; }
-
     return metadata;
   }
 };

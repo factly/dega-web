@@ -6,7 +6,7 @@
       <header class="card-header">
         <p class="card-header-title">
           <nuxt-link
-            :to="localePath({ name:'collection-slug', params: { collection, slug } })"
+            :to="localePath({ name:'collection-slug-type', params: { collection, slug, type: null } })"
             class="has-text-black-bis">
             {{ header }}
           </nuxt-link>
@@ -47,8 +47,8 @@
 
 <script>
 import gql from 'graphql-tag';
-import { factchecksQuery } from '../graphql/query/factcheck';
-import { postsQuery } from '../graphql/query/post';
+import { factchecksQuery } from '../graphql/query/factchecks';
+import { postsQuery } from '../graphql/query/posts';
 
 export default {
   props: {
