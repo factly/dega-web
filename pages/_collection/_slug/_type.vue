@@ -47,8 +47,8 @@ import StoryPreview from '@/components/StoryPreview';
 import RelatedArticle from '@/components/RelatedArticle';
 import CollectionHeader from '@/components/CollectionHeader';
 import UserCard from '@/components/UserCard';
-import { postsQuery } from '../../../../graphql/query/posts';
-import { factchecksQuery } from '../../../../graphql/query/factchecks';
+import { postsQuery } from '@/graphql/query/posts';
+import { factchecksQuery } from '@/graphql/query/factchecks';
 
 export default {
   components: {
@@ -57,13 +57,13 @@ export default {
     CollectionHeader,
     UserCard
   },
-  validate({ params, error }) {
+  validate({ params }) {
     const collectionList = ['category', 'user', 'tag'];
     const typeList = ['factchecks', 'posts'];
     if (collectionList.includes(params.collection) && (!params.type || typeList.includes(params.type))) {
       return true;
     }
-    return error({ code: 404, message: 'You have been lost', homepage: true });
+    return false;
   },
   data() {
     return {
@@ -95,7 +95,7 @@ export default {
         sort: 'DES'
       };
       if (this.params.type) {
-        const factchecks = await this.$apollo.query({
+        const stories = await this.$apollo.query({
           query: gql(String.raw`
           query (
             $limit: Int
@@ -114,7 +114,7 @@ export default {
           .then(f => f.data[this.params.type].nodes)
           .catch(() => this.error({ code: 500, message: 'Something went wrong', homepage: true }));
         this.pagination.pageNext += 1;
-        this.stories = this.stories.concat(factchecks);
+        this.stories = this.stories.concat(stories);
       } else {
         const result = await this.$apollo.query({
           query: gql(String.raw`
@@ -147,7 +147,7 @@ export default {
     params, app, error
   }) {
     /* query fetching */
-    const collectionQuery = require(`../../../../graphql/query/${params.collection}`);
+    const collectionQuery = require(`@/graphql/query/${params.collection}`);
     let storiesQuery;
 
     /* stories fetching */
@@ -187,7 +187,9 @@ export default {
       })
         .then(f => f.data)
         .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
-
+      if (result[params.type].total === 0) {
+        error({ code: 500, message: 'Something went wrong', homepage: true });
+      }
       return {
         stories: result[params.type].nodes, pagination: { pageNext: 2 }, collection: result[params.collection], total: result[params.type].total
       };
@@ -217,7 +219,9 @@ export default {
 
     const stories = (result.posts.nodes || []).concat(result.factchecks.nodes || []);
     const total = result.posts.total + result.factchecks.total;
-
+    if (total === 0) {
+      error({ code: 404, message: 'page not found', homepage: true });
+    }
     return {
       stories, pagination: { pageNext: 2 }, collection: result[params.collection], total
     };
