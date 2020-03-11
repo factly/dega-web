@@ -1,7 +1,6 @@
 /* eslint-disable */
 // const getGATracking = require('../utils/getGATracking.js');
-import axios from 'axios';
-
+import gql from 'graphql-tag';
 
 export default ({ app }) => {
   /*
@@ -18,13 +17,12 @@ export default ({ app }) => {
     /*
     ** Set the current page
     */
-  let config = {
-    headers: {
-      client: process.env.CLIENT_ID,
-    }
-  }
-  const GAC = axios
-  .get(`${process.env.API_URI}/api/v1/organizations`, config)
+  
+  const GAC = async() => await this.$apollo.query({
+    query: gql(String.raw`
+        ${organizationQuery}
+    `)
+  })
   .then(response => {
     ga('create', response.data.gaTrackingCode, 'auto')
     ga('send', 'pageview')
