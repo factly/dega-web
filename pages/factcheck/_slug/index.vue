@@ -49,7 +49,7 @@
             <RelatedArticle
               v-for="(category, index) in f.categories"
               :key="'user-related'+index"
-              :slug="category._id"
+              :slug="category.slug+'-'+category._id"
               :header="`More in ${category.name}`"
               :id="f._id"
               class="margin-horizontal-1"
@@ -60,7 +60,7 @@
             <RelatedArticle
               v-for="(user, index) in f.degaUsers"
               :key="'user-related'+index"
-              :slug="user._id"
+              :slug="user.slug+'-'+user._id"
               :header="`More from ${user.display_name}`"
               :id="f._id"
               class="margin-horizontal-1"
@@ -120,7 +120,7 @@ export default {
     on() {
       document.title = `${this.factchecks[this.on].title} - ${this.$store.getters.getOrganization.site_title}`;
       // eslint-disable-next-line no-restricted-globals
-      history.pushState({}, null, `/factcheck/${this.factchecks[this.on]._id}`);
+      history.pushState({}, null, `/factcheck/${this.factchecks[this.on].slug}-${this.factchecks[this.on]._id}`);
     }
   },
   mounted() {
@@ -191,7 +191,7 @@ export default {
     const factcheck = await app.apolloProvider.defaultClient.query({
       query: gql(String.raw`${factcheckQuery}`),
       variables: {
-        id: params.slug
+        id: params.slug.split('-').pop()
       }
     })
       .then(f => f.data.factcheck)

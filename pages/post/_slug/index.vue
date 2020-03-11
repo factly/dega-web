@@ -31,7 +31,7 @@
             <RelatedArticle
               v-for="(category, index) in p.categories"
               :key="'category-related'+index"
-              :slug="category._id"
+              :slug="category.slug+'-'+category._id"
               :header="`More in ${category.name}`"
               :id="p._id"
               class="margin-horizontal-1"
@@ -42,7 +42,7 @@
             <RelatedArticle
               v-for="(user, index) in p.users"
               :key="'user-related'+index"
-              :slug="user._id"
+              :slug="user.slug+'-'+user._id"
               :header="`More from ${user.display_name}`"
               :id="p._id"
               class="margin-horizontal-1"
@@ -92,7 +92,7 @@ export default {
     on() {
       document.title = `${this.posts[this.on].title} - ${this.$store.getters.getOrganization.site_title}`;
       // eslint-disable-next-line no-restricted-globals
-      history.pushState({}, null, `/post/${this.posts[this.on]._id}`);
+      history.pushState({}, null, `/post/${this.posts[this.on].slug}-${this.posts[this.on]._id}`);
     }
   },
   mounted() {
@@ -167,7 +167,7 @@ export default {
     const post = await app.apolloProvider.defaultClient.query({
       query: gql(String.raw`${postQuery}`),
       variables: {
-        id: params.slug
+        id: params.slug.split('-').pop()
       }
     })
       .then(p => p.data.post)

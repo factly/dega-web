@@ -20,7 +20,7 @@
       <div class="column is-4">
         <div class="is-hidden-mobile">
           <RelatedArticle
-            slug="5c38f470569ed47e00c7002c"
+            slug="bussiness-5c38f470569ed47e00c7002c"
             header="Recent Bussiness"
             collection="category"
           />

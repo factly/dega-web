@@ -149,17 +149,16 @@ export default {
     /* query fetching */
     const collectionQuery = require(`@/graphql/query/${params.collection}`);
     let storiesQuery;
-
     /* stories fetching */
     const variables = {
       limit: 5,
       page: 1,
       sortBy: 'published_date',
       sort: 'DES',
-      id: params.slug
+      id: params.slug.split('-').pop()
     };
 
-    if (params.collection && params.slug) variables[params.collection] = [params.slug];
+    if (params.collection && params.slug) variables[params.collection] = [params.slug.split('-').pop()];
 
     if (params.type) {
       if (params.type === 'factchecks') {

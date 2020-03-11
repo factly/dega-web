@@ -6,7 +6,7 @@
           <div>
             <p class="is-size-4 has-text-weight-bold story-preview-title">
               <nuxt-link
-                :to="localePath({ name: story._class.split('.').pop().toLowerCase() + '-slug', params: { slug: story._id
+                :to="localePath({ name: story._class.split('.').pop().toLowerCase() + '-slug', params: { slug: story.slug+'-'+story._id
                 } })"
                 class="has-text-black-bis">
                 {{ story.title }}
@@ -25,7 +25,7 @@
       </div>
       <div class="column is-3">
         <nuxt-link
-          :to="localePath({ name: story._class.split('.').pop().toLowerCase() + '-slug', params: { slug: story._id
+          :to="localePath({ name: story._class.split('.').pop().toLowerCase() + '-slug', params: { slug: story.slug+'-'+story._id
         } })">
           <figure
             v-if="story.media"

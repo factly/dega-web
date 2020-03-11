@@ -13,7 +13,7 @@
             <figure
               v-if="story.degaUsers[0].media"
               class="image is-48x48">
-              <nuxt-link :to="localePath({ name:'collection-slug-type', params: {collection: 'user', slug: story.degaUsers[0]._id, type: null } })" >
+              <nuxt-link :to="localePath({ name:'collection-slug-type', params: {collection: 'user', slug: story.degaUsers[0].slug+'-'+story.degaUsers[0]._id, type: null } })" >
                 <img
                   :src="story.degaUsers[0].media.url+'?resize:fill:50:50:0/quality:60/gravity:sm'"
                   :alt="story.degaUsers[0].media.altText"
@@ -41,7 +41,7 @@
             <figure
               v-if="user.media"
               class="image is-48x48">
-              <nuxt-link :to="localePath({ name:'collection-slug-type', params: { collection: 'user', slug: user._id, type: null } })">
+              <nuxt-link :to="localePath({ name:'collection-slug-type', params: { collection: 'user', slug: user.slug+'-'+user._id, type: null } })">
                 <img
                   :src="user.media.url+'?resize:fill:50:50:0/quality:60/gravity:sm'"
                   :alt="user.media.altText"

@@ -22,7 +22,7 @@
               <figure
                 v-if="story.media"
                 class="image figure-width-5">
-                <nuxt-link :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story._id } })">
+                <nuxt-link :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug+'-'+story._id } })">
                   <img
                     :src="story.media.url+'?resize:fill:80:45:0/gravity:sm'"
                     :alt="story.media.altText" >
@@ -32,7 +32,7 @@
             <div class="media-content">
               <p class="subtitle is-6">
                 <nuxt-link
-                  :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story._id } })"
+                  :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug+'-'+story._id } })"
                   class="has-text-black-bis">
                   {{ story.title }}
                 </nuxt-link>
@@ -85,7 +85,7 @@ export default {
         sort: 'DES'
       };
 
-      if (collection && slug) variables[collection] = [slug];
+      if (collection && slug) variables[collection] = [slug.split('-').pop()];
 
       const result = await this.$apollo.query({
         query: gql(String.raw`
