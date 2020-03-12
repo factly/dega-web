@@ -47,8 +47,8 @@
 
 <script>
 import gql from 'graphql-tag';
-import { factchecksQuery } from '../graphql/query/factchecks';
-import { postsQuery } from '../graphql/query/posts';
+import { pagingQuery as factchecksQuery } from '../graphql/query/factchecks';
+import { pagingQuery as postsQuery } from '../graphql/query/posts';
 
 export default {
   props: {

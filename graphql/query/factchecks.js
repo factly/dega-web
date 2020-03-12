@@ -2,10 +2,8 @@ const factcheck = `
     _id
     title
     excerpt
-    introduction
     published_date
     slug
-    updates
     media {
         url
         alt_text
@@ -15,20 +13,10 @@ const factcheck = `
         name
         slug
     }
-    tags {
-        _id
-        name
-        slug
-    }
-    degaUsers {
-        _id
-        display_name
-        slug
-        media {
-            url
-            alt_text
-        }
-    }
+    _class
+`;
+
+const claims = `
     claims {
         claim
         description
@@ -48,20 +36,40 @@ const factcheck = `
             }
         }
     }
-    _class
+`;
+
+const tags = `
+    tags {
+        _id
+        name
+        slug
+    }
 `;
 
 /* export factcheck query by id */
 export const factcheckQuery = `
 query factcheckById($id: String!) {
     factcheck(id: $id) {
+        introduction
+        updates
         ${factcheck}
+        ${claims}
+        degaUsers {
+            _id
+            display_name
+            slug
+            media {
+                url
+                alt_text
+            }
+        }
+        ${tags}
     }
 }
 `;
 
-/* export factchecks query */
-export const factchecksQuery = `
+/* export factchecks query for list page */
+export const pagingQuery = `
 factchecks(
     limit: $limit
     page: $page
@@ -73,8 +81,43 @@ factchecks(
 ) {
     nodes {
         ${factcheck}
+        degaUsers {
+            _id
+            display_name
+            slug
+        }
     }
     total
 }
+`;
 
+/* export factchecks query for single page */
+export const singlePageQuery = `
+factchecks(
+    limit: $limit
+    page: $page
+    categories: $category
+    tags: $tag
+    users: $user
+    sortBy: $sortBy
+    sortOrder: $sortOrder 
+) {
+    nodes {
+        introduction
+        updates
+        ${factcheck}
+        ${claims}
+        degaUsers {
+            _id
+            display_name
+            slug
+            media {
+                url
+                alt_text
+            }
+        }
+        ${tags}
+    }
+    total
+}
 `;

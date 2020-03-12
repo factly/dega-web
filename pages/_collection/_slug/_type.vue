@@ -44,16 +44,14 @@
 /* eslint-disable global-require */
 import gql from 'graphql-tag';
 import StoryPreview from '@/components/StoryPreview';
-import RelatedArticle from '@/components/RelatedArticle';
 import CollectionHeader from '@/components/CollectionHeader';
 import UserCard from '@/components/UserCard';
-import { postsQuery } from '@/graphql/query/posts';
-import { factchecksQuery } from '@/graphql/query/factchecks';
+import { pagingQuery as postsQuery } from '@/graphql/query/posts';
+import { pagingQuery as factchecksQuery } from '@/graphql/query/factchecks';
 
 export default {
   components: {
     StoryPreview,
-    RelatedArticle,
     CollectionHeader,
     UserCard
   },

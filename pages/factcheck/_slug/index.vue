@@ -93,7 +93,7 @@ import StoryFooter from '@/components/StoryFooter';
 import Claim from '@/components/Claim';
 import ListClaims from '@/components/ListClaims';
 import RelatedArticle from '@/components/RelatedArticle';
-import { factchecksQuery, factcheckQuery } from '../../../graphql/query/factchecks';
+import { singlePageQuery as factchecksQuery, factcheckQuery } from '../../../graphql/query/factchecks';
 
 export default {
   components: {
