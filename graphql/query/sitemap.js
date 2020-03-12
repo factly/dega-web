@@ -16,25 +16,10 @@ export const sitemapsQuery = `
             users{
                 ${sitemap}
             }
-            formats{
-                ${sitemap}
-            }
-            statuses{
-                ${sitemap}
-            }
             posts{
                 ${sitemap}
             }
             factchecks{
-                ${sitemap}
-            }
-            claims{
-                ${sitemap}
-            }
-            claimants{
-                ${sitemap}
-            }
-            ratings{
                 ${sitemap}
             }
         }
