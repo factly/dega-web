@@ -19,31 +19,31 @@ export default async function getSitemapRoutes() {
   const routes = [];
   sitemap.categories.forEach((category) => {
     routes.push({
-      url: `category/${category._id}`
+      url: `category/${category.slug}-${category._id}`
     });
   });
 
   /* sitemap.users.forEach((user) => {
     routes.push({
-      url: `user/${user._id}`
+      url: `user/${user.slug}-${user._id}`
     });
   }); */
 
   sitemap.tags.forEach((tag) => {
     routes.push({
-      url: `tag/${tag._id}`
+      url: `tag/${tag.slug}-${tag._id}`
     });
   });
 
   sitemap.posts.forEach((post) => {
     routes.push({
-      url: `post/${post._id}`
+      url: `post/${post.slug}-${post._id}`
     });
   });
 
   sitemap.factchecks.forEach((factcheck) => {
     routes.push({
-      url: `factcheck/${factcheck._id}`
+      url: `factcheck/${factcheck.slug}-${factcheck._id}`
     });
   });
 

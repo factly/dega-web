@@ -25,8 +25,8 @@ const factcheck = `
         slug
         email
         media {
-        url
-        alt_text
+            url
+            alt_text
         }
         _class
     }
@@ -35,21 +35,21 @@ const factcheck = `
         description
         review
         claimant {
-        name
-        media {
-            url
-            alt_text
-        }
-        _class
+            name
+            media {
+                url
+                alt_text
+            }
+            _class
         }
         rating {
-        numeric_value
-        slug
-        media {
-            url
-            alt_text
-        }
-        _class
+            numeric_value
+            slug
+            media {
+                url
+                alt_text
+            }
+            _class
         }
     }
     _class
