@@ -4,6 +4,7 @@ const factcheck = `
     excerpt
     introduction
     published_date
+    slug
     updates
     media {
         url
@@ -23,12 +24,10 @@ const factcheck = `
         _id
         display_name
         slug
-        email
         media {
             url
             alt_text
         }
-        _class
     }
     claims {
         claim
@@ -40,16 +39,13 @@ const factcheck = `
                 url
                 alt_text
             }
-            _class
         }
         rating {
             numeric_value
-            slug
             media {
                 url
                 alt_text
             }
-            _class
         }
     }
     _class

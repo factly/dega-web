@@ -25,11 +25,9 @@ const post = `
         display_name
         slug
         media {
-        url
-        alt_text
+            url
+            alt_text
         }
-        email
-        _class
     }
     _class
 `;
