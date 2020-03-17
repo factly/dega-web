@@ -59,6 +59,9 @@ export default {
           headers: {
             client: process.env.CLIENT_ID
           }
+        },
+        inMemoryCacheOptions: {
+          addTypename: false
         }
       }
     }

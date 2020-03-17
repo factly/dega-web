@@ -46,6 +46,41 @@ const tags = `
     }
 `;
 
+const schema = `
+schemas {
+    context
+    type
+    datePublished
+    url    
+    author{
+        name
+        type
+        url
+        image
+    }
+    claimReviewed
+    reviewRating{
+        type
+        ratingValue
+        bestRating
+        worstRating
+        image
+        alternateName
+    }
+    itemReviewed{
+        type
+        author{
+            name
+            type
+            url
+            image
+        }
+        datePublished
+        name
+    }
+}
+`;
+
 /* export factcheck query by id */
 export const factcheckQuery = `
 query factcheckById($id: String!) {
@@ -64,6 +99,7 @@ query factcheckById($id: String!) {
             }
         }
         ${tags}
+        ${schema}
     }
 }
 `;

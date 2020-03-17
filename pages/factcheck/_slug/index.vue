@@ -87,6 +87,7 @@ a.anchor {
 </style>
 <script>
 /* eslint-disable no-underscore-dangle */
+/* eslint-disable no-param-reassign */
 import gql from 'graphql-tag';
 import StoryHead from '@/components/StoryHead';
 import StoryFooter from '@/components/StoryFooter';
@@ -208,10 +209,28 @@ export default {
   head() {
     const metadata = {};
     const { factchecks } = this;
+    const schemas = factchecks[0].schemas.map((schema) => {
+      schema['@type'] = schema.type;
+      schema['@context'] = schema.context;
+      schema.author['@type'] = schema.author.type;
+      schema.reviewRating['@type'] = schema.reviewRating.type;
+      schema.itemReviewed['@type'] = schema.itemReviewed.type;
+      schema.itemReviewed.author['@type'] = schema.itemReviewed.author.type;
+      delete schema.type;
+      delete schema.context;
+      delete schema.author.type;
+      delete schema.reviewRating.type;
+      delete schema.itemReviewed.type;
+      delete schema.itemReviewed.author.type;
+
+      return schema;
+    });
+
     if (factchecks.length > 0) {
       metadata.title = `${factchecks[0].title} - ${this.$store.getters.getOrganization.site_title}`;
+      metadata.__dangerouslyDisableSanitizers = ['script'];
       metadata.script = [
-        { innerHTML: JSON.stringify(factchecks[0].schemas), type: 'application/ld+json' },
+        { innerHTML: JSON.stringify(schemas), type: 'application/ld+json' },
         { src: 'https://platform.twitter.com/widgets.js', async: true },
       ];
       metadata.meta = [
