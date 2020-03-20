@@ -184,7 +184,7 @@ export default {
         { rel: 'icon', type: 'image/x-icon', href: this.organization.mediaFavicon ? this.organization.mediaFavicon.url : null },
       ],
       meta: [
-        { name: 'google-site-verification', content: this.organization.googleVerificationCode },
+        { name: 'google-site-verification', content: this.organization.google_verification_code },
         { hid: 'og:site_name', name: 'og:site_name', content: this.organization.name },
         { hid: 'og:title', name: 'og:title', content: this.$nuxt.$route.path.split('/').pop() },
         { hid: 'og:url', name: 'og:url', content: this.organization.site_address + this.$nuxt.$route.path },
