@@ -3,20 +3,6 @@
     <div class="column is-12">
       <div class="main-content">
         <section class="hero-title has-text-centered container">
-          <!-- <div>
-            <p class="title is-size-5 is-size-4-tablet is-size-3-desktop has-text-link has-text-centered-desktop">
-                Fact Check Methodology
-            </p>
-            <p class="selectionShareable">
-              Factly is a
-              <a
-                href="https://www.ifcncodeofprinciples.poynter.org/signatories"
-                target="_blank"
-                rel="noopener"
-              >verified signatory</a> of the International Fact Checking Network (IFCN) Code of Principles for Fact Checkers.
-            </p>
-          </div> -->
-          <br>
           <div class="card">
             <header class="card-header">
               <p class="card-header-title">
