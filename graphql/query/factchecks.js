@@ -51,11 +51,11 @@ schemas {
     context
     type
     datePublished
-    source_url    
+    url    
     author{
         name
         type
-        source_url
+        url
         image
     }
     claimReviewed
@@ -72,7 +72,7 @@ schemas {
         author{
             name
             type
-            source_url
+            url
             image
         }
         datePublished
