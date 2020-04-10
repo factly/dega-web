@@ -11,10 +11,7 @@ function loadTwitter(el) {
         window.twttr.widgets.createTweet(
           tweetID,
           tweets[i]
-        )
-          .then(
-            html.querySelector('#twitter-widget-4').style.display = 'none'
-          );
+        );
       }
     }
   }

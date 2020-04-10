@@ -5,26 +5,24 @@
 # Change Dockerfile based on the project directory. Include nginx
 
 # build stage
-FROM node:10.14.2-alpine
-ENV APP_ROOT /app
+FROM node:12.16-alpine
+WORKDIR /app
 
+# install node modules
+COPY ./package.json ./
+RUN npm install
 
-ENV API_URI=https://api.degacms.com/query 
+# set build time variable
+ENV API_URI=https://api.degacms.com/query
 ENV CLIENT_ID=factly
 ENV DOMAIN_HOSTNAME=https://telugu.factly.in
 ENV DEFAULT_LANG=en
 
-# create and setup working directory
-RUN mkdir ${APP_ROOT}
-WORKDIR ${APP_ROOT}
-
-# install node modules
-COPY ./package.json ${APP_ROOT}
-RUN npm install
-
 # copy source files to image and build
-COPY . ${APP_ROOT}
+COPY . .
 RUN npm run build
+
+RUN npm audit fix
 
 # give full external access to the app container
 ENV HOST 0.0.0.0
