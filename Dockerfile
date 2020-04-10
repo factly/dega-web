@@ -20,9 +20,12 @@ ENV DEFAULT_LANG=en
 
 # copy source files to image and build
 COPY . .
-RUN npm run build
 
 RUN npm audit fix
+
+RUN npm run build
+
+
 
 # give full external access to the app container
 ENV HOST 0.0.0.0
