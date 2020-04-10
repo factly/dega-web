@@ -54,7 +54,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://localhost:8080/query',
+        httpEndpoint: process.env.API_URI,
         httpLinkOptions: {
           headers: {
             client: process.env.CLIENT_ID
