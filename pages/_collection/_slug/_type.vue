@@ -184,7 +184,7 @@ export default {
       })
         .then(f => f.data)
         .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
-      if (result[params.type].total === 0) {
+      if (result[params.collection] === null) {
         error({ code: 500, message: 'Something went wrong', homepage: true });
       }
       return {
