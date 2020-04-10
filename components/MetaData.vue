@@ -10,8 +10,8 @@
           class="meta-data-font">
           <span v-if="index !== 0">,&nbsp;</span>
           <nuxt-link
-            :to="localePath({ name:'collection-slug', params: { collection: 'user', slug: user.slug } })"
-            class="has-text-link">{{ user.displayName }}</nuxt-link>
+            :to="localePath({ name:'collection-slug-type', params: { collection: 'user', slug: user.slug+'-'+user._id, type: null } })"
+            class="has-text-link">{{ user.display_name }}</nuxt-link>
         </p>
       </div>
       <p
@@ -28,7 +28,7 @@
           class="meta-data-font">
           <span v-if="index !== 0">,&nbsp;</span>
           <nuxt-link
-            :to="localePath({ name:'collection-slug', params: { collection: 'category', slug: category.slug } })"
+            :to="localePath({ name:'collection-slug-type', params: { collection: 'category', slug: category.slug+'-'+category._id, type: null } })"
             class="has-text-link">{{ category.name }}</nuxt-link>
         </p>
       </div>

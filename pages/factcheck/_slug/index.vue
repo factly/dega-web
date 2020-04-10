@@ -1,5 +1,7 @@
+
 <template>
-  <div class="main-content">
+  <div
+    class="main-content">
     <div
       v-for="(f, i) in factchecks"
       ref="factchecks"
@@ -47,20 +49,20 @@
             <RelatedArticle
               v-for="(category, index) in f.categories"
               :key="'user-related'+index"
-              :slug="category.slug"
+              :slug="category.slug+'-'+category._id"
               :header="`More in ${category.name}`"
-              :id="f.id"
+              :id="f._id"
               class="margin-horizontal-1"
               collection="category"
             />
           </div>
-          <div v-if="f.users.length > 0">
+          <div v-if="f.degaUsers.length > 0">
             <RelatedArticle
-              v-for="(user, index) in f.users"
+              v-for="(user, index) in f.degaUsers"
               :key="'user-related'+index"
-              :slug="user.slug"
-              :header="`More from ${user.displayName}`"
-              :id="f.id"
+              :slug="user.slug+'-'+user._id"
+              :header="`More from ${user.display_name}`"
+              :id="f._id"
               class="margin-horizontal-1"
               collection="user"
             />
@@ -69,9 +71,9 @@
       </div>
     </div>
     <SocialSharingVertical
-      :url="'/factcheck/'+factchecks[on].slug"
+      :url="'/factcheck/'+factchecks[on]._id"
       :quote="factchecks[on].title"
-      :id="factchecks[on].id"
+      :id="factchecks[on]._id"
       type="factcheck"
     />
   </div>
@@ -84,11 +86,15 @@ a.anchor {
 }
 </style>
 <script>
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-param-reassign */
+import gql from 'graphql-tag';
 import StoryHead from '@/components/StoryHead';
 import StoryFooter from '@/components/StoryFooter';
 import Claim from '@/components/Claim';
 import ListClaims from '@/components/ListClaims';
 import RelatedArticle from '@/components/RelatedArticle';
+import { singlePageQuery as factchecksQuery, factcheckQuery } from '../../../graphql/query/factchecks';
 
 export default {
   components: {
@@ -102,9 +108,9 @@ export default {
     return {
       factchecks: [],
       on: 0,
+      total: 0,
       pagination: {
-        hasNext: true,
-        next: ''
+        pageNext: 2
       }
     };
   },
@@ -113,9 +119,9 @@ export default {
   },
   watch: {
     on() {
-      document.title = `${this.factchecks[this.on].title} - ${this.$store.getters.getOrganisation.siteTitle}`;
+      document.title = `${this.factchecks[this.on].title} - ${this.$store.getters.getOrganization.site_title}`;
       // eslint-disable-next-line no-restricted-globals
-      history.pushState({}, null, `/factcheck/${this.factchecks[this.on].slug}`);
+      history.pushState({}, null, `/factcheck/${this.factchecks[this.on].slug}-${this.factchecks[this.on]._id}`);
     }
   },
   mounted() {
@@ -128,7 +134,7 @@ export default {
         const bottomOfWindow = scrolling + 50 >= document.documentElement.offsetHeight;
 
         if (bottomOfWindow) {
-          if (this.pagination.hasNext) this.getLatestFactchecks();
+          if (this.factchecks.length <= this.total) this.getLatestFactchecks();
         }
 
         const factchecksList = this.$refs.factchecks;
@@ -144,39 +150,95 @@ export default {
       };
     },
     async getLatestFactchecks() {
-      await this.$axios
-        .$get(`/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=1&next=${this.pagination.next}`)
-        .then((response) => {
-          const latestFactcheck = response.data;
-          this.pagination = response.paging;
-          if (this.factchecks.find(value => value.id === latestFactcheck[0].id)) {
-            console.log('Already there');
-          } else this.factchecks = this.factchecks.concat(latestFactcheck);
-        });
+      /* fectching factchecks */
+      const latestFactcheck = await this.$apollo.query({
+        query: gql(String.raw`
+          query (
+            $limit: Int
+            $page: Int
+            $category: [String!]
+            $tag: [String!]
+            $user: [String!]
+            $sortBy: String
+            $sortOrder: String 
+          ) {
+              ${factchecksQuery}
+            }
+          `),
+        variables: {
+          limit: 1,
+          page: this.pagination.pageNext,
+          sortBy: 'published_date',
+          sort: 'DES'
+        }
+      })
+        .then(f => f.data.factchecks)
+        .catch(() => this.error({ code: 500, message: 'Something went wrong', homepage: true }));
+
+      this.pagination.pageNext = this.pagination.pageNext + 1;
+      this.total = latestFactcheck.total;
+
+      if (this.factchecks.find(value => value._id === latestFactcheck.nodes[0]._id)) {
+        console.log('Already there');
+      } else {
+        this.factchecks = this.factchecks.concat(latestFactcheck.nodes);
+      }
     }
   },
   async asyncData({
-    params, error, $axios
+    params, app, error
   }) {
-    return $axios.$get(`/api/v1/factchecks/${params.slug}`)
-      .then(factcheck => ({ factchecks: factcheck.data ? [factcheck.data] : [] }))
-      .catch(() => error({ code: 404, message: 'You have been lost', homepage: true }));
+    /* fectching factcheck by id */
+    const factcheck = await app.apolloProvider.defaultClient.query({
+      query: gql(String.raw`${factcheckQuery}`),
+      variables: {
+        id: params.slug.split('-').pop()
+      }
+    })
+      .then(f => f.data.factcheck)
+      .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
+    if (!factcheck) {
+      error({ code: 404, message: 'page not found', homepage: true });
+    }
+
+    return {
+      factchecks: [factcheck],
+      total: 1
+    };
   },
   head() {
     const metadata = {};
     const { factchecks } = this;
+    const schemas = factchecks[0].schemas.map((schema) => {
+      schema['@type'] = schema.type;
+      schema['@context'] = schema.context;
+      schema.author['@type'] = schema.author.type;
+      schema.reviewRating['@type'] = schema.reviewRating.type;
+      schema.itemReviewed['@type'] = schema.itemReviewed.type;
+      schema.itemReviewed.author['@type'] = schema.itemReviewed.author.type;
+      delete schema.type;
+      delete schema.context;
+      delete schema.author.type;
+      delete schema.reviewRating.type;
+      delete schema.itemReviewed.type;
+      delete schema.itemReviewed.author.type;
+
+      return schema;
+    });
+
     if (factchecks.length > 0) {
-      metadata.title = `${factchecks[0].title} - ${this.$store.getters.getOrganisation.siteTitle}`;
+      metadata.title = `${factchecks[0].title} - ${this.$store.getters.getOrganization.site_title}`;
+      metadata.__dangerouslyDisableSanitizers = ['script'];
       metadata.script = [
-        { innerHTML: JSON.stringify(factchecks[0].schemas), type: 'application/ld+json' },
+        { innerHTML: JSON.stringify(schemas), type: 'application/ld+json' },
         { src: 'https://platform.twitter.com/widgets.js', async: true },
       ];
       metadata.meta = [
-        { hid: 'og:title', name: 'og:title', content: `${factchecks[0].title} - ${this.$store.getters.getOrganisation.siteTitle}` },
-        { hid: 'og:image', name: 'og:image', content: factchecks[0].media ? factchecks[0].media.sourceURL : null },
+        { hid: 'og:title', name: 'og:title', content: `${factchecks[0].title} - ${this.$store.getters.getOrganization.site_title}` },
+        { hid: 'og:image', name: 'og:image', content: factchecks[0].media ? factchecks[0].media.source_url : null },
         { hid: 'og:description', name: 'og:description', content: factchecks[0].excerpt ? factchecks[0].excerpt : null },
       ];
-    } else { metadata.title = this.$store.getters.getOrganisation.siteTitle; }
+    } else { metadata.title = this.$store.getters.getOrganization.site_title; }
 
     return metadata;
   }

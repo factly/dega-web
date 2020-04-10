@@ -7,25 +7,25 @@
       <div class="margin-top-half"/>
     </div>
     <div class="margin-horizontal-1">
-      <div v-if="story.users.length == 1">
+      <div v-if="story.degaUsers.length == 1">
         <article class="media">
           <div class="media-left">
             <figure
-              v-if="story.users[0].media"
+              v-if="story.degaUsers[0].media"
               class="image is-48x48">
-              <nuxt-link :to="localePath({ name:'collection-slug', params: {collection: 'user', slug: story.users[0].slug } })" >
+              <nuxt-link :to="localePath({ name:'collection-slug-type', params: {collection: 'user', slug: story.degaUsers[0].slug+'-'+story.degaUsers[0]._id, type: null } })" >
                 <img
-                  :src="story.users[0].media.sourceURL+'?resize:fill:50:50:0/quality:60/gravity:sm'"
-                  :alt="story.users[0].media.altText"
+                  :src="story.degaUsers[0].media.source_url+'?resize:fill:50:50:0/quality:60/gravity:sm'"
+                  :alt="story.degaUsers[0].media.altText"
                   class="is-rounded" >
               </nuxt-link>
             </figure>
           </div>
           <div class="media-content">
             <MetaData
-              :users="story.users"
+              :users="story.degaUsers"
               :categories="story.categories"
-              :published="story.publishedDate"
+              :published="story.published_date"
               size="is-size-6"
             />
           </div>
@@ -34,16 +34,16 @@
       <div v-else>
         <div class="field is-grouped">
           <div
-            v-for="(user, index) in story.users"
+            v-for="(user, index) in story.degaUsers"
             :key="'user'+index"
             class="control"
             style="margin-right:0.5rem;">
             <figure
               v-if="user.media"
               class="image is-48x48">
-              <nuxt-link :to="localePath({ name:'collection-slug', params: { collection: 'user', slug: user.slug } })">
+              <nuxt-link :to="localePath({ name:'collection-slug-type', params: { collection: 'user', slug: user.slug+'-'+user._id, type: null } })">
                 <img
-                  :src="user.media.sourceURL+'?resize:fill:50:50:0/quality:60/gravity:sm'"
+                  :src="user.media.source_url+'?resize:fill:50:50:0/quality:60/gravity:sm'"
                   :alt="user.media.altText"
                   class="is-rounded">
               </nuxt-link>
@@ -52,9 +52,9 @@
         </div>
         <div class="margin-top-half">
           <MetaData
-            :users="story.users"
+            :users="story.degaUsers"
             :categories="story.categories"
-            :published="story.publishedDate"
+            :published="story.published_date"
             size="is-size-6"
           />
         </div>
@@ -68,7 +68,7 @@
               v-if="story.media"
               class="image is-16by9">
               <img
-                :src="story.media.sourceURL+'?resize:fill:200:112:0/gravity:sm'"
+                :src="story.media.source_url+'?resize:fill:200:112:0/gravity:sm'"
                 :alt="story.media.altText"
               >
             </figure>

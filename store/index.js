@@ -1,23 +1,30 @@
 /* eslint-disable */
+import { organizationQuery } from '../graphql/query/organization';
+import gql from 'graphql-tag';
+
 export const state = () => ({
-  organisation: Object,
+  organization: Object,
 });
 
 export const mutations = {
-  setOrganisation(state, organisation) {
-    state.organisation = organisation;
+  setOrganization(state, organization) {
+    state.organization = organization;
   }
 };
 
 export const actions = {
   async nuxtServerInit({ commit }) {
-    const org = await this.$axios.$get('/api/v1/organizations')
-    commit('setOrganisation', org.data)
+    const org = await this.app.apolloProvider.defaultClient.query({
+      query: gql(String.raw`
+          ${organizationQuery}
+      `)
+    });
+    commit('setOrganization', org.data.organization)
   }
 };
 
 export const getters = {
-  getOrganisation(state) {
-    return state.organisation;
+  getOrganization(state) {
+    return state.organization;
   }
 };

@@ -35,24 +35,36 @@ export default {
     '~/plugins/filters.js',
     '~/plugins/directives.js',
     { src: '~plugins/ga.js', ssr: false },
-    '~/plugins/axios.js',
   ],
 
   /*
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap',
     'nuxt-i18n',
+    '@nuxtjs/apollo',
   ],
 
   /*
-  ** Axios module configuration
+  ** Apollo module configuration
   */
-  axios: {
-    baseURL: process.env.API_URI
+
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: process.env.API_URI,
+        httpLinkOptions: {
+          headers: {
+            client: process.env.CLIENT_ID
+          }
+        },
+        inMemoryCacheOptions: {
+          addTypename: false
+        }
+      }
+    }
   },
 
   /*

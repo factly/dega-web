@@ -2,7 +2,7 @@
   <div class="sticky-horizontal-container">
     <div>
       <a
-        :href="'https://www.facebook.com/sharer/sharer.php?u='+ encodeURI(organisation.siteAddress + url) + '&quote='+quote"
+        :href="'https://www.facebook.com/sharer/sharer.php?u='+ encodeURI(organization.site_address + url) + '&quote='+quote"
         class="button is-white"
         target="_blank" >
         <span class="icon is-size-4 facebook-color">
@@ -12,7 +12,7 @@
     </div>
     <div>
       <a
-        :href="'https://twitter.com/share?text=' + quote + '&url=' + encodeURI(organisation.siteAddress + url)"
+        :href="'https://twitter.com/share?text=' + quote + '&url=' + encodeURI(organization.site_address + url)"
         target="_blank"
         class="button is-white">
         <span class="icon is-size-4 twitter-color">
@@ -22,7 +22,7 @@
     </div>
     <div>
       <a
-        :href="'https://api.whatsapp.com/send?text='+ quote + ' ' + encodeURI(organisation.siteAddress + url)"
+        :href="'https://api.whatsapp.com/send?text='+ quote + ' ' + encodeURI(organization.site_address + url)"
         target="_blank"
         class="button is-white">
         <span class="icon is-size-4 whatsapp-color">
@@ -56,7 +56,7 @@ export default {
   },
   data() {
     return {
-      organisation: this.$store.getters.getOrganisation
+      organization: this.$store.getters.getOrganization
     };
   }
 };

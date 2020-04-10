@@ -6,12 +6,12 @@
       aria-label="main navigation">
       <div class="navbar-brand">
         <nuxt-link
-          v-if="organisation.mediaLogo"
+          v-if="organization.mediaLogo"
           :to="localePath('index')"
           class="navbar-item">
           <img
-            :src="organisation.mediaLogo.sourceURL"
-            :alt="organisation.name"
+            :src="organization.mediaLogo.source_url"
+            :alt="organization.name"
             height="110">
         </nuxt-link>
         <div
@@ -33,12 +33,12 @@
             :to="localePath('post')"
             class="navbar-item">{{ $t('header.stories') }}</nuxt-link>
           <nuxt-link
-            :to="localePath({ name:'collection-slug', params: { collection: 'category', slug: 'fake-news' } })"
+            :to="localePath({ name:'collection-slug-type', params: { collection: 'category', slug: 'fake-news-5da707da6ae80e607432d6b8', type: null } })"
             class="navbar-item">
             {{ $t('header.fake_news') }}
           </nuxt-link>
           <nuxt-link
-            :to="localePath({ name:'collection-slug', params: { collection: 'category', slug: 'video' }})"
+            :to="localePath({ name:'collection-slug-type', params: { collection: 'category', slug: 'videos-5da707da6ae80e607432d6b7', type: null }})"
             class="navbar-item">{{ $t('header.videos') }}</nuxt-link>
           <nuxt-link
             :to="localePath('factcheck')"
@@ -48,7 +48,7 @@
         <div class="navbar-end">
           <div class="navbar-item is-hidden-touch is-hidden-desktop-only">
             <SocialLink
-              :organisation="organisation"
+              :organization="organization"
             />
           </div>
           <div class="navbar-item">
@@ -144,7 +144,7 @@
           <div class="column is-3">
             <p class="is-size-6">Connect with us</p>
             <SocialLink
-              :organisation="organisation"
+              :organization="organization"
               name
               way="horizontal"
               icon_size="is-size-6"
@@ -157,8 +157,8 @@
 </template>
 
 <script>
-import DefaultImage from '~/assets/images/dega-default-image.png';
 import SocialLink from '@/components/SocialLinks';
+import DefaultImage from '~/assets/images/dega-default-image.png';
 
 export default {
   components: {
@@ -168,7 +168,7 @@ export default {
     return {
       toggleNavBar: false,
       toggleMore: true,
-      organisation: this.$store.getters.getOrganisation
+      organization: this.$store.getters.getOrganization
     };
   },
   computed: {
@@ -178,18 +178,18 @@ export default {
   },
   head() {
     return {
-      title: this.organisation.name,
+      title: this.organization.name,
       link: [
-        { rel: 'shortcut icon', type: 'image/png', href: this.organisation.mediaLogo ? this.organisation.mediaLogo.sourceURL : null },
-        { rel: 'icon', type: 'image/x-icon', href: this.organisation.mediaFavicon ? this.organisation.mediaFavicon.sourceURL : null },
+        { rel: 'shortcut icon', type: 'image/png', href: this.organization.mediaLogo ? this.organization.mediaLogo.source_url : null },
+        { rel: 'icon', type: 'image/x-icon', href: this.organization.mediaFavicon ? this.organization.mediaFavicon.source_url : null },
       ],
       meta: [
-        { name: 'google-site-verification', content: this.organisation.googleVerificationCode },
-        { hid: 'og:site_name', name: 'og:site_name', content: this.organisation.name },
+        { name: 'google-site-verification', content: this.organization.google_verification_code },
+        { hid: 'og:site_name', name: 'og:site_name', content: this.organization.name },
         { hid: 'og:title', name: 'og:title', content: this.$nuxt.$route.path.split('/').pop() },
-        { hid: 'og:url', name: 'og:url', content: this.organisation.siteAddress + this.$nuxt.$route.path },
-        { hid: 'og:image', name: 'og:image', content: this.organisation.siteAddress + DefaultImage },
-        { hid: 'og:description', name: 'og:description', content: this.organisation.description },
+        { hid: 'og:url', name: 'og:url', content: this.organization.site_address + this.$nuxt.$route.path },
+        { hid: 'og:image', name: 'og:image', content: this.organization.site_address + DefaultImage },
+        { hid: 'og:description', name: 'og:description', content: this.organization.description },
       ]
     };
   }

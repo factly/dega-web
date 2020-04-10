@@ -3,10 +3,10 @@
     :class="way === 'vertical' ? 'is-grouped': ''"
     class="field">
     <div
-      v-if="organisation.facebookURL"
+      v-if="organization.facebook_url"
       class="control">
       <a
-        :href="organisation.facebookURL"
+        :href="organization.facebook_url"
         target="_blank"
       >
         <span
@@ -22,10 +22,10 @@
       </a>
     </div>
     <div
-      v-if="organisation.twitterURL"
+      v-if="organization.twitter_url"
       class="control">
       <a
-        :href="organisation.twitterURL"
+        :href="organization.twitter_url"
         target="_blank"
       >
         <span
@@ -41,10 +41,10 @@
       </a>
     </div>
     <div
-      v-if="organisation.youTubeURL"
+      v-if="organization.youTube_url"
       class="control">
       <a
-        :href="organisation.youTubeURL"
+        :href="organization.youTube_url"
         target="_blank"
       >
         <span
@@ -60,10 +60,10 @@
       </a>
     </div>
     <div
-      v-if="organisation.githubURL"
+      v-if="organization.github_url"
       class="control">
       <a
-        :href="organisation.githubURL"
+        :href="organization.github_url"
         target="_blank"
       >
         <span
@@ -79,29 +79,10 @@
       </a>
     </div>
     <div
-      v-if="organisation.tumblerURL"
+      v-if="organization.pinterest_url"
       class="control">
       <a
-        :href="organisation.tumblerURL"
-        target="_blank"
-      >
-        <span
-          :class="icon_size"
-          class="icon tunbler-color">
-          <i class="mdi mdi-tumblr"/>
-        </span>
-        <span
-          v-if="name"
-          class="is-size-6 has-text-black">
-          Tumbler
-        </span>
-      </a>
-    </div>
-    <div
-      v-if="organisation.pinterestURL"
-      class="control">
-      <a
-        :href="organisation.pinterestURL"
+        :href="organization.pinterest_url"
         target="_blank"
       >
         <span
@@ -117,10 +98,10 @@
       </a>
     </div>
     <div
-      v-if="organisation.linkedInURL"
+      v-if="organization.linked_in_url"
       class="control">
       <a
-        :href="organisation.linkedInURL"
+        :href="organization.linked_in_url"
         target="_blank"
       >
         <span
@@ -136,10 +117,10 @@
       </a>
     </div>
     <div
-      v-if="organisation.whatsappURL"
+      v-if="organization.whatsapp_url"
       class="control">
       <a
-        :href="organisation.whatsappURL"
+        :href="organization.whatsapp_url"
         target="_blank"
       >
         <span
@@ -155,10 +136,10 @@
       </a>
     </div>
     <div
-      v-if="organisation.instagramURL"
+      v-if="organization.instagram_url"
       class="control">
       <a
-        :href="organisation.instagramURL"
+        :href="organization.instagram_url"
         target="_blank"
       >
         <span
@@ -179,7 +160,7 @@
 <script>
 export default {
   props: {
-    organisation: {
+    organization: {
       type: Object,
       required: true
     },

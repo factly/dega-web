@@ -18,8 +18,8 @@
         <div class="column is-4">
           <div class="is-hidden-mobile">
             <RelatedArticle
-              slug="video"
-              header="Recent Videos"
+              slug="bussiness-5c38f470569ed47e00c7002c"
+              header="Recent Bussiness"
               collection="category"
             />
           </div>
@@ -30,9 +30,12 @@
 </template>
 
 <script>
+import gql from 'graphql-tag';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
 import RelatedArticle from '@/components/RelatedArticle';
+import { pagingQuery as postsQuery } from '../graphql/query/posts';
+import { pagingQuery as factchecksQuery } from '../graphql/query/factchecks';
 
 export default {
   components: {
@@ -45,15 +48,34 @@ export default {
       stories: null
     };
   },
-  async asyncData({ $axios, error }) {
-    const posts = await $axios.$get('/api/v1/posts/?sortBy=publishedDate&sortAsc=false&limit=10')
-      .then(p => p.data || [])
-      .catch(() => error({ code: 500, message: 'Something went wrong' }));
-    const factchecks = await $axios.$get('/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=10')
-      .then(f => f.data || [])
+  async asyncData({ app, error }) {
+    /* fectching posts & factchecks */
+    const result = await app.apolloProvider.defaultClient.query({
+      query: gql(String.raw`
+        query (
+          $limit: Int
+          $page: Int
+          $category: [String!]
+          $tag: [String!]
+          $user: [String!]
+          $sortBy: String
+          $sortOrder: String 
+        ) {
+            ${factchecksQuery}
+            ${postsQuery}
+          }
+        `),
+      variables: {
+        limit: 5,
+        sortBy: 'published_date',
+        sort: 'DES'
+      }
+    })
+      .then(f => f.data)
       .catch(() => error({ code: 500, message: 'Something went wrong' }));
 
-    const stories = (posts).concat(factchecks);
+    const stories = (result.posts.nodes || []).concat(result.factchecks.nodes || []);
+
     stories.sort((a, b) => {
       if (a.publishedDate > b.publishedDate) return -1;
       if (b.publishedDate > a.publishedDate) return 1;

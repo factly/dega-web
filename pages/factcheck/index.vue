@@ -12,7 +12,7 @@
           />
         </div>
         <div
-          v-if="stories.length > 0 && !pagination.hasNext"
+          v-if="stories.length > 0 && stories.length >= total"
           class="margin-top-2">
           <h3 class="is-size-4 has-text-centered">No more stories</h3>
         </div>
@@ -20,8 +20,8 @@
       <div class="column is-4">
         <div class="is-hidden-mobile">
           <RelatedArticle
-            slug="video"
-            header="Recent Videos"
+            slug="bussiness-5c38f470569ed47e00c7002c"
+            header="Recent Bussiness"
             collection="category"
           />
         </div>
@@ -31,9 +31,11 @@
 </template>
 
 <script>
+import gql from 'graphql-tag';
 import StoryPreview from '@/components/StoryPreview';
 import Hero from '@/components/Hero';
 import RelatedArticle from '@/components/RelatedArticle';
+import { pagingQuery as factchecksQuery } from '../../graphql/query/factchecks';
 
 export default {
   components: {
@@ -44,7 +46,10 @@ export default {
   data() {
     return {
       stories: [],
-      pagination: {}
+      total: 0,
+      pagination: {
+        pageNext: 2
+      }
     };
   },
   mounted() {
@@ -54,37 +59,69 @@ export default {
     scroll() {
       window.onscroll = () => {
         const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-        if (bottomOfWindow && this.pagination.hasNext) {
+        if (bottomOfWindow && this.stories.length < this.total) {
           this.getStories();
         }
       };
     },
-    getStories() {
-      if (this.pagination.hasNext) {
-        this.$axios
-          .$get(`/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&next=${this.pagination.next}&limit=5`)
-          .then((response) => {
-            this.stories = (this.stories || []).concat(response.data || []);
-            this.pagination = response.paging;
-          });
-      }
+    async getStories() {
+      /* fectching factchecks */
+      const factchecks = await this.$apollo.query({
+        query: gql(String.raw`
+          query (
+            $limit: Int
+            $page: Int
+            $category: [String!]
+            $tag: [String!]
+            $user: [String!]
+            $sortBy: String
+            $sortOrder: String 
+          ) {
+              ${factchecksQuery}
+            }
+          `),
+        variables: {
+          limit: 5,
+          page: this.pagination.pageNext
+        }
+      })
+        .then(f => f.data.factchecks.nodes)
+        .catch(() => this.error({ code: 500, message: 'Something went wrong', homepage: true }));
+      this.pagination.pageNext += 1;
+      this.stories = this.stories.concat(factchecks);
     }
   },
-  async asyncData({ error, $axios }) {
-    return $axios.$get('/api/v1/factchecks/?sortBy=publishedDate&sortAsc=false&limit=5')
-      .then(({ data, paging }) => {
-        if (data.length === 0) {
-          error({ code: 404, message: 'You have been lost', homepage: true });
-        }
+  async asyncData({ app, error }) {
+    /* fectching factchecks */
+    const factchecks = await app.apolloProvider.defaultClient.query({
+      query: gql(String.raw`
+        query (
+          $limit: Int
+          $page: Int
+          $category: [String!]
+          $tag: [String!]
+          $user: [String!]
+          $sortBy: String
+          $sortOrder: String 
+        ) {
+            ${factchecksQuery}
+          }
+        `),
+      variables: {
+        limit: 5,
+        page: 1
+      }
+    })
+      .then(f => f.data.factchecks)
+      .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
 
-        return {
-          stories: data,
-          pagination: paging
-        };
-      });
+    return {
+      stories: factchecks.nodes,
+      total: factchecks.total
+    };
   },
   head() {
-    const title = `Factchecks - ${this.$store.getters.getOrganisation.siteTitle}`;
+    const title = `Factchecks - ${this.$store.getters.getOrganization.site_title}`;
     return {
       title,
       meta: [
