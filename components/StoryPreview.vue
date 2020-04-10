@@ -31,7 +31,7 @@
             v-if="story.media"
             class="images is-16by9">
             <img
-              :src="story.media.url+'?resize:fill:200:112:0/gravity:sm'"
+              :src="story.media.source_url+'?resize:fill:200:112:0/gravity:sm'"
               :alt="story.media.alt_text">
           </figure>
         </nuxt-link>

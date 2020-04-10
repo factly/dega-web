@@ -235,7 +235,7 @@ export default {
       ];
       metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: `${factchecks[0].title} - ${this.$store.getters.getOrganization.site_title}` },
-        { hid: 'og:image', name: 'og:image', content: factchecks[0].media ? factchecks[0].media.url : null },
+        { hid: 'og:image', name: 'og:image', content: factchecks[0].media ? factchecks[0].media.source_url : null },
         { hid: 'og:description', name: 'og:description', content: factchecks[0].excerpt ? factchecks[0].excerpt : null },
       ];
     } else { metadata.title = this.$store.getters.getOrganization.site_title; }

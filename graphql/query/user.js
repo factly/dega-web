@@ -7,7 +7,7 @@ user(id: $id) {
   email
   description
   media {
-    url
+    source_url
     alt_text
   }
 }`;

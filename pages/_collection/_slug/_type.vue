@@ -231,7 +231,7 @@ export default {
       metadata.title = title;
       metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: title },
-        { hid: 'og:image', name: 'og:image', content: collection.media ? collection.media.url : null },
+        { hid: 'og:image', name: 'og:image', content: collection.media ? collection.media.source_url : null },
         { hid: 'og:description', name: 'og:description', content: collection.description ? collection.description : null },
       ];
     } else { metadata.title = this.$store.getters.getOrganization.site_title; }

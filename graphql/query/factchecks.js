@@ -5,7 +5,7 @@ const factcheck = `
     published_date
     slug
     media {
-        url
+        source_url
         alt_text
     }
     categories {
@@ -24,14 +24,14 @@ const claims = `
         claimant {
             name
             media {
-                url
+                source_url
                 alt_text
             }
         }
         rating {
             numeric_value
             media {
-                url
+                source_url
                 alt_text
             }
         }
@@ -51,11 +51,11 @@ schemas {
     context
     type
     datePublished
-    url    
+    source_url    
     author{
         name
         type
-        url
+        source_url
         image
     }
     claimReviewed
@@ -72,7 +72,7 @@ schemas {
         author{
             name
             type
-            url
+            source_url
             image
         }
         datePublished
@@ -94,7 +94,7 @@ query factcheckById($id: String!) {
             display_name
             slug
             media {
-                url
+                source_url
                 alt_text
             }
         }
@@ -148,7 +148,7 @@ factchecks(
             display_name
             slug
             media {
-                url
+                source_url
                 alt_text
             }
         }

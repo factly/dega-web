@@ -6,19 +6,19 @@ export const organizationQuery = `query {
         site_title
         site_address
         mediaLogo {
-            url
+            source_url
             alt_text
         }
         mediaMobileLogo {
-            url
+            source_url
             alt_text
         }
         mediaFavicon {
-            url
+            source_url
             alt_text
         }
         mediaMobileIcon {
-            url
+            source_url
             alt_text
         }
     }

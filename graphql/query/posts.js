@@ -6,7 +6,7 @@ const post = `
     updates
     slug
     media {
-        url
+        source_url
         alt_text
     }
     categories {
@@ -36,7 +36,7 @@ query postById($id: String!) {
             display_name
             slug
             media {
-                url
+                source_url
                 alt_text
             }
         }
@@ -87,7 +87,7 @@ posts(
             display_name
             slug
             media {
-                url
+                source_url
                 alt_text
             }
         }

@@ -15,7 +15,7 @@
               class="image is-48x48">
               <nuxt-link :to="localePath({ name:'collection-slug-type', params: {collection: 'user', slug: story.degaUsers[0].slug+'-'+story.degaUsers[0]._id, type: null } })" >
                 <img
-                  :src="story.degaUsers[0].media.url+'?resize:fill:50:50:0/quality:60/gravity:sm'"
+                  :src="story.degaUsers[0].media.source_url+'?resize:fill:50:50:0/quality:60/gravity:sm'"
                   :alt="story.degaUsers[0].media.altText"
                   class="is-rounded" >
               </nuxt-link>
@@ -43,7 +43,7 @@
               class="image is-48x48">
               <nuxt-link :to="localePath({ name:'collection-slug-type', params: { collection: 'user', slug: user.slug+'-'+user._id, type: null } })">
                 <img
-                  :src="user.media.url+'?resize:fill:50:50:0/quality:60/gravity:sm'"
+                  :src="user.media.source_url+'?resize:fill:50:50:0/quality:60/gravity:sm'"
                   :alt="user.media.altText"
                   class="is-rounded">
               </nuxt-link>
@@ -68,7 +68,7 @@
               v-if="story.media"
               class="image is-16by9">
               <img
-                :src="story.media.url+'?resize:fill:200:112:0/gravity:sm'"
+                :src="story.media.source_url+'?resize:fill:200:112:0/gravity:sm'"
                 :alt="story.media.altText"
               >
             </figure>

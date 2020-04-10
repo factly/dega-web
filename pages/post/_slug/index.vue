@@ -191,7 +191,7 @@ export default {
       metadata.title = `${posts[0].title} - ${this.$store.getters.getOrganization.site_title}`;
       metadata.meta = [
         { hid: 'og:title', name: 'og:title', content: `${posts[0].title} - ${this.$store.getters.getOrganization.site_title}` },
-        { hid: 'og:image', name: 'og:image', content: posts[0].media ? posts[0].media.url : null },
+        { hid: 'og:image', name: 'og:image', content: posts[0].media ? posts[0].media.source_url : null },
         { hid: 'og:description', name: 'og:description', content: posts[0].excerpt ? posts[0].excerpt : null },
       ];
       metadata.script = [
