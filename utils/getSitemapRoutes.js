@@ -3,7 +3,7 @@ import fetch from 'cross-fetch';
 import { sitemapsQuery } from '../graphql/query/sitemap';
 
 export default async function getSitemapRoutes() {
-  const sitemap = await fetch('http://localhost:8080/query', {
+  const sitemap = await fetch(process.env.API_URI, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
