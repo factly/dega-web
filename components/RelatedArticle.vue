@@ -6,7 +6,7 @@
       <header class="card-header">
         <p class="card-header-title">
           <nuxt-link
-            :to="localePath({ name:'collection-slug-type', params: { collection, slug, type: null } })"
+            :to="localePath({ name:'collection-slug', params: { collection, slug, type: null } })"
             class="has-text-black-bis">
             {{ header }}
           </nuxt-link>

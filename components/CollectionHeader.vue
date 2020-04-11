@@ -2,7 +2,7 @@
   <div class="tabs">
     <ul>
       <li :class="meta === 'all' ? 'is-active': null">
-        <nuxt-link :to="localePath({ name:'collection-slug-type', params: { collection, slug, type: null } })">
+        <nuxt-link :to="localePath({ name:'collection-slug', params: { collection, slug } })">
           {{ heading }}
         </nuxt-link>
       </li>

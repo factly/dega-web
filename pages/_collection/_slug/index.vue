@@ -7,7 +7,7 @@
             :collection = "this.$route.params.collection"
             :slug = "this.$route.params.slug"
             :heading = "this.$route.params.collection === 'user' ? collection.display_name : collection.name"
-            :meta = "this.$route.params.type"
+            meta = "all"
           />
         </div>
         <div class="margin-top-2">
@@ -57,8 +57,7 @@ export default {
   },
   validate({ params }) {
     const collectionList = ['category', 'user', 'tag'];
-    const typeList = ['factchecks', 'posts'];
-    if (collectionList.includes(params.collection) && typeList.includes(params.type)) {
+    if (collectionList.includes(params.collection)) {
       return true;
     }
     return false;
@@ -67,60 +66,14 @@ export default {
     return {
       stories: [],
       collection: null,
-      total: 0,
-      pagination: {
-        pageNext: 1
-      }
+      total: 0
     };
-  },
-  mounted() {
-    this.scroll();
-  },
-  methods: {
-    scroll() {
-      window.onscroll = () => {
-        const bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
-        if (bottomOfWindow && this.stories.length < this.total) {
-          this.getStories();
-        }
-      };
-    },
-    async getStories() {
-      const variables = {
-        limit: 5,
-        page: 1,
-        sortBy: 'published_date',
-        sort: 'DES'
-      };
-
-      const stories = await this.$apollo.query({
-        query: gql(String.raw`
-        query (
-          $limit: Int
-          $page: Int
-          $category: [String!]
-          $tag: [String!]
-          $user: [String!]
-          $sortBy: String
-          $sortOrder: String 
-        ) {
-            ${`${this.params.type}Query`}
-          }
-        `),
-        variables
-      })
-        .then(f => f.data[this.params.type].nodes)
-        .catch(() => this.error({ code: 500, message: 'Something went wrong', homepage: true }));
-      this.pagination.pageNext += 1;
-      this.stories = this.stories.concat(stories);
-    }
   },
   async asyncData({
     params, app, error
   }) {
     /* query fetching */
     const collectionQuery = require(`@/graphql/query/${params.collection}`);
-    let storiesQuery;
     /* stories fetching */
     const variables = {
       limit: 5,
@@ -132,36 +85,35 @@ export default {
 
     if (params.collection && params.slug) variables[params.collection] = [params.slug.split('-').pop()];
 
-    if (params.type === 'factchecks') {
-      storiesQuery = factchecksQuery;
-    } else {
-      storiesQuery = postsQuery;
-    }
     const result = await app.apolloProvider.defaultClient.query({
       query: gql(String.raw`
-        query (
-          $limit: Int
-          $page: Int
-          $category: [String!]
-          $tag: [String!]
-          $user: [String!]
-          $sortBy: String
-          $sortOrder: String
-          $id: String! 
-        ) {
-            ${storiesQuery}
-            ${collectionQuery[params.collection]}
-          }
-        `),
+          query (
+            $limit: Int
+            $page: Int
+            $category: [String!]
+            $tag: [String!]
+            $user: [String!]
+            $sortBy: String
+            $sortOrder: String
+            $id: String! 
+          ) {
+              ${postsQuery}
+              ${factchecksQuery}
+              ${collectionQuery[params.collection]}
+            }
+          `),
       variables
     })
       .then(f => f.data)
       .catch(() => error({ code: 500, message: 'Something went wrong', homepage: true }));
-    if (result[params.collection] === null) {
-      error({ code: 500, message: 'Something went wrong', homepage: true });
+
+    const stories = (result.posts.nodes || []).concat(result.factchecks.nodes || []);
+    const total = result.posts.total + result.factchecks.total;
+    if (total === 0) {
+      error({ code: 404, message: 'page not found', homepage: true });
     }
     return {
-      stories: result[params.type].nodes, pagination: { pageNext: 2 }, collection: result[params.collection], total: result[params.type].total
+      stories, collection: result[params.collection], total
     };
   },
   head() {
