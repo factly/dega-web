@@ -17,7 +17,7 @@
                 <a :href="'#claim'+(index)">
                   <img
                     :src="c.rating.media.source_url+'?resize:fill:100:100:0/gravity:sm'"
-                    :alt="c.rating.media.altText">
+                    :alt="c.rating.media.alt_text">
                 </a>
               </figure>
             </div>
