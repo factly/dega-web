@@ -6,7 +6,7 @@
         class="button is-white"
         target="_blank" >
         <span class="icon is-size-4 facebook-color">
-          <i class="mdi mdi-facebook"/>
+          <i class="fab fa-facebook-square"/>
         </span>
       </a>
     </div>
@@ -16,7 +16,7 @@
         target="_blank"
         class="button is-white">
         <span class="icon is-size-4 twitter-color">
-          <i class="mdi mdi-twitter"/>
+          <i class="fab fa-twitter-square"/>
         </span>
       </a>
     </div>
@@ -26,7 +26,7 @@
         target="_blank"
         class="button is-white">
         <span class="icon is-size-4 whatsapp-color">
-          <i class="mdi mdi-whatsapp"/>
+          <i class="fab fa-whatsapp-square"/>
         </span>
       </a>
     </div>

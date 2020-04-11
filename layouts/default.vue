@@ -179,6 +179,9 @@ export default {
   head() {
     return {
       title: this.organization.name,
+      script: [
+        { src: 'https://use.fontawesome.com/releases/v5.3.1/js/all.js' },
+      ],
       link: [
         { rel: 'shortcut icon', type: 'image/png', href: this.organization.mediaLogo ? this.organization.mediaLogo.source_url : null },
         { rel: 'icon', type: 'image/x-icon', href: this.organization.mediaFavicon ? this.organization.mediaFavicon.source_url : null },

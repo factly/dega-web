@@ -12,7 +12,7 @@
         <span
           :class="icon_size"
           class="icon facebook-color">
-          <i class="mdi mdi-facebook"/>
+          <i class="fab fa-facebook-square"/>
         </span>
         <span
           v-if="name"
@@ -31,7 +31,7 @@
         <span
           :class="icon_size"
           class="icon twitter-color">
-          <i class="mdi mdi-twitter"/>
+          <i class="fab fa-twitter-square"/>
         </span>
         <span
           v-if="name"
@@ -50,7 +50,7 @@
         <span
           :class="icon_size"
           class="icon youtube-color">
-          <i class="mdi mdi-youtube"/>
+          <i class="fab fa-youtube-square"/>
         </span>
         <span
           v-if="name"
@@ -69,7 +69,7 @@
         <span
           :class="icon_size"
           class="icon github-color">
-          <i class="mdi mdi-github-circle"/>
+          <i class="fab fa-github-square"/>
         </span>
         <span
           v-if="name"
@@ -88,7 +88,7 @@
         <span
           :class="icon_size"
           class="icon pinterest-color">
-          <i class="mdi mdi-pinterest"/>
+          <i class="fab fa-pinterest-square"/>
         </span>
         <span
           v-if="name"
@@ -107,7 +107,7 @@
         <span
           :class="icon_size"
           class="icon linkedin-color">
-          <i class="mdi mdi-linkedin"/>
+          <i class="fab fa-linkedin"/>
         </span>
         <span
           v-if="name"
@@ -126,7 +126,7 @@
         <span
           :class="icon_size"
           class="icon whatsapp-color">
-          <i class="mdi mdi-whatsapp"/>
+          <i class="fab fa-whatsapp-square"/>
         </span>
         <span
           v-if="name"
@@ -145,7 +145,7 @@
         <span
           :class="icon_size"
           class="icon instagram-color">
-          <i class="mdi mdi-instagram"/>
+          <i class="fab fa-instagram" />
         </span>
         <span
           v-if="name"
