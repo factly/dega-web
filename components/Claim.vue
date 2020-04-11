@@ -12,7 +12,7 @@
                 class="image is-24x24">
                 <img
                   :src="claim.claimant.media.source_url+'?resize:fill:50:50:0/gravity:sm'"
-                  :alt="claim.claimant.media.altText">
+                  :alt="claim.claimant.media.alt_text">
               </figure>
             </div>
             <div class="control">
@@ -28,7 +28,7 @@
               class="image is-128x128">
               <img
                 :src="claim.rating.media.source_url+'?resize:fill:80:80:0/gravity:sm'"
-                :alt="claim.rating.media.altText">
+                :alt="claim.rating.media.alt_text">
             </figure>
           </div>
           <div class="field is-horizontal">
@@ -41,7 +41,7 @@
             class="image is-96x96">
             <img
               :src="claim.rating.media.source_url+'?resize:fill:100:100:0/gravity:sm'"
-              :alt="claim.rating.media.altText">
+              :alt="claim.rating.media.alt_text">
           </figure>
         </div>
       </div>

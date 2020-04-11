@@ -25,7 +25,7 @@
                 <nuxt-link :to="localePath({ name: story._class.split('.').pop().toLowerCase()+'-slug', params: { slug: story.slug+'-'+story._id } })">
                   <img
                     :src="story.media.source_url+'?resize:fill:80:45:0/gravity:sm'"
-                    :alt="story.media.altText" >
+                    :alt="story.media.alt_text" >
                 </nuxt-link>
               </figure>
             </div>
