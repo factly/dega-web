@@ -71,7 +71,7 @@ export default {
   computed: {
     widgetBackground() {
       const backgrounglist = ['false-background', 'misleading-background', 'unverified-background', 'partly-true-background', 'true-background'];
-      return backgrounglist[parseInt(this.claim.rating.numericValue, 10) - 1];
+      return backgrounglist[parseInt(this.claim.rating.numeric_value, 10) - 1];
     }
   }
 };
