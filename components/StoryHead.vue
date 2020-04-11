@@ -16,7 +16,7 @@
               <nuxt-link :to="localePath({ name:'collection-slug', params: {collection: 'user', slug: story.degaUsers[0].slug+'-'+story.degaUsers[0]._id} })" >
                 <img
                   :src="story.degaUsers[0].media.source_url+'?resize:fill:50:50:0/quality:60/gravity:sm'"
-                  :alt="story.degaUsers[0].media.altText"
+                  :alt="story.degaUsers[0].media.alt_text"
                   class="is-rounded" >
               </nuxt-link>
             </figure>
@@ -44,7 +44,7 @@
               <nuxt-link :to="localePath({ name:'collection-slug', params: { collection: 'user', slug: user.slug+'-'+user._id} })">
                 <img
                   :src="user.media.source_url+'?resize:fill:50:50:0/quality:60/gravity:sm'"
-                  :alt="user.media.altText"
+                  :alt="user.media.alt_text"
                   class="is-rounded">
               </nuxt-link>
             </figure>
@@ -69,7 +69,7 @@
               class="image is-16by9">
               <img
                 :src="story.media.source_url+'?resize:fill:200:112:0/gravity:sm'"
-                :alt="story.media.altText"
+                :alt="story.media.alt_text"
               >
             </figure>
           </div>
